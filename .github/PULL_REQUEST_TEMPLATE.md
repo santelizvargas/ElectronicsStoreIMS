@@ -1,3 +1,7 @@
+### Related ticket
+
+Ticket: [PR Title](https://developer-solutions.atlassian.net/browse/IMS-XXX)
+
 ### Description
 
 (Provide context and explain why you are making the change you are making, and why it is the right one)
@@ -5,10 +9,6 @@
 ### Medias (if needed)
 
 (Provide images or videos about the changes)
-
-### Related ticket
-
-Ticket: [PR Title](https://developer-solutions.atlassian.net/browse/IMS-XXX)
 
 ### Testplan
 
