@@ -1,5 +1,6 @@
 from v1.app import server_v1 as app
 from dotenv import load_dotenv
+from v1.core.database.postgres.database import get_session
 import uvicorn
 import os
 

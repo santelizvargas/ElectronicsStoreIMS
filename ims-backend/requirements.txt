@@ -1,3 +1,6 @@
 fastapi==0.110.2
 uvicorn[standard]
 python-dotenv
+sqlalchemy
+pydantic-settings
+psycopg2-binary
