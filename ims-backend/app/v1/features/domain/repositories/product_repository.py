@@ -32,4 +32,3 @@ class ProductRepository(ProductRepositoryContract):
         entity = self.find_by_id(id)
         self._database.delete(entity)
         return entity
-    

@@ -1,5 +1,6 @@
 from v1.core.exceptions.base_exception import BaseException
 
+
 class NotFoundException(BaseException):
     """
     Exception raised for not found error (404)
