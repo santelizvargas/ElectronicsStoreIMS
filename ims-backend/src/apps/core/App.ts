@@ -12,8 +12,8 @@ export default class App {
     // Configure server variables
     const baseURL = process.env.BASE_URL || '0.0.0.0';
     const port = process.env.PORT || '8080';
-    const apiConfig = new ApiConfig()
-    
+    const apiConfig = new ApiConfig();
+
     // Configure the server instance
     this.server = new Server(baseURL, port, apiConfig);
   }
