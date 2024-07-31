@@ -28,6 +28,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@prisma/client": "^5.17.0",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
@@ -55,5 +56,8 @@
     "hooks": {
       "pre-commit": "npm run lint"
     }
+  },
+  "prisma": {
+    "schema": "./src/apps/core/prisma/schema.prisma"
   }
 }
