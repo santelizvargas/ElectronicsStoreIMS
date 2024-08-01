@@ -8,10 +8,10 @@ model User {
     password       String
     address        String
     image          Image?     @relation(fields: [imageId], references: [id])
-    imageId        Int        @unique
+    imageId        Int?       @unique
     Seller         Seller?
-    createdAt      DateTime
-    udpatedAt      DateTime
+    createdAt      DateTime?
+    updatedAt      DateTime?
     deletedAt      DateTime?
     roles          RoleUser[]
 }

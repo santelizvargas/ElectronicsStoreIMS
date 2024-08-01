@@ -36,12 +36,14 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-promise-router": "^4.1.1",
+    "express-validator": "^7.1.0",
     "glob": "^10.3.15",
     "helmet": "^7.1.0",
     "http-status": "^1.7.4",
     "jsonwebtoken": "^9.0.2",
     "pg": "^8.11.5",
-    "pg-hstore": "^2.3.4"
+    "pg-hstore": "^2.3.4",
+    "winston": "^3.13.1"
   },
   "lint-staged": {
     "**/*.ts": [

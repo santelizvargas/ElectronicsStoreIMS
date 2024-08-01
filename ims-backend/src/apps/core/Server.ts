@@ -1,7 +1,5 @@
 import express from 'express';
-import helmet from 'helmet';
 import http, { createServer } from 'http';
-import compress from 'compression';
 import AppRouter from './routes/AppRouter';
 import ApiConfig from './config/ApiConfig';
 
@@ -11,14 +9,16 @@ export default class Server {
   private readonly port: string | number;
   private readonly api: ApiConfig;
   private readonly httpServer: http.Server;
+  private readonly router: AppRouter;
 
   constructor(baseURL: string, port: string | number, api: ApiConfig) {
     this.baseURL = baseURL;
     this.port = port;
     this.api = api;
     this.app = express();
-    this.configureApp();
+    this.router = new AppRouter();
     this.httpServer = createServer(this.app);
+    this.app.use(this.api.route(), this.router.getRouter());
   }
 
   async start(): Promise<void> {
@@ -46,17 +46,5 @@ export default class Server {
         return resolve();
       });
     });
-  }
-
-  private configureApp(): void {
-    const router = new AppRouter().getRouter();
-    this.app.use(express.json());
-    this.app.use(express.urlencoded({ extended: true }));
-    this.app.use(helmet.xssFilter());
-    this.app.use(helmet.noSniff());
-    this.app.use(helmet.hidePoweredBy());
-    this.app.use(helmet.frameguard({ action: 'deny' }));
-    this.app.use(compress());
-    this.app.use(this.api.route(), router);
   }
 }
