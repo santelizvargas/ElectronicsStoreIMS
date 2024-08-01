@@ -12,7 +12,7 @@ struct GradientButtonStyle: ButtonStyle {
     private let gradientColors: [Color]
     
     init(iconName: String? = nil, 
-         gradientColors: [Color] = [.purpleGadfient, .blueGradient]) {
+         gradientColors: [Color] = [.purpleGradient, .blueGradient]) {
         self.iconName = iconName
         self.gradientColors = gradientColors
     }
