@@ -8,18 +8,19 @@
 import SwiftUI
 
 struct GradientButtonStyle: ButtonStyle {
-    private let icon: String?
+    private let iconName: String?
     private let gradientColors: [Color]
     
-    init(icon: String? = nil, gradientColors: [Color] = [.purpleGadfiente, .blueGradiente]) {
-        self.icon = icon
+    init(iconName: String? = nil, 
+         gradientColors: [Color] = [.purpleGadfiente, .blueGradiente]) {
+        self.iconName = iconName
         self.gradientColors = gradientColors
     }
     
     func makeBody(configuration: Configuration) -> some View {
         HStack {
-            if let icon {
-                Image(systemName: icon)
+            if let iconName {
+                Image(systemName: iconName)
             }
             configuration.label
         }

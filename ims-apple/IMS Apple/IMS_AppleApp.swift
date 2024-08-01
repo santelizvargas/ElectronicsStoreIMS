@@ -12,7 +12,7 @@ import SwiftData
 struct IMS_AppleApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            UserRegistrationView()
                 .modelContainer(SwiftDataProvider.shared.container)
         }
     }
