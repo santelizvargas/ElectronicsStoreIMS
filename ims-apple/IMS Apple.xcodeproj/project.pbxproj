@@ -17,6 +17,7 @@
 		33EA674E2C48BDA4007A9DBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33EA674D2C48BDA4007A9DBE /* Preview Assets.xcassets */; };
 		35BAA8672C59D9540051FBCF /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BAA8662C59D9540051FBCF /* UserRegistrationView.swift */; };
 		35FDA06E2C5B24C4004A4849 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDA06D2C5B24C4004A4849 /* Components.swift */; };
+		35FDA0712C5B3395004A4849 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDA0702C5B3395004A4849 /* UserModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		33EA674D2C48BDA4007A9DBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		35BAA8662C59D9540051FBCF /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
 		35FDA06D2C5B24C4004A4849 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
+		35FDA0702C5B3395004A4849 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +124,7 @@
 		33F848362C5081040065B0D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35FDA06F2C5B3374004A4849 /* Models */,
 				35BAA8652C59D91F0051FBCF /* Users */,
 			);
 			path = Views;
@@ -141,6 +144,14 @@
 				35FDA06D2C5B24C4004A4849 /* Components.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		35FDA06F2C5B3374004A4849 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				35FDA0702C5B3395004A4849 /* UserModel.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +231,7 @@
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */,
 				332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */,
+				35FDA0712C5B3395004A4849 /* UserModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
