@@ -15,6 +15,8 @@
 		33EA67482C48BDA2007A9DBE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA67472C48BDA2007A9DBE /* ContentView.swift */; };
 		33EA674A2C48BDA4007A9DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33EA67492C48BDA4007A9DBE /* Assets.xcassets */; };
 		33EA674E2C48BDA4007A9DBE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33EA674D2C48BDA4007A9DBE /* Preview Assets.xcassets */; };
+		35BAA8672C59D9540051FBCF /* UserRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BAA8662C59D9540051FBCF /* UserRegistrationView.swift */; };
+		35FDA06E2C5B24C4004A4849 /* Components.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDA06D2C5B24C4004A4849 /* Components.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +30,8 @@
 		33EA67492C48BDA4007A9DBE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		33EA674B2C48BDA4007A9DBE /* IMS_Apple.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IMS_Apple.entitlements; sourceTree = "<group>"; };
 		33EA674D2C48BDA4007A9DBE /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		35BAA8662C59D9540051FBCF /* UserRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegistrationView.swift; sourceTree = "<group>"; };
+		35FDA06D2C5B24C4004A4849 /* Components.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Components.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +101,7 @@
 			children = (
 				33F848362C5081040065B0D4 /* Views */,
 				33C941322C4F394E00F65E28 /* Persistence */,
+				35FDA06C2C5B24AE004A4849 /* Utilities */,
 				33EA67452C48BDA2007A9DBE /* IMS_AppleApp.swift */,
 				33EA67472C48BDA2007A9DBE /* ContentView.swift */,
 				33EA67492C48BDA4007A9DBE /* Assets.xcassets */,
@@ -117,8 +122,25 @@
 		33F848362C5081040065B0D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				35BAA8652C59D91F0051FBCF /* Users */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		35BAA8652C59D91F0051FBCF /* Users */ = {
+			isa = PBXGroup;
+			children = (
+				35BAA8662C59D9540051FBCF /* UserRegistrationView.swift */,
+			);
+			path = Users;
+			sourceTree = "<group>";
+		};
+		35FDA06C2C5B24AE004A4849 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				35FDA06D2C5B24C4004A4849 /* Components.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -192,6 +214,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */,
+				35FDA06E2C5B24C4004A4849 /* Components.swift in Sources */,
+				35BAA8672C59D9540051FBCF /* UserRegistrationView.swift in Sources */,
 				33EA67482C48BDA2007A9DBE /* ContentView.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */,
@@ -326,7 +350,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IMS Apple/Preview Content\"";
-				DEVELOPMENT_TEAM = 24GHL894R3;
+				DEVELOPMENT_TEAM = S6829FW8J6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -364,7 +388,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IMS Apple/Preview Content\"";
-				DEVELOPMENT_TEAM = 24GHL894R3;
+				DEVELOPMENT_TEAM = S6829FW8J6;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
