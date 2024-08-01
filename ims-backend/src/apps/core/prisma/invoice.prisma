@@ -1,0 +1,13 @@
+model Invoice {
+    id                      Int      @id @default(autoincrement())
+    customerName           String
+    customerIdentification String
+    totalAmount             Float
+    createdAt               DateTime
+    currency                Currency @relation(fields: [currencyId], references: [id])
+    currencyId              Int      @unique
+    detail                  Detail   @relation(fields: [detailId], references: [id])
+    detailId                Int      @unique
+    seller                  Seller   @relation(fields: [sellerId], references: [id])
+    sellerId                Int      @unique
+}

@@ -1,0 +1,12 @@
+model Image {
+    id        Int       @id @default(autoincrement())
+    name      String
+    url       String
+    createdAt DateTime
+    udpatedAt DateTime
+    deletedAt DateTime?
+    user      User?
+    product   Product   @relation(fields: [productId], references: [id])
+    productId Int
+    userId    Int
+}

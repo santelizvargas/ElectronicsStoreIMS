@@ -11,7 +11,7 @@ npx prisma db push --schema <SCHEMA_FILE>
 
 # Example
 
-npx prisma db push --schema ./src/apps/core/prisma/product.prisma
+npx prisma db push --schema ./src/apps/core/prisma
 ```
 
 > © 2024 PPLAM S.A. All Rights Reserved

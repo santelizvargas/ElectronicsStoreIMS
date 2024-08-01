@@ -1,0 +1,9 @@
+model Detail {
+    id          Int      @id @default(autoincrement())
+    description String
+    amount      Float
+    quantity    Int
+    unit        String
+    createdAt   DateTime
+    invoice     Invoice?
+}
