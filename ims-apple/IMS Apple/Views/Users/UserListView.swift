@@ -1,5 +1,5 @@
 //
-//  UserRegistrationView.swift
+//  UserListView.swift
 //  IMS Apple
 //
 //  Created by Diana Zeledon on 30/7/24.
@@ -7,48 +7,52 @@
 
 import SwiftUI
 
-private enum Constant {
+private enum Constants {
     static let cornerRadius: CGFloat = 12
     static let columnsNumber: Int = 4
+    static let mainSpacing: CGFloat = 20
 }
 
-struct UserRegistrationView: View {
-    private let columns: [GridItem] = Array(repeating: GridItem(), count: Constant.columnsNumber)
+struct UserListView: View {
+    private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
     
     var body: some View {
-        VStack {
+        VStack(spacing: Constants.mainSpacing) {
             headerView
             
             VStack {
-                headerList
+                headerListView
                 
                 Divider()
                 
-                userList
+                userListView
             }
             .padding()
             .background(.secondaryBackground)
-            .clipShape(RoundedRectangle(cornerRadius: Constant.cornerRadius))
+            .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
             
             Spacer()
         }
-        .padding()
+        .padding(Constants.mainSpacing)
         .background(.grayBackground)
     }
     
+    // MARK: - Header View
+    
     private var headerView: some View {
         HStack {
-            Text("Usurios Registrados")
+            Text("Usuarios Registrados")
             
             Spacer()
             
             Button("Invitar Usuario") { }
                 .buttonStyle(GradientButtonStyle(iconName: "paperplane.fill"))
         }
-        .padding()
     }
     
-    private var headerList: some View {
+    // MARK: - Header List View
+    
+    private var headerListView: some View {
         LazyVGrid(columns: columns) {
             Group {
                 Text("Usuario")
@@ -60,8 +64,10 @@ struct UserRegistrationView: View {
         }
     }
     
-    private var userList: some View {
-        ScrollView {
+    // MARK: - User List View
+    
+    private var userListView: some View {
+        ScrollView(showsIndicators: false) {
             LazyVGrid(columns: columns) {
                 ForEach(UserModel.mockUsers) { user in
                     HStack {
@@ -97,5 +103,5 @@ struct UserRegistrationView: View {
 }
 
 #Preview {
-    UserRegistrationView()
+    UserListView()
 }
