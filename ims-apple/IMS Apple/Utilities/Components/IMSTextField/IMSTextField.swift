@@ -25,8 +25,7 @@ enum IMSTextFieldType {
 }
 
 struct IMSTextField: View {
-    
-    @Binding var text: String
+    @Binding private var text: String
     
     private let type: IMSTextFieldType
     

@@ -8,15 +8,20 @@
 import SwiftUI
 
 private enum Constants {
-    static let textFieldMaxWidth: Double = 353
-    static let textFieldMaxHeight: Double = 74
-    static let secureButtonXOffset: Double = -8
+    static let secureFieldMaxWidth: Double = 353
+    static let secureFieldMaxHeight: Double = 74
+    static let secureButtonTrailingPadding: Double = 8
+    static let secureButtonImage: String = "eye.slash"
+    static let nonSecureButtonImage: String = "eye"
 }
 
 struct IMSSecureField: View {
-    
-    @Binding var text: String
+    @Binding private var text: String
     @State private var isSecure: Bool = true
+    
+    init(text: Binding<String>) {
+        _text = text
+    }
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -30,12 +35,16 @@ struct IMSSecureField: View {
                 Button {
                     isSecure.toggle()
                 } label: {
-                    Image(systemName: isSecure ? "eye.slash" : "eye")
+                    Image(
+                        systemName: isSecure
+                        ? Constants.secureButtonImage
+                        : Constants.nonSecureButtonImage
+                    )
                 }
-                .offset(x: Constants.secureButtonXOffset)
+                .padding(.trailing, Constants.secureButtonTrailingPadding)
             }
         }
-        .frame(maxWidth: Constants.textFieldMaxWidth, maxHeight: Constants.textFieldMaxHeight)
+        .frame(maxWidth: Constants.secureFieldMaxWidth, maxHeight: Constants.secureFieldMaxHeight)
     }
     
     @ViewBuilder

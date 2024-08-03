@@ -10,7 +10,6 @@ import SwiftUI
 private enum Constants {
     static let containerMaxWidth: Double = 353
     static let containerSpacing: Double = 25
-    static let loginButtonBorderRadius: Double = 14
 }
 
 struct LoginView: View {
@@ -25,14 +24,12 @@ struct LoginView: View {
     var body: some View {
         VStack(spacing: Constants.containerSpacing) {
             
-            Group {
-                Text("Iniciar sesión")
-                    .font(.largeTitle)
-                
-                Text("Bienvenido! Por favor ingrese sus credenciales")
-                    .font(.title2)
-                    .foregroundStyle(.gray)
-            }
+            Text("Iniciar sesión")
+                .font(.largeTitle)
+            
+            Text("Bienvenido! Por favor ingrese sus credenciales")
+                .font(.title2)
+                .foregroundStyle(.gray)
             
             IMSTextField(type: .email, text: $email)
             IMSSecureField(text: $password)
@@ -47,26 +44,8 @@ struct LoginView: View {
                 }
                 .buttonStyle(.plain)
                 
-                Button {
-                    /// Do something
-                } label: {
-                    Text("Iniciar sesión")
-                        .foregroundStyle(.white)
-                        .background(.imsGray.opacity(0))
-                }
-                .buttonStyle(.plain)
-                .frame(maxWidth: Constants.containerMaxWidth)
-                .padding()
-                .background {
-                    RoundedRectangle(cornerRadius: Constants.loginButtonBorderRadius)
-                        .foregroundStyle(
-                            LinearGradient(
-                                colors: [.imsLightPurple, .imsLightBlue],
-                                startPoint: .bottomLeading,
-                                endPoint: .topTrailing
-                            )
-                        )
-                }
+                Button("Iniciar sesión") { }
+                    .buttonStyle(ActionButtonStyle(gradientColors: [.imsLightPurple, .imsLightBlue]))
             }
             .frame(maxWidth: Constants.containerMaxWidth)
         }

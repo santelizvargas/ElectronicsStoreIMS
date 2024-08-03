@@ -30,6 +30,7 @@
 		BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F32C5D9A2400F3D38D /* BlurCircle.swift */; };
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
+		BD1DE9042C5DF44B00F3D38D /* ActionButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE9032C5DF44B00F3D38D /* ActionButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +59,7 @@
 		BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSSecureField.swift; sourceTree = "<group>"; };
 		BD1DE8F82C5D9A2400F3D38D /* IMSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSTextField.swift; sourceTree = "<group>"; };
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		BD1DE9032C5DF44B00F3D38D /* ActionButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				6DB536B02C5B38F7008676D7 /* GradientButtonStyle.swift */,
 				6DB536B22C5B394C008676D7 /* SidebarButtonStyle.swift */,
 				BD1DE8F12C5D99F900F3D38D /* IMSTextFieldStyle.swift */,
+				BD1DE9032C5DF44B00F3D38D /* ActionButtonStyle.swift */,
 			);
 			path = CustomStyles;
 			sourceTree = "<group>";
@@ -349,6 +352,7 @@
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				6DB536B62C5B3DDF008676D7 /* CustomDivider.swift in Sources */,
+				BD1DE9042C5DF44B00F3D38D /* ActionButtonStyle.swift in Sources */,
 				6DB536BF2C5B3FFC008676D7 /* SidebarItem.swift in Sources */,
 				33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */,
 				BD1DE8FA2C5D9A2400F3D38D /* IMSTextField.swift in Sources */,

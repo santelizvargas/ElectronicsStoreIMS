@@ -33,14 +33,10 @@ enum Position {
 
 struct BlurCircle: View {
     
-    // MARK: - Properties
-    
     @State private var blurRadius: CGFloat = Constants.primaryBlur
     
     private let color: Color
     private let position: Position
-    
-    // MARK: - Initializers
     
     init(color: Color,
          position: Position) {

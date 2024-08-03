@@ -18,9 +18,9 @@ struct IMSStyle: TextFieldStyle {
             .textFieldStyle(.plain)
             .frame(minHeight: Constants.textFieldMinHeight)
             .padding(.horizontal)
-            .background(
+            .background {
                 RoundedRectangle(cornerRadius: Constants.backgroundRadius)
                     .fill(.imsGray)
-            )
+            }
     }
 }
