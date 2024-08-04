@@ -2,6 +2,9 @@ import { Request, Response, NextFunction, Router } from 'express';
 import cors from 'cors';
 import httpStatus from 'http-status';
 import { sync } from 'glob';
+import compress from 'compression';
+import helmet from 'helmet';
+import express from 'express';
 
 export default class AppRouter {
   private readonly router: Router;
@@ -14,6 +17,14 @@ export default class AppRouter {
       console.error(error);
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message);
     });
+
+    this.router.use(express.json());
+    this.router.use(express.urlencoded({ extended: true }));
+    this.router.use(helmet.xssFilter());
+    this.router.use(helmet.noSniff());
+    this.router.use(helmet.hidePoweredBy());
+    this.router.use(helmet.frameguard({ action: 'deny' }));
+    this.router.use(compress());
 
     this.registerRoutes();
   }
