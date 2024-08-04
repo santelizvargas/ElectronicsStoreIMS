@@ -21,9 +21,6 @@ struct ActionButtonStyle: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .foregroundStyle(.white)
-            .background(.imsGray.opacity(0))
-            .buttonStyle(.plain)
             .frame(maxWidth: Constants.buttonMaxWidth)
             .padding()
             .background {
