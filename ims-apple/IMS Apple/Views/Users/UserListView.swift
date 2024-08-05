@@ -47,6 +47,11 @@ struct UserListView: View {
             
             Button("Invitar Usuario") { }
                 .buttonStyle(GradientButtonStyle(iconName: "paperplane.fill"))
+            
+            Button("Exportar Lista") {
+                _ = PermissionHandler().writeFile(data: "testing writing")
+            }
+                .buttonStyle(GradientButtonStyle(iconName: "square.and.arrow.up.fill"))
         }
     }
     

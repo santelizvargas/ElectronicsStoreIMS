@@ -13,7 +13,7 @@ private enum Constants {
 }
 
 struct MainView: View {
-    @State private var itemSelected: SidebarItem = .graphs
+    @State private var itemSelected: SidebarItem = .users
     
     private var sectionSelected: SidebarSection {
         SidebarSection.allCases.first { section in
