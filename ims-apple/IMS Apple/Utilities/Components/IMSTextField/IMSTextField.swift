@@ -45,7 +45,7 @@ struct IMSTextField: View {
             }
             
             TextField("", text: $text)
-                .textFieldStyle(IMSStyle())
+                .textFieldStyle(IMSTextFieldStyle())
         }
         .frame(maxWidth: Constants.textFieldMaxWidth, maxHeight: Constants.textFieldMaxHeight)
     }

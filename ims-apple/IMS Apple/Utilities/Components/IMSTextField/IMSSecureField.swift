@@ -30,7 +30,7 @@ struct IMSSecureField: View {
             ZStack(alignment: .trailing) {
                 
                 textField
-                    .textFieldStyle(IMSStyle())
+                    .textFieldStyle(IMSTextFieldStyle())
                 
                 Button {
                     isSecure.toggle()
@@ -41,6 +41,7 @@ struct IMSSecureField: View {
                         : Constants.nonSecureButtonImage
                     )
                 }
+                .buttonStyle(.plain)
                 .padding(.trailing, Constants.secureButtonTrailingPadding)
             }
         }

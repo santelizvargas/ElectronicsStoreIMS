@@ -12,7 +12,7 @@ private enum Constants {
     static let backgroundRadius: Double = 8
 }
 
-struct IMSStyle: TextFieldStyle {
+struct IMSTextFieldStyle: TextFieldStyle {
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .textFieldStyle(.plain)

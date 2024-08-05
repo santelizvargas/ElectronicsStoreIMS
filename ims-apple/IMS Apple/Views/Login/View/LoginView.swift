@@ -8,18 +8,14 @@
 import SwiftUI
 
 private enum Constants {
-    static let containerMaxWidth: Double = 353
+    static let loginButtonMaxWidth: Double = 320
     static let containerSpacing: Double = 25
 }
 
 struct LoginView: View {
     
-    // MARK: - Properties
-    
     @State private var password: String = ""
     @State private var email: String = ""
-    
-    // MARK: - Body
     
     var body: some View {
         VStack(spacing: Constants.containerSpacing) {
@@ -45,9 +41,12 @@ struct LoginView: View {
                 .buttonStyle(.plain)
                 
                 Button("Iniciar sesión") { }
-                    .buttonStyle(ActionButtonStyle(gradientColors: [.imsLightPurple, .imsLightBlue]))
+                    .buttonStyle(GradientButtonStyle(
+                        buttonWidth: Constants.loginButtonMaxWidth,
+                        gradientColors: [.imsLightBlue, .imsLightPurple]
+                    )
+                )
             }
-            .frame(maxWidth: Constants.containerMaxWidth)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(IMSBackground())
