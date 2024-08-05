@@ -9,11 +9,14 @@ import SwiftUI
 
 struct GradientButtonStyle: ButtonStyle {
     private let iconName: String?
+    private let buttonWidth: CGFloat?
     private let gradientColors: [Color]
     
     init(iconName: String? = nil,
+         buttonWidth: CGFloat? = nil,
          gradientColors: [Color] = [.purpleGradient, .blueGradient]) {
         self.iconName = iconName
+        self.buttonWidth = buttonWidth
         self.gradientColors = gradientColors
     }
     
@@ -23,6 +26,7 @@ struct GradientButtonStyle: ButtonStyle {
                 Image(systemName: iconName)
             }
             configuration.label
+                .frame(maxWidth: buttonWidth)
         }
         .padding()
         .background(
