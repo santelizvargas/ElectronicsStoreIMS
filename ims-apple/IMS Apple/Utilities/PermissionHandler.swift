@@ -6,8 +6,7 @@
 //
 
 import Foundation
-import SwiftUI
-import UniformTypeIdentifiers
+import AppKit
 
 final class PermissionHandler {
     
@@ -15,34 +14,20 @@ final class PermissionHandler {
         FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
     }
     
-//    private func requestFileAccess() -> Bool {
-//        let permissionStatus =
-//    }
-    
-    private func showPanel() -> NSApplication.ModalResponse {
-        let openPanel: NSOpenPanel = .init()
-        openPanel.directoryURL = getDownloadsDirectory()
-        openPanel.prompt = "Save"
-        openPanel.showsTagField = true
-        openPanel.nameFieldStringValue = "Name"
-        openPanel.canChooseDirectories = true
-        openPanel.canChooseFiles = false
-        return openPanel.runModal()
-    }
-    
-    func writeFile(data: String) -> Bool {
+    func writeFile(data: String) {
+        let savePanel: NSSavePanel = .init()
+        savePanel.directoryURL = self.getDownloadsDirectory()
+        savePanel.prompt = "Save"
+        savePanel.nameFieldStringValue = "Users"
+        savePanel.allowedContentTypes = [.xml]
+        savePanel.runModal()
         
-        if showPanel() == .OK {
-            let fileName = getDownloadsDirectory().appendingPathComponent("IMSData.txt")
-            do {
-                try data.write(to: fileName, atomically: true, encoding: .utf8)
-                return true
-            } catch {
-                print(error)
-                return false
-            }
-        } else {
-            return false
+        guard let url = savePanel.url else { return }
+        
+        do {
+            try data.write(to: url, atomically: true, encoding: .utf8)
+        } catch {
+            fatalError(error.localizedDescription)
         }
     }
 }
