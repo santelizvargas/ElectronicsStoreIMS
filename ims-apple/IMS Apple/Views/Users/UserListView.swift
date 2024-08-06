@@ -71,17 +71,7 @@ struct UserListView: View {
             LazyVGrid(columns: columns) {
                 ForEach(UserModel.mockUsers) { user in
                     HStack {
-                        AsyncImage(url: URL(string: user.image)) { image in
-                            image
-                        } placeholder: {
-                            Image(systemName: "person.fill")
-                                .foregroundStyle(.grayBackground)
-                                .padding()
-                        }
-                        .background {
-                            Circle()
-                                .fill(.graySecundary)
-                        }
+                        ProfileImage(url: user.image)
                         
                         Text(user.name)
                             .fontWeight(.semibold)
