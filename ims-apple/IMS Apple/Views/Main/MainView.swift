@@ -56,7 +56,7 @@ struct MainView: View {
         Button {
             
         } label: {
-           ProfileImage(url: "")
+           ProfileImage(url: "https://pplam.png")
         }
         .buttonStyle(.plain)
     }

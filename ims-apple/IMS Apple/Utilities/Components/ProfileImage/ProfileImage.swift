@@ -31,5 +31,5 @@ struct ProfileImage: View {
 }
 
 #Preview {
-    ProfileImage(url: "")
+    ProfileImage(url: "https://pplam.png")
 }
