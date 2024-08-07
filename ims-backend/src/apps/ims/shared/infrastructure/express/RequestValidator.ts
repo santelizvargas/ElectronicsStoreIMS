@@ -9,7 +9,7 @@ export const RequestValidator = (req: Request, res: Response, next: NextFunction
 
   const errors = validationResult(req).formatWith(errorFormatter).array({ onlyFirstError: true });
   if (errors.length > 0) {
-    return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({ errors: errors });
+    return res.status(httpStatus.UNPROCESSABLE_ENTITY).json({ errors });
   }
   return next();
 };

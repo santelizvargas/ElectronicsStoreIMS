@@ -6,5 +6,5 @@ export const register = function (app: Express): void {
   const controller: AuthenticationController = new Container()
     .invoke()
     .resolve<AuthenticationController>('authenticationController');
-  app.post('/auth/login', controller.invoke.bind(controller));
+  app.post('/auth/login', controller.rules, controller.invoke.bind(controller));
 };
