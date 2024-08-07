@@ -48,6 +48,7 @@ struct MainView: View {
     @ViewBuilder private var detailView: some View {
         switch itemSelected {
         case .users: UserListView()
+        case .salesHistory: SalesHistoryView()
         default: Text(itemSelected.name)
         }
     }
