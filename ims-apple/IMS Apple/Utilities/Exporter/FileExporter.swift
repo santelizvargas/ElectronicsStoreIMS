@@ -7,6 +7,7 @@
 
 import Foundation
 import AppKit
+import UniformTypeIdentifiers
 
 final class FileExporter {
     
@@ -14,22 +15,24 @@ final class FileExporter {
     
     private lazy var fileFactory: FileFactory = FileFactory()
     
-    private lazy var savePanel: NSSavePanel = {
-        let panel: NSSavePanel = .init()
-        panel.directoryURL = getDownloadsDirectoryUrl()
-        panel.prompt = "Save"
-        return panel
-    }()
-    
     // MARK: - Functions
     
     private func getDownloadsDirectoryUrl() -> URL {
         FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
     }
     
+    private func savePanel(type: UTType, fileName: String) -> NSSavePanel {
+        let panel: NSSavePanel = NSSavePanel()
+        panel.directoryURL = getDownloadsDirectoryUrl()
+        panel.prompt = "Save"
+        panel.allowedContentTypes = [type]
+        panel.nameFieldStringValue = fileName
+        return panel
+    }
+    
     func exportUserList(from users: [UserModel]) -> Bool {
         
-        savePanel.allowedContentTypes = [.commaSeparatedText]
+        let savePanel: NSSavePanel = savePanel(type: .commaSeparatedText, fileName: "IMS Users")
         
         if savePanel.runModal() == .OK,
            let url = savePanel.url {
