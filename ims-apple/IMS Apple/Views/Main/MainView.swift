@@ -37,6 +37,11 @@ struct MainView: View {
             }
             .navigationTitle(sectionSelected.name)
             .toolbarBackground(.imsPrimary)
+            .toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    profileButton
+                }
+            }
         }
     }
     
@@ -46,6 +51,15 @@ struct MainView: View {
         case .salesHistory: SalesHistoryView()
         default: Text(itemSelected.name)
         }
+    }
+    
+    private var profileButton: some View {
+        Button {
+            
+        } label: {
+           ProfileImage(url: "https://pplam.png")
+        }
+        .buttonStyle(.plain)
     }
 }
 

@@ -73,7 +73,7 @@ struct Sidebar: View {
                 
                 Text(section.name)
                     .font(.caption)
-                    .foregroundStyle(.imsGray)
+                    .foregroundStyle(.imsGraySecundary)
                     .padding(.bottom, Constants.sectionTitlePadding)
                 
                 itemListView(items: section.itemList)
