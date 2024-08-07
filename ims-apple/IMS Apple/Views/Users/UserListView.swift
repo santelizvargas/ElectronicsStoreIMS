@@ -49,7 +49,7 @@ struct UserListView: View {
                 .buttonStyle(GradientButtonStyle(iconName: "paperplane.fill"))
             
             Button("Exportar Lista") {
-                _ = PermissionHandler().writeFile(data: "testing writing")
+                _ = FileExporter().exportUserList(from: UserModel.mockUsers)
             }
                 .buttonStyle(GradientButtonStyle(iconName: "square.and.arrow.up.fill"))
         }
