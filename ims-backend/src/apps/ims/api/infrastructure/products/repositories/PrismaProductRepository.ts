@@ -1,5 +1,4 @@
 import { PrismaClient } from '@prisma/client';
-
 import { CrudRepository } from '../../../../shared/domain/models/repository/CrudRepository';
 import { Product } from '../../../domain/models/products/Product';
 import { ProductRequest } from '../../../application/products/CreateProductService';
