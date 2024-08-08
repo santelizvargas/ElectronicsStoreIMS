@@ -47,6 +47,11 @@ struct UserListView: View {
             
             Button("Invitar Usuario") { }
                 .buttonStyle(GradientButtonStyle(iconName: "paperplane.fill"))
+            
+            Button("Exportar Lista") {
+                _ = FileExporter().exportUserList(from: UserModel.mockUsers)
+            }
+                .buttonStyle(GradientButtonStyle(iconName: "square.and.arrow.up.fill"))
         }
     }
     
