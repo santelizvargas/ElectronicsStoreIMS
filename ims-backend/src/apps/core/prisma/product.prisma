@@ -6,7 +6,7 @@ model Product {
   salePrice     Float
   purchasePrice Float
   createdAt     DateTime
-  udpatedAt     DateTime
+  updatedAt     DateTime
   deletedAt     DateTime?
   images        Image[]
 }
