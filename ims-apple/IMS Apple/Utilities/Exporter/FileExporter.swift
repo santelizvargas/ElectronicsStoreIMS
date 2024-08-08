@@ -11,20 +11,17 @@ import UniformTypeIdentifiers
 
 final class FileExporter {
     
-    // MARK: - Properties
-    
     private lazy var fileFactory: FileFactory = FileFactory()
+    
+    private lazy var downloadsDirectoryUrl: URL = {
+        FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
+    }()
     
     // MARK: - Functions
     
-    private func getDownloadsDirectoryUrl() -> URL {
-        FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
-    }
-    
     private func savePanel(type: UTType, fileName: String) -> NSSavePanel {
         let panel: NSSavePanel = NSSavePanel()
-        panel.directoryURL = getDownloadsDirectoryUrl()
-        panel.prompt = "Save"
+        panel.directoryURL = downloadsDirectoryUrl
         panel.allowedContentTypes = [type]
         panel.nameFieldStringValue = fileName
         return panel
