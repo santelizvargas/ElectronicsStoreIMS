@@ -15,6 +15,9 @@ import CreateProductController from '../../ims/api/infrastructure/express/contro
 import ProductFetcher from '../../ims/api/infrastructure/products/ProductFetcher';
 import FetchProductService from '../../ims/api/application/products/FetchProductService';
 import FetchProductController from '../../ims/api/infrastructure/express/controllers/products/FetchProductController';
+import RemoveProductService from '../../ims/api/application/products/RemoveProductService';
+import ProductRemover from '../../ims/api/infrastructure/products/ProductRemover';
+import RemoveProductController from '../../ims/api/infrastructure/express/controllers/products/RemoveProductController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -49,11 +52,14 @@ export default class Container {
       .register({
         createProductService: asClass(CreateProductService).singleton(),
         fetchProductService: asClass(FetchProductService).singleton(),
+        removeProductService: asClass(RemoveProductService).singleton(),
         productCreator: asClass(ProductCreator).singleton(),
         productFetcher: asClass(ProductFetcher).singleton(),
+        productRemover: asClass(ProductRemover).singleton(),
         productRepository: asClass(PrismaProductRepository).singleton(),
         createProductController: asClass(CreateProductController).singleton(),
         fetchProductController: asClass(FetchProductController).singleton(),
+        removeProductController: asClass(RemoveProductController).singleton(),
       });
   }
 
