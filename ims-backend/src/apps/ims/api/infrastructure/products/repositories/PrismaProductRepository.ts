@@ -7,11 +7,15 @@ export default class PrismaProductRepository implements CrudRepository<ProductRe
   constructor(private readonly database: PrismaClient) {}
 
   async findAll(): Promise<Product[]> {
-    return this.database.product.findMany();
+    return await this.database.product.findMany({
+      where: {
+        deletedAt: null,
+      },
+    });
   }
 
   async find(id: number): Promise<Product | null> {
-    return this.database.product.findUnique({
+    return await this.database.product.findUnique({
       where: {
         id,
       },
@@ -19,7 +23,7 @@ export default class PrismaProductRepository implements CrudRepository<ProductRe
   }
 
   async create(model: ProductRequest): Promise<Product> {
-    return this.database.product.create({
+    return await this.database.product.create({
       data: {
         ...model,
         createdAt: new Date(),
@@ -29,7 +33,7 @@ export default class PrismaProductRepository implements CrudRepository<ProductRe
   }
 
   async update(model: Omit<Product, 'images'>): Promise<void> {
-    this.database.product.update({
+    await this.database.product.update({
       where: {
         id: model.id,
       },
@@ -38,7 +42,7 @@ export default class PrismaProductRepository implements CrudRepository<ProductRe
   }
 
   async delete(id: number): Promise<void> {
-    this.database.product.delete({
+    await this.database.product.delete({
       where: {
         id,
       },
