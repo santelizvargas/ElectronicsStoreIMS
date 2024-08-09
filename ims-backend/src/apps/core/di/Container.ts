@@ -12,6 +12,9 @@ import CreateProductService from '../../ims/api/application/products/CreateProdu
 import ProductCreator from '../../ims/api/infrastructure/products/ProductCreator';
 import PrismaProductRepository from '../../ims/api/infrastructure/products/repositories/PrismaProductRepository';
 import CreateProductController from '../../ims/api/infrastructure/express/controllers/products/CreateProductController';
+import ProductFetcher from '../../ims/api/infrastructure/products/ProductFetcher';
+import FetchProductService from '../../ims/api/application/products/FetchProductService';
+import FetchProductController from '../../ims/api/infrastructure/express/controllers/products/FetchProductController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -45,9 +48,12 @@ export default class Container {
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),
+        fetchProductService: asClass(FetchProductService).singleton(),
         productCreator: asClass(ProductCreator).singleton(),
+        productFetcher: asClass(ProductFetcher).singleton(),
         productRepository: asClass(PrismaProductRepository).singleton(),
         createProductController: asClass(CreateProductController).singleton(),
+        fetchProductController: asClass(FetchProductController).singleton(),
       });
   }
 
