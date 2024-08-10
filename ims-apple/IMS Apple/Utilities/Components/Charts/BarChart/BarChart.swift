@@ -40,8 +40,8 @@ struct BarChart: View {
         .chartXAxis {
             AxisMarks { value in
                 AxisValueLabel {
-                    if let valueString = value.as(String.self),
-                       let values = data.first(where: { $0.id.uuidString == valueString}) {
+                    if let id = value.as(String.self),
+                       let values = data.first(where: { $0.id.uuidString == id}) {
                         Text(values.name.prefix(Constants.prefix))
                     }
                 }

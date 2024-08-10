@@ -93,7 +93,6 @@ struct GraphView: View {
     }
 }
 
-
 #Preview {
     GraphView()
 }
