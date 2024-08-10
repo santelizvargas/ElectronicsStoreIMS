@@ -27,8 +27,8 @@ final class FileExporter {
         return panel
     }
     
+    @discardableResult
     func exportUserList(from users: [UserModel]) -> Bool {
-        
         let savePanel: NSSavePanel = savePanel(type: .commaSeparatedText, fileName: "IMS Users")
         
         if savePanel.runModal() == .OK,

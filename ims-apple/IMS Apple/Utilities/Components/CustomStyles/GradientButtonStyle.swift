@@ -8,27 +8,42 @@
 import SwiftUI
 
 struct GradientButtonStyle: ButtonStyle {
-    private let iconName: String?
+    private let imageRight: String?
+    private let imageLeft: String?
     private let buttonWidth: CGFloat?
+    private let buttonHeight: CGFloat?
     private let gradientColors: [Color]
+    private let cornerRadius: CGFloat
     
-    init(iconName: String? = nil,
+    init(imageRight: String? = nil,
+         imageLeft: String? = nil,
          buttonWidth: CGFloat? = nil,
-         gradientColors: [Color] = [.purpleGradient, .blueGradient]) {
-        self.iconName = iconName
+         buttonHeight: CGFloat? = 50,
+         gradientColors: [Color] = [.purpleGradient, .blueGradient],
+         cornerRadius: CGFloat = 12) {
+        self.imageRight = imageRight
+        self.imageLeft = imageLeft
         self.buttonWidth = buttonWidth
+        self.buttonHeight = buttonHeight
         self.gradientColors = gradientColors
+        self.cornerRadius = cornerRadius
     }
     
     func makeBody(configuration: Configuration) -> some View {
         HStack {
-            if let iconName {
-                Image(systemName: iconName)
+            if let imageLeft {
+                Image(systemName: imageLeft)
             }
+            
             configuration.label
                 .frame(maxWidth: buttonWidth)
+            
+            if let imageRight {
+                Image(systemName: imageRight)
+            }
         }
-        .padding()
+        .padding(.horizontal)
+        .frame(height: buttonHeight)
         .background(
             LinearGradient(
                 colors: gradientColors,
@@ -36,6 +51,6 @@ struct GradientButtonStyle: ButtonStyle {
                 endPoint: .trailing
             )
         )
-        .clipShape(RoundedRectangle(cornerRadius: 12))
+        .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
     }
 }
