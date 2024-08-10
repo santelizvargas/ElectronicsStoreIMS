@@ -15,6 +15,7 @@ struct HistoryModel: Identifiable {
 }
 
 // MARK: - Mock Data
+
 extension HistoryModel {
     static let mockData: [HistoryModel] = [
         HistoryModel(name: "John Doe", phoneNumber: "123-456-7890", date: "2024-01-01"),

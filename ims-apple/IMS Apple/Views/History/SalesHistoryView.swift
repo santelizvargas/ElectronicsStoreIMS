@@ -21,7 +21,6 @@ private enum Constants {
 }
 
 struct SalesHistoryView: View {
-    private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
     @State var pageSelected: Int = 0
     
     var body: some View {
@@ -40,6 +39,7 @@ struct SalesHistoryView: View {
     }
     
     // MARK: - Page buttons
+    
     private var pageButtons: some View {
         HStack {
             Button("Anterior") { }
@@ -59,6 +59,7 @@ struct SalesHistoryView: View {
     }
     
     // MARK: - Header List View
+    
     private var headerListView: some View {
         Grid(horizontalSpacing: .zero) {
             GridRow {
@@ -74,6 +75,7 @@ struct SalesHistoryView: View {
     }
         
     // MARK: - History List View
+    
     private var historyList: some View {
         Grid {
             headerListView
@@ -90,6 +92,7 @@ struct SalesHistoryView: View {
     }
     
     // MARK: - Item View
+    
     private var itemRows: some View {
         GridRow {
             ScrollView(showsIndicators: false) {
@@ -117,6 +120,7 @@ struct SalesHistoryView: View {
     }
     
     // MARK: - Page Number Button
+    
     private func pageButton(page: Int) -> some View {
         Button(page.description) {
             withAnimation {
