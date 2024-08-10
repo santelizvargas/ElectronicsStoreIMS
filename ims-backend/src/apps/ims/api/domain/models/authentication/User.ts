@@ -1,3 +1,5 @@
+// import { Role } from '../rbac/Role';
+
 export type User = {
   id: number;
   firstName: string;
@@ -7,4 +9,5 @@ export type User = {
   phone: string;
   address: string;
   password: string;
+  // role: Role[];
 };

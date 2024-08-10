@@ -24,6 +24,10 @@ import SupplyProductService from '../../ims/api/application/products/SupplyProdu
 import CredentialsPasswordUpdater from '../../ims/api/infrastructure/authentication/credentials/CredentialsPasswordUpdater';
 import UpdatePasswordService from '../../ims/api/application/authentication/UpdatePasswordService';
 import UpdatePasswordController from '../../ims/api/infrastructure/express/controllers/UpdatePasswordController';
+import AssignRoleController from '../../ims/api/infrastructure/express/controllers/rbac/AssignRoleController';
+import AssignRoleService from '../../ims/api/application/rbac/AssignRoleService';
+import RoleAssigner from '../../ims/api/infrastructure/rbac/RoleAssigner';
+import PrismaRbacRepository from '../../ims/api/infrastructure/rbac/repositories/PrismaRbacRepository';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -72,6 +76,12 @@ export default class Container {
         fetchProductController: asClass(FetchProductController).singleton(),
         removeProductController: asClass(RemoveProductController).singleton(),
         supplyProductController: asClass(SupplyProductController).singleton(),
+      })
+      .register({
+        assignRoleController: asClass(AssignRoleController).singleton(),
+        assignRoleService: asClass(AssignRoleService).singleton(),
+        roleAssigner: asClass(RoleAssigner).singleton(),
+        rbacRepository: asClass(PrismaRbacRepository).singleton(),
       });
   }
 
