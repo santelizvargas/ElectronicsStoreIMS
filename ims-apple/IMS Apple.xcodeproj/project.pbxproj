@@ -9,6 +9,14 @@
 /* Begin PBXBuildFile section */
 		332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332509B82C51E39800E10F94 /* SwiftDataProvider.swift */; };
 		3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353B6BC2C60852500202526 /* ProfileImage.swift */; };
+		338DF8292C645DE200F72772 /* Donut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8282C645DE200F72772 /* Donut.swift */; };
+		338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82A2C645E4D00F72772 /* DonutChart.swift */; };
+		338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82D2C64668B00F72772 /* ChartContainer.swift */; };
+		338DF8312C64733300F72772 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8302C64733300F72772 /* GraphView.swift */; };
+		338DF8342C64846000F72772 /* BarChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8332C64846000F72772 /* BarChart.swift */; };
+		338DF8372C65D66700F72772 /* View+OSType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8362C65D66700F72772 /* View+OSType.swift */; };
+		338DF83A2C65DA0300F72772 /* LeftGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8392C65DA0300F72772 /* LeftGradient.swift */; };
+		338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF83B2C65E5EA00F72772 /* BarItem.swift */; };
 		33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941332C4F3A3E00F65E28 /* DataManager.swift */; };
 		33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941392C4F42ED00F65E28 /* DataManagerError.swift */; };
 		33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9413C2C4F4DDC00F65E28 /* Product.swift */; };
@@ -40,6 +48,14 @@
 /* Begin PBXFileReference section */
 		332509B82C51E39800E10F94 /* SwiftDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftDataProvider.swift; sourceTree = "<group>"; };
 		3353B6BC2C60852500202526 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
+		338DF8282C645DE200F72772 /* Donut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donut.swift; sourceTree = "<group>"; };
+		338DF82A2C645E4D00F72772 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
+		338DF82D2C64668B00F72772 /* ChartContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContainer.swift; sourceTree = "<group>"; };
+		338DF8302C64733300F72772 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
+		338DF8332C64846000F72772 /* BarChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarChart.swift; sourceTree = "<group>"; };
+		338DF8362C65D66700F72772 /* View+OSType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+OSType.swift"; sourceTree = "<group>"; };
+		338DF8392C65DA0300F72772 /* LeftGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftGradient.swift; sourceTree = "<group>"; };
+		338DF83B2C65E5EA00F72772 /* BarItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarItem.swift; sourceTree = "<group>"; };
 		33C941332C4F3A3E00F65E28 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		33C941392C4F42ED00F65E28 /* DataManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerError.swift; sourceTree = "<group>"; };
 		33C9413C2C4F4DDC00F65E28 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -96,6 +112,58 @@
 				3353B6BC2C60852500202526 /* ProfileImage.swift */,
 			);
 			path = ProfileImage;
+			sourceTree = "<group>";
+		};
+		338DF8262C645DC000F72772 /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+				338DF8322C64844600F72772 /* BarChart */,
+				338DF8272C645DC600F72772 /* DonutChart */,
+				338DF82D2C64668B00F72772 /* ChartContainer.swift */,
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		338DF8272C645DC600F72772 /* DonutChart */ = {
+			isa = PBXGroup;
+			children = (
+				338DF8282C645DE200F72772 /* Donut.swift */,
+				338DF82A2C645E4D00F72772 /* DonutChart.swift */,
+			);
+			path = DonutChart;
+			sourceTree = "<group>";
+		};
+		338DF82F2C64731F00F72772 /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				338DF8302C64733300F72772 /* GraphView.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		338DF8322C64844600F72772 /* BarChart */ = {
+			isa = PBXGroup;
+			children = (
+				338DF83B2C65E5EA00F72772 /* BarItem.swift */,
+				338DF8332C64846000F72772 /* BarChart.swift */,
+			);
+			path = BarChart;
+			sourceTree = "<group>";
+		};
+		338DF8352C65D64A00F72772 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				338DF8362C65D66700F72772 /* View+OSType.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		338DF8382C65D99C00F72772 /* Gradients */ = {
+			isa = PBXGroup;
+			children = (
+				338DF8392C65DA0300F72772 /* LeftGradient.swift */,
+			);
+			path = Gradients;
 			sourceTree = "<group>";
 		};
 		33C941322C4F394E00F65E28 /* Persistence */ = {
@@ -171,6 +239,7 @@
 				35069C802C61C2C8001E854F /* History */,
 				BD1DE9002C5D9B2600F3D38D /* Login */,
 				6DB536C02C5B443E008676D7 /* Main */,
+				338DF82F2C64731F00F72772 /* Graph */,
 				35BAA8652C59D91F0051FBCF /* Users */,
 			);
 			path = Views;
@@ -196,6 +265,7 @@
 			isa = PBXGroup;
 			children = (
 				BDD7125C2C6426EF000FAD7B /* Exporter */,
+				338DF8352C65D64A00F72772 /* Extensions */,
 				6DB536AE2C5B38D5008676D7 /* Components */,
 			);
 			path = Utilities;
@@ -213,6 +283,8 @@
 		6DB536AE2C5B38D5008676D7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				338DF8382C65D99C00F72772 /* Gradients */,
+				338DF8262C645DC000F72772 /* Charts */,
 				3353B6BB2C60850900202526 /* ProfileImage */,
 				BD1DE8F42C5D9A2400F3D38D /* BlurCircle */,
 				BD1DE8F62C5D9A2400F3D38D /* IMSBackground */,
@@ -286,18 +358,10 @@
 			path = IMSTextField;
 			sourceTree = "<group>";
 		};
-		BD1DE8FF2C5D9B2600F3D38D /* View */ = {
-			isa = PBXGroup;
-			children = (
-				BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */,
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		BD1DE9002C5D9B2600F3D38D /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				BD1DE8FF2C5D9B2600F3D38D /* View */,
+				BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -382,11 +446,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */,
+				338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */,
 				6DB536B12C5B38F7008676D7 /* GradientButtonStyle.swift in Sources */,
+				338DF83A2C65DA0300F72772 /* LeftGradient.swift in Sources */,
 				6DB536BD2C5B3FC1008676D7 /* SidebarSection.swift in Sources */,
 				35BAA8672C59D9540051FBCF /* UserListView.swift in Sources */,
 				33EA67482C48BDA2007A9DBE /* MainView.swift in Sources */,
 				BD1DE8F22C5D99F900F3D38D /* IMSTextFieldStyle.swift in Sources */,
+				338DF8292C645DE200F72772 /* Donut.swift in Sources */,
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				6DB536B62C5B3DDF008676D7 /* CustomDivider.swift in Sources */,
@@ -397,15 +464,20 @@
 				BD1DE8FB2C5D9A2400F3D38D /* IMSBackground.swift in Sources */,
 				BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */,
 				35069C842C61C3DE001E854F /* HistoryModel.swift in Sources */,
+				338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */,
 				BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */,
+				338DF8372C65D66700F72772 /* View+OSType.swift in Sources */,
 				BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */,
 				35069C822C61C2E0001E854F /* SalesHistoryView.swift in Sources */,
+				338DF8342C64846000F72772 /* BarChart.swift in Sources */,
+				338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */,
+				338DF8312C64733300F72772 /* GraphView.swift in Sources */,
 				332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */,
 				35FDA0712C5B3395004A4849 /* UserModel.swift in Sources */,
 				6DB536B82C5B3EC8008676D7 /* Breadcrumb.swift in Sources */,
 				BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */,
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
-				BD378ACF2C617D5800E77862 /* PermissionHandler.swift in Sources */,
+				BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */,
 				6DB536BB2C5B3F9B008676D7 /* Sidebar.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
 			);

@@ -5,6 +5,7 @@
 //  Created by Brandon Santeliz on 8/5/24.
 //
 
+#if os(macOS)
 import Foundation
 import AppKit
 import UniformTypeIdentifiers
@@ -50,3 +51,4 @@ final class FileExporter {
     
     // TODO: Export PDF File
 }
+#endif

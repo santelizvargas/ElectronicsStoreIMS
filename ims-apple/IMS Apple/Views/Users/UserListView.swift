@@ -48,10 +48,12 @@ struct UserListView: View {
             Button("Invitar Usuario") { }
                 .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
             
+            #if os(macOS)
             Button("Exportar Lista") {
                 FileExporter().exportUserList(from: UserModel.mockUsers)
             }
             .buttonStyle(GradientButtonStyle(imageLeft: "square.and.arrow.up.fill"))
+            #endif
         }
     }
     
