@@ -46,7 +46,7 @@ struct UserListView: View {
             Spacer()
             
             Button("Invitar Usuario") { }
-                .buttonStyle(GradientButtonStyle(imageRight: "paperplane.fill", buttonHeight: 50))
+                .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
         }
     }
     

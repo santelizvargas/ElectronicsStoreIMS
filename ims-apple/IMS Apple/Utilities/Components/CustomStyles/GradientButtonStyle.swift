@@ -18,7 +18,7 @@ struct GradientButtonStyle: ButtonStyle {
     init(imageRight: String? = nil,
          imageLeft: String? = nil,
          buttonWidth: CGFloat? = nil,
-         buttonHeight: CGFloat? = nil,
+         buttonHeight: CGFloat? = 50,
          gradientColors: [Color] = [.purpleGradient, .blueGradient],
          cornerRadius: CGFloat = 12) {
         self.imageRight = imageRight

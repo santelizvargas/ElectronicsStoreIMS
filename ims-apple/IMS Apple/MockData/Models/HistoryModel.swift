@@ -2,18 +2,19 @@
 //  HistoryModel.swift
 //  IMS Apple
 //
-//  Created by Diana Zeledon on 5/8/24.
+//  Created by Brandon Santeliz on 5/8/24.
 //
 
 import Foundation
 
 struct HistoryModel: Identifiable {
-    var id = UUID()
+    let id: UUID = UUID()
     let name: String
     let phoneNumber: String
     let date: String
 }
 
+// MARK: - Mock Data
 extension HistoryModel {
     static let mockData: [HistoryModel] = [
         HistoryModel(name: "John Doe", phoneNumber: "123-456-7890", date: "2024-01-01"),

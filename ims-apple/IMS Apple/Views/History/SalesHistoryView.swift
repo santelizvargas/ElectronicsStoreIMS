@@ -2,39 +2,35 @@
 //  SalesHistoryView.swift
 //  IMS Apple
 //
-//  Created by Diana Zeledon on 5/8/24.
+//  Created by Brandon Santeliz on 5/8/24.
 //
 
 import SwiftUI
 
-private enum HistoryConstants {
+private enum Constants {
     static let columnsNumber: Int = 4
     static let horizontalPadding: CGFloat = 32
     static let cornerRadius: CGFloat = 12
+    static let gridCellColumns: Int = 2
     
     enum Button {
         static let height: CGFloat = 36
+        static let width: CGFloat = 33
         static let cornerRadius: CGFloat = 4
     }
 }
 
 struct SalesHistoryView: View {
-    private let columns: [GridItem] = Array(repeating: GridItem(), count: HistoryConstants.columnsNumber)
+    private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
+    @State var pageSelected: Int = 0
+    
     var body: some View {
         VStack {
             Text("Todas las ventas")
                 .padding(.vertical)
                 .frame(maxWidth: .infinity, alignment: .leading)
             
-            VStack {
-                headerListView
-                
-                Divider()
-                
-                historyList
-            }
-            .background(.secondaryBackground)
-            .clipShape(RoundedRectangle(cornerRadius: HistoryConstants.cornerRadius))
+            historyList
             
             pageButtons
                 .padding()
@@ -43,59 +39,96 @@ struct SalesHistoryView: View {
         .background(.grayBackground)
     }
     
+    // MARK: - Page buttons
     private var pageButtons: some View {
         HStack {
             Button("Anterior") { }
                 .buttonStyle(GradientButtonStyle(imageLeft: "chevron.left",
-                                                 buttonHeight: HistoryConstants.Button.height,
-                                                 cornerRadius: HistoryConstants.Button.cornerRadius))
+                                                 buttonHeight: Constants.Button.height,
+                                                 cornerRadius: Constants.Button.cornerRadius))
             
             ForEach(1...5, id: \.self) { number in
-                Button("\(number)") { }
-                    .buttonStyle(GradientButtonStyle(buttonHeight: HistoryConstants.Button.height,
-                                                     cornerRadius: HistoryConstants.Button.cornerRadius))
+                pageButton(page: number)
             }
             
             Button("Siguiente") { }
                 .buttonStyle(GradientButtonStyle(imageRight: "chevron.right",
-                                                 buttonHeight: HistoryConstants.Button.height,
-                                                 cornerRadius: HistoryConstants.Button.cornerRadius))
+                                                 buttonHeight: Constants.Button.height,
+                                                 cornerRadius: Constants.Button.cornerRadius))
         }
     }
     
+    // MARK: - Header List View
     private var headerListView: some View {
-        LazyVGrid(columns: columns) {
-            Group {
-                Text("Cliente")
-                Text("Telefono")
-                Text("Fecha de Compra")
+        Grid(horizontalSpacing: .zero) {
+            GridRow {
+                Group {
+                    Text("Cliente")
+                    Text("Telefono")
+                    Text("Fecha")
+                        .gridCellColumns(Constants.gridCellColumns)
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .padding([.vertical, .trailing])
         }
-        .padding(.leading, HistoryConstants.horizontalPadding)
+    }
+        
+    // MARK: - History List View
+    private var historyList: some View {
+        Grid {
+            headerListView
+            
+            CustomDivider(color: .graySecundary)
+            
+            itemRows
+        }
+        .padding()
+        .background {
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                .fill(.secondaryBackground)
+        }
     }
     
-    private var historyList: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVGrid(columns: columns) {
-                ForEach(HistoryModel.mockData) { user in
-                    Group {
-                        Text(user.name)
-                        Text(user.phoneNumber)
-                        Text(user.date)
+    // MARK: - Item View
+    private var itemRows: some View {
+        GridRow {
+            ScrollView(showsIndicators: false) {
+                Grid(horizontalSpacing: .zero) {
+                    ForEach(HistoryModel.mockData) { item in
+                        GridRow {
+                            Group {
+                                Text(item.name)
+                                Text(item.phoneNumber)
+                                Text(item.date)
+                                Button("Ver factura") {
+                                    
+                                }
+                                .buttonStyle(.plain)
+                                .underline()
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                        .padding(.vertical)
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding([.vertical, .trailing])
-                    
-                    Button("Ver Factura") { }
-                        .underline()
-                        .buttonStyle(.plain)
-                        .foregroundStyle(.blue)
                 }
             }
+            .gridCellColumns(Constants.columnsNumber)
         }
-        .padding(.leading, HistoryConstants.horizontalPadding)
+    }
+    
+    // MARK: - Page Number Button
+    private func pageButton(page: Int) -> some View {
+        Button(page.description) {
+            withAnimation {
+                pageSelected = page
+            }
+        }
+        .frame(width: Constants.Button.width, height: Constants.Button.height)
+        .buttonStyle(.plain)
+        .background {
+            RoundedRectangle(cornerRadius: Constants.Button.cornerRadius)
+                .fill(pageSelected == page ? .blueGradient : .graySecundary)
+        }
     }
 }
 
