@@ -13,4 +13,15 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       },
     });
   }
+
+  public async updatePassword(email: string, password: string): Promise<User> {
+    return await this.database.user.update({
+      where: {
+        email,
+      },
+      data: {
+        password,
+      },
+    });
+  }
 }

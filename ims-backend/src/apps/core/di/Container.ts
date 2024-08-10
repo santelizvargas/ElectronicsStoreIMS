@@ -21,6 +21,9 @@ import RemoveProductController from '../../ims/api/infrastructure/express/contro
 import SupplyProductController from '../../ims/api/infrastructure/express/controllers/products/SupplyProductController';
 import ProductSupplier from '../../ims/api/infrastructure/products/ProductSupplier';
 import SupplyProductService from '../../ims/api/application/products/SupplyProductService';
+import CredentialsPasswordUpdater from '../../ims/api/infrastructure/authentication/credentials/CredentialsPasswordUpdater';
+import UpdatePasswordService from '../../ims/api/application/authentication/UpdatePasswordService';
+import UpdatePasswordController from '../../ims/api/infrastructure/express/controllers/UpdatePasswordController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -51,6 +54,9 @@ export default class Container {
         authenticationRepository: asClass(PrismaAuthenticationRepository).singleton(),
         authenticationService: asClass(AuthenticationService).singleton(),
         authenticationController: asClass(AuthenticationController).singleton(),
+        passwordUpdater: asClass(CredentialsPasswordUpdater).singleton(),
+        updatePasswordService: asClass(UpdatePasswordService).singleton(),
+        updatePasswordController: asClass(UpdatePasswordController).singleton(),
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),
