@@ -20,10 +20,13 @@ export default class CredentialsAuthenticator implements Authenticator {
       throw new Error('Wrong credentials');
     }
 
-    const { accessToken, expiresIn }: AuthenticationResponse = this.jwtManager.generate(user);
+    // Ignore password field
+    const { password: _, ...userData } = user;
+    const { accessToken, expiresIn }: Omit<AuthenticationResponse, 'data'> = this.jwtManager.generate(userData);
     return {
       accessToken,
       expiresIn,
+      data: userData,
     };
   }
 }
