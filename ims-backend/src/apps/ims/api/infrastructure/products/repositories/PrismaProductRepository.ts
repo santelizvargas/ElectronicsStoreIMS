@@ -2,8 +2,9 @@ import { PrismaClient } from '@prisma/client';
 import { CrudRepository } from '../../../../shared/domain/models/repository/CrudRepository';
 import { Product } from '../../../domain/models/products/Product';
 import { ProductRequest } from '../../../application/products/CreateProductService';
+import { ProductRepository } from '../../../domain/models/products/repositories/ProductRepository';
 
-export default class PrismaProductRepository implements CrudRepository<ProductRequest, Product> {
+export default class PrismaProductRepository implements ProductRepository, CrudRepository<ProductRequest, Product> {
   constructor(private readonly database: PrismaClient) {}
 
   async findAll(): Promise<Product[]> {
@@ -45,6 +46,19 @@ export default class PrismaProductRepository implements CrudRepository<ProductRe
     await this.database.product.delete({
       where: {
         id,
+      },
+    });
+  }
+
+  async supply(id: number, stock: number): Promise<Product> {
+    return await this.database.product.update({
+      where: {
+        id,
+      },
+      data: {
+        stock: {
+          increment: stock,
+        },
       },
     });
   }
