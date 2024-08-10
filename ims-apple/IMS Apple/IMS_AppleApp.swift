@@ -13,6 +13,7 @@ struct IMS_AppleApp: App {
     var body: some Scene {
         WindowGroup {
             MainView()
+                .preferredColorScheme(.dark)
                 .modelContainer(SwiftDataProvider.shared.container)
         }
     }

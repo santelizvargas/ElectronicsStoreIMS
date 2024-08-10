@@ -29,11 +29,13 @@ struct MainView: View {
                 Breadcrumb(routeList: [sectionSelected.name, itemSelected.name])
                 
                 detailView
-                    .frame(
-                        minWidth: Constants.screenMinWidth,
-                        minHeight: Constants.screenMinHeight,
-                        maxHeight: .infinity
-                    )
+                    .isOS(.macOS) { view in
+                        view.frame(
+                            minWidth: Constants.screenMinWidth,
+                            minHeight: Constants.screenMinHeight,
+                            maxHeight: .infinity
+                        )
+                    }
             }
             .navigationTitle(sectionSelected.name)
             .toolbarBackground(.imsPrimary)
@@ -47,9 +49,10 @@ struct MainView: View {
     
     @ViewBuilder private var detailView: some View {
         switch itemSelected {
-        case .users: UserListView()
-        case .salesHistory: SalesHistoryView()
-        default: Text(itemSelected.name)
+            case .users: UserListView()
+            case .salesHistory: SalesHistoryView()
+            case .graphs: GraphView()
+            default: Text(itemSelected.name)
         }
     }
     
@@ -57,7 +60,7 @@ struct MainView: View {
         Button {
             
         } label: {
-           ProfileImage(url: "https://pplam.png")
+            ProfileImage(url: "https://pplam.png")
         }
         .buttonStyle(.plain)
     }
