@@ -7,29 +7,47 @@
 
 import SwiftUI
 
+private enum Constants {
+    static let fontSize: CGFloat = 0.4
+    static let defaultSize: CGFloat = 40
+    static let namesPrefix: Int = 2
+    static let mapPrefix: Int = 1
+}
+
+// MARK: - Profile Image View
+
 struct ProfileImage: View {
-    private let url: String
+    private let fullName: String
     private let size: CGFloat
     
-    init(url: String, size: CGFloat = 40) {
-        self.url = url
+    init(fullName: String, 
+         size: CGFloat = Constants.defaultSize) {
+        self.fullName = fullName
         self.size = size
     }
     
     var body: some View {
-        AsyncImage(url: URL(string: url)) { image in
-            image
-                .resizable()
-                .frame(width: size, height: size)
-        } placeholder: {
-            Circle()
-                .fill(.graySecundary)
-                .frame(width: size)
-                .overlay(Image(systemName: "person.fill"))
-        }
+        Circle()
+            .fill(.imsLightPurple)
+            .frame(width: size)
+            .overlay {
+                Text(abbreviations)
+                    .font(.system(size: size * Constants.fontSize))
+                    .bold()
+            }
+    }
+    
+    private var abbreviations: String {
+        fullName
+            .split(separator: " ")
+            .prefix(Constants.namesPrefix)
+            .map { $0.prefix(Constants.mapPrefix) }
+            .joined()
+            .uppercased()
     }
 }
 
 #Preview {
-    ProfileImage(url: "https://pplam.png")
+    ProfileImage(fullName: "Juan Perez")
+        .padding()
 }
