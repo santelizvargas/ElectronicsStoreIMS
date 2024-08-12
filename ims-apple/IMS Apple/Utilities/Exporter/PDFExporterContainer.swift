@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-struct PDFExporter<Content: View>: View {
+struct PDFExporterContainer<Content: View>: View {
+    private let fileName: String
+    private let content: Content
     
-    private var content: Content
-    
-    init(content: () -> Content) {
+    init(fileName: String, content: () -> Content) {
+        self.fileName = fileName
         self.content = content()
     }
     
@@ -36,7 +37,7 @@ struct PDFExporter<Content: View>: View {
     func render() -> URL {
         let rendered = ImageRenderer(content: content)
         
-        let url: URL = .documentsDirectory.appendingPathComponent("Charts.pdf", conformingTo: .pdf)
+        let url: URL = .documentsDirectory.appendingPathComponent("\(fileName).pdf", conformingTo: .pdf)
         
         rendered.render { size, context in
             var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)

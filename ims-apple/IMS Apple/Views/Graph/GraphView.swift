@@ -19,7 +19,7 @@ private enum Constants {
 
 struct GraphView: View {
     var body: some View {
-        PDFExporter {
+        PDFExporterContainer(fileName: "Charts", content: {
             Grid(horizontalSpacing: Constants.spacing,
                  verticalSpacing: Constants.spacing) {
                 firstGridRow
@@ -29,7 +29,7 @@ struct GraphView: View {
             .padding()
             .background(.grayBackground)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-        }
+        })
     }
     
     // MARK: - First Row
