@@ -20,7 +20,7 @@ struct IMSDocument: FileDocument {
         self.content = text
     }
     
-    init(configuration: ReadConfiguration) throws {
+    init(configuration: ReadConfiguration) {
         if let data = configuration.file.regularFileContents {
             content = String(decoding: data, as: UTF8.self)
         } else {

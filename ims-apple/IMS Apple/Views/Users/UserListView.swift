@@ -87,7 +87,7 @@ struct UserListView: View {
                     
                     Group {
                         Text(user.email)
-                        Text(user.role)
+                        Text(user.role.first ?? "None")
                         Text(user.date)
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
