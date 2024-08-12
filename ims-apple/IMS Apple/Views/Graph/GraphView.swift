@@ -19,15 +19,17 @@ private enum Constants {
 
 struct GraphView: View {
     var body: some View {
-        Grid(horizontalSpacing: Constants.spacing, 
-             verticalSpacing: Constants.spacing) {
-            firstGridRow
-            
-            secondGridRow
+        PDFExporter {
+            Grid(horizontalSpacing: Constants.spacing,
+                 verticalSpacing: Constants.spacing) {
+                firstGridRow
+                
+                secondGridRow
+            }
+            .padding()
+            .background(.grayBackground)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-        .padding()
-        .background(.grayBackground)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     // MARK: - First Row
