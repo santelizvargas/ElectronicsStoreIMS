@@ -88,7 +88,7 @@ struct UserListView: View {
                     userPropertyTextView(text: user.email)
                         
                     VStack {
-                        ForEach(Array(user.role.enumerated()), id: \.offset) { _, role in
+                        ForEach(user.role, id: \.self) { role in
                             userPropertyTextView(text: role)
                         }
                     }
