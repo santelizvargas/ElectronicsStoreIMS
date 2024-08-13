@@ -48,6 +48,7 @@
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
 		BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD378ACE2C617D5800E77862 /* FileExporter.swift */; };
+		BD5D706F2C6BFC1D00AFD054 /* View+PDFExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* View+PDFExporter.swift */; };
 		BDA506BD2C69E9AC0021D2A0 /* PDFExporterContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDA506BC2C69E9AC0021D2A0 /* PDFExporterContainer.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +98,7 @@
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD378ACE2C617D5800E77862 /* FileExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileExporter.swift; sourceTree = "<group>"; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
+		BD5D706E2C6BFC1D00AFD054 /* View+PDFExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+PDFExporter.swift"; sourceTree = "<group>"; };
 		BDA506BC2C69E9AC0021D2A0 /* PDFExporterContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFExporterContainer.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				338DF8362C65D66700F72772 /* View+OSType.swift */,
+				BD5D706E2C6BFC1D00AFD054 /* View+PDFExporter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -530,6 +533,7 @@
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
 				BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */,
 				6DB536BB2C5B3F9B008676D7 /* Sidebar.swift in Sources */,
+				BD5D706F2C6BFC1D00AFD054 /* View+PDFExporter.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
 			);

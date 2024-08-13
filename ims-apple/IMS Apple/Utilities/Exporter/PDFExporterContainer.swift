@@ -17,17 +17,21 @@ struct PDFExporterContainer<Content: View>: View {
     }
     
     var body: some View {
+        
+        let url: URL = render()
+        
         VStack(alignment: .trailing) {
             content
                 .contextMenu {
                     HStack {
-                        #if os(iOS)
-                        ShareLink("Exportar", item: render())
-                        #else
-                        Button("Exportar") {
-                            NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: render().path)
+                        switch OSType.current {
+                            case .iOS:
+                                ShareLink("Exportar", item: url)
+                            case .macOS:
+                                Button("Exportar") {
+                                    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
+                                }
                         }
-                        #endif
                     }
                     .padding()
                 }
