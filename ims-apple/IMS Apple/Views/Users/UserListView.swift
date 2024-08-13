@@ -85,16 +85,24 @@ struct UserListView: View {
                             .padding()
                     }
                     
-                    Group {
-                        Text(user.email)
-                        Text(user.role.first ?? "None")
-                        Text(user.date)
+                    userPropertyTextView(text: user.email)
+                        
+                    VStack {
+                        ForEach(Array(user.role.enumerated()), id: \.offset) { _, role in
+                            userPropertyTextView(text: role)
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(.graySecundary)
+                        
+                    userPropertyTextView(text: user.date)
                 }
             }
         }
+    }
+    
+    private func userPropertyTextView(text: String) -> some View {
+        Text(text)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.graySecundary)
     }
 }
 
