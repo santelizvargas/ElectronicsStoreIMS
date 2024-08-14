@@ -8,7 +8,7 @@
 import SwiftUI
 
 private enum Constants {
-    static let textFieldMinHeight: Double = 43
+    static let textFieldMinHeight: CGFloat = 30
     static let backgroundRadius: Double = 8
 }
 

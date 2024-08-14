@@ -10,6 +10,7 @@ import SwiftUI
 private enum Constants {
     static let textFieldMaxWidth: Double = 353
     static let textFieldMaxHeight: Double = 74
+    static let cornerRadiusSize: CGFloat = 8
 }
 
 enum IMSTextFieldType {
@@ -26,13 +27,16 @@ enum IMSTextFieldType {
 
 struct IMSTextField: View {
     @Binding private var text: String
+    private let hasBorder: Bool
     
     private let type: IMSTextFieldType
     
     init(type: IMSTextFieldType,
-         text: Binding<String>) {
+         text: Binding<String>,
+         hasBorder: Bool = false) {
         self.type = type
         _text = text
+        self.hasBorder = hasBorder
     }
     
     var body: some View {
@@ -46,6 +50,12 @@ struct IMSTextField: View {
             
             TextField("", text: $text)
                 .textFieldStyle(IMSTextFieldStyle())
+                .overlay {
+                    if hasBorder {
+                        RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
+                            .stroke(.graySecundary)
+                    }
+                }
         }
         .frame(maxWidth: Constants.textFieldMaxWidth, maxHeight: Constants.textFieldMaxHeight)
     }
