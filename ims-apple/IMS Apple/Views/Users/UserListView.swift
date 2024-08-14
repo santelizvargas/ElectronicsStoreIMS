@@ -2,7 +2,7 @@
 //  UserListView.swift
 //  IMS Apple
 //
-//  Created by Diana Zeledon on 30/7/24.
+//  Created by Brandon Santeliz on 30/7/24.
 //
 
 import SwiftUI
