@@ -28,7 +28,7 @@ struct ProfileImage: View {
     
     var body: some View {
         Circle()
-            .fill(.imsLightPurple)
+            .fill(LeftGradient(colors: [.purpleGradient, .blueGradient]))
             .frame(width: size)
             .overlay {
                 Text(abbreviations)
