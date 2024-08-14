@@ -17,19 +17,16 @@ struct PDFExporterContainer<Content: View>: View {
     }
     
     var body: some View {
-        
-        let url: URL = render()
-        
         VStack(alignment: .trailing) {
             content
                 .contextMenu {
                     HStack {
                         switch OSType.current {
                             case .iOS:
-                                ShareLink("Exportar", item: url)
+                                ShareLink("Exportar", item: render())
                             case .macOS:
                                 Button("Exportar") {
-                                    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: url.path)
+                                    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: render().path)
                                 }
                         }
                     }
@@ -44,7 +41,7 @@ struct PDFExporterContainer<Content: View>: View {
         let url: URL = .documentsDirectory.appendingPathComponent("\(fileName).pdf", conformingTo: .pdf)
         
         rendered.render { size, context in
-            var box = CGRect(x: 0, y: 0, width: size.width, height: size.height)
+            var box = CGRect(x: .zero, y: .zero, width: size.width, height: size.height)
             
             guard let pdf = CGContext(url as CFURL, mediaBox: &box, nil)
             else { return }
