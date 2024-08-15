@@ -62,4 +62,8 @@ export default class PrismaProductRepository implements ProductRepository, CrudR
       },
     });
   }
+
+  async count(): Promise<number> {
+    return await this.database.product.count();
+  }
 }

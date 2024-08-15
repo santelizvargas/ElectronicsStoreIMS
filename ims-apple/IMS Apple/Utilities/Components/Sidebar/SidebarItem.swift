@@ -13,7 +13,6 @@ enum SidebarItem {
     
     case productList
     case addProduct
-    case supplyProduct
     
     case invoiceSale
     case salesHistory
@@ -25,7 +24,6 @@ enum SidebarItem {
             
         case .productList: "Lista de productos"
         case .addProduct: "Agregar producto"
-        case .supplyProduct: "Abastecer producto"
             
         case .invoiceSale: "Facturar venta"
         case .salesHistory: "Historial de ventas"
@@ -38,7 +36,6 @@ enum SidebarItem {
         case .users: "person"
         case .productList: "list.bullet.rectangle.portrait"
         case .addProduct: "plus.circle"
-        case .supplyProduct: "arrow.2.circlepath"
         case .invoiceSale: "plus.circle"
         case .salesHistory: "doc.text.magnifyingglass"
         }
