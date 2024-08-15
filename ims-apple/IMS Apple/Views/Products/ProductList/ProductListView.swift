@@ -31,7 +31,7 @@ private enum Constants {
 
 struct ProductListView: View {
     @ObservedObject private var viewModel: ProductListViewModel = .init()
-    private let adaptiveColumn = [GridItem(.adaptive(minimum: Constants.gridMinimum))]
+    private let adaptiveColumn = [GridItem(.adaptive(minimum: Constants.gridMinimum), spacing: Constants.padding)]
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -98,7 +98,7 @@ struct ProductListView: View {
             Spacer()
         }
         .padding([.top, .horizontal], Constants.padding)
-        .frame(width: Constants.cardWidth, height: Constants.cardHeight)
+        .frame(maxWidth: .infinity, maxHeight: Constants.cardHeight)
         .background(.secondaryBackground)
         .overlay(alignment: .topTrailing) {
             amountBanner(amount: product.amount)
