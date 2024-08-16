@@ -40,7 +40,11 @@ struct LoginView: View {
                 }
                 .buttonStyle(.plain)
                 
-                Button("Iniciar sesión") { }
+                Button("Iniciar sesión") { 
+                    Task {
+                        let _ = try await AuthenticationManager().login(email: email, password: password)
+                    }
+                }
                     .buttonStyle(GradientButtonStyle(
                         buttonWidth: Constants.loginButtonMaxWidth,
                         gradientColors: [.imsLightBlue, .imsLightPurple]

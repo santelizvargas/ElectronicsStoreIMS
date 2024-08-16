@@ -47,9 +47,13 @@
 		BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F32C5D9A2400F3D38D /* BlurCircle.swift */; };
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
-		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
-		BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD378ACE2C617D5800E77862 /* FileExporter.swift */; };
 		BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */; };
+		BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */; };
+		BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */; };
+		BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */; };
+		BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */; };
+		BD6B28092C6F2E6B00BC73D2 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */; };
+		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
 /* End PBXBuildFile section */
@@ -98,8 +102,13 @@
 		BD1DE8F82C5D9A2400F3D38D /* IMSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSTextField.swift; sourceTree = "<group>"; };
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
-		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
 		BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFButton.swift; sourceTree = "<group>"; };
+		BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
+		BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMSError.swift; sourceTree = "<group>"; };
+		BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
+		BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -248,6 +257,7 @@
 		33EA67442C48BDA2007A9DBE /* IMS Apple */ = {
 			isa = PBXGroup;
 			children = (
+				BD6B27FE2C6F2E3400BC73D2 /* Networking */,
 				BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */,
 				6DB536B42C5B3B66008676D7 /* MockData */,
 				35FDA06C2C5B24AE004A4849 /* Utilities */,
@@ -422,6 +432,26 @@
 			path = Login;
 			sourceTree = "<group>";
 		};
+		BD6B27FE2C6F2E3400BC73D2 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				BD6B28042C6F2E6B00BC73D2 /* Entities */,
+				BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */,
+				BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */,
+				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
+				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		BD6B28042C6F2E6B00BC73D2 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
 		BDD7125C2C6426EF000FAD7B /* Exporter */ = {
 			isa = PBXGroup;
 			children = (
@@ -523,12 +553,16 @@
 				356743EE2C6AFA880073496B /* InvoiceSaleView.swift in Sources */,
 				BD1DE8FB2C5D9A2400F3D38D /* IMSBackground.swift in Sources */,
 				BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */,
+				BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */,
+				BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */,
 				35069C842C61C3DE001E854F /* HistoryModel.swift in Sources */,
 				338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */,
 				BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */,
 				338DF8372C65D66700F72772 /* View+OSType.swift in Sources */,
 				BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */,
+				BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */,
 				35069C822C61C2E0001E854F /* SalesHistoryView.swift in Sources */,
+				BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */,
 				33EEE8482C69822F001EC07F /* ProductListView.swift in Sources */,
 				338DF8342C64846000F72772 /* BarChart.swift in Sources */,
 				338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */,
@@ -544,6 +578,7 @@
 				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
+				BD6B28092C6F2E6B00BC73D2 /* UserEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
