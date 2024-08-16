@@ -8,7 +8,6 @@
 import Foundation
 
 final class FileFactory {
-    
     static func makeUserStringFormatted(users: [UserModel]) -> String {
         let header: String = "Nombre, Email, Rol, Fecha"
         

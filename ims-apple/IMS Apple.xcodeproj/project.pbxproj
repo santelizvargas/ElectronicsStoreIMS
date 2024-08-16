@@ -48,6 +48,8 @@
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
 		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
+		BD378ACF2C617D5800E77862 /* FileExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD378ACE2C617D5800E77862 /* FileExporter.swift */; };
+		BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
 /* End PBXBuildFile section */
@@ -97,6 +99,7 @@
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
+		BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFButton.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -129,6 +132,14 @@
 				3331062C2C6B171C0035644F /* ProductListViewModel.swift */,
 			);
 			path = ProductList;
+			sourceTree = "<group>";
+		};
+		333A40BE2C6F131000BEFE11 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		3353B6BB2C60850900202526 /* ProfileImage */ = {
@@ -327,6 +338,7 @@
 		6DB536AE2C5B38D5008676D7 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				333A40BE2C6F131000BEFE11 /* Buttons */,
 				338DF8382C65D99C00F72772 /* Gradients */,
 				338DF8262C645DC000F72772 /* Charts */,
 				3353B6BB2C60850900202526 /* ProfileImage */,
@@ -529,6 +541,7 @@
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
 				BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */,
 				6DB536BB2C5B3F9B008676D7 /* Sidebar.swift in Sources */,
+				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
 			);

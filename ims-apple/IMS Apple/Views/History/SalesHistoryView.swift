@@ -30,7 +30,11 @@ struct SalesHistoryView: View {
                     .padding(.vertical)
                     .frame(maxWidth: .infinity, alignment: .leading)
                 
-                ExporterButton(title: "Exportar", collection: HistoryModel.mockData)
+                ExporterButton(
+                    title: "Exportar",
+                    fileName: "Historial de ventas",
+                    collection: HistoryModel.mockData
+                )
             }
             
             historyList

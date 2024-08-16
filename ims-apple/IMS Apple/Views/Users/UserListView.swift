@@ -14,7 +14,6 @@ private enum Constants {
 }
 
 struct UserListView: View {
-    
     @State private var isPresented: Bool = false
     
     private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
@@ -48,10 +47,10 @@ struct UserListView: View {
             
             Spacer()
             
-            Button("Invitar Usuario") { }
+            Button("Agregar Usuario") { }
                 .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
             
-            ExporterButton(title: "Exportar",
+            ExporterButton(title: "Exportar", fileName: "Usuarios",
                            collection: UserModel.mockUsers)
         }
     }

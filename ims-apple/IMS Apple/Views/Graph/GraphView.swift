@@ -13,21 +13,33 @@ private enum Constants {
     static let legendSize: CGFloat = 16
     static let maxCellColumns: Int = 2
     static let imageSize: CGFloat = 60
+    static let minWidth: CGFloat = 700
+    static let minHeight: CGFloat = 500
 }
 
 // MARK: - Graph View
 
 struct GraphView: View {
     var body: some View {
-        Grid(horizontalSpacing: Constants.spacing, 
-             verticalSpacing: Constants.spacing) {
+        Grid(horizontalSpacing: Constants.spacing, verticalSpacing: Constants.spacing) {
             firstGridRow
             
             secondGridRow
         }
         .padding()
         .background(.grayBackground)
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .foregroundStyle(.white)
+        .frame(
+            minWidth: Constants.minWidth,
+            maxWidth: .infinity,
+            minHeight: Constants.minHeight,
+            maxHeight: .infinity
+        )
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                ExportPDFButton(fileName: "Graficos") { self }
+            }
+        }
     }
     
     // MARK: - First Row

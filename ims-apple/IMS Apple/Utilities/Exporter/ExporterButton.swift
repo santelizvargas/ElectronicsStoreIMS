@@ -10,12 +10,15 @@ import SwiftUI
 struct ExporterButton<IMSCollection: Collection>: View {
     @State private var isPresented: Bool = false
 
-    private let collection: IMSCollection
     private let title: String
+    private let fileName: String
+    private let collection: IMSCollection
     
     init(title: String,
+         fileName: String,
          collection: IMSCollection) {
         self.title = title
+        self.fileName = fileName
         self.collection = collection
     }
     
@@ -23,19 +26,24 @@ struct ExporterButton<IMSCollection: Collection>: View {
         Button(title) {
             isPresented.toggle()
         }
-        .buttonStyle(GradientButtonStyle(imageLeft: "square.and.arrow.up.fill"))
+        .buttonStyle(
+            GradientButtonStyle(imageLeft: "square.and.arrow.up.fill")
+        )
         .fileExporter<IMSDocument>(
             isPresented: $isPresented,
-            documents: [formattedDocument],
-            contentType: .commaSeparatedText) { result in
-            switch result {
-                case .success(let success):
-                    print("Saved on: \(success.description)")
-                case .failure(let error):
-                    fatalError(error.localizedDescription)
+            document: formattedDocument,
+            contentType: .commaSeparatedText,
+            defaultFilename: fileName) { result in
+                switch result {
+                    case .success(let success):
+                        print("Saved on: \(success.description)")
+                    case .failure(let error):
+                        fatalError(error.localizedDescription)
+                }
             }
-        }
     }
+    
+    // MARK: - Formatted Document
     
     private var formattedDocument: IMSDocument {
         if let users = collection as? [UserModel] {
