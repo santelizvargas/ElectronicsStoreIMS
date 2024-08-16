@@ -40,7 +40,7 @@ struct MainView: View {
             .navigationTitle(sectionSelected.name)
             .toolbarBackground(.imsPrimary)
             .toolbar {
-                ToolbarItem(placement: .destructiveAction) {
+                ToolbarItem(placement: .confirmationAction) {
                     if itemSelected != .productList {
                         profileButton
                     }
