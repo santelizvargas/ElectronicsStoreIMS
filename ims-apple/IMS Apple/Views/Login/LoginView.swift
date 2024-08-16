@@ -14,46 +14,52 @@ private enum Constants {
 
 struct LoginView: View {
     
-    @State private var password: String = ""
-    @State private var email: String = ""
+    @State private var email: String = "derianricardo451@gmail.com"
+    @State private var password: String = "password2"
+    
+    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
     
     var body: some View {
-        VStack(spacing: Constants.containerSpacing) {
-            
-            Text("Iniciar sesión")
-                .font(.largeTitle)
-            
-            Text("Bienvenido! Por favor ingrese sus credenciales")
-                .font(.title2)
-                .foregroundStyle(.gray)
-            
-            IMSTextField(type: .email, text: $email)
-            IMSSecureField(text: $password)
-            
-            VStack(alignment: .trailing, spacing: Constants.containerSpacing) {
-                Button {
-                    /// Do something
-                } label: {
-                    Text("Olvidaste la contraseña?")
-                        .font(.title3)
-                        .foregroundStyle(.gray)
-                }
-                .buttonStyle(.plain)
+        ZStack {
+            VStack(spacing: Constants.containerSpacing) {
                 
-                Button("Iniciar sesión") { 
-                    Task {
-                        let _ = try await AuthenticationManager().login(email: email, password: password)
+                Text("Iniciar sesión")
+                    .font(.largeTitle)
+                
+                Text("Bienvenido! Por favor ingrese sus credenciales")
+                    .font(.title2)
+                    .foregroundStyle(.gray)
+                
+                IMSTextField(type: .email, text: $email)
+                IMSSecureField(text: $password)
+                
+                VStack(alignment: .trailing, spacing: Constants.containerSpacing) {
+                    Button {
+                        /// Do something
+                    } label: {
+                        Text("Olvidaste la contraseña?")
+                            .font(.title3)
+                            .foregroundStyle(.gray)
                     }
-                }
-                    .buttonStyle(GradientButtonStyle(
-                        buttonWidth: Constants.loginButtonMaxWidth,
-                        gradientColors: [.imsLightBlue, .imsLightPurple]
+                    .buttonStyle(.plain)
+                    
+                    Button("Iniciar sesión") {
+                        viewModel.login(email: email, password: password)
+                    }
+                        .buttonStyle(GradientButtonStyle(
+                            buttonWidth: Constants.loginButtonMaxWidth,
+                            gradientColors: [.imsLightBlue, .imsLightPurple]
+                        )
                     )
-                )
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .background(IMSBackground())
+            
+            if viewModel.requestInProgress {
+                ProgressView()
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(IMSBackground())
     }
 }
 

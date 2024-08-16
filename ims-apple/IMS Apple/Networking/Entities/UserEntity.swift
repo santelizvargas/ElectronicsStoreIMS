@@ -7,8 +7,7 @@
 
 import Foundation
 
-struct UserEntity: Decodable {
-//    var uuid = UUID()
+struct UserEntity: Codable {
     let id: String
     let firstName: String
     let lastName: String

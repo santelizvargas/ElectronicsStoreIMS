@@ -12,18 +12,17 @@ final class AuthenticationManager {
     private lazy var networkManager: NetworkManager = NetworkManager()
     
     func login(email: String, password: String) async throws -> UserEntity {
-        let path: IMSPath = .login
         let parameters: [String: Any] = [
-            "email": "derianricardo451@gmail.com",
-            "password": "password2"
+            "email": email,
+            "password": password
         ]
         
         do {
-            let data = try await networkManager.makeRequest(path: path,
+            let data = try await networkManager.makeRequest(path: .login,
                                                             with: parameters,
                                                             httpMethod: .post)
-            let user = try JSONDecoder().decode(UserEntity.self, from: data)
-            return user
+            let response = try JSONDecoder().decode(IMSResponseBody<UserEntity>.self, from: data)
+            return response.data
         } catch {
             throw error
         }

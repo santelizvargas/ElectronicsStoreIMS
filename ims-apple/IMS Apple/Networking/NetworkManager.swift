@@ -29,7 +29,6 @@ final class NetworkManager {
         
         if let parameters {
             components.queryItems = makeQueryItems(parameters: parameters)
-            components.queryItems?.reverse()
         }
         
         guard let url = components.url
@@ -40,30 +39,14 @@ final class NetworkManager {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else { throw IMSError.badRequest }
+            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             
-            switch statusCode {
-                case 200...299: return data
-                case 400...500: throw IMSError.wrongCredentials
-                case 500...503: throw IMSError.internetConnection
-                default: throw IMSError.badRequest
-            }
+            if !(200...299 ~= statusCode) { throw IMSError.HTTPError(statusCode) }
+            
+            return data
         } catch {
-            throw IMSError.badRequest
+            throw IMSError.requestError
         }
     }
     
 }
-
-struct LoginResponse<Entity: Decodable>: Decodable {
-    let accessToken: String?
-    let expiresIn: Int?
-    let data: Entity?
-    
-    enum CodingKeys: String, CodingKey {
-        case accessToken = "accessToken"
-        case expiresIn = "expiresIn"
-        case data
-    }
-}
-
