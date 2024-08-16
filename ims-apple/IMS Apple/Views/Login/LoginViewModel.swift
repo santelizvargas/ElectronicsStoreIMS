@@ -30,7 +30,7 @@ final class LoginViewModel: ObservableObject {
                 print(user.firstName)
                 // TODO: - Save user using DTO
             } catch {
-                guard let imsError = error as? IMSError else { return }
+                guard let imsError = error as? IMSError.HTTP else { return }
                 print(imsError.description)
             }
             requestInProgressPublished = false

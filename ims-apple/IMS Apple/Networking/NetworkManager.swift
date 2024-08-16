@@ -32,7 +32,7 @@ final class NetworkManager {
         }
         
         guard let url = components.url
-        else { throw IMSError.badUrl }
+        else { throw IMSError.HTTP.badUrl }
         
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
@@ -41,11 +41,11 @@ final class NetworkManager {
             let (data, response) = try await URLSession.shared.data(for: request)
             let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
             
-            if !(200...299 ~= statusCode) { throw IMSError.HTTPError(statusCode) }
+            if !(200...299 ~= statusCode) { throw IMSError.HTTP.badResponse(statusCode) }
             
             return data
         } catch {
-            throw IMSError.requestError
+            throw IMSError.HTTP.requestError
         }
     }
     

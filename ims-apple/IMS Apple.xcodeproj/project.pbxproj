@@ -49,6 +49,8 @@
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
 		BD56AE2F2C6FEA100056FD18 /* IMSResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE2E2C6FEA100056FD18 /* IMSResponseBody.swift */; };
 		BD56AE312C6FEBD20056FD18 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */; };
+		BD56AE342C6FF39A0056FD18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD56AE332C6FF39A0056FD18 /* Security.framework */; };
+		BD56AE392C6FF4630056FD18 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE382C6FF4630056FD18 /* KeychainHelper.swift */; };
 		BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */; };
 		BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */; };
 		BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */; };
@@ -105,6 +107,8 @@
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		BD56AE2E2C6FEA100056FD18 /* IMSResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSResponseBody.swift; sourceTree = "<group>"; };
 		BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		BD56AE332C6FF39A0056FD18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
+		BD56AE382C6FF4630056FD18 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFButton.swift; sourceTree = "<group>"; };
 		BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
@@ -122,6 +126,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD56AE342C6FF39A0056FD18 /* Security.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +252,7 @@
 			children = (
 				33EA67442C48BDA2007A9DBE /* IMS Apple */,
 				33EA67432C48BDA2007A9DBE /* Products */,
+				BD56AE322C6FF39A0056FD18 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -332,6 +338,7 @@
 		35FDA06C2C5B24AE004A4849 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				BD56AE372C6FF4560056FD18 /* Store */,
 				BDD7125C2C6426EF000FAD7B /* Exporter */,
 				338DF8352C65D64A00F72772 /* Extensions */,
 				6DB536AE2C5B38D5008676D7 /* Components */,
@@ -435,6 +442,22 @@
 				BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		BD56AE322C6FF39A0056FD18 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BD56AE332C6FF39A0056FD18 /* Security.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BD56AE372C6FF4560056FD18 /* Store */ = {
+			isa = PBXGroup;
+			children = (
+				BD56AE382C6FF4630056FD18 /* KeychainHelper.swift */,
+			);
+			path = Store;
 			sourceTree = "<group>";
 		};
 		BD6B27FE2C6F2E3400BC73D2 /* Networking */ = {
@@ -541,6 +564,7 @@
 				33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */,
 				338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */,
 				6DB536B12C5B38F7008676D7 /* GradientButtonStyle.swift in Sources */,
+				BD56AE392C6FF4630056FD18 /* KeychainHelper.swift in Sources */,
 				338DF83A2C65DA0300F72772 /* LeftGradient.swift in Sources */,
 				6DB536BD2C5B3FC1008676D7 /* SidebarSection.swift in Sources */,
 				35BAA8672C59D9540051FBCF /* UserListView.swift in Sources */,
