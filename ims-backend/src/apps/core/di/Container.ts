@@ -28,6 +28,9 @@ import AssignRoleController from '../../ims/api/infrastructure/express/controlle
 import AssignRoleService from '../../ims/api/application/rbac/AssignRoleService';
 import RoleAssigner from '../../ims/api/infrastructure/rbac/RoleAssigner';
 import PrismaRbacRepository from '../../ims/api/infrastructure/rbac/repositories/PrismaRbacRepository';
+import ProductCounter from '../../ims/api/infrastructure/products/ProductCounter';
+import CountProductController from '../../ims/api/infrastructure/express/controllers/products/CountProductController';
+import CountProductService from '../../ims/api/application/products/CountProductService';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -67,15 +70,18 @@ export default class Container {
         fetchProductService: asClass(FetchProductService).singleton(),
         removeProductService: asClass(RemoveProductService).singleton(),
         supplyProductService: asClass(SupplyProductService).singleton(),
+        countProductService: asClass(CountProductService).singleton(),
         productCreator: asClass(ProductCreator).singleton(),
         productFetcher: asClass(ProductFetcher).singleton(),
         productRemover: asClass(ProductRemover).singleton(),
         productSupplier: asClass(ProductSupplier).singleton(),
+        productCounter: asClass(ProductCounter).singleton(),
         productRepository: asClass(PrismaProductRepository).singleton(),
         createProductController: asClass(CreateProductController).singleton(),
         fetchProductController: asClass(FetchProductController).singleton(),
         removeProductController: asClass(RemoveProductController).singleton(),
         supplyProductController: asClass(SupplyProductController).singleton(),
+        countProductController: asClass(CountProductController).singleton(),
       })
       .register({
         assignRoleController: asClass(AssignRoleController).singleton(),

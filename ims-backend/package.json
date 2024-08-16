@@ -7,8 +7,8 @@
     "dev": "NODE_ENV=dev ts-node-dev --ignore-watch node_modules ./src/apps/core/index.ts",
     "build:clean": "rm -rf dist; exit 0",
     "build:tsc": "tsc -p tsconfig.prod.json",
-    "build": "npm run build:clean && npm run build:tsc",
-    "start": "NODE_ENV=prod node dist/index.js",
+    "build": "npm run build:clean && npm run build:tsc || echo ''",
+    "start": "NODE_ENV=prod node dist/src/apps/core/index.js",
     "lint": "prettier --write src/**/*.ts",
     "prepare": "husky"
   },

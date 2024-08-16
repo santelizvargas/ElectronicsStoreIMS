@@ -41,7 +41,9 @@ struct MainView: View {
             .toolbarBackground(.imsPrimary)
             .toolbar {
                 ToolbarItem(placement: .destructiveAction) {
-                    profileButton
+                    if itemSelected != .productList {
+                        profileButton
+                    }
                 }
             }
         }
@@ -54,6 +56,7 @@ struct MainView: View {
             case .graphs: GraphView()
             case .invoiceSale: InvoiceSaleView()
             case .addProduct: AddingProductView()
+            case .productList: ProductListView()
             default: Text(itemSelected.name)
         }
     }
