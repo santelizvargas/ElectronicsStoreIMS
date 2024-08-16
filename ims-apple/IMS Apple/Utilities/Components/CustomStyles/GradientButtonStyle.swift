@@ -43,7 +43,7 @@ struct GradientButtonStyle: ButtonStyle {
             }
         }
         .padding(.horizontal)
-        .frame(height: buttonHeight)
+        .frame(width: buttonWidth, height: buttonHeight)
         .background(
             LinearGradient(
                 colors: gradientColors,

@@ -13,10 +13,16 @@ private enum Constants {
 }
 
 struct IMSTextFieldStyle: TextFieldStyle {
+    private let textFieldMinHeight: CGFloat
+    
+    init(textFieldMinHeight: CGFloat = Constants.textFieldMinHeight) {
+        self.textFieldMinHeight = textFieldMinHeight
+    }
+    
     func _body(configuration: TextField<Self._Label>) -> some View {
         configuration
             .textFieldStyle(.plain)
-            .frame(minHeight: Constants.textFieldMinHeight)
+            .frame(minHeight: textFieldMinHeight)
             .padding(.horizontal)
             .background {
                 RoundedRectangle(cornerRadius: Constants.backgroundRadius)

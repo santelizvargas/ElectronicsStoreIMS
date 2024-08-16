@@ -53,6 +53,7 @@ struct MainView: View {
             case .salesHistory: SalesHistoryView()
             case .graphs: GraphView()
             case .invoiceSale: InvoiceSaleView()
+            case .addProduct: AddingProductView()
             default: Text(itemSelected.name)
         }
     }
