@@ -14,6 +14,8 @@ private enum Constants {
 }
 
 struct UserListView: View {
+    @State private var isPresented: Bool = false
+    
     private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
     
     var body: some View {
@@ -45,15 +47,11 @@ struct UserListView: View {
             
             Spacer()
             
-            Button("Invitar Usuario") { }
+            Button("Agregar Usuario") { }
                 .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
             
-            #if os(macOS)
-            Button("Exportar Lista") {
-                FileExporter().exportUserList(from: UserModel.mockUsers)
-            }
-            .buttonStyle(GradientButtonStyle(imageLeft: "square.and.arrow.up.fill"))
-            #endif
+            ExporterButton(title: "Exportar", fileName: "Usuarios",
+                           collection: UserModel.mockUsers)
         }
     }
     
@@ -86,16 +84,24 @@ struct UserListView: View {
                             .padding()
                     }
                     
-                    Group {
-                        Text(user.email)
-                        Text(user.role)
-                        Text(user.date)
+                    userPropertyTextView(text: user.email)
+                        
+                    VStack {
+                        ForEach(user.role, id: \.self) { role in
+                            userPropertyTextView(text: role)
+                        }
                     }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .foregroundStyle(.graySecundary)
+                        
+                    userPropertyTextView(text: user.date)
                 }
             }
         }
+    }
+    
+    private func userPropertyTextView(text: String) -> some View {
+        Text(text)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.graySecundary)
     }
 }
 

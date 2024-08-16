@@ -8,16 +8,25 @@
 import Foundation
 
 final class FileFactory {
-    
-    func makeUserStringFormatted(users: [UserModel]) -> String {
-        let header: String = "Name, Email, Role, Date"
+    static func makeUserStringFormatted(users: [UserModel]) -> String {
+        let header: String = "Nombre, Email, Rol, Fecha"
         
         let mappedUsers: String = users.map { user in
-            "\"\(user.name)\", \"\(user.email)\", \"\(user.role)\", \"\(user.date)\""
+            "\(user.name), \(user.email), \(user.role.joined(separator: "-")), \(user.date)"
         }.joined(separator: "\n")
         
         let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")
         return stringFormatted
     }
     
+    static func makeHistoryStringFormatted(histories: [HistoryModel]) -> String {
+        let header: String = "Nombre, Telefono, Fecha"
+        
+        let mappedUsers: String = histories.map { history in
+            "\(history.name), \(history.phoneNumber), \(history.date)"
+        }.joined(separator: "\n")
+        
+        let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")
+        return stringFormatted
+    }
 }

@@ -25,9 +25,17 @@ struct SalesHistoryView: View {
     
     var body: some View {
         VStack {
-            Text("Todas las ventas")
-                .padding(.vertical)
-                .frame(maxWidth: .infinity, alignment: .leading)
+            HStack {
+                Text("Todas las ventas")
+                    .padding(.vertical)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                ExporterButton(
+                    title: "Exportar",
+                    fileName: "Historial de ventas",
+                    collection: HistoryModel.mockData
+                )
+            }
             
             historyList
             
