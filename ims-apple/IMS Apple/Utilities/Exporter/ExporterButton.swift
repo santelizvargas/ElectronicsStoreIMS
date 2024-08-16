@@ -36,7 +36,7 @@ struct ExporterButton<IMSCollection: Collection>: View {
             defaultFilename: fileName) { result in
                 switch result {
                     case .success(let success):
-                        print("Saved on: \(success.description)")
+                        debugPrint("Saved on: \(success.description)")
                     case .failure(let error):
                         fatalError(error.localizedDescription)
                 }

@@ -27,11 +27,11 @@ final class LoginViewModel: ObservableObject {
             try await Task.sleep(for: .seconds(2))
             do {
                 let user = try await authenticationManager.login(email: email, password: password)
-                print(user.firstName)
+                debugPrint(user.firstName)
                 // TODO: - Save user using DTO
             } catch {
                 guard let imsError = error as? IMSError.HTTP else { return }
-                print(imsError.description)
+                debugPrint(imsError.description)
             }
             requestInProgressPublished = false
         }
