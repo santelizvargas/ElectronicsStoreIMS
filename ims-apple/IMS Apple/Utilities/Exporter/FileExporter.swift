@@ -15,10 +15,7 @@ final class FileExporter {
     private lazy var fileFactory: FileFactory = FileFactory()
     
     private lazy var downloadsDirectoryUrl: URL = {
-        guard let url = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first else {
-            fatalError("Fatal Error: File Urls list is empty")
-        }
-        return url
+        FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask)[0]
     }()
     
     // MARK: - Functions
