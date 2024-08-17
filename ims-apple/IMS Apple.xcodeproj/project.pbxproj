@@ -47,7 +47,7 @@
 		BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F32C5D9A2400F3D38D /* BlurCircle.swift */; };
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
-		BD56AE2F2C6FEA100056FD18 /* IMSResponseBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE2E2C6FEA100056FD18 /* IMSResponseBody.swift */; };
+		BD56AE2F2C6FEA100056FD18 /* IMSResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE2E2C6FEA100056FD18 /* IMSResponse.swift */; };
 		BD56AE312C6FEBD20056FD18 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */; };
 		BD56AE342C6FF39A0056FD18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD56AE332C6FF39A0056FD18 /* Security.framework */; };
 		BD56AE392C6FF4630056FD18 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE382C6FF4630056FD18 /* KeychainHelper.swift */; };
@@ -105,7 +105,7 @@
 		BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSSecureField.swift; sourceTree = "<group>"; };
 		BD1DE8F82C5D9A2400F3D38D /* IMSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSTextField.swift; sourceTree = "<group>"; };
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		BD56AE2E2C6FEA100056FD18 /* IMSResponseBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSResponseBody.swift; sourceTree = "<group>"; };
+		BD56AE2E2C6FEA100056FD18 /* IMSResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSResponse.swift; sourceTree = "<group>"; };
 		BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BD56AE332C6FF39A0056FD18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		BD56AE382C6FF4630056FD18 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
@@ -475,7 +475,7 @@
 		BD6B28042C6F2E6B00BC73D2 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				BD56AE2E2C6FEA100056FD18 /* IMSResponseBody.swift */,
+				BD56AE2E2C6FEA100056FD18 /* IMSResponse.swift */,
 				BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */,
 			);
 			path = Entities;
@@ -582,7 +582,7 @@
 				BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */,
 				356743EE2C6AFA880073496B /* InvoiceSaleView.swift in Sources */,
 				BD1DE8FB2C5D9A2400F3D38D /* IMSBackground.swift in Sources */,
-				BD56AE2F2C6FEA100056FD18 /* IMSResponseBody.swift in Sources */,
+				BD56AE2F2C6FEA100056FD18 /* IMSResponse.swift in Sources */,
 				BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */,
 				BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */,
 				BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */,

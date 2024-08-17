@@ -2,22 +2,21 @@
 //  UserEntity.swift
 //  IMS Apple
 //
-//  Created by Jose Luna on 8/15/24.
+//  Created by Brandon Santeliz on 8/15/24.
 //
 
 import Foundation
 
 struct UserEntity: Codable {
-    let id: String
+    let id: Int
     let firstName: String
-    let lastName: String
     let email: String
-    var roles: String = "Admin"
+    let roles: String?
     let identification: String
     let phone: String
     let address: String
-    let imageId: String?
-    let createdAt: String?
-    let updatedAt: String?
-    let deletedAt: String?
+    var imageId: String = ""
+    var createdAt: String = ""
+    var updatedAt: String = ""
+    var deletedAt: String = ""
 }

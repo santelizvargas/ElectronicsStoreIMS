@@ -17,7 +17,7 @@ final class KeychainHelper {
                                   data: Data? = nil,
                                   returnData: Bool? = nil) throws -> CFDictionary {
         
-        if data == nil, returnData == nil { throw IMSError.Keychain.queryError }
+        if data == nil, returnData == nil { throw IMSError.queryError }
         
         var dictionary: [String: Any] = [
             kSecClass as String: kSecClassGenericPassword,
@@ -36,7 +36,7 @@ final class KeychainHelper {
         
         let oSStatus: OSStatus = SecItemAdd(query as CFDictionary, nil)
         
-        guard oSStatus == noErr else { throw IMSError.Keychain.invalidData }
+        guard oSStatus == noErr else { throw IMSError.invalidData }
         
         return true
     }
@@ -49,7 +49,7 @@ final class KeychainHelper {
         let oSStatus = SecItemCopyMatching(query as CFDictionary, &typeRef)
         
         guard oSStatus == noErr,
-              let data = typeRef as? Data else { throw IMSError.Keychain.unknownError(oSStatus) }
+              let data = typeRef as? Data else { throw IMSError.unknownError(oSStatus) }
         
         return data
         
