@@ -47,6 +47,7 @@ struct MainView: View {
                 }
             }
         }
+        .navigationBarBackButtonHidden()
     }
     
     @ViewBuilder private var detailView: some View {
