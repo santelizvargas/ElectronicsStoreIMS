@@ -464,7 +464,7 @@
 		BD6B27FE2C6F2E3400BC73D2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				BD6B28042C6F2E6B00BC73D2 /* Model */,
+				BD6B28042C6F2E6B00BC73D2 /* Models */,
 				BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */,
 				BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */,
 				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
@@ -473,12 +473,12 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		BD6B28042C6F2E6B00BC73D2 /* Model */ = {
+		BD6B28042C6F2E6B00BC73D2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BDD7125C2C6426EF000FAD7B /* Exporter */ = {
