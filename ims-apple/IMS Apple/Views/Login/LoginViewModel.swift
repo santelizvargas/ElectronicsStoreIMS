@@ -12,7 +12,7 @@ final class LoginViewModel: ObservableObject {
     @Published var requestInProgress: Bool = false
     @Published var loginSuccess: Bool = false
     
-    private lazy var authenticationManager: AuthenticationManager = AuthenticationManager()
+    private var authenticationManager: AuthenticationManager = AuthenticationManager()
     
     func login(email: String, password: String) {
         requestInProgress = true
@@ -20,7 +20,7 @@ final class LoginViewModel: ObservableObject {
             do {
                 try await authenticationManager.login(email: email, password: password)
                 requestInProgress = false
-                loginSuccess = true
+                loginSuccess = authenticationManager.isAnUserLogged
                 // TODO: - Save user using DTO
             } catch {
                 requestInProgress = false
@@ -28,5 +28,9 @@ final class LoginViewModel: ObservableObject {
                 debugPrint(iMSError.localizedDescription)
             }
         }
+    }
+    
+    func checkIsUserLogged() {
+        loginSuccess = authenticationManager.isAnUserLogged
     }
 }

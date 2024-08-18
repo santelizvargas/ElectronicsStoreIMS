@@ -65,6 +65,9 @@ struct LoginView: View {
         .onChange(of: viewModel.loginSuccess) {_, newValue in
             navigationPath.append(newValue)
         }
+        .onAppear {
+            viewModel.checkIsUserLogged()
+        }
     }
 }
 

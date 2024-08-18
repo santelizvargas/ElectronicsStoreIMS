@@ -20,7 +20,7 @@ struct IMS_AppleApp: App {
                     .modelContainer(SwiftDataProvider.shared.container)
                     .navigationDestination(for: Bool.self) { isLoginSuccess in
                         if isLoginSuccess {
-                            MainView()
+                            MainView(navigationPath: $navigationPath)
                         }
                     }
             }

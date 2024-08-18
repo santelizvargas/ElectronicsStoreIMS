@@ -12,5 +12,12 @@ import Foundation
 enum DataManagerError: Error {
     case fetchModels
     case removeModel
+    
+    var description: String {
+        switch self {
+            case .fetchModels: "Not data!"
+            case .removeModel: "Data doesn't exist!"
+        }
+    }
 }
 

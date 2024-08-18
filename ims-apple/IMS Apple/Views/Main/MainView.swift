@@ -14,6 +14,12 @@ private enum Constants {
 
 struct MainView: View {
     @State private var itemSelected: SidebarItem = .graphs
+    @Binding private var navigationPath: NavigationPath
+    @ObservedObject private var viewModel: MainViewViewModel = MainViewViewModel()
+    
+    init(navigationPath: Binding<NavigationPath>) {
+        _navigationPath = navigationPath
+    }
     
     private var sectionSelected: SidebarSection {
         SidebarSection.allCases.first { section in
@@ -58,20 +64,26 @@ struct MainView: View {
             case .invoiceSale: InvoiceSaleView()
             case .addProduct: AddProductView()
             case .productList: ProductListView()
-            default: Text(itemSelected.name)
         }
     }
     
     private var profileButton: some View {
-        Button {
-            
-        } label: {
+        Button { }
+        label: {
             ProfileImage(fullName: "Juan Perez")
         }
         .buttonStyle(.plain)
+        .contextMenu {
+            Button("Logout") {
+                viewModel.logout()
+            }
+        }
+        .onChange(of: viewModel.logoutSuccess) { _, _ in
+            navigationPath.removeLast()
+        }
     }
 }
 
 #Preview {
-    MainView()
+    MainView(navigationPath: .constant(NavigationPath()))
 }
