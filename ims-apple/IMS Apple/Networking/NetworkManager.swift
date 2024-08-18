@@ -33,14 +33,14 @@ final class NetworkManager {
         
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
-        
-        if httpMethod != .get {
-            request.httpBody = components.percentEncodedQuery?.data(using: .utf8)
-        }
+        request.httpBody = httpMethod != .get
+        ? components.percentEncodedQuery?.data(using: .utf8)
+        : nil
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200...299 ~= statusCode
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 
+                  200...299 ~= statusCode
             else { throw IMSError.somethingWrong }
             
             return data

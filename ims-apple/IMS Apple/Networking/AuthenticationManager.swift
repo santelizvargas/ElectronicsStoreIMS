@@ -21,12 +21,11 @@ final class AuthenticationManager {
             let data = try await networkManager.makeRequest(path: .login,
                                                             with: parameters,
                                                             httpMethod: .post)
-            guard let response = try? JSONDecoder().decode(AuthenticationResponse.self, from: data)
-            else { throw IMSError.somethingWrong }
+            let response = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
             debugPrint("\(email) login successfully!")
             return response.data
         } catch {
-            throw error
+            throw IMSError.somethingWrong
         }
     }
     
