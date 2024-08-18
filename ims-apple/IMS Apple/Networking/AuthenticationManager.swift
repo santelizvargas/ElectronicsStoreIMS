@@ -11,7 +11,7 @@ final class AuthenticationManager {
     private lazy var networkManager: NetworkManager = NetworkManager()
     
     @discardableResult
-    func login(email: String, password: String) async throws -> UserEntity {
+    func login(email: String, password: String) async throws -> UserModel {
         let parameters: [String: Any] = [
             "email": email,
             "password": password
