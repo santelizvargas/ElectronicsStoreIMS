@@ -10,6 +10,7 @@ import Foundation
 final class AuthenticationManager {
     private lazy var networkManager: NetworkManager = NetworkManager()
     
+    @discardableResult
     func login(email: String, password: String) async throws -> UserEntity {
         let parameters: [String: Any] = [
             "email": email,
@@ -20,7 +21,7 @@ final class AuthenticationManager {
             let data = try await networkManager.makeRequest(path: .login,
                                                             with: parameters,
                                                             httpMethod: .post)
-            guard let response = try? JSONDecoder().decode(IMSResponse<UserEntity>.self, from: data)
+            guard let response = try? JSONDecoder().decode(AuthenticationResponse.self, from: data)
             else { throw IMSError.somethingWrong }
             debugPrint("\(email) login successfully!")
             return response.data

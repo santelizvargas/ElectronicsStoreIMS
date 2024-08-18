@@ -2,7 +2,7 @@
 //  HttpMethod.swift
 //  IMS Apple
 //
-//  Created by Jose Luna on 8/12/24.
+//  Created by Brandon Santeliz on 8/12/24.
 //
 
 enum HttpMethod: String {

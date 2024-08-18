@@ -10,12 +10,20 @@ import SwiftData
 
 @main
 struct IMS_AppleApp: App {
+    @State private var navigationPath: NavigationPath = NavigationPath()
+    
     var body: some Scene {
         WindowGroup {
-//            MainView()
-//                .preferredColorScheme(.dark)
-//                .modelContainer(SwiftDataProvider.shared.container)
-            LoginView()
+            NavigationStack(path: $navigationPath) {
+                LoginView(navigationPath: $navigationPath)
+                    .preferredColorScheme(.dark)
+                    .modelContainer(SwiftDataProvider.shared.container)
+                    .navigationDestination(for: Bool.self) { isLoginSuccess in
+                        if isLoginSuccess {
+                            MainView()
+                        }
+                    }
+            }
         }
     }
 }

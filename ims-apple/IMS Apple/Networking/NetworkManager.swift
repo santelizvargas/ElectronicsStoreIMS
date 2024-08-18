@@ -40,13 +40,12 @@ final class NetworkManager {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            let statusCode = (response as? HTTPURLResponse)?.statusCode ?? 0
-            
-            if !(200...299 ~= statusCode) { throw IMSError.badResponse(statusCode) }
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 200...299 ~= statusCode
+            else { throw IMSError.somethingWrong }
             
             return data
         } catch {
-            throw IMSError.requestError
+            throw IMSError.somethingWrong
         }
     }
     
