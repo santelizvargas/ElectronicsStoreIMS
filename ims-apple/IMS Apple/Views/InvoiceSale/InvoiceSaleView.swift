@@ -66,10 +66,10 @@ struct InvoiceSaleView: View {
     private var clientInformatioView: some View {
         HStack(spacing: Constants.spacingSize) {
             IMSTextField(type: .custom("Buscar Producto"),
-                         text: $nameValue, hasBorder: true)
+                         text: $nameValue, hasBorder: true, maxWidth: .infinity)
 
             IMSTextField(type: .custom("Teléfono"),
-                         text: $phoneNumberValue, hasBorder: true)
+                         text: $phoneNumberValue, hasBorder: true, maxWidth: .infinity)
         }
         .padding(.vertical)
     }
@@ -96,8 +96,7 @@ struct InvoiceSaleView: View {
                 
                 IMSTextField(type: .custom("Descripcion"),
                              text: $descriptionValue,
-                             hasBorder: Constants.hasBorder)
-                .frame(minWidth: Constants.textFieldWidth)
+                             hasBorder: Constants.hasBorder, maxWidth: .infinity)
                 
                 IMSTextField(type: .custom("P. Unitartio"),
                              text: $priceValue,
