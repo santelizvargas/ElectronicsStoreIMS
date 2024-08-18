@@ -17,7 +17,6 @@ final class LoginViewModel: ObservableObject {
     func login(email: String, password: String) {
         requestInProgress = true
         Task {
-            try await Task.sleep(for: .seconds(2))
             do {
                 try await authenticationManager.login(email: email, password: password)
                 requestInProgress = false
