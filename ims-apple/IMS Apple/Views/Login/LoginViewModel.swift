@@ -11,6 +11,7 @@ import Foundation
 final class LoginViewModel: ObservableObject {
     @Published var requestInProgress: Bool = false
     @Published var loginSuccess: Bool = false
+    @Published var isShowLaunchScreen: Bool = false
     
     private var authenticationManager: AuthenticationManager = AuthenticationManager()
     
@@ -21,7 +22,6 @@ final class LoginViewModel: ObservableObject {
                 try await authenticationManager.login(email: email, password: password)
                 requestInProgress = false
                 loginSuccess = authenticationManager.isAnUserLogged
-                // TODO: - Save user using DTO
             } catch {
                 requestInProgress = false
                 guard let iMSError = error as? IMSError else { return }
@@ -31,6 +31,12 @@ final class LoginViewModel: ObservableObject {
     }
     
     func checkIsUserLogged() {
-        loginSuccess = authenticationManager.isAnUserLogged
+        Task {
+            isShowLaunchScreen = true
+            try await Task.sleep(for: .seconds(2))
+            loginSuccess = authenticationManager.isAnUserLogged
+            try await Task.sleep(for: .seconds(0.5))
+            isShowLaunchScreen = false
+        }
     }
 }
