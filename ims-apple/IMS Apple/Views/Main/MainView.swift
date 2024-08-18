@@ -58,13 +58,15 @@ struct MainView: View {
             case .invoiceSale: InvoiceSaleView()
             case .addProduct: AddProductView()
             case .productList: ProductListView()
-            default: Text(itemSelected.name)
+            case .profile: ProfileView()
         }
     }
     
     private var profileButton: some View {
         Button {
-            
+            withAnimation {
+                itemSelected = .profile
+            }
         } label: {
             ProfileImage(fullName: "Juan Perez")
         }
