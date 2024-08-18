@@ -13,9 +13,16 @@ private enum Constants {
 }
 
 struct LoginView: View {
+    @Binding private var navigationPath: NavigationPath
     
-    @State private var password: String = ""
-    @State private var email: String = ""
+    // FIXME: - Delete mock credentials
+    @State private var email: String = "derianricardo451@gmail.com"
+    @State private var password: String = "password3"
+    @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
+    
+    init(navigationPath: Binding<NavigationPath>) {
+        _navigationPath = navigationPath
+    }
     
     var body: some View {
         VStack(spacing: Constants.containerSpacing) {
@@ -40,21 +47,29 @@ struct LoginView: View {
                 }
                 .buttonStyle(.plain)
                 
-                Button("Iniciar sesión") { }
-                    .buttonStyle(GradientButtonStyle(
-                        buttonWidth: Constants.loginButtonMaxWidth,
-                        gradientColors: [.imsLightBlue, .imsLightPurple]
-                    )
+                Button("Iniciar sesión") {
+                    viewModel.login(email: email, password: password)
+                }
+                .buttonStyle(GradientButtonStyle(buttonWidth: Constants.loginButtonMaxWidth,
+                                                 gradientColors: [.imsLightBlue, .imsLightPurple])
                 )
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(IMSBackground())
+        .overlay {
+            if viewModel.requestInProgress {
+                ProgressView()
+            }
+        }
+        .onChange(of: viewModel.loginSuccess) {_, newValue in
+            navigationPath.append(newValue)
+        }
     }
 }
 
 // MARK: - Preview
 
 #Preview {
-    LoginView()
-}   
+    LoginView(navigationPath: .constant(NavigationPath()))
+}
