@@ -21,8 +21,6 @@ final class AuthenticationManager {
     private var networkManager: NetworkManager = NetworkManager()
     private var dataManager: DataManager = DataManager<UserModelPersistence>()
     
-    private let decoder: JSONDecoder = JSONDecoder()
-    
     @discardableResult
     func userLogged() throws -> UserModelPersistence {
         guard let user = try fetchTest().first
