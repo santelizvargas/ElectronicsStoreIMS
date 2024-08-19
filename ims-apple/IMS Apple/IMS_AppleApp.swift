@@ -18,10 +18,8 @@ struct IMS_AppleApp: App {
                 LoginView(navigationPath: $navigationPath)
                     .preferredColorScheme(.dark)
                     .modelContainer(SwiftDataProvider.shared.container)
-                    .navigationDestination(for: Bool.self) { isLoginSuccess in
-                        if isLoginSuccess {
-                            MainView()
-                        }
+                    .navigationDestination(for: Bool.self) { _ in
+                        MainView(navigationPath: $navigationPath)
                     }
             }
         }

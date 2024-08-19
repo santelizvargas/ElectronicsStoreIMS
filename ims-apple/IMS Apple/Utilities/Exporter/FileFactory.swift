@@ -12,7 +12,7 @@ final class FileFactory {
         let header: String = "Nombre, Email, Rol, Fecha"
         
         let mappedUsers: String = users.map { user in
-            "\(user.name), \(user.email), \(user.role.joined(separator: "-")), \(user.date)"
+            "\(user.firstName), \(user.email), \((user.roles ?? ["None"]).joined(separator: "-")), \(user.updatedAt ?? "None")"
         }.joined(separator: "\n")
         
         let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")

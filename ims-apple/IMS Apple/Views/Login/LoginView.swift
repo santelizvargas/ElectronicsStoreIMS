@@ -10,6 +10,7 @@ import SwiftUI
 private enum Constants {
     static let loginButtonMaxWidth: Double = 320
     static let containerSpacing: Double = 25
+    static let launchViewHeight: Double = 200
 }
 
 struct LoginView: View {
@@ -26,33 +27,24 @@ struct LoginView: View {
     
     var body: some View {
         VStack(spacing: Constants.containerSpacing) {
-            
-            Text("Iniciar sesión")
-                .font(.largeTitle)
-            
-            Text("Bienvenido! Por favor ingrese sus credenciales")
-                .font(.title2)
-                .foregroundStyle(.gray)
-            
-            IMSTextField(type: .email, text: $email)
-            IMSSecureField(text: $password)
-            
-            VStack(alignment: .trailing, spacing: Constants.containerSpacing) {
-                Button {
-                    /// Do something
-                } label: {
-                    Text("Olvidaste la contraseña?")
-                        .font(.title3)
-                        .foregroundStyle(.gray)
-                }
-                .buttonStyle(.plain)
+            if viewModel.isShowLaunchScreen {
+                launchView
+            } else {
+                Text("Iniciar sesión")
+                    .font(.largeTitle)
+                
+                Text("Bienvenido! Por favor ingrese sus credenciales")
+                    .font(.title2)
+                    .foregroundStyle(.gray)
+                
+                IMSTextField(type: .email, text: $email)
+                IMSSecureField(text: $password)
                 
                 Button("Iniciar sesión") {
                     viewModel.login(email: email, password: password)
                 }
                 .buttonStyle(GradientButtonStyle(buttonWidth: Constants.loginButtonMaxWidth,
-                                                 gradientColors: [.imsLightBlue, .imsLightPurple])
-                )
+                                                 gradientColors: [.imsLightBlue, .imsLightPurple]))
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -63,7 +55,23 @@ struct LoginView: View {
             }
         }
         .onChange(of: viewModel.loginSuccess) {_, newValue in
-            navigationPath.append(newValue)
+            if newValue {
+                navigationPath.append(true)
+            }
+        }
+        .onAppear {
+            viewModel.checkIsUserLogged()
+        }
+    }
+    
+    private var launchView: some View {
+        VStack {
+            Image(.imsLogoWhite)
+                .resizable()
+                .scaledToFit()
+                .frame(height: Constants.launchViewHeight)
+            
+            ProgressView()
         }
     }
 }
