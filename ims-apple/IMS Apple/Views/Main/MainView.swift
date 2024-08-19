@@ -69,18 +69,24 @@ struct MainView: View {
     }
     
     private var profileButton: some View {
-        Button {
-            withAnimation {
-                itemSelected = .profile
+        Menu {
+            Button {
+                withAnimation {
+                    itemSelected = .profile
+                }
+            } label: {
+                Label("Ver pefil", systemImage: "person")
+            }
+            
+            Button(role: .destructive) {
+                withAnimation {
+                    viewModel.logout()
+                }
+            } label: {
+                Label("Cerrar sesión", systemImage: "figure.walk.arrival")
             }
         } label: {
             ProfileImage(fullName: "Juan Perez")
-        }
-        .buttonStyle(.plain)
-        .contextMenu {
-            Button("Cerrar sesión") {
-                viewModel.logout()
-            }
         }
         .onChange(of: viewModel.logoutSuccess) { _, _ in
             if navigationPath.count > .zero {

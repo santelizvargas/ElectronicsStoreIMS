@@ -33,6 +33,7 @@ struct ProfileImage: View {
             .overlay {
                 Text(abbreviations)
                     .font(.system(size: size * Constants.fontSize))
+                    .foregroundStyle(.white)
                     .bold()
             }
     }
