@@ -11,6 +11,8 @@ enum IMSError: Error {
     
     ///  JSONDecoder
     case decoding
+    case badPassword
+    case sameAsLastPassword
     
     /// HTTPS
     case somethingWrong
@@ -18,9 +20,11 @@ enum IMSError: Error {
     
     var localizedDescription: String {
         switch self {
-            case .somethingWrong: "Ops, please try again later!"
-            case .badUrl: "Bad URL!"
-            case .decoding: "An error has occurred, please try again!"
+            case .somethingWrong: "Ops, please try again later"
+            case .badUrl: "Bad URL"
+            case .decoding: "An error has occurred, please try again"
+            case .badPassword: "Wrong credentials"
+            case .sameAsLastPassword: "New password must be different"
         }
     }
 }

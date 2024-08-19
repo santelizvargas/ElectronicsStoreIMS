@@ -44,6 +44,11 @@ struct ProfileView: View {
                         .padding(.vertical)
                     
                     userPasswordForm
+                        .overlay {
+                            if viewModel.isRequestInProgress {
+                                ProgressView()
+                            }
+                        }
                 }
                 .padding()
                 .background {
@@ -166,7 +171,7 @@ struct ProfileView: View {
             
             GridRow {
                 Button("Guardar contraseña") {
-                    
+                    viewModel.updatePassword()
                 }
                 .buttonStyle(
                     GradientButtonStyle(

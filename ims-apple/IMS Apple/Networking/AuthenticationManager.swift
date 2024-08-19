@@ -21,14 +21,17 @@ final class AuthenticationManager {
     private var networkManager: NetworkManager = NetworkManager()
     private var dataManager: DataManager = DataManager<UserModelPersistence>()
     
+    private let decoder: JSONDecoder = JSONDecoder()
+    
     @discardableResult
-    private func userLogged() throws -> UserModelPersistence {
+    func userLogged() throws -> UserModelPersistence {
         guard let user = try fetchTest().first
         else { throw DataManagerError.fetchModels }
         return user
     }
     
     private func storeUserDTO(user: UserModel) {
+        if isAnUserLogged { return }
         let user = UserModelPersistence(user: user)
         dataManager.save(model: user)
     }
@@ -61,5 +64,33 @@ final class AuthenticationManager {
         let user = try userLogged()
         try dataManager.removeAll()
         debugPrint("--- Logout: \(user.firstName) ---")
+    }
+    
+    func updatePassword(email: String,
+                        currentPassword: String,
+                        newPassword: String,
+                        confirmationPassword: String) async throws {
+        do { try await login(email: email, password: currentPassword) }
+        catch { throw IMSError.badPassword }
+        
+        if currentPassword == newPassword {
+            throw IMSError.sameAsLastPassword
+        }
+        
+        let parameters: [String: Any] = [
+            "email": email,
+            "password": newPassword,
+            "confirmPassword": confirmationPassword
+        ]
+        
+        do {
+            let data = try await networkManager.makeRequest(path: .updatePassword,
+                                                            with: parameters,
+                                                            httpMethod: .put)
+            let response = try JSONDecoder().decode(UpdatePasswordResponse.self, from: data)
+            debugPrint("---\(response.message) by \(response.data.firstName)---")
+        } catch {
+            throw IMSError.somethingWrong
+        }
     }
 }

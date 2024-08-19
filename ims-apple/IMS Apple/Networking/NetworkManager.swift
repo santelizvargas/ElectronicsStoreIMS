@@ -33,9 +33,12 @@ final class NetworkManager {
         
         var request: URLRequest = URLRequest(url: url)
         request.httpMethod = httpMethod.rawValue
-        request.httpBody = httpMethod != .get
-        ? components.percentEncodedQuery?.data(using: .utf8)
-        : nil
+        
+        if httpMethod != .get {
+            let json = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+            request.httpBody = json
+            request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        }
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)

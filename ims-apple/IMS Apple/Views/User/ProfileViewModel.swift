@@ -7,15 +7,17 @@
 
 import Foundation
 
+@MainActor
 final class ProfileViewModel: ObservableObject {
     @Published var isPasswordEdit: Bool = false
     @Published var userPassword: UserPasswordReset
+    @Published var isRequestInProgress: Bool = false
     
-    let userInfo: UserInformation = .init(
-        names: "Juan",
-        lastName: "Perez",
-        email: "test@gmail.com"
-    )
+    var userInfo: UserInformation {
+        UserInformation(user: try? authenticationManager.userLogged())
+    }
+    
+    private let authenticationManager: AuthenticationManager = AuthenticationManager()
     
     private let defaultUserPassword: UserPasswordReset = .init(
         currentPassword: "",
@@ -29,5 +31,25 @@ final class ProfileViewModel: ObservableObject {
     
     func resetPasswordTextfields() {
         userPassword = defaultUserPassword
+    }
+    
+    func updatePassword() {
+        guard userPassword.newPassword == userPassword.confirmPassword else { return }
+        isRequestInProgress = true
+        
+        Task {
+            do {
+                try await authenticationManager.updatePassword(email: userInfo.email,
+                                                               currentPassword: userPassword.currentPassword,
+                                                               newPassword: userPassword.newPassword,
+                                                               confirmationPassword: userPassword.confirmPassword)
+                isPasswordEdit = false
+                resetPasswordTextfields()
+            } catch {
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+            isRequestInProgress = false
+        }
     }
 }

@@ -14,6 +14,12 @@ struct AuthenticationResponse: Decodable {
     let data: UserModel
 }
 
+struct UpdatePasswordResponse: Decodable {
+    let message: String
+    let code: Int
+    let data: UserModel
+}
+
 @Model
 final class UserModelPersistence {
     let id: Int
