@@ -39,7 +39,7 @@ final class NetworkManager {
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, 
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
                   200...299 ~= statusCode
             else { throw IMSError.somethingWrong }
             

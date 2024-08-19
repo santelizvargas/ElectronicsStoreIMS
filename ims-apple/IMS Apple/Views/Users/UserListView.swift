@@ -76,9 +76,9 @@ struct UserListView: View {
             LazyVGrid(columns: columns) {
                 ForEach(UserModel.mockUsers) { user in
                     HStack {
-                        ProfileImage(fullName: user.name)
+                        ProfileImage(fullName: user.firstName)
                         
-                        Text(user.name)
+                        Text(user.firstName)
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
@@ -87,12 +87,16 @@ struct UserListView: View {
                     userPropertyTextView(text: user.email)
                         
                     VStack {
-                        ForEach(user.role, id: \.self) { role in
-                            userPropertyTextView(text: role)
+                        if let roles = user.roles {
+                            ForEach(roles, id: \.self) { role in
+                                userPropertyTextView(text: role)
+                            }
                         }
                     }
-                        
-                    userPropertyTextView(text: user.date)
+                    
+                    if let updatedAt = user.updatedAt {
+                        userPropertyTextView(text: updatedAt)
+                    }
                 }
             }
         }

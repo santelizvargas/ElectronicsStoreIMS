@@ -40,7 +40,6 @@
 		35441DDB2C6C506500B13146 /* AddProductView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35441DDA2C6C506500B13146 /* AddProductView.swift */; };
 		356743EE2C6AFA880073496B /* InvoiceSaleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 356743ED2C6AFA880073496B /* InvoiceSaleView.swift */; };
 		35BAA8672C59D9540051FBCF /* UserListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BAA8662C59D9540051FBCF /* UserListView.swift */; };
-		35FDA0712C5B3395004A4849 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35FDA0702C5B3395004A4849 /* UserModel.swift */; };
 		6DB536B12C5B38F7008676D7 /* GradientButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB536B02C5B38F7008676D7 /* GradientButtonStyle.swift */; };
 		6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB536B22C5B394C008676D7 /* SidebarButtonStyle.swift */; };
 		6DB536B62C5B3DDF008676D7 /* CustomDivider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DB536B52C5B3DDF008676D7 /* CustomDivider.swift */; };
@@ -61,10 +60,11 @@
 		BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */; };
 		BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */; };
 		BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */; };
-		BD6B28092C6F2E6B00BC73D2 /* UserEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */; };
+		BD6B28092C6F2E6B00BC73D2 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */; };
 		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
+		BDFBD8FE2C71D97800EF549C /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -103,7 +103,6 @@
 		35441DDA2C6C506500B13146 /* AddProductView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProductView.swift; sourceTree = "<group>"; };
 		356743ED2C6AFA880073496B /* InvoiceSaleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceSaleView.swift; sourceTree = "<group>"; };
 		35BAA8662C59D9540051FBCF /* UserListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListView.swift; sourceTree = "<group>"; };
-		35FDA0702C5B3395004A4849 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		6DB536B02C5B38F7008676D7 /* GradientButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientButtonStyle.swift; sourceTree = "<group>"; };
 		6DB536B22C5B394C008676D7 /* SidebarButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarButtonStyle.swift; sourceTree = "<group>"; };
 		6DB536B52C5B3DDF008676D7 /* CustomDivider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDivider.swift; sourceTree = "<group>"; };
@@ -125,10 +124,11 @@
 		BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMSError.swift; sourceTree = "<group>"; };
 		BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEntity.swift; sourceTree = "<group>"; };
+		BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
+		BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,7 +380,6 @@
 		35FDA06F2C5B3374004A4849 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				35FDA0702C5B3395004A4849 /* UserModel.swift */,
 				35069C832C61C3DE001E854F /* HistoryModel.swift */,
 				3331062A2C6B03750035644F /* ProductModel.swift */,
 			);
@@ -437,6 +436,7 @@
 			isa = PBXGroup;
 			children = (
 				33EA67472C48BDA2007A9DBE /* MainView.swift */,
+				BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 		BD6B27FE2C6F2E3400BC73D2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				BD6B28042C6F2E6B00BC73D2 /* Entities */,
+				BD6B28042C6F2E6B00BC73D2 /* Models */,
 				BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */,
 				BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */,
 				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
@@ -496,12 +496,12 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
-		BD6B28042C6F2E6B00BC73D2 /* Entities */ = {
+		BD6B28042C6F2E6B00BC73D2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				BD6B28032C6F2E6B00BC73D2 /* UserEntity.swift */,
+				BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */,
 			);
-			path = Entities;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		BDD7125C2C6426EF000FAD7B /* Exporter */ = {
@@ -587,6 +587,7 @@
 				33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */,
 				338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */,
 				331664C92C71D84000968A73 /* IMSUserTextField.swift in Sources */,
+				BDFBD8FE2C71D97800EF549C /* MainViewViewModel.swift in Sources */,
 				6DB536B12C5B38F7008676D7 /* GradientButtonStyle.swift in Sources */,
 				338DF83A2C65DA0300F72772 /* LeftGradient.swift in Sources */,
 				6DB536BD2C5B3FC1008676D7 /* SidebarSection.swift in Sources */,
@@ -628,7 +629,6 @@
 				338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */,
 				338DF8312C64733300F72772 /* GraphView.swift in Sources */,
 				332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */,
-				35FDA0712C5B3395004A4849 /* UserModel.swift in Sources */,
 				333106322C6BF01B0035644F /* ProductState.swift in Sources */,
 				333106302C6BF0010035644F /* ProductCategory.swift in Sources */,
 				6DB536B82C5B3EC8008676D7 /* Breadcrumb.swift in Sources */,
@@ -638,7 +638,7 @@
 				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
-				BD6B28092C6F2E6B00BC73D2 /* UserEntity.swift in Sources */,
+				BD6B28092C6F2E6B00BC73D2 /* UserModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
