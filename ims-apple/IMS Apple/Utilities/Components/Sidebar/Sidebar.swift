@@ -64,7 +64,7 @@ struct Sidebar: View {
     // MARK: - Section List View
     
     private var sectionListView: some View {
-        ForEach(Array(SidebarSection.allCases.enumerated()), id: \.offset) { index, section in
+        ForEach(Array(SidebarSection.sidebarCases.enumerated()), id: \.offset) { index, section in
             VStack(alignment: .leading, spacing: .zero) {
                 if index != .zero {
                     CustomDivider()

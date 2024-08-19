@@ -64,22 +64,34 @@ struct MainView: View {
             case .invoiceSale: InvoiceSaleView()
             case .addProduct: AddProductView()
             case .productList: ProductListView()
+            case .profile: ProfileView()
         }
     }
     
     private var profileButton: some View {
-        Button { }
-        label: {
+        Menu {
+            Button {
+                withAnimation {
+                    itemSelected = .profile
+                }
+            } label: {
+                Label("Ver pefil", systemImage: "person")
+            }
+            
+            Button(role: .destructive) {
+                withAnimation {
+                    viewModel.logout()
+                }
+            } label: {
+                Label("Cerrar sesión", systemImage: "figure.walk.arrival")
+            }
+        } label: {
             ProfileImage(fullName: "Juan Perez")
         }
-        .buttonStyle(.plain)
-        .contextMenu {
-            Button("Logout") {
-                viewModel.logout()
-            }
-        }
         .onChange(of: viewModel.logoutSuccess) { _, _ in
-            navigationPath.removeLast()
+            if navigationPath.count > .zero {
+                navigationPath.removeLast()
+            }
         }
     }
 }

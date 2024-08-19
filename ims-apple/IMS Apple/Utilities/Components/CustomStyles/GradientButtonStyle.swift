@@ -36,14 +36,14 @@ struct GradientButtonStyle: ButtonStyle {
             }
             
             configuration.label
-                .frame(maxWidth: buttonWidth)
             
             if let imageRight {
                 Image(systemName: imageRight)
             }
         }
         .padding(.horizontal)
-        .frame(width: buttonWidth, height: buttonHeight)
+        .frame(height: buttonHeight)
+        .frame(maxWidth: buttonWidth)
         .background(
             LinearGradient(
                 colors: gradientColors,
