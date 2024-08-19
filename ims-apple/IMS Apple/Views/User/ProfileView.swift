@@ -22,6 +22,8 @@ private enum Constants {
     static let verticalSpacing: CGFloat = 20
     static let horizontalSpacing: CGFloat = 20
     static let buttonHeight: CGFloat = 35
+    static let cancelIcon: String = "xmark"
+    static let editIcon: String = "pencil"
 }
 
 struct ProfileView: View {
@@ -180,7 +182,7 @@ struct ProfileView: View {
                     viewModel.resetPasswordTextfields()
                 }
             } label: {
-                Image(systemName: viewModel.isPasswordEdit ? "xmark" : "pencil")
+                Image(systemName: viewModel.isPasswordEdit ? Constants.cancelIcon : Constants.editIcon)
             }
         }
     }
