@@ -105,6 +105,9 @@ struct UserListView: View {
                 }
             }
         }
+        .refreshable {
+            viewModel.getUsers()
+        }
         .overlay {
             if viewModel.isRequestInProgress {
                 CustomProgressView()
