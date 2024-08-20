@@ -11,6 +11,16 @@ export default class CredentialsPasswordUpdater implements PasswordUpdater {
   constructor(private readonly authenticationRepository: AuthenticationRepository) {}
 
   public async invoke(request: UpdatePasswordRequest): Promise<UpdatePasswordResponse> {
+    const foundUser: User | null = await this.authenticationRepository.findByCredentials(
+      request.email,
+      request.currentPassword,
+    );
+
+    // Check if user exists, if not throw error
+    if (!foundUser) {
+      throw new Error('User not found');
+    }
+
     // Check if passwords match
     if (request.password !== request.confirmPassword) {
       throw new Error('Passwords do not match');
