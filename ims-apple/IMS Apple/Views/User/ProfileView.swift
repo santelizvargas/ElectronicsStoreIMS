@@ -59,6 +59,7 @@ struct ProfileView: View {
                         .fill(.secondaryBackground)
                 }
             }
+            .isOS(.iOS) { $0.onKeyboardAppear() }
             
             Spacer()
         }
