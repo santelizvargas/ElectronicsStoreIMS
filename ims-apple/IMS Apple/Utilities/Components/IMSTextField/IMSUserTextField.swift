@@ -82,7 +82,7 @@ struct IMSUserTextField: View {
                     .fill(.white)
             }
             .overlay(alignment: .trailing) {
-                if type == .password {
+                if type == .password, !isDisabled {
                     Button {
                         withAnimation {
                             isSecure.toggle()

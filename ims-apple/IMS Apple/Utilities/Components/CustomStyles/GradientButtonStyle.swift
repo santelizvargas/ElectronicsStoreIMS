@@ -52,5 +52,6 @@ struct GradientButtonStyle: ButtonStyle {
             )
         )
         .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
+        .contentShape(Rectangle())
     }
 }
