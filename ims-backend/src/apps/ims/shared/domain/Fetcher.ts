@@ -1,5 +1,3 @@
-import { FetchProductResponse } from '../../api/application/products/FetchProductService';
-
-export interface Fetcher {
-  invoke(): Promise<FetchProductResponse>;
+export interface Fetcher<Response> {
+  invoke(): Promise<Response>;
 }

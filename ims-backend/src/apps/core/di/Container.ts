@@ -34,6 +34,7 @@ import CountProductService from '../../ims/api/application/products/CountProduct
 import RegisterController from '../../ims/api/infrastructure/express/controllers/authentication/RegisterController';
 import RegistrationService from '../../ims/api/application/authentication/RegistrationService';
 import CredentialsClientRegister from '../../ims/api/infrastructure/authentication/credentials/CredentialsClientRegister';
+import FetchAuthenticationService from '../../ims/api/application/authentication/FetchAuthenticationService';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -64,6 +65,7 @@ export default class Container {
         authenticationRepository: asClass(PrismaAuthenticationRepository).singleton(),
         authenticationService: asClass(AuthenticationService).singleton(),
         registrationService: asClass(RegistrationService).singleton(),
+        fetchAuthenticationService: asClass(FetchAuthenticationService).singleton(),
         authenticationController: asClass(AuthenticationController).singleton(),
         register: asClass(CredentialsClientRegister).singleton(),
         passwordUpdater: asClass(CredentialsPasswordUpdater).singleton(),

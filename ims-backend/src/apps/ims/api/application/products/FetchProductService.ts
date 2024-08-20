@@ -9,7 +9,7 @@ export type FetchProductResponse = {
 export default class FetchProductService {
   constructor(
     private readonly logger: Logger,
-    private readonly productFetcher: Fetcher,
+    private readonly productFetcher: Fetcher<FetchProductResponse>,
   ) {}
 
   async invoke(): Promise<FetchProductResponse> {
