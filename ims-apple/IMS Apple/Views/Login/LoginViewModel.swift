@@ -11,7 +11,7 @@ import Foundation
 final class LoginViewModel: ObservableObject {
     @Published var requestInProgress: Bool = false
     @Published var loginSuccess: Bool = false
-    @Published var isShowLaunchScreen: Bool = false
+    @Published var isShowLaunchScreen: Bool = true
     
     private var authenticationManager: AuthenticationManager = AuthenticationManager()
     
@@ -31,11 +31,12 @@ final class LoginViewModel: ObservableObject {
     }
     
     func checkIsUserLogged() {
+        loginSuccess = false
+        isShowLaunchScreen = true
         Task {
-            isShowLaunchScreen = true
             try await Task.sleep(for: .seconds(2))
             loginSuccess = authenticationManager.isAnUserLogged
-            try await Task.sleep(for: .seconds(0.5))
+            try await Task.sleep(for: .seconds(1))
             isShowLaunchScreen = false
         }
     }
