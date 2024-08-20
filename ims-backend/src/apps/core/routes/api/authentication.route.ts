@@ -3,6 +3,7 @@ import AuthenticationController from '../../../ims/api/infrastructure/express/co
 import Container from '../../di/Container';
 import UpdatePasswordController from '../../../ims/api/infrastructure/express/controllers/authentication/UpdatePasswordController';
 import RegisterController from '../../../ims/api/infrastructure/express/controllers/authentication/RegisterController';
+import AuthenticationFetchController from '../../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
 
 export const register = function (app: Express): void {
   const container = new Container().invoke();
@@ -11,6 +12,9 @@ export const register = function (app: Express): void {
   const updatePasswordController: UpdatePasswordController =
     container.resolve<UpdatePasswordController>('updatePasswordController');
   const registerController: RegisterController = container.resolve<RegisterController>('registerController');
+  const fetchController: AuthenticationFetchController = container.resolve<AuthenticationFetchController>(
+    'authenticationFetchController',
+  );
 
   app.post(
     '/auth/login',
@@ -25,4 +29,6 @@ export const register = function (app: Express): void {
   );
 
   app.post('/auth/register', registerController.rules, registerController.invoke.bind(registerController));
+
+  app.get('/auth', fetchController.invoke.bind(fetchController));
 };
