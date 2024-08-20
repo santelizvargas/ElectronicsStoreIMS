@@ -7,6 +7,7 @@
 
 import Foundation
 
+@MainActor
 final class ProductListViewModel: ObservableObject {
     @Published var products: [ProductModel] = []
     
@@ -22,19 +23,36 @@ final class ProductListViewModel: ObservableObject {
         didSet { filterProducts() }
     }
 
-    private let allProducts: [ProductModel]
-
+    private let productManager: ProductManager = ProductManager()
+    
+    private var allProducts: [ProductModel] = []
+    private var isRequestInProgress: Bool = false
+    
     init() {
-        allProducts = ProductModel.products
-        products = allProducts
+        getProducts()
     }
     
     private func filterProducts() {
         products = allProducts.filter { product in
             let matchesSearch = searchText.isEmpty || product.name.lowercased().contains(searchText.lowercased())
             let matchesCategory = selectedCategory == .all || product.category == selectedCategory
-            let matchesState = selectedState == .all || (selectedState == .outOfStock ? product.amount == .zero : product.amount > .zero)
+            let matchesState = selectedState == .all || (selectedState == .outOfStock ? product.stock == .zero : product.stock > .zero)
             return matchesSearch && matchesCategory && matchesState
+        }
+    }
+    
+    func getProducts() {
+        isRequestInProgress = false
+        Task {
+            do {
+                allProducts = try await productManager.getProducts()
+                products = allProducts
+                isRequestInProgress = false
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
         }
     }
 }
