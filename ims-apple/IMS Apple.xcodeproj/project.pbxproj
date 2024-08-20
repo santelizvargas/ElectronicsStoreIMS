@@ -63,6 +63,7 @@
 		BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */; };
 		BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */; };
 		BD6B28092C6F2E6B00BC73D2 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */; };
+		BD85DB4A2C7444680076F612 /* ProductManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD85DB492C7444680076F612 /* ProductManager.swift */; };
 		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
@@ -129,6 +130,7 @@
 		BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		BD85DB492C7444680076F612 /* ProductManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductManager.swift; sourceTree = "<group>"; };
 		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */,
 				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
 				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
+				BD85DB492C7444680076F612 /* ProductManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
 				BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */,
 				6DB536BB2C5B3F9B008676D7 /* Sidebar.swift in Sources */,
+				BD85DB4A2C7444680076F612 /* ProductManager.swift in Sources */,
 				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,

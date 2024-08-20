@@ -49,6 +49,15 @@ struct ProductListView: View {
             ToolbarItem(placement: .destructiveAction) { stateMenu }
             ToolbarItem(placement: .destructiveAction) { categoryMenu }
         }
+        .onAppear {
+            viewModel.getProducts()
+        }
+        .overlay {
+            if viewModel.products.isEmpty {
+                ProgressView()
+                    .controlSize(.extraLarge)
+            }
+        }
     }
     
     // MARK: - State Menu View
@@ -83,16 +92,16 @@ struct ProductListView: View {
     
     private func productCard(_ product: ProductModel) -> some View {
         VStack(alignment: .leading, spacing: Constants.cornerRadius) {
-            productImage(url: product.image)
+            productImage(url: "product.image")
             
             Text(product.name)
                 .bold()
             
-            Text(product.detail)
+            Text(product.description)
                 .foregroundStyle(.graySecundary)
                 .lineLimit(Constants.lineLimit)
             
-            Text("$ \(product.price.description)")
+            Text("$ \(product.salePrice)")
                 .bold()
             
             Spacer()
@@ -101,7 +110,7 @@ struct ProductListView: View {
         .frame(maxWidth: .infinity, maxHeight: Constants.cardHeight)
         .background(.secondaryBackground)
         .overlay(alignment: .topTrailing) {
-            amountBanner(amount: product.amount)
+            amountBanner(amount: product.stock)
         }
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
     }
@@ -135,8 +144,7 @@ struct ProductListView: View {
                         .padding(Constants.Image.padding)
                 }
         } placeholder: {
-            ProgressView()
-                .controlSize(.extraLarge)
+            Image(systemName: "moon.stars.fill")
         }
         .frame(maxWidth: .infinity)
         .frame(height: Constants.Image.height)
