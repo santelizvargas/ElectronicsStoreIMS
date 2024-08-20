@@ -1,12 +1,12 @@
 import type { Request, Response, NextFunction } from 'express';
 import status from 'http-status';
-import { Controller } from '../../../../shared/infrastructure/express/controllers/Controller';
+import { Controller } from '../../../../../shared/infrastructure/express/controllers/Controller';
 import AuthenticationService, {
   AuthenticationResponse,
-} from '../../../application/authentication/AuthenticationService';
-import { ErrorHandler } from '../../../../shared/domain/ErrorHandler';
+} from '../../../../application/authentication/AuthenticationService';
+import { ErrorHandler } from '../../../../../shared/domain/ErrorHandler';
 import { body } from 'express-validator';
-import { RequestValidator } from '../../../../shared/infrastructure/express/RequestValidator';
+import { RequestValidator } from '../../../../../shared/infrastructure/express/RequestValidator';
 
 export default class AuthenticationController implements Controller {
   public readonly rules = [
