@@ -8,7 +8,6 @@
 import Foundation
 
 final class AuthenticationManager {
-    
     var isAnUserLogged: Bool {
         do {
             try userLogged()
@@ -85,6 +84,18 @@ final class AuthenticationManager {
                                                             httpMethod: .put)
             let response = try JSONDecoder().decode(UpdatePasswordResponse.self, from: data)
             debugPrint("---\(response.message) by \(response.data.firstName)---")
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
+    
+    // MARK: - Fetch All Users
+    
+    func getUsers() async throws -> [UserModel] {
+        do {
+            let data = try await networkManager.makeRequest(path: .users)
+            let response = try JSONDecoder().decode(UserResponse.self, from: data)
+            return response.data
         } catch {
             throw IMSError.somethingWrong
         }

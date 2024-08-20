@@ -42,8 +42,8 @@ final class ProductListViewModel: ObservableObject {
     }
     
     func getProducts() {
-        isRequestInProgress = false
-        Task {
+        isRequestInProgress = true
+        Task { @MainActor in
             do {
                 allProducts = try await productManager.getProducts()
                 products = allProducts

@@ -16,6 +16,7 @@ enum IMSPath {
     case login
     case getProducts
     case updatePassword
+    case users
     
     private var apiVersion: String { "/api/v1/" }
     
@@ -25,6 +26,7 @@ enum IMSPath {
                 case .login: "auth/login"
                 case .getProducts: "products"
                 case .updatePassword: "auth/password"
+                case .users: "auth"
             }
         }
         return "\(apiVersion)\(path)/"
