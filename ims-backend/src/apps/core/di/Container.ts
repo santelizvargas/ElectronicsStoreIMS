@@ -35,6 +35,8 @@ import RegisterController from '../../ims/api/infrastructure/express/controllers
 import RegistrationService from '../../ims/api/application/authentication/RegistrationService';
 import CredentialsClientRegister from '../../ims/api/infrastructure/authentication/credentials/CredentialsClientRegister';
 import FetchAuthenticationService from '../../ims/api/application/authentication/FetchAuthenticationService';
+import AuthenticationFetchController from '../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
+import ClientFetcher from '../../ims/api/infrastructure/authentication/credentials/ClientFetcher';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -72,6 +74,8 @@ export default class Container {
         updatePasswordService: asClass(UpdatePasswordService).singleton(),
         updatePasswordController: asClass(UpdatePasswordController).singleton(),
         registerController: asClass(RegisterController).singleton(),
+        authenticationFetchController: asClass(AuthenticationFetchController).singleton(),
+        authenticationFetcher: asClass(ClientFetcher).singleton(),
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),
