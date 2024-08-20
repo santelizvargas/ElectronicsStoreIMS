@@ -32,6 +32,7 @@ struct ProfileView: View {
     var body: some View {
         VStack(alignment: .leading) {
             Text("Información del usuario")
+                .padding(.vertical)
             
             HStack(alignment: .top) {
                 cardInformation
@@ -188,6 +189,3 @@ struct ProfileView: View {
     }
 }
 
-#Preview {
-    ProfileView()
-}

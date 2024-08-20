@@ -40,9 +40,9 @@ struct SidebarButtonStyle: ButtonStyle {
         .buttonStyle(.plain)
         .frame(
             maxWidth: .infinity,
-            maxHeight: Constants.maxHeight,
             alignment: .leading
         )
+        .frame(height: Constants.maxHeight)
         .padding(.horizontal)
         .background {
             if isSelected {

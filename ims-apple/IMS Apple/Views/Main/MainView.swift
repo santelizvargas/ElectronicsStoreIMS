@@ -10,6 +10,8 @@ import SwiftUI
 private enum Constants {
     static let screenMinWidth: CGFloat = 700
     static let screenMinHeight: CGFloat = 500
+    static let macOSButtonHeight: CGFloat = 35
+    static let iOSButtonHeight: CGFloat = 35
 }
 
 struct MainView: View {
@@ -51,6 +53,12 @@ struct MainView: View {
                         profileButton
                     }
                 }
+                
+                if itemSelected == .profile {
+                    ToolbarItem(placement: .destructiveAction) {
+                        logoutButton
+                    }
+                }
             }
         }
         .navigationBarBackButtonHidden()
@@ -69,27 +77,31 @@ struct MainView: View {
     }
     
     private var profileButton: some View {
-        Menu {
-            Button {
-                withAnimation {
-                    itemSelected = .profile
-                }
-            } label: {
-                Label("Ver pefil", systemImage: "person")
-            }
-            
-            Button(role: .destructive) {
-                withAnimation {
-                    viewModel.logout()
-                }
-            } label: {
-                Label("Cerrar sesión", systemImage: "figure.walk.arrival")
+        Button {
+            withAnimation {
+                itemSelected = .profile
             }
         } label: {
             ProfileImage(fullName: "Juan Perez")
         }
-        .onChange(of: viewModel.logoutSuccess) { _, _ in
-            if navigationPath.count > .zero {
+        .buttonStyle(.plain)
+    }
+    
+    private var logoutButton: some View {
+        Button("Salir") {
+            withAnimation {
+                viewModel.logout()
+            }
+        }
+        .buttonStyle(
+            GradientButtonStyle(
+                imageRight: "figure.walk.arrival",
+                buttonHeight: OSType.current == .iOS ? Constants.iOSButtonHeight : Constants.macOSButtonHeight,
+                gradientColors: [.redGradient, .orangeGradient]
+            )
+        )
+        .onReceive(viewModel.$logoutSuccess) { isLogoutSuccess in
+            if navigationPath.count > .zero, isLogoutSuccess {
                 navigationPath.removeLast()
             }
         }

@@ -41,7 +41,9 @@ struct LoginView: View {
                 IMSSecureField(text: $password)
                 
                 Button("Iniciar sesión") {
-                    viewModel.login(email: email, password: password)
+                    withAnimation {
+                        viewModel.login(email: email, password: password)
+                    }
                 }
                 .buttonStyle(GradientButtonStyle(buttonWidth: Constants.loginButtonMaxWidth,
                                                  gradientColors: [.imsLightBlue, .imsLightPurple]))
@@ -54,8 +56,8 @@ struct LoginView: View {
                 ProgressView()
             }
         }
-        .onChange(of: viewModel.loginSuccess) {_, newValue in
-            if newValue {
+        .onReceive(viewModel.$loginSuccess) { isLoginSuccess in
+            if isLoginSuccess {
                 navigationPath.append(true)
             }
         }
