@@ -17,11 +17,14 @@ private enum Constants {
     static let circleSizeDecrement: Int = 20
     static let cardWidth: CGFloat = 260
     static let cardHeight: CGFloat = 300
+    static let cardMaxHeight: CGFloat = 350
     static let cardSpacing: CGFloat = 10
     static let cardCornerRadius: CGFloat = 10
     static let verticalSpacing: CGFloat = 20
     static let horizontalSpacing: CGFloat = 20
     static let buttonHeight: CGFloat = 35
+    static let minOpacity: CGFloat = 0.7
+    static let maxOpacity: CGFloat = 1
     static let cancelIcon: String = "xmark"
     static let editIcon: String = "pencil"
 }
@@ -68,7 +71,10 @@ struct ProfileView: View {
     private var cardInformation: some View {
         VStack {
             ZStack {
-                ProfileImage(fullName: "Juan Perez", size: Constants.profileImageSize)
+                ProfileImage(
+                    fullName: viewModel.shortName,
+                    size: Constants.profileImageSize
+                )
                 
                 ForEach(.zero...Constants.circleMaximun, id: \.self) { index in
                     Circle()
@@ -79,20 +85,22 @@ struct ProfileView: View {
             .frame(width: Constants.baseCircleSize, height: Constants.baseCircleSize)
             
             VStack(spacing: Constants.cardSpacing) {
-                Text("\(viewModel.userInfo.names) \(viewModel.userInfo.lastName)")
+                Text(viewModel.shortName)
                     .font(.title.bold())
                 
                 Text(["Admin", "User"].joined(separator: " - "))
                     .font(.title2)
                 
                 Text(viewModel.userInfo.email)
+                    .multilineTextAlignment(.center)
                     .font(.title3)
             }
             
             Spacer()
         }
         .padding()
-        .frame(width: Constants.cardWidth, height: Constants.cardHeight)
+        .frame(width: Constants.cardWidth)
+        .frame(minHeight: Constants.cardHeight, maxHeight: Constants.cardMaxHeight)
         .background {
             RoundedRectangle(cornerRadius: Constants.cardCornerRadius)
                 .fill(.secondaryBackground)
@@ -107,7 +115,7 @@ struct ProfileView: View {
                 IMSUserTextField(
                     text: .constant(viewModel.userInfo.names),
                     title: "Nombres",
-                    placeholder: "Ingrese sus nombres",
+                    placeholder: "",
                     isRequired: false,
                     isDisabled: true
                 )
@@ -115,7 +123,7 @@ struct ProfileView: View {
                 IMSUserTextField(
                     text: .constant(viewModel.userInfo.lastName),
                     title: "Apellidos",
-                    placeholder: "Ingrese sus apellidos",
+                    placeholder: "",
                     isRequired: false,
                     isDisabled: true
                 )
@@ -125,7 +133,7 @@ struct ProfileView: View {
                 IMSUserTextField(
                     text: .constant(viewModel.userInfo.email),
                     title: "Email",
-                    placeholder: "Ingrese su email",
+                    placeholder: "",
                     isRequired: false,
                     isDisabled: true
                 )
@@ -179,17 +187,26 @@ struct ProfileView: View {
                         buttonHeight: Constants.buttonHeight
                     )
                 )
+                .disabled(viewModel.isSavePasswordDisabled)
+                .opacity(viewModel.isSavePasswordDisabled ? Constants.minOpacity : Constants.maxOpacity)
             }
         }
+        .opacity(viewModel.isPasswordEdit ? Constants.maxOpacity : Constants.minOpacity)
         .overlay(alignment: .topTrailing) {
-            Button {
+            Button(viewModel.isPasswordEdit ? "Cancelar" : "Editar") {
                 withAnimation {
                     viewModel.isPasswordEdit.toggle()
                     viewModel.resetPasswordTextfields()
                 }
-            } label: {
-                Image(systemName: viewModel.isPasswordEdit ? Constants.cancelIcon : Constants.editIcon)
             }
+            .buttonStyle(
+                GradientButtonStyle(
+                    imageRight: viewModel.isPasswordEdit ? Constants.cancelIcon : Constants.editIcon,
+                    gradientColors: viewModel.isPasswordEdit
+                    ? [.redGradient, .orangeGradient]
+                    : [.purpleGradient, .blueGradient]
+                )
+            )
         }
     }
 }

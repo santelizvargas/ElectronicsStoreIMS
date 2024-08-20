@@ -17,6 +17,18 @@ final class ProfileViewModel: ObservableObject {
         UserInformation(user: try? authenticationManager.userLogged())
     }
     
+    var shortName: String {
+        let names = userInfo.names.components(separatedBy: " ")
+        let lastName = userInfo.lastName.components(separatedBy: " ")
+        return "\(names.first ?? "") \(lastName.first ?? "")"
+    }
+    
+    var isSavePasswordDisabled: Bool {
+        userPassword.currentPassword.isEmpty ||
+        userPassword.newPassword.isEmpty ||
+        userPassword.confirmPassword.isEmpty
+    }
+    
     private let authenticationManager: AuthenticationManager = AuthenticationManager()
     
     private let defaultUserPassword: UserPasswordReset = .init(

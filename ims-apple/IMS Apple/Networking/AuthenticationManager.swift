@@ -68,15 +68,13 @@ final class AuthenticationManager {
                         currentPassword: String,
                         newPassword: String,
                         confirmPassword: String) async throws {
-        do { try await login(email: email, password: currentPassword) }
-        catch { throw IMSError.badPassword }
-        
         if currentPassword == newPassword {
             throw IMSError.sameAsLastPassword
         }
         
         let parameters: [String: Any] = [
             "email": email,
+            "currentPassword": currentPassword,
             "password": newPassword,
             "confirmPassword": confirmPassword
         ]

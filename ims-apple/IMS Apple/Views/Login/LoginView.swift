@@ -18,7 +18,7 @@ struct LoginView: View {
     
     // FIXME: - Delete mock credentials
     @State private var email: String = "derianricardo451@gmail.com"
-    @State private var password: String = "password3"
+    @State private var password: String = "password0"
     @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
     
     init(navigationPath: Binding<NavigationPath>) {
@@ -59,6 +59,8 @@ struct LoginView: View {
         .onReceive(viewModel.$loginSuccess) { isLoginSuccess in
             if isLoginSuccess {
                 navigationPath.append(true)
+                email = ""
+                password = ""
             }
         }
         .onAppear {
