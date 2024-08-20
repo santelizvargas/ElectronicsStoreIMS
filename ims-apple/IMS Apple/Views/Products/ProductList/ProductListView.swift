@@ -54,8 +54,7 @@ struct ProductListView: View {
         }
         .overlay {
             if viewModel.products.isEmpty {
-                ProgressView()
-                    .controlSize(.extraLarge)
+                CustomProgressView()
             }
         }
     }
