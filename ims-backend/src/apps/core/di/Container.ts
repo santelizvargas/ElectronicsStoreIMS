@@ -5,7 +5,7 @@ import CredentialsAuthenticator from '../../ims/api/infrastructure/authenticatio
 import JWTConfig from '../../ims/api/application/tokens/JWTConfig';
 import PrismaAuthenticationRepository from '../../ims/api/infrastructure/authentication/repositories/PrismaAuthenticationRepository';
 import AuthenticationService from '../../ims/api/application/authentication/AuthenticationService';
-import AuthenticationController from '../../ims/api/infrastructure/express/controllers/AuthenticationController';
+import AuthenticationController from '../../ims/api/infrastructure/express/controllers/authentication/AuthenticationController';
 import CredentialsClient from '../../ims/api/infrastructure/authentication/credentials/CredentialsClient';
 import JWTManager from '../../ims/api/application/tokens/JWTManager';
 import CreateProductService from '../../ims/api/application/products/CreateProductService';
@@ -23,7 +23,7 @@ import ProductSupplier from '../../ims/api/infrastructure/products/ProductSuppli
 import SupplyProductService from '../../ims/api/application/products/SupplyProductService';
 import CredentialsPasswordUpdater from '../../ims/api/infrastructure/authentication/credentials/CredentialsPasswordUpdater';
 import UpdatePasswordService from '../../ims/api/application/authentication/UpdatePasswordService';
-import UpdatePasswordController from '../../ims/api/infrastructure/express/controllers/UpdatePasswordController';
+import UpdatePasswordController from '../../ims/api/infrastructure/express/controllers/authentication/UpdatePasswordController';
 import AssignRoleController from '../../ims/api/infrastructure/express/controllers/rbac/AssignRoleController';
 import AssignRoleService from '../../ims/api/application/rbac/AssignRoleService';
 import RoleAssigner from '../../ims/api/infrastructure/rbac/RoleAssigner';
@@ -31,6 +31,9 @@ import PrismaRbacRepository from '../../ims/api/infrastructure/rbac/repositories
 import ProductCounter from '../../ims/api/infrastructure/products/ProductCounter';
 import CountProductController from '../../ims/api/infrastructure/express/controllers/products/CountProductController';
 import CountProductService from '../../ims/api/application/products/CountProductService';
+import RegisterController from '../../ims/api/infrastructure/express/controllers/authentication/RegisterController';
+import RegistrationService from '../../ims/api/application/authentication/RegistrationService';
+import CredentialsClientRegister from '../../ims/api/infrastructure/authentication/credentials/CredentialsClientRegister';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -60,10 +63,13 @@ export default class Container {
       .register({
         authenticationRepository: asClass(PrismaAuthenticationRepository).singleton(),
         authenticationService: asClass(AuthenticationService).singleton(),
+        registrationService: asClass(RegistrationService).singleton(),
         authenticationController: asClass(AuthenticationController).singleton(),
+        register: asClass(CredentialsClientRegister).singleton(),
         passwordUpdater: asClass(CredentialsPasswordUpdater).singleton(),
         updatePasswordService: asClass(UpdatePasswordService).singleton(),
         updatePasswordController: asClass(UpdatePasswordController).singleton(),
+        registerController: asClass(RegisterController).singleton(),
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),

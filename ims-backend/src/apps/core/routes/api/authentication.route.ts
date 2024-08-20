@@ -1,7 +1,8 @@
 import { Express } from 'express';
-import AuthenticationController from '../../../ims/api/infrastructure/express/controllers/AuthenticationController';
+import AuthenticationController from '../../../ims/api/infrastructure/express/controllers/authentication/AuthenticationController';
 import Container from '../../di/Container';
-import UpdatePasswordController from '../../../ims/api/infrastructure/express/controllers/UpdatePasswordController';
+import UpdatePasswordController from '../../../ims/api/infrastructure/express/controllers/authentication/UpdatePasswordController';
+import RegisterController from '../../../ims/api/infrastructure/express/controllers/authentication/RegisterController';
 
 export const register = function (app: Express): void {
   const container = new Container().invoke();
@@ -9,6 +10,8 @@ export const register = function (app: Express): void {
     container.resolve<AuthenticationController>('authenticationController');
   const updatePasswordController: UpdatePasswordController =
     container.resolve<UpdatePasswordController>('updatePasswordController');
+  const registerController: RegisterController = container.resolve<RegisterController>('registerController');
+
   app.post(
     '/auth/login',
     authenticationController.rules,
@@ -20,4 +23,6 @@ export const register = function (app: Express): void {
     updatePasswordController.rules,
     updatePasswordController.invoke.bind(updatePasswordController),
   );
+
+  app.post('/auth/register', registerController.rules, registerController.invoke.bind(registerController));
 };

@@ -4,6 +4,7 @@ import { User } from '../../domain/models/authentication/User';
 
 export type UpdatePasswordRequest = {
   email: string;
+  currentPassword: string;
   password: string;
   confirmPassword: string;
 };

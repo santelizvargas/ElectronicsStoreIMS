@@ -1,16 +1,17 @@
 import type { Request, Response, NextFunction } from 'express';
 import status from 'http-status';
-import { Controller } from '../../../../shared/infrastructure/express/controllers/Controller';
-import { ErrorHandler } from '../../../../shared/domain/ErrorHandler';
+import { Controller } from '../../../../../shared/infrastructure/express/controllers/Controller';
+import { ErrorHandler } from '../../../../../shared/domain/ErrorHandler';
 import { body } from 'express-validator';
-import { RequestValidator } from '../../../../shared/infrastructure/express/RequestValidator';
+import { RequestValidator } from '../../../../../shared/infrastructure/express/RequestValidator';
 import UpdatePasswordService, {
   UpdatePasswordResponse,
-} from '../../../application/authentication/UpdatePasswordService';
+} from '../../../../application/authentication/UpdatePasswordService';
 
 export default class UpdatePasswordController implements Controller {
   public readonly rules = [
     body('email').trim().normalizeEmail().isEmail().withMessage('Please give a valid email'),
+    body('currentPassword').trim().isLength({ min: 8 }).withMessage('Please give a valid password'),
     body('password').trim().isLength({ min: 8 }).withMessage('Please give a valid password'),
     body('confirmPassword').trim().isLength({ min: 8 }).withMessage('Please give a valid confirm password'),
     RequestValidator,
