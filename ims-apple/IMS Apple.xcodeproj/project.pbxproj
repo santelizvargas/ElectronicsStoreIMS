@@ -397,7 +397,6 @@
 			isa = PBXGroup;
 			children = (
 				35069C832C61C3DE001E854F /* HistoryModel.swift */,
-				3331062A2C6B03750035644F /* ProductModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -517,6 +516,7 @@
 			isa = PBXGroup;
 			children = (
 				BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */,
+				3331062A2C6B03750035644F /* ProductModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";

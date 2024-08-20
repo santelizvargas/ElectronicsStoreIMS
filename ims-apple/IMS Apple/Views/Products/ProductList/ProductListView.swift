@@ -49,7 +49,7 @@ struct ProductListView: View {
             ToolbarItem(placement: .destructiveAction) { stateMenu }
             ToolbarItem(placement: .destructiveAction) { categoryMenu }
         }
-        .onAppear {
+        .refreshable {
             viewModel.getProducts()
         }
         .overlay {

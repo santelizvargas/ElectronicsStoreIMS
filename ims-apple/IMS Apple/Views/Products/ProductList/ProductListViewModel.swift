@@ -28,6 +28,10 @@ final class ProductListViewModel: ObservableObject {
     private var allProducts: [ProductModel] = []
     private var isRequestInProgress: Bool = false
     
+    init() {
+        getProducts()
+    }
+    
     private func filterProducts() {
         products = allProducts.filter { product in
             let matchesSearch = searchText.isEmpty || product.name.lowercased().contains(searchText.lowercased())
