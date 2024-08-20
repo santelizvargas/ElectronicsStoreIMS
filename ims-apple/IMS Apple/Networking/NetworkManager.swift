@@ -20,7 +20,7 @@ final class NetworkManager {
     }
     
     func makeRequest(path: IMSPath,
-                     with parameters: [String: Any],
+                     with parameters: [String: Any] = [:],
                      httpMethod: HttpMethod = .get) async throws -> Data {
         var components: URLComponents = URLComponents()
         components.scheme = Constants.scheme
