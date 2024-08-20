@@ -53,7 +53,7 @@ struct LoginView: View {
         .background(IMSBackground())
         .overlay {
             if viewModel.requestInProgress {
-                ProgressView()
+                CustomProgressView()
             }
         }
         .onReceive(viewModel.$loginSuccess) { isLoginSuccess in
@@ -75,7 +75,7 @@ struct LoginView: View {
                 .scaledToFit()
                 .frame(height: Constants.launchViewHeight)
             
-            ProgressView()
+            CustomProgressView()
         }
     }
 }
@@ -85,3 +85,4 @@ struct LoginView: View {
 #Preview {
     LoginView(navigationPath: .constant(NavigationPath()))
 }
+

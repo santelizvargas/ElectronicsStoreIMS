@@ -49,7 +49,7 @@ struct ProfileView: View {
                     userPasswordForm
                         .overlay {
                             if viewModel.isRequestInProgress {
-                                ProgressView()
+                                CustomProgressView()
                             }
                         }
                 }
