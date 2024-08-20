@@ -16,6 +16,14 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
     });
   }
 
+  public async findAll(): Promise<Omit<User, 'password'>[]> {
+    return await this.database.user.findMany({
+      omit: {
+        password: true,
+      },
+    });
+  }
+
   public async findByCredentials(email: string, password: string): Promise<User | null> {
     return await this.database.user.findFirst({
       where: {
