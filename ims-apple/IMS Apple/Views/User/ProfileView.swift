@@ -171,7 +171,7 @@ struct ProfileView: View {
             
             GridRow {
                 Button("Guardar contraseña") {
-                    viewModel.updatePassword()
+                    viewModel.updatePasswordIfNeeded()
                 }
                 .buttonStyle(
                     GradientButtonStyle(

@@ -33,7 +33,7 @@ final class ProfileViewModel: ObservableObject {
         userPassword = defaultUserPassword
     }
     
-    func updatePassword() {
+    func updatePasswordIfNeeded() {
         guard userPassword.newPassword == userPassword.confirmPassword else { return }
         isRequestInProgress = true
         
@@ -42,7 +42,7 @@ final class ProfileViewModel: ObservableObject {
                 try await authenticationManager.updatePassword(email: userInfo.email,
                                                                currentPassword: userPassword.currentPassword,
                                                                newPassword: userPassword.newPassword,
-                                                               confirmationPassword: userPassword.confirmPassword)
+                                                               confirmPassword: userPassword.confirmPassword)
                 isPasswordEdit = false
                 resetPasswordTextfields()
             } catch {

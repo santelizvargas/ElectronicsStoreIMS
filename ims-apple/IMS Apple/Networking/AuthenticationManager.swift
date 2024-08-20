@@ -28,7 +28,7 @@ final class AuthenticationManager {
         return user
     }
     
-    private func storeUserDTO(user: UserModel) {
+    private func storeUserDTOIfNeeded(user: UserModel) {
         if isAnUserLogged { return }
         let user = UserModelPersistence(user: user)
         dataManager.save(model: user)
@@ -50,7 +50,7 @@ final class AuthenticationManager {
                                                             with: parameters,
                                                             httpMethod: .post)
             let response = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
-            storeUserDTO(user: response.data)
+            storeUserDTOIfNeeded(user: response.data)
             debugPrint("\(email) login successfully!")
             return response.data
         } catch {
@@ -67,7 +67,7 @@ final class AuthenticationManager {
     func updatePassword(email: String,
                         currentPassword: String,
                         newPassword: String,
-                        confirmationPassword: String) async throws {
+                        confirmPassword: String) async throws {
         do { try await login(email: email, password: currentPassword) }
         catch { throw IMSError.badPassword }
         
@@ -78,7 +78,7 @@ final class AuthenticationManager {
         let parameters: [String: Any] = [
             "email": email,
             "password": newPassword,
-            "confirmPassword": confirmationPassword
+            "confirmPassword": confirmPassword
         ]
         
         do {
