@@ -14,7 +14,7 @@ private enum Constants {
     static let hasBorder: Bool = true
     static let minHeight: CGFloat = 30
     static let cornerRadiusSize: CGFloat = 8
-    static let photoMaxHeight: CGFloat = 120
+    static let photoMaxHeight: CGFloat = 200
     static let detailButtonHeight: CGFloat = 70
     static let strokLengths: CGFloat = 10
     static let spaceSize: CGFloat = 10
@@ -41,22 +41,22 @@ struct AddProductView: View {
                 
                 Spacer()
                 
-                Button("Guardar Product") { }
+                Button("Guardar producto") { }
                     .buttonStyle(GradientButtonStyle(imageLeft: Constants.saveProductImage,
                                                      buttonHeight: Constants.buttonHeight))
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
-            HStack(spacing: Constants.horizontalSpacing) {
+            HStack(alignment: .top, spacing: Constants.horizontalSpacing) {
                 productInformationView
                 
                 productDetailView
             }
-            
-            Spacer()
+            .isOS(.iOS) { $0.onKeyboardAppear() }
+            .padding(.top)
         }
         .padding()
-        .frame(maxWidth: .infinity)
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(.grayBackground)
     }
     
@@ -71,35 +71,13 @@ struct AddProductView: View {
             
             productTextFild(
                 title: "Precio",
-                textValue: $price.allowOnlyNumbers
+                textValue: $price.allowOnlyDecimalNumbers
             )
 
             productTextFild(
                 title: "Unidades disponibles",
-                textValue: $availableUnits
+                textValue: $availableUnits.allowOnlyNumbers
             )
-            
-            Text("Estado")
-                .frame(maxWidth: .infinity, alignment: .leading)
-            
-            Menu {
-                ForEach(ProductState.allCases, id: \.self) { productState in
-                    Button(productState.title) {
-                        withAnimation {
-                            selectedState = productState
-                        }
-                    }
-                }
-            } label: {
-                Text(selectedState.title)
-            }
-            .menuStyle(.borderlessButton)
-            .padding(.horizontal)
-            .frame(maxWidth: .infinity, minHeight: Constants.minHeight, alignment: .leading)
-            .overlay {
-                RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
-                    .stroke(.graySecundary)
-            }
         }
     }
     
@@ -107,12 +85,20 @@ struct AddProductView: View {
     
     private var productDetailView: some View {
         VStack(alignment: .leading, spacing: Constants.horizontalSpacing) {
-            productTextFild(
-                title: "Detalles del producto",
-                textValue: $productDetails,
-                maxHeight: Constants.detailButtonHeight
-            )
-                .padding(.vertical)
+            VStack(alignment: .leading) {
+                Text("Detalles del producto")
+                    .font(.title3) +
+                Text(" *")
+                    .foregroundStyle(.redGradient)
+                
+                TextField("", text: $productDetails, axis: .vertical)
+                    .textFieldStyle(.plain)
+                    .frame(minHeight: Constants.detailButtonHeight)
+                    .overlay {
+                        RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
+                            .stroke(.graySecundary)
+                    }
+            }
             
             avatarImage
         }
@@ -125,11 +111,14 @@ struct AddProductView: View {
             if let productImage = viewModel.productImage {
                 productImage
                     .resizable()
-                    .frame(maxWidth: .infinity, maxHeight: Constants.photoMaxHeight)
+                    .scaledToFill()
+                    .frame(maxWidth: .infinity)
+                    .frame(height: Constants.photoMaxHeight)
+                    .clipped()
             } else {
                 RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
                     .stroke(style: StrokeStyle(dash: [Constants.strokLengths]))
-                    .frame(maxWidth: .infinity, maxHeight: Constants.photoMaxHeight)
+                    .frame(maxWidth: .infinity, minHeight: Constants.photoMaxHeight)
             }
             
             HStack {
@@ -139,7 +128,7 @@ struct AddProductView: View {
                     .buttonStyle(.plain)
             }
             .padding(.horizontal)
-            .frame(maxWidth: .infinity, maxHeight: Constants.buttonHeight)
+            .frame(maxWidth: .infinity, minHeight: Constants.buttonHeight)
             .background {
                 RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
                     .fill(LinearGradient(colors: [.purpleGradient, .blueGradient], 

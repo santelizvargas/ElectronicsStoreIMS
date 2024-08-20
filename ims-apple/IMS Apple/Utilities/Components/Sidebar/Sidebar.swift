@@ -79,6 +79,7 @@ struct Sidebar: View {
                 itemListView(items: section.itemList)
             }
         }
+        .isOS(.iOS) { $0.onKeyboardAppear() }
     }
     
     // MARK: - Item List View
@@ -96,6 +97,7 @@ struct Sidebar: View {
                     isSelected: itemSelected == item
                 )
             )
+            .contentShape(Rectangle())
         }
     }
 }

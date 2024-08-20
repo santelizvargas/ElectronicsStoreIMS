@@ -11,10 +11,22 @@ import SwiftUI
 // MARK: - Binding + OnlyNumbers
 
 extension Binding where Value == String {
-    var allowOnlyNumbers: Self {
+    private func filterInput(allowedCharacters: CharacterSet) -> Self {
         DispatchQueue.main.async {
-            self.wrappedValue = self.wrappedValue.filter { $0.isNumber }
+            wrappedValue = wrappedValue.filter { character in
+                character.unicodeScalars.allSatisfy(allowedCharacters.contains)
+            }
         }
         return self
+    }
+    
+    var allowOnlyNumbers: Self {
+        filterInput(allowedCharacters: .decimalDigits)
+    }
+    
+    var allowOnlyDecimalNumbers: Self {
+        var decimalCharacters: CharacterSet = .decimalDigits
+        decimalCharacters.insert(charactersIn: ".")
+        return filterInput(allowedCharacters: decimalCharacters)
     }
 }
