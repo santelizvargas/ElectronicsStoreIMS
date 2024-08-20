@@ -24,15 +24,17 @@ struct InvoiceSaleView: View {
     @State private var quantityValue: String = ""
     @State private var descriptionValue: String = ""
     @State private var priceValue: String = ""
-    @State private var totalValue: String = ""
     
     var body: some View {
         VStack {
             headerView
             
-            clientInformatioView
-            
-            invoiceDetailsView
+            VStack {
+                clientInformatioView
+                
+                invoiceDetailsView
+            }
+            .isOS(.iOS) { $0.onKeyboardAppear() }
             
             Spacer()
         }
@@ -65,11 +67,19 @@ struct InvoiceSaleView: View {
     
     private var clientInformatioView: some View {
         HStack(spacing: Constants.spacingSize) {
-            IMSTextField(type: .custom("Buscar Producto"),
-                         text: $nameValue, hasBorder: true, maxWidth: .infinity)
+            IMSTextField(
+                type: .custom("Nombre de cliente"),
+                text: $nameValue,
+                hasBorder: true,
+                maxWidth: .infinity
+            )
 
-            IMSTextField(type: .custom("Teléfono"),
-                         text: $phoneNumberValue, hasBorder: true, maxWidth: .infinity)
+            IMSTextField(
+                type: .custom("Teléfono"),
+                text: $phoneNumberValue.allowOnlyNumbers,
+                hasBorder: true,
+                maxWidth: .infinity
+            )
         }
         .padding(.vertical)
     }
@@ -91,7 +101,7 @@ struct InvoiceSaleView: View {
             
             HStack {
                 IMSTextField(type: .custom("Cantidad"),
-                             text: $quantityValue,
+                             text: $quantityValue.allowOnlyNumbers,
                              hasBorder: Constants.hasBorder)
                 
                 IMSTextField(type: .custom("Descripcion"),
@@ -99,18 +109,30 @@ struct InvoiceSaleView: View {
                              hasBorder: Constants.hasBorder, maxWidth: .infinity)
                 
                 IMSTextField(type: .custom("P. Unitartio"),
-                             text: $priceValue,
+                             text: $priceValue.allowOnlyDecimalNumbers,
                              hasBorder: Constants.hasBorder)
                 
                 IMSTextField(type: .custom("P. Total"),
-                             text: $totalValue,
+                             text: .constant(totalPrice),
                              hasBorder: Constants.hasBorder)
+                .disabled(true)
             }
             .padding()
             .background {
                 RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
                     .fill(.secondaryBackground)
             }
+        }
+    }
+    
+    private var totalPrice: String {
+        if let quantity = Double(quantityValue), let price = Double(priceValue) {
+            let result = quantity * price
+            return result.truncatingRemainder(dividingBy: 1) == .zero
+            ? "\(Int(result))"
+            : String(format: "%.2f", result)
+        } else {
+            return "0"
         }
     }
 }
