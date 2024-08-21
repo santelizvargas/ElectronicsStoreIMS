@@ -13,10 +13,10 @@ final class AddProductViewModel: ObservableObject {
     @Published var avatarItem: PhotosPickerItem?
     @Published var productImage: Image?
     @Published var isRequestInProgress: Bool = false
-    @Published var name: String = "Laptop-1"
-    @Published var price: String = "22"
-    @Published var stock: String = "10"
-    @Published var description: String = "Desck"
+    @Published var name: String = ""
+    @Published var price: String = ""
+    @Published var stock: String = ""
+    @Published var description: String = ""
     @Published var state: String = ""
     
     private let productManager: ProductManager = ProductManager()
