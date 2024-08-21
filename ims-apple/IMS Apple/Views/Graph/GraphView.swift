@@ -20,6 +20,8 @@ private enum Constants {
 // MARK: - Graph View
 
 struct GraphView: View {
+    @ObservedObject private var viewModel: GraphViewModel = .init()
+    
     var body: some View {
         Grid(horizontalSpacing: Constants.spacing, verticalSpacing: Constants.spacing) {
             firstGridRow
@@ -56,7 +58,7 @@ struct GraphView: View {
             .gridCellColumns(Constants.maxCellColumns)
             
             ChartContainer(title: "Productos") {
-                DonutChart(data: Donut.products)
+                DonutChart(total: viewModel.productCount)
             }
         }
     }
