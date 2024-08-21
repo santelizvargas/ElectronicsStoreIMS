@@ -23,11 +23,6 @@ private enum Constants {
 }
 
 struct AddProductView: View {
-    @State private var productName: String = ""
-    @State private var price: String = ""
-    @State private var availableUnits: String = ""
-    @State private var productDetails: String = ""
-    @State private var state: String = ""
     @State private var selectedState: ProductState = .available
     @State private var showingImagePicker = false
     
@@ -41,7 +36,9 @@ struct AddProductView: View {
                 
                 Spacer()
                 
-                Button("Guardar producto") { }
+                Button("Guardar producto") {
+                    viewModel.createProduct()
+                }
                     .buttonStyle(GradientButtonStyle(imageLeft: Constants.saveProductImage,
                                                      buttonHeight: Constants.buttonHeight))
             }
@@ -66,17 +63,17 @@ struct AddProductView: View {
         VStack {
             productTextFild(
                 title: "Nombre del producto",
-                textValue: $productName
+                textValue: $viewModel.name
             )
             
             productTextFild(
                 title: "Precio",
-                textValue: $price.allowOnlyDecimalNumbers
+                textValue: $viewModel.price.allowOnlyDecimalNumbers
             )
 
             productTextFild(
                 title: "Unidades disponibles",
-                textValue: $availableUnits.allowOnlyNumbers
+                textValue: $viewModel.stock.allowOnlyNumbers
             )
         }
     }
@@ -91,7 +88,7 @@ struct AddProductView: View {
                 Text(" *")
                     .foregroundStyle(.redGradient)
                 
-                TextField("", text: $productDetails, axis: .vertical)
+                TextField("", text: $viewModel.description, axis: .vertical)
                     .textFieldStyle(.plain)
                     .frame(minHeight: Constants.detailButtonHeight)
                     .overlay {

@@ -12,7 +12,7 @@ final class ProductManager {
     
     func getProducts() async throws -> [ProductModel] {
         do {
-            let data = try await networkManager.makeRequest(path: .getProducts)
+            let data = try await networkManager.makeRequest(path: .products)
             let products = try JSONDecoder().decode(ProductResponse.self, from: data)
             return products.data
         } catch {
@@ -27,6 +27,28 @@ final class ProductManager {
             return products.data.quantity
         } catch {
             throw IMSError.somethingWrong
+        }
+    }
+    
+    func createProduct(name: String,
+                       description: String,
+                       salePrice: Double,
+                       purchasePrice: Double,
+                       stock: Int = 1) async throws {
+        let parameters: [String: Any] = [
+            "name": name,
+            "description": description,
+            "salePrice": salePrice,
+            "purchasePrice": purchasePrice,
+            "stock": stock
+        ]
+        
+        do {
+            let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .post)
+            let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
+            if response.data == nil, response.code == 500 { throw IMSError.uniqueNameKey }
+        } catch {
+            throw error
         }
     }
 }

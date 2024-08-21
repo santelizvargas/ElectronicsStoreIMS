@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct CreateProductResponse: Decodable {
+    let message: String
+    let code: Int
+    let data: ProductModel?
+}
+
 struct ProductResponse: Decodable {
     let data: [ProductModel]
 }
@@ -21,21 +27,22 @@ struct ProductCount: Decodable {
 }
 
 struct ProductModel: Identifiable, Equatable, Decodable {
-    let id: UUID = UUID()
+    let uuid: UUID = UUID()
+    let id: Int
     let name: String
     var category: ProductCategory = .all
-    let description: String
+    let description: String?
     let stock: Int
-    let salePrice: Int
-    let purchasePrice: Int
+    let salePrice: Double
+    let purchasePrice: Double
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?
+    var images: [String]? = nil
 
     enum CodingKeys: String, CodingKey {
         case id
         case name
-        case category
         case description
         case stock
         case salePrice
@@ -44,34 +51,15 @@ struct ProductModel: Identifiable, Equatable, Decodable {
         case updatedAt
         case deletedAt
     }
-    
-    init(name: String,
-         category: ProductCategory,
-         description: String,
-         stock: Int,
-         salePrice: Int,
-         purchasePrice: Int, 
-         createdAt: String,
-         updatedAt: String,
-         deletedAt: String?) {
-        self.name = name
-        self.description = description
-        self.stock = stock
-        self.salePrice = salePrice
-        self.purchasePrice = purchasePrice
-        self.createdAt = createdAt
-        self.updatedAt = updatedAt
-        self.deletedAt = deletedAt
-        self.category = category
-    }
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
+        id = try container.decode(Int.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        description = try container.decode(String.self, forKey: .description)
+        description = try container.decodeIfPresent(String.self, forKey: .description)
         stock = try container.decode(Int.self, forKey: .stock)
-        salePrice = try container.decode(Int.self, forKey: .salePrice)
-        purchasePrice = try container.decode(Int.self, forKey: .purchasePrice)
+        salePrice = try container.decode(Double.self, forKey: .salePrice)
+        purchasePrice = try container.decode(Double.self, forKey: .purchasePrice)
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
         deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
