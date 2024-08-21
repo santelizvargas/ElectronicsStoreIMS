@@ -16,7 +16,7 @@ enum IMSPath {
     case users
     case login
     case updatePassword
-    case getProducts
+    case products
     case productCount
     case register
     
@@ -25,7 +25,7 @@ enum IMSPath {
     var endPoint: String {
         var path: String {
             switch self {
-                case .getProducts: "products"
+                case .products: "products"
                 case .productCount: "products/count"
                 case .users: "auth"
                 case .login: "auth/login"

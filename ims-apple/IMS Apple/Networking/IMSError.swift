@@ -18,6 +18,9 @@ enum IMSError: Error {
     case somethingWrong
     case badUrl
     
+    /// Products
+    case uniqueNameKey
+    
     var localizedDescription: String {
         switch self {
             case .somethingWrong: "Ops, please try again later"
@@ -25,6 +28,7 @@ enum IMSError: Error {
             case .decoding: "An error has occurred, please try again"
             case .badPassword: "Wrong credentials"
             case .sameAsLastPassword: "New password must be different"
+            case .uniqueNameKey: "Product name exists, please provide another"
         }
     }
 }
