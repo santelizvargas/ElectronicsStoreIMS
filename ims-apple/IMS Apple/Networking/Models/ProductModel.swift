@@ -11,6 +11,15 @@ struct ProductResponse: Decodable {
     let data: [ProductModel]
 }
 
+struct ProductCountResponse: Decodable {
+    let message: String
+    let data: ProductCount
+}
+
+struct ProductCount: Decodable {
+    let quantity: Int
+}
+
 struct ProductModel: Identifiable, Equatable, Decodable {
     let id: UUID = UUID()
     let name: String

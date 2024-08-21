@@ -19,4 +19,14 @@ final class ProductManager {
             throw IMSError.somethingWrong
         }
     }
+    
+    func getProductCount() async throws -> Int {
+        do {
+            let data = try await networkManager.makeRequest(path: .productCount)
+            let products = try JSONDecoder().decode(ProductCountResponse.self, from: data)
+            return products.data.quantity
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
 }

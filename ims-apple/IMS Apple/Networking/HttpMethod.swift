@@ -13,20 +13,22 @@ enum HttpMethod: String {
 }
 
 enum IMSPath {
-    case login
-    case getProducts
-    case updatePassword
     case users
+    case login
+    case updatePassword
+    case getProducts
+    case productCount
     
     private var apiVersion: String { "/api/v1/" }
     
     var endPoint: String {
         var path: String {
             switch self {
-                case .login: "auth/login"
                 case .getProducts: "products"
-                case .updatePassword: "auth/password"
+                case .productCount: "products/count"
                 case .users: "auth"
+                case .login: "auth/login"
+                case .updatePassword: "auth/password"
             }
         }
         return "\(apiVersion)\(path)/"

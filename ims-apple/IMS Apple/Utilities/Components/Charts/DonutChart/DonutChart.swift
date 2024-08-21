@@ -30,6 +30,22 @@ private enum Constants {
                 gradientColors: [.clear]
             )
         ]
+    } 
+    
+    static func getDefaultItems(_ total: Double) -> [Donut] {
+        let value = total * Constants.spacerValue
+        return [
+            Donut(
+                name: "Spacer",
+                value: value,
+                gradientColors: [.clear]
+            ),
+            Donut(
+                name: "Default",
+                value: total,
+                gradientColors: [.purpleGradient, .blueGradient]
+            )
+        ]
     }
 }
 
@@ -39,10 +55,15 @@ struct DonutChart: View {
     private let data: [Donut]
     private let total: Double
     
-    init(data: [Donut]) {
-        self.total = data.map { $0.value }.reduce(.zero, +)
-        self.data = data.count > Constants.minCount ?
-        data : data + Constants.getSpacerItem(data.first?.value)
+    init(data: [Donut] = [], total: Int? = nil) {
+        if let total {
+            self.total = Double(total)
+            self.data = Constants.getDefaultItems(Double(total))
+        } else {
+            self.total = data.map { $0.value }.reduce(.zero, +)
+            self.data = data.count > Constants.minCount ?
+            data : data + Constants.getSpacerItem(data.first?.value)
+        }
     }
     
     var body: some View {
