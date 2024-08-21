@@ -19,6 +19,9 @@
 		336AF5C12C744397009810A1 /* View+KeyboardReadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AF5C02C744397009810A1 /* View+KeyboardReadable.swift */; };
 		336AF5C42C744846009810A1 /* OnkeyboardAppear.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AF5C32C744846009810A1 /* OnkeyboardAppear.swift */; };
 		336AF5C72C747A91009810A1 /* CustomProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 336AF5C62C747A91009810A1 /* CustomProgressView.swift */; };
+		33708CD62C7486A700BD811F /* UserListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33708CD52C7486A700BD811F /* UserListViewModel.swift */; };
+		33708CD92C74897800BD811F /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33708CD82C74897800BD811F /* DateFormatter.swift */; };
+		33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33708CDA2C748B9600BD811F /* String+DateFormatter.swift */; };
 		338DF8292C645DE200F72772 /* Donut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8282C645DE200F72772 /* Donut.swift */; };
 		338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82A2C645E4D00F72772 /* DonutChart.swift */; };
 		338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82D2C64668B00F72772 /* ChartContainer.swift */; };
@@ -84,6 +87,9 @@
 		336AF5C02C744397009810A1 /* View+KeyboardReadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+KeyboardReadable.swift"; sourceTree = "<group>"; };
 		336AF5C32C744846009810A1 /* OnkeyboardAppear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnkeyboardAppear.swift; sourceTree = "<group>"; };
 		336AF5C62C747A91009810A1 /* CustomProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomProgressView.swift; sourceTree = "<group>"; };
+		33708CD52C7486A700BD811F /* UserListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserListViewModel.swift; sourceTree = "<group>"; };
+		33708CD82C74897800BD811F /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
+		33708CDA2C748B9600BD811F /* String+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift"; sourceTree = "<group>"; };
 		338DF8282C645DE200F72772 /* Donut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donut.swift; sourceTree = "<group>"; };
 		338DF82A2C645E4D00F72772 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		338DF82D2C64668B00F72772 /* ChartContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContainer.swift; sourceTree = "<group>"; };
@@ -202,6 +208,24 @@
 			path = Progress;
 			sourceTree = "<group>";
 		};
+		33708CD22C74844000BD811F /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
+				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
+				BD85DB492C7444680076F612 /* ProductManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		33708CD72C74895000BD811F /* DateFormatter */ = {
+			isa = PBXGroup;
+			children = (
+				33708CD82C74897800BD811F /* DateFormatter.swift */,
+			);
+			path = DateFormatter;
+			sourceTree = "<group>";
+		};
 		338DF8262C645DC000F72772 /* Charts */ = {
 			isa = PBXGroup;
 			children = (
@@ -244,6 +268,7 @@
 				338DF8362C65D66700F72772 /* View+OSType.swift */,
 				350DA9382C704C5D0043567A /* Binding+OnlyNumber.swift */,
 				336AF5C02C744397009810A1 /* View+KeyboardReadable.swift */,
+				33708CDA2C748B9600BD811F /* String+DateFormatter.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -388,6 +413,7 @@
 			isa = PBXGroup;
 			children = (
 				35BAA8662C59D9540051FBCF /* UserListView.swift */,
+				33708CD52C7486A700BD811F /* UserListViewModel.swift */,
 			);
 			path = Users;
 			sourceTree = "<group>";
@@ -395,6 +421,7 @@
 		35FDA06C2C5B24AE004A4849 /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				33708CD72C74895000BD811F /* DateFormatter */,
 				336AF5C22C744827009810A1 /* Modifiers */,
 				BDD7125C2C6426EF000FAD7B /* Exporter */,
 				338DF8352C65D64A00F72772 /* Extensions */,
@@ -513,12 +540,10 @@
 		BD6B27FE2C6F2E3400BC73D2 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				33708CD22C74844000BD811F /* Managers */,
 				BD6B28042C6F2E6B00BC73D2 /* Models */,
 				BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */,
 				BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */,
-				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
-				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
-				BD85DB492C7444680076F612 /* ProductManager.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -629,6 +654,7 @@
 				336AF5C12C744397009810A1 /* View+KeyboardReadable.swift in Sources */,
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
+				33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */,
 				6DB536B62C5B3DDF008676D7 /* CustomDivider.swift in Sources */,
 				33FBF5B32C70225200ED5032 /* ProfileView.swift in Sources */,
 				6DB536BF2C5B3FFC008676D7 /* SidebarItem.swift in Sources */,
@@ -657,10 +683,12 @@
 				338DF8342C64846000F72772 /* BarChart.swift in Sources */,
 				BD56AE312C6FEBD20056FD18 /* LoginViewModel.swift in Sources */,
 				338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */,
+				33708CD92C74897800BD811F /* DateFormatter.swift in Sources */,
 				338DF8312C64733300F72772 /* GraphView.swift in Sources */,
 				332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */,
 				333106322C6BF01B0035644F /* ProductState.swift in Sources */,
 				333106302C6BF0010035644F /* ProductCategory.swift in Sources */,
+				33708CD62C7486A700BD811F /* UserListViewModel.swift in Sources */,
 				6DB536B82C5B3EC8008676D7 /* Breadcrumb.swift in Sources */,
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
 				BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */,

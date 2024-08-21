@@ -14,6 +14,7 @@ private enum Constants {
 }
 
 struct UserListView: View {
+    @ObservedObject private var viewModel: UserListViewModel = .init()
     @State private var isPresented: Bool = false
     
     private let columns: [GridItem] = Array(repeating: GridItem(), count: Constants.columnsNumber)
@@ -51,7 +52,7 @@ struct UserListView: View {
                 .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
             
             ExporterButton(title: "Exportar", fileName: "Usuarios",
-                           collection: UserModel.mockUsers)
+                           collection: viewModel.users)
         }
     }
     
@@ -74,11 +75,13 @@ struct UserListView: View {
     private var userListView: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: columns) {
-                ForEach(UserModel.mockUsers) { user in
+                ForEach(viewModel.users) { user in
+                    let shortName = getShortName(names: user.firstName, lastName: user.lastName)
+                    
                     HStack {
-                        ProfileImage(fullName: user.firstName)
+                        ProfileImage(fullName: shortName)
                         
-                        Text(user.firstName)
+                        Text(shortName)
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
@@ -91,13 +94,23 @@ struct UserListView: View {
                             ForEach(roles, id: \.self) { role in
                                 userPropertyTextView(text: role)
                             }
+                        } else {
+                            Text("-")
                         }
                     }
                     
                     if let updatedAt = user.updatedAt {
-                        userPropertyTextView(text: updatedAt)
+                        userPropertyTextView(text: updatedAt.dayMonthYear)
                     }
                 }
+            }
+        }
+        .refreshable {
+            viewModel.getUsers()
+        }
+        .overlay {
+            if viewModel.isRequestInProgress {
+                CustomProgressView()
             }
         }
     }
@@ -106,6 +119,12 @@ struct UserListView: View {
         Text(text)
             .frame(maxWidth: .infinity, alignment: .leading)
             .foregroundStyle(.graySecundary)
+    }
+    
+    private func getShortName(names: String, lastName: String) -> String {
+        let names = names.components(separatedBy: " ")
+        let lastName = lastName.components(separatedBy: " ")
+        return "\(names.first ?? "") \(lastName.first ?? "")".capitalized
     }
 }
 

@@ -12,7 +12,7 @@ final class ProductManager {
     
     func getProducts() async throws -> [ProductModel] {
         do {
-            let data = try await networkManager.makeRequest(path: .getProducts, with: [:])
+            let data = try await networkManager.makeRequest(path: .getProducts)
             let products = try JSONDecoder().decode(ProductResponse.self, from: data)
             return products.data
         } catch {

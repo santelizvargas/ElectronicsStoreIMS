@@ -9,10 +9,14 @@ import Foundation
 
 final class FileFactory {
     static func makeUserStringFormatted(users: [UserModel]) -> String {
-        let header: String = "Nombre, Email, Rol, Fecha"
+        let header: String = "Nombre, Email, Roles, Fecha"
         
         let mappedUsers: String = users.map { user in
-            "\(user.firstName), \(user.email), \((user.roles ?? ["None"]).joined(separator: "-")), \(user.updatedAt ?? "None")"
+            let userName = "\(user.firstName) \(user.lastName)".capitalized
+            let roles = user.roles?.joined(separator: "-") ?? "-"
+            let updatedAt = user.updatedAt?.dayMonthYear ?? "-"
+            
+            return "\(userName), \(user.email), \(roles), \(updatedAt)"
         }.joined(separator: "\n")
         
         let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")
