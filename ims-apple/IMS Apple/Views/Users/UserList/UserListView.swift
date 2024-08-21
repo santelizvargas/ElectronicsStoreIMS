@@ -48,8 +48,23 @@ struct UserListView: View {
             
             Spacer()
             
-            Button("Agregar Usuario") { }
-                .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
+            Button("Agregar Usuario") {
+                withAnimation {
+                    isPresented.toggle()
+                }
+            }
+            .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
+            .isOS(.iOS) { view in
+                view.popover(isPresented: $isPresented) {
+                    RegisterUserView()
+                        .presentationCompactAdaptation(.popover)
+                }
+            }
+            .isOS(.macOS) { view in
+                view.sheet(isPresented: $isPresented) {
+                    RegisterUserView()
+                }
+            }
             
             ExporterButton(title: "Exportar", fileName: "Usuarios",
                            collection: viewModel.users)
