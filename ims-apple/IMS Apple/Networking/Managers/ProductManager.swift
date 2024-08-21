@@ -13,7 +13,7 @@ final class ProductManager {
     func getProducts() async throws -> [ProductModel] {
         do {
             let data = try await networkManager.makeRequest(path: .products)
-            let products = try JSONDecoder().decode(ProductResponse.self, from: data)
+            let products = try JSONDecoder().decode(GetProductResponse.self, from: data)
             return products.data
         } catch {
             throw IMSError.somethingWrong
@@ -47,6 +47,37 @@ final class ProductManager {
             let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .post)
             let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
             if response.data == nil, response.code == 500 { throw IMSError.uniqueNameKey }
+            debugPrint("---\(response.message)---")
+        } catch {
+            throw error
+        }
+    }
+    
+    func deleteProduct(with id: Int) async throws {
+        let parameters: [String: Any] = [
+            "id": id
+        ]
+        
+        do {
+            let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .delete)
+            let response = try JSONDecoder().decode(DeleteProductResponse.self, from: data)
+            if response.code == 500 { throw IMSError.productNotFound }
+            debugPrint("---\(response.message)---")
+        } catch {
+            throw error
+        }
+    }
+    
+    func supplyProduct(id: Int, with stock: Int) async throws {
+        let parameters: [String: Any] = [
+            "id": id,
+            "stock": stock
+        ]
+        do {
+            let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .put)
+            let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
+            if response.code == 500 { throw IMSError.productNotFound }
+            debugPrint("---\(response.message)---")
         } catch {
             throw error
         }

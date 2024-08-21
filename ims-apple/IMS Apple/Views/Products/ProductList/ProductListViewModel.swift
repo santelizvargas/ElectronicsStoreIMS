@@ -56,4 +56,32 @@ final class ProductListViewModel: ObservableObject {
             }
         }
     }
+    
+    func deleteProduct(with id: Int) {
+        isRequestInProgress = true
+        Task {
+            do {
+                try await productManager.deleteProduct(with: id)
+                isRequestInProgress = false
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func supplyProduct(id: Int, stock: Int) {
+        isRequestInProgress = true
+        Task {
+            do {
+                try await productManager.supplyProduct(id: id, with: stock)
+                isRequestInProgress = false
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
 }
