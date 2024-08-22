@@ -17,8 +17,8 @@ struct LoginView: View {
     @Binding private var navigationPath: NavigationPath
     
     // FIXME: - Delete mock credentials
-    @State private var email: String = "derianricardo451@gmail.com"
-    @State private var password: String = "password0"
+    @State private var email: String = "brandon.santeliz@example.com"
+    @State private var password: String = "password5"
     @ObservedObject private var viewModel: LoginViewModel = LoginViewModel()
     
     init(navigationPath: Binding<NavigationPath>) {

@@ -31,17 +31,32 @@ private enum Constants {
 
 struct ProductListView: View {
     @ObservedObject private var viewModel: ProductListViewModel = .init()
+    @State private var isPresented: Bool = false
+    
     private let adaptiveColumn = [GridItem(.adaptive(minimum: Constants.gridMinimum), spacing: Constants.padding)]
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             LazyVGrid(columns: adaptiveColumn, spacing: Constants.padding) {
                 ForEach(viewModel.products) { product in
-                    productCard(product)
-                        .animation(.easeInOut, value: viewModel.products)
+                    Button {
+                        withAnimation {
+                            viewModel.selectedProduct = product
+                            isPresented = true
+                        }
+                    } label: {
+                        productCard(product)
+                            .animation(.easeInOut, value: viewModel.products)
+                    }
+                    .buttonStyle(.plain)
                 }
             }
             .padding()
+        }
+        .sheet(isPresented: $isPresented) {
+            if let selectedProduct = viewModel.selectedProduct {
+                ProductDetailView(product: selectedProduct)
+            }
         }
         .background(.grayBackground)
         .searchable(text: $viewModel.searchText)
