@@ -23,6 +23,16 @@ final class ProductListViewModel: ObservableObject {
     @Published var searchText: String = "" {
         didSet { filterProducts() }
     }
+    
+    @Published var reloadProducts: Bool = false {
+        didSet {
+            guard reloadProducts else { return }
+            getProducts()
+            reloadProducts = false
+        }
+    }
+    
+    @Published var errorMessage: String?
 
     private let productManager: ProductManager = ProductManager()
     
@@ -49,36 +59,6 @@ final class ProductListViewModel: ObservableObject {
                 allProducts = try await productManager.getProducts()
                 products = allProducts
                 isRequestInProgress = false
-            } catch {
-                isRequestInProgress = false
-                guard let error = error as? IMSError else { return }
-                debugPrint(error.localizedDescription)
-            }
-        }
-    }
-    
-    func deleteProduct(with id: Int) {
-        isRequestInProgress = true
-        Task {
-            do {
-                try await productManager.deleteProduct(with: id)
-                isRequestInProgress = false
-                getProducts()
-            } catch {
-                isRequestInProgress = false
-                guard let error = error as? IMSError else { return }
-                debugPrint(error.localizedDescription)
-            }
-        }
-    }
-    
-    func supplyProduct(id: Int, stock: Double) {
-        isRequestInProgress = true
-        Task {
-            do {
-                try await productManager.supplyProduct(id: id, with: stock)
-                isRequestInProgress = false
-                getProducts()
             } catch {
                 isRequestInProgress = false
                 guard let error = error as? IMSError else { return }

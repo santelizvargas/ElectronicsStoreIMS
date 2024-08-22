@@ -55,7 +55,7 @@ struct ProductListView: View {
         }
         .sheet(isPresented: $isPresented) {
             if let selectedProduct = viewModel.selectedProduct {
-                ProductDetailView(product: selectedProduct)
+                ProductDetailView(product: selectedProduct, reloadProducts: $viewModel.reloadProducts)
             }
         }
         .background(.grayBackground)

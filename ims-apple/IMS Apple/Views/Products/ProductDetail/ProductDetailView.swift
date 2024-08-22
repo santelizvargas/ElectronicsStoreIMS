@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct ProductDetailView: View {
+    @Binding private var reloadProducts: Bool
     @Environment(\.dismiss) private var dismiss
+    @ObservedObject private var viewModel: ProductDetailViewModel = ProductDetailViewModel()
     private let product: ProductModel
     
-    init(product: ProductModel) {
+    init(product: ProductModel, reloadProducts: Binding<Bool>) {
         self.product = product
+        _reloadProducts = reloadProducts
     }
     
     var body: some View {
@@ -61,7 +64,11 @@ struct ProductDetailView: View {
                 
                 HStack {
                     Button {
-                        
+                        viewModel.deleteProduct(with: product.id)
+                        if viewModel.errorMessage == nil {
+                            reloadProducts = true
+                            dismiss()
+                        }
                     } label: {
                         HStack {
                             Image(systemName: "trash")
@@ -77,7 +84,11 @@ struct ProductDetailView: View {
                     .buttonStyle(.plain)
                     
                     Button("Abastecer") {
-                        
+                        viewModel.supplyProduct(id: product.id, stock: 1)
+                        if viewModel.errorMessage == nil {
+                            reloadProducts = true
+                            dismiss()
+                        }
                     }
                     .buttonStyle(
                         GradientButtonStyle(
@@ -89,6 +100,12 @@ struct ProductDetailView: View {
                 }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
+            .overlay {
+                if viewModel.isRequestInProgress {
+                    ProgressView()
+                        .controlSize(.extraLarge)
+                }
+            }
         }
         .padding(30)
         .frame(width: 650, height: 310)

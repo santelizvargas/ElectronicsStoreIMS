@@ -76,6 +76,7 @@
 		BD9F215E2C69ACAB003E6255 /* ExporterButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */; };
 		BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7125D2C642DD2000FAD7B /* FileFactory.swift */; };
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
+		BDFA27B02C771B66007F4EB0 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFA27AF2C771B66007F4EB0 /* ProductDetailViewModel.swift */; };
 		BDFBD8FE2C71D97800EF549C /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -152,6 +153,7 @@
 		BD9F215D2C69ACAB003E6255 /* ExporterButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExporterButton.swift; sourceTree = "<group>"; };
 		BDD7125D2C642DD2000FAD7B /* FileFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileFactory.swift; sourceTree = "<group>"; };
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
+		BDFA27AF2C771B66007F4EB0 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				333A14F02C770A6400BBFACB /* ProductDetailView.swift */,
+				BDFA27AF2C771B66007F4EB0 /* ProductDetailViewModel.swift */,
 			);
 			path = ProductDetail;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */,
 				338DF8372C65D66700F72772 /* View+OSType.swift in Sources */,
 				BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */,
+				BDFA27B02C771B66007F4EB0 /* ProductDetailViewModel.swift in Sources */,
 				BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */,
 				35069C822C61C2E0001E854F /* SalesHistoryView.swift in Sources */,
 				BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */,
