@@ -13,12 +13,17 @@ private enum Constants {
     static let maxOpacity: CGFloat = 1
     static let gridCellColumns: Int = 2
     static let gridPadding: CGFloat = 30
-    static let gridMinWidth: CGFloat = 2
+    static let gridMinWidth: CGFloat = 600
 }
 
 struct RegisterUserView: View {
     @Environment(\.dismiss) private var dismiss
+    @Binding private var isReloadUsers: Bool
     @ObservedObject private var viewModel: RegisterUserViewModel = .init()
+    
+    init(isReloadUsers: Binding<Bool>) {
+        _isReloadUsers = isReloadUsers
+    }
     
     var body: some View {
         Grid(horizontalSpacing: Constants.spacing, verticalSpacing: Constants.spacing) {
@@ -98,6 +103,7 @@ struct RegisterUserView: View {
         .onReceive(viewModel.$isRegistered) { isRegistered in
             guard isRegistered else { return }
             viewModel.isRegistered = false
+            isReloadUsers = true
             dismiss()
         }
         .overlay(alignment: .topTrailing) {

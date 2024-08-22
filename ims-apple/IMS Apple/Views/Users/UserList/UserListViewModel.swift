@@ -11,6 +11,14 @@ final class UserListViewModel: ObservableObject {
     @Published var users: [UserModel] = []
     @Published var isRequestInProgress: Bool = false
     
+    @Published var isReloadUsers: Bool = false {
+        didSet {
+            guard isReloadUsers else { return }
+            getUsers()
+            isReloadUsers.toggle()
+        }
+    }
+    
     private let authenticationManager: AuthenticationManager = AuthenticationManager()
     
     init() {
