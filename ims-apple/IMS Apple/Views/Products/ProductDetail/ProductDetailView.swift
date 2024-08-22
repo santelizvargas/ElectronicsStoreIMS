@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct ProductDetailView: View {
-    @Binding private var reloadProducts: Bool
     @Environment(\.dismiss) private var dismiss
-    @ObservedObject private var viewModel: ProductDetailViewModel = ProductDetailViewModel()
+    @ObservedObject private var viewModel: ProductDetailViewModel
     private let product: ProductModel
     
-    init(product: ProductModel, reloadProducts: Binding<Bool>) {
+    init(product: ProductModel, 
+         reloadProducts: Binding<Bool>) {
         self.product = product
-        _reloadProducts = reloadProducts
+        self.viewModel = ProductDetailViewModel(reloadProducts: reloadProducts)
     }
     
     var body: some View {
@@ -66,7 +66,6 @@ struct ProductDetailView: View {
                     Button {
                         viewModel.deleteProduct(with: product.id)
                         if viewModel.errorMessage == nil {
-                            reloadProducts = true
                             dismiss()
                         }
                     } label: {
@@ -86,7 +85,6 @@ struct ProductDetailView: View {
                     Button("Abastecer") {
                         viewModel.supplyProduct(id: product.id, stock: 1)
                         if viewModel.errorMessage == nil {
-                            reloadProducts = true
                             dismiss()
                         }
                     }

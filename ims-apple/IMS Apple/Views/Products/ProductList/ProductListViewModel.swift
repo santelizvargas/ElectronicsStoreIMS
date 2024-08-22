@@ -27,6 +27,7 @@ final class ProductListViewModel: ObservableObject {
     @Published var reloadProducts: Bool = false {
         didSet {
             guard reloadProducts else { return }
+            products = []
             getProducts()
             reloadProducts = false
         }
@@ -54,7 +55,7 @@ final class ProductListViewModel: ObservableObject {
     
     func getProducts() {
         isRequestInProgress = true
-        Task { @MainActor in
+        Task {
             do {
                 allProducts = try await productManager.getProducts()
                 products = allProducts
