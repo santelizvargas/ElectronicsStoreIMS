@@ -63,6 +63,7 @@ final class ProductListViewModel: ObservableObject {
             do {
                 try await productManager.deleteProduct(with: id)
                 isRequestInProgress = false
+                getProducts()
             } catch {
                 isRequestInProgress = false
                 guard let error = error as? IMSError else { return }
@@ -77,6 +78,7 @@ final class ProductListViewModel: ObservableObject {
             do {
                 try await productManager.supplyProduct(id: id, with: stock)
                 isRequestInProgress = false
+                getProducts()
             } catch {
                 isRequestInProgress = false
                 guard let error = error as? IMSError else { return }
