@@ -14,7 +14,6 @@ final class RegisterUserViewModel: ObservableObject {
     private lazy var authenticationManager: AuthenticationManager = AuthenticationManager()
     
     func registerUser() {
-        guard userInfo.password == userInfo.confirmPassword else { return }
         Task { @MainActor in
             do {
                 try await authenticationManager.registerUser(user: userInfo)
