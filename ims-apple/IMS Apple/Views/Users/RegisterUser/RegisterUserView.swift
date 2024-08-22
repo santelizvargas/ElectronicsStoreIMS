@@ -20,6 +20,7 @@ struct RegisterUserView: View {
     @Environment(\.dismiss) private var dismiss
     @Binding private var isReloadUsers: Bool
     @ObservedObject private var viewModel: RegisterUserViewModel = .init()
+    @State private var isShowErrorMessage: Bool = false
     
     init(isReloadUsers: Binding<Bool>) {
         _isReloadUsers = isReloadUsers
@@ -87,14 +88,29 @@ struct RegisterUserView: View {
             
             GridRow {
                 Button("Registrar") {
-                    withAnimation {
-                        viewModel.registerUser()
+                    if viewModel.userInfo.password == viewModel.userInfo.confirmPassword {
+                        withAnimation {
+                            viewModel.registerUser()
+                        }
+                    } else {
+                        withAnimation {
+                            isShowErrorMessage = true
+                        }
                     }
                 }
                 .buttonStyle(GradientButtonStyle(buttonWidth: .infinity))
                 .opacity(viewModel.userInfo.someFieldsAreEmpty() ? Constants.minOpacity : Constants.maxOpacity)
                 .disabled(viewModel.userInfo.someFieldsAreEmpty())
                 .gridCellColumns(Constants.gridCellColumns)
+            }
+            
+            if isShowErrorMessage {
+                GridRow {
+                    Text("Algo salio mal! Por favor revisa que las contraseñas coincidan")
+                        .underline()
+                        .foregroundStyle(.red)
+                        .gridCellColumns(Constants.gridCellColumns)
+                }
             }
         }
         .padding(Constants.gridPadding)
@@ -119,4 +135,8 @@ struct RegisterUserView: View {
         }
         .isOS(.iOS) { $0.onKeyboardAppear() }
     }
+}
+
+#Preview {
+    RegisterUserView(isReloadUsers: .constant(false))
 }
