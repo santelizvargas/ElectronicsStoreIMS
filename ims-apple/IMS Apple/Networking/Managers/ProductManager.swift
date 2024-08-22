@@ -68,7 +68,7 @@ final class ProductManager {
         }
     }
     
-    func supplyProduct(id: Int, with stock: Int) async throws {
+    func supplyProduct(id: Int, with stock: Double) async throws {
         let parameters: [String: Any] = [
             "id": id,
             "stock": stock

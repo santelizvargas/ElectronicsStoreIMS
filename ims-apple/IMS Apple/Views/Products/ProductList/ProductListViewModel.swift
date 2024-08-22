@@ -71,7 +71,7 @@ final class ProductListViewModel: ObservableObject {
         }
     }
     
-    func supplyProduct(id: Int, stock: Int) {
+    func supplyProduct(id: Int, stock: Double) {
         isRequestInProgress = true
         Task {
             do {

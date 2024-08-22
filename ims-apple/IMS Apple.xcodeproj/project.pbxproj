@@ -64,7 +64,6 @@
 		BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F32C5D9A2400F3D38D /* BlurCircle.swift */; };
 		BD1DE8FD2C5D9A2400F3D38D /* IMSSecureField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */; };
 		BD1DE9012C5D9B2600F3D38D /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */; };
-		BD39F8972C75BA8500467738 /* ProductDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD39F8962C75BA8500467738 /* ProductDetailView.swift */; };
 		BD56AE312C6FEBD20056FD18 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */; };
 		BD56AE342C6FF39A0056FD18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD56AE332C6FF39A0056FD18 /* Security.framework */; };
 		BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */; };
@@ -140,7 +139,6 @@
 		BD1DE8F72C5D9A2400F3D38D /* IMSSecureField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSSecureField.swift; sourceTree = "<group>"; };
 		BD1DE8F82C5D9A2400F3D38D /* IMSTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSTextField.swift; sourceTree = "<group>"; };
 		BD1DE8FE2C5D9B2600F3D38D /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
-		BD39F8962C75BA8500467738 /* ProductDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailView.swift; sourceTree = "<group>"; };
 		BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		BD56AE332C6FF39A0056FD18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
@@ -567,14 +565,6 @@
 				BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */,
 			);
 			path = Login;
-			sourceTree = "<group>";
-		};
-		BD39F8952C75BA3700467738 /* ProductDetail */ = {
-			isa = PBXGroup;
-			children = (
-				BD39F8962C75BA8500467738 /* ProductDetailView.swift */,
-			);
-			path = ProductDetail;
 			sourceTree = "<group>";
 		};
 		BD56AE322C6FF39A0056FD18 /* Frameworks */ = {
