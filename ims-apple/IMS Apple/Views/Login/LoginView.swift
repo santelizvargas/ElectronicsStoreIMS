@@ -66,6 +66,9 @@ struct LoginView: View {
         .onAppear {
             viewModel.checkIsUserLogged()
         }
+        .alert("¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde.", isPresented: $viewModel.isLoginError) {
+            Button("OK", role: .cancel) { }
+        }
     }
     
     private var launchView: some View {

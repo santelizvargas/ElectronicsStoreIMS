@@ -12,6 +12,7 @@ final class LoginViewModel: ObservableObject {
     @Published var requestInProgress: Bool = false
     @Published var loginSuccess: Bool = false
     @Published var isShowLaunchScreen: Bool = true
+    @Published var isLoginError: Bool = false
     
     private var authenticationManager: AuthenticationManager = AuthenticationManager()
     
@@ -24,6 +25,7 @@ final class LoginViewModel: ObservableObject {
                 loginSuccess = authenticationManager.isAnUserLogged
             } catch {
                 requestInProgress = false
+                isLoginError = true
                 guard let iMSError = error as? IMSError else { return }
                 debugPrint(iMSError.localizedDescription)
             }
