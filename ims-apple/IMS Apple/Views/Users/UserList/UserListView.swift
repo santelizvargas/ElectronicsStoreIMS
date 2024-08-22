@@ -56,13 +56,13 @@ struct UserListView: View {
             .buttonStyle(GradientButtonStyle(imageLeft: "paperplane.fill"))
             .isOS(.iOS) { view in
                 view.popover(isPresented: $isPresented) {
-                    RegisterUserView()
+                    RegisterUserView(isReloadUsers: $viewModel.isReloadUsers)
                         .presentationCompactAdaptation(.popover)
                 }
             }
             .isOS(.macOS) { view in
                 view.sheet(isPresented: $isPresented) {
-                    RegisterUserView()
+                    RegisterUserView(isReloadUsers: $viewModel.isReloadUsers)
                 }
             }
             
@@ -103,14 +103,14 @@ struct UserListView: View {
                     }
                     
                     userPropertyTextView(text: user.email)
-                        
-                    VStack {
-                        if let roles = user.roles {
-                            ForEach(roles, id: \.self) { role in
-                                userPropertyTextView(text: role)
+                    
+                    if user.roles.isEmpty {
+                        Text("-")
+                    } else {
+                        ForEach(user.roles) { rol in
+                            VStack {
+                                userPropertyTextView(text: rol.name)
                             }
-                        } else {
-                            Text("-")
                         }
                     }
                     

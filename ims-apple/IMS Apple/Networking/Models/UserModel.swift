@@ -50,7 +50,6 @@ final class UserModelPersistence {
         self.address = address
     }
     
-    
     /// Factory from user model entity
     init(user: UserModel) {
         self.id = user.id
@@ -63,7 +62,7 @@ final class UserModelPersistence {
     }
 }
 
-struct UserModel: Codable, Identifiable {
+struct UserModel: Decodable, Identifiable {
     let id: Int
     let firstName: String
     let lastName: String
@@ -71,9 +70,18 @@ struct UserModel: Codable, Identifiable {
     let identification: String
     let phone: String
     let address: String
-    let roles: [String]?
+    let roles: [RoleModel]
     let imageId: String?
     let createdAt: String?
     let updatedAt: String?
+    let deletedAt: String?
+}
+
+struct RoleModel: Decodable, Identifiable {
+    let id: String
+    let name: String
+    let description: String
+    let createdAt: String?
+    let udpatedAt: String?
     let deletedAt: String?
 }

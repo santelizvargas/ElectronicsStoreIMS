@@ -13,7 +13,7 @@ final class FileFactory {
         
         let mappedUsers: String = users.map { user in
             let userName = "\(user.firstName) \(user.lastName)".capitalized
-            let roles = user.roles?.joined(separator: "-") ?? "-"
+            let roles = user.roles.map { $0.name }.joined(separator: "-")
             let updatedAt = user.updatedAt?.dayMonthYear ?? "-"
             
             return "\(userName), \(user.email), \(roles), \(updatedAt)"
