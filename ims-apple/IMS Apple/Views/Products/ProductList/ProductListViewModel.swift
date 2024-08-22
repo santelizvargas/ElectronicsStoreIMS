@@ -9,6 +9,7 @@ import Foundation
 
 @MainActor
 final class ProductListViewModel: ObservableObject {
+    @Published var selectedProduct: ProductModel?
     @Published var products: [ProductModel] = []
     
     @Published var selectedState: ProductState = .all {
