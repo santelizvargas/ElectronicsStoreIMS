@@ -23,6 +23,17 @@ final class ProductListViewModel: ObservableObject {
     @Published var searchText: String = "" {
         didSet { filterProducts() }
     }
+    
+    @Published var reloadProducts: Bool = false {
+        didSet {
+            guard reloadProducts else { return }
+            products = []
+            getProducts()
+            reloadProducts = false
+        }
+    }
+    
+    @Published var errorMessage: String?
 
     private let productManager: ProductManager = ProductManager()
     
@@ -44,7 +55,7 @@ final class ProductListViewModel: ObservableObject {
     
     func getProducts() {
         isRequestInProgress = true
-        Task { @MainActor in
+        Task {
             do {
                 allProducts = try await productManager.getProducts()
                 products = allProducts

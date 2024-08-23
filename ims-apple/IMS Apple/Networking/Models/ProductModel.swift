@@ -13,13 +13,18 @@ struct CreateProductResponse: Decodable {
     let data: ProductModel?
 }
 
-struct ProductResponse: Decodable {
+struct GetProductResponse: Decodable {
     let data: [ProductModel]
 }
 
 struct ProductCountResponse: Decodable {
     let message: String
     let data: ProductCount
+}
+
+struct DeleteProductResponse: Decodable {
+    let message: String
+    let code: Int
 }
 
 struct ProductCount: Decodable {

@@ -20,6 +20,7 @@ enum IMSError: Error {
     
     /// Products
     case uniqueNameKey
+    case productNotFound
     
     var localizedDescription: String {
         switch self {
@@ -29,6 +30,7 @@ enum IMSError: Error {
             case .badPassword: "Wrong credentials"
             case .sameAsLastPassword: "New password must be different"
             case .uniqueNameKey: "Product name exists, please provide another"
+            case .productNotFound: "Product not found"
         }
     }
 }
