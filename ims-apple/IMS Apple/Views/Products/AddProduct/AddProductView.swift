@@ -18,13 +18,16 @@ private enum Constants {
     static let detailButtonHeight: CGFloat = 70
     static let strokLengths: CGFloat = 10
     static let spaceSize: CGFloat = 10
+    static let minOpacity: CGFloat = 0.6
+    static let maxOpacity: CGFloat = 1
     static let loadingImage: String = "square.and.arrow.down"
     static let saveProductImage: String = "square.and.arrow.down.on.square.fill"
 }
 
 struct AddProductView: View {
     @State private var selectedState: ProductState = .available
-    @State private var showingImagePicker = false
+    @State private var showingImagePicker: Bool = false
+    @State private var showAlert: Bool = false
     
     @ObservedObject private var viewModel = AddProductViewModel()
     
@@ -36,11 +39,21 @@ struct AddProductView: View {
                 
                 Spacer()
                 
-                Button("Guardar producto") {
-                    viewModel.createProduct()
+                Button("Agregar producto") {
+                    viewModel.createProduct {
+                        withAnimation {
+                            showAlert.toggle()
+                        }
+                    }
                 }
-                    .buttonStyle(GradientButtonStyle(imageLeft: Constants.saveProductImage,
-                                                     buttonHeight: Constants.buttonHeight))
+                .buttonStyle(
+                    GradientButtonStyle(
+                        imageLeft: Constants.saveProductImage,
+                        buttonHeight: Constants.buttonHeight
+                    )
+                )
+                .disabled(viewModel.isCreateDisabled)
+                .opacity(viewModel.isCreateDisabled ? Constants.minOpacity : Constants.maxOpacity)
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             
@@ -55,6 +68,13 @@ struct AddProductView: View {
         .padding()
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(.grayBackground)
+        .alert(
+            viewModel.name.isEmpty
+            ? "Producto Agregado Correctamente"
+            : "¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde.",
+            isPresented: $showAlert) {
+                Button("OK", role: .cancel) { }
+            }
     }
     
     // MARK: - Product Information

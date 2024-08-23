@@ -114,9 +114,7 @@ struct UserListView: View {
                         }
                     }
                     
-                    if let updatedAt = user.updatedAt {
-                        userPropertyTextView(text: updatedAt.dayMonthYear)
-                    }
+                    userPropertyTextView(text: user.updatedAt.dayMonthYear)
                 }
             }
         }

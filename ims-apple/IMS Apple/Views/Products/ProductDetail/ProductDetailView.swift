@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+private enum Constants {
+    static let spacing: CGFloat = 20
+    static let cornerRadius: CGFloat = 10
+    static let smallPadding: CGFloat = 5
+    static let middlePadding: CGFloat = 8
+    static let bigPadding: CGFloat = 30
+    static let imageWidth: CGFloat = 180
+    static let imageHeight: CGFloat = 220
+    static let editSize: CGFloat = 25
+    static let bannerSize: CGFloat = 50
+    static let trashHeight: CGFloat = 36
+    static let cardWidth: CGFloat = 650
+    static let cardHeight: CGFloat = 310
+}
+
 struct ProductDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel: ProductDetailViewModel
@@ -19,20 +34,20 @@ struct ProductDetailView: View {
     }
     
     var body: some View {
-        HStack(spacing: 20) {
-            RoundedRectangle(cornerRadius: 6)
+        HStack(spacing: Constants.spacing) {
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.secondaryBackground)
                 .overlay {
                     AsyncImage(url: URL(string: "url")) { image in
                         image
                             .resizable()
                             .scaledToFit()
-                            .padding(5)
+                            .padding(Constants.smallPadding)
                     } placeholder: {
                         Image(systemName: "moon.stars.fill")
                     }
                 }
-                .frame(width: 180, height: 220)
+                .frame(width: Constants.imageWidth, height: Constants.imageHeight)
             
             VStack(alignment: .leading) {
                 HStack {
@@ -44,9 +59,9 @@ struct ProductDetailView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Image(systemName: "square.and.pencil")
+                        Image(.editIcon)
                             .resizable()
-                            .frame(width: 25, height: 25)
+                            .frame(width: Constants.editSize, height: Constants.editSize)
                     }
                     .buttonStyle(.plain)
                 }
@@ -75,12 +90,13 @@ struct ProductDetailView: View {
                         }
                         .foregroundStyle(.red)
                     }
-                    .frame(maxWidth: .infinity, minHeight: 35)
+                    .frame(maxWidth: .infinity, minHeight: Constants.trashHeight)
                     .background {
-                        RoundedRectangle(cornerRadius: 10)
+                        RoundedRectangle(cornerRadius: Constants.cornerRadius)
                             .stroke(.red)
                     }
                     .buttonStyle(.plain)
+                    .contentShape(Rectangle())
                     
                     Button("Abastecer") {
                         viewModel.supplyProduct(id: product.id, stock: 1)
@@ -92,7 +108,7 @@ struct ProductDetailView: View {
                         GradientButtonStyle(
                             imageLeft: "repeat",
                             buttonWidth: .infinity,
-                            buttonHeight: 35
+                            buttonHeight: Constants.trashHeight
                         )
                     )
                 }
@@ -105,11 +121,11 @@ struct ProductDetailView: View {
                 }
             }
         }
-        .padding(30)
-        .frame(width: 650, height: 310)
+        .padding(Constants.bigPadding)
+        .frame(width: Constants.cardWidth, height: Constants.cardHeight)
         .foregroundStyle(.imsWhite)
         .background {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.grayBackground)
         }
     }
@@ -118,9 +134,9 @@ struct ProductDetailView: View {
         Text(text)
             .bold()
             .padding(.horizontal)
-            .padding(.vertical, 8)
+            .padding(.vertical, Constants.middlePadding)
             .background {
-                RoundedRectangle(cornerRadius: 50)
+                RoundedRectangle(cornerRadius: Constants.bannerSize)
                     .fill(.secondaryBackground)
             }
     }

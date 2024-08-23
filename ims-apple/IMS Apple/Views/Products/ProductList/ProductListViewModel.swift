@@ -27,18 +27,17 @@ final class ProductListViewModel: ObservableObject {
     @Published var reloadProducts: Bool = false {
         didSet {
             guard reloadProducts else { return }
-            products = []
             getProducts()
             reloadProducts = false
         }
     }
-    
-    @Published var errorMessage: String?
 
     private let productManager: ProductManager = ProductManager()
-    
-    private var allProducts: [ProductModel] = []
     private var isRequestInProgress: Bool = false
+    
+    private var allProducts: [ProductModel] = [] {
+        didSet { filterProducts() }
+    }
     
     init() {
         getProducts()
@@ -51,6 +50,7 @@ final class ProductListViewModel: ObservableObject {
             let matchesState = selectedState == .all || (selectedState == .outOfStock ? product.stock == .zero : product.stock > .zero)
             return matchesSearch && matchesCategory && matchesState
         }
+        .sorted { $0.createdAt > $1.createdAt }
     }
     
     func getProducts() {
@@ -58,7 +58,6 @@ final class ProductListViewModel: ObservableObject {
         Task {
             do {
                 allProducts = try await productManager.getProducts()
-                products = allProducts
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false

@@ -17,16 +17,21 @@ final class AddProductViewModel: ObservableObject {
     @Published var price: String = ""
     @Published var stock: String = ""
     @Published var description: String = ""
-    @Published var state: String = ""
     
     private let productManager: ProductManager = ProductManager()
+    
+    var isCreateDisabled: Bool {
+        name.isEmpty ||
+        price.isEmpty ||
+        description.isEmpty ||
+        stock.isEmpty
+    }
     
     private func resetProductProperties() {
         name = ""
         price = ""
         stock = ""
         description = ""
-        state = ""
         productImage = nil
         avatarItem = nil
     }
@@ -45,28 +50,21 @@ final class AddProductViewModel: ObservableObject {
         }
     }
     
-    func createProduct() {
-        guard !name.isEmpty,
-              !price.isEmpty,
-              !price.isEmpty,
-              !stock.isEmpty
-        else {
-            debugPrint("Some properties are required.")
-            return
-        }
-        
+    func createProduct(completion: (() -> Void)?) {
         isRequestInProgress = true
         Task {
             do {
                 try await productManager.createProduct(name: name,
                                                        description: description,
-                                                       salePrice: Double(price) ?? 0,
-                                                       purchasePrice: Double(price) ?? 0,
-                                                       stock: Int(stock) ?? 0)
+                                                       salePrice: Double(price) ?? .zero,
+                                                       purchasePrice: Double(price) ?? .zero,
+                                                       stock: Int(stock) ?? .zero)
                 isRequestInProgress = false
                 resetProductProperties()
+                completion?()
             } catch {
                 isRequestInProgress = false
+                completion?()
                 guard let error = error as? IMSError else { return }
                 debugPrint(error.localizedDescription)
             }
