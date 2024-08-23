@@ -9,6 +9,7 @@ import SwiftUI
 
 private enum Constants {
     static let spacingSize: CGFloat = 30
+    static let imageSize: CGFloat = 20
     static let buttonHeight: CGFloat = 40
     static let textFieldWidth: CGFloat = 300
     static let hasBorder: Bool = true
@@ -18,9 +19,8 @@ private enum Constants {
 }
 
 struct InvoiceSaleView: View {
-    @State private var nameValue: String = ""
-    @State private var phoneNumberValue: String = ""
-    @State private var invoiceSaleRows: [InvoiceSaleRow] = []
+    
+    @ObservedObject private var viewModel: InvoiceSaleViewModel = InvoiceSaleViewModel()
     
     var body: some View {
         VStack {
@@ -38,9 +38,6 @@ struct InvoiceSaleView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
-        .onAppear {
-            invoiceSaleRows.append(InvoiceSaleRow())
-        }
     }
     
     // MARK: - Header View
@@ -56,11 +53,11 @@ struct InvoiceSaleView: View {
                                                  buttonHeight: Constants.buttonHeight,
                                                  gradientColors: [.redGradient, .orangeGradient]))
             
-            Button("Generar Factura") { 
+            Button("Generar Factura") {
                 
             }
-                .buttonStyle(GradientButtonStyle(imageLeft: Constants.generateInvoiceImage,
-                                                 buttonHeight: Constants.buttonHeight))
+            .buttonStyle(GradientButtonStyle(imageLeft: Constants.generateInvoiceImage,
+                                             buttonHeight: Constants.buttonHeight))
         }
         .padding(.vertical)
     }
@@ -71,14 +68,14 @@ struct InvoiceSaleView: View {
         HStack(spacing: Constants.spacingSize) {
             IMSTextField(
                 type: .custom("Nombre de cliente"),
-                text: $nameValue,
+                text: $viewModel.invoiceSaleModel.clientName,
                 hasBorder: true,
                 maxWidth: .infinity
             )
-
+            
             IMSTextField(
                 type: .custom("Teléfono"),
-                text: $phoneNumberValue.allowOnlyNumbers,
+                text: $viewModel.invoiceSaleModel.clientPhoneNumber.allowOnlyNumbers,
                 hasBorder: true,
                 maxWidth: .infinity
             )
@@ -96,21 +93,90 @@ struct InvoiceSaleView: View {
                 Spacer()
                 
                 Button("Agregar fila") {
-                    invoiceSaleRows.append(InvoiceSaleRow())
+                    viewModel.addInvoiceRow()
                 }
-                    .buttonStyle(GradientButtonStyle(imageLeft: Constants.addRowImage,
-                                                     buttonHeight: Constants.buttonHeight))
+                .buttonStyle(GradientButtonStyle(imageLeft: Constants.addRowImage,
+                                                 buttonHeight: Constants.buttonHeight))
             }
             .padding(.vertical)
             
-            ScrollView {
-                ForEach(invoiceSaleRows.indices, id: \.self) { index in
-                    invoiceSaleRows[index]
+            VStack {
+                headerGrid
+                invoiceGridRows
+            }
+            .padding()
+            .background {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.secondaryBackground)
+            }
+        }
+    }
+    
+    private var headerGrid: some View {
+        Grid {
+            GridRow {
+                Group {
+                    Text("Cantidad")
+                    Text("Description")
+                    Text("P. Producto")
+                    Text("P. Total")
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .foregroundStyle(.imsWhite)
+                
+                Text(" ")
+            }
+        }
+    }
+    
+    private var invoiceGridRows: some View {
+        ScrollView(showsIndicators: false) {
+            Grid {
+                ForEach($viewModel.invoiceSaleModel.products) { $product in
+                    GridRow {
+                        IMSTextField(text: $product.amount,
+                                     hasBorder: true)
+                        
+                        IMSTextField(text: $product.description,
+                                     hasBorder: true, maxWidth: .infinity)
+                        
+                        IMSTextField(text: $product.unitPrice,
+                                     hasBorder: true)
+                        
+                        IMSTextField(text: .constant(
+                            totalPrice(
+                                amount: $product.amount,
+                                price: $product.unitPrice
+                            )
+                        ),
+                        hasBorder: true)
+                        .disabled(true)
+                        
+                        Button {
+                            viewModel.removeInvoiceRow(at: product.id)
+                        } label: {
+                            Image(systemName: "trash")
+                                .resizable()
+                                .frame(width: Constants.imageSize, height: Constants.imageSize)
+                                .foregroundStyle(.red)
+                        }
+                        .buttonStyle(.plain)
+                    }
                 }
             }
         }
     }
     
+    private func totalPrice(amount: Binding<String>, price: Binding<String>) -> String {
+        if let quantity = Double(amount.wrappedValue), let price = Double(price.wrappedValue) {
+            let result = quantity * price
+            return result.truncatingRemainder(dividingBy: 1) == .zero
+            ? "\(Double(result))"
+            : String(format: "%.2f", result)
+        } else {
+            return "0"
+        }
+    }
 }
 
 #Preview {

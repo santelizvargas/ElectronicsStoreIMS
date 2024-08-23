@@ -8,14 +8,26 @@
 import Foundation
 
 struct InvoiceSaleModel {
-    let clientName: String
-    let clientPhoneNumber: String
-    let articles: [InvoiceSaleView]
+    var clientName: String
+    var clientPhoneNumber: String
+    var date: Date = .now
+    var products: [InvoiceSaleRowModel]
 }
 
-struct InvoiceSaleRowModel {
-    let amount: Int
-    let description: String
-    let unitPrice: Double
-    let totalPrice: Double
+struct InvoiceSaleRowModel: Identifiable {
+    let id: UUID = UUID()
+    var amount: String
+    var description: String
+    var unitPrice: String
+    var totalPrice: String
+    
+    init(amount: String = "",
+         description: String = "",
+         unitPrice: String = "",
+         totalPrice: String = "") {
+        self.amount = amount
+        self.description = description
+        self.unitPrice = unitPrice
+        self.totalPrice = totalPrice
+    }
 }
