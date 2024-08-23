@@ -73,6 +73,7 @@ final class ProductManager {
             "id": id,
             "stock": stock
         ]
+        
         do {
             let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .put)
             let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
