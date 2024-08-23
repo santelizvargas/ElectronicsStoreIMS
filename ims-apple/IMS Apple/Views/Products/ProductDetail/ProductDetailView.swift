@@ -7,6 +7,22 @@
 
 import SwiftUI
 
+private enum Constants {
+    static let spacing: CGFloat = 20
+    static let cornerRadius: CGFloat = 10
+    static let smallPadding: CGFloat = 5
+    static let middlePadding: CGFloat = 8
+    static let bigPadding: CGFloat = 30
+    static let imageWidth: CGFloat = 180
+    static let imageHeight: CGFloat = 220
+    static let editSize: CGFloat = 25
+    static let closeSize: CGFloat = 15
+    static let bannerSize: CGFloat = 50
+    static let trashHeight: CGFloat = 36
+    static let cardWidth: CGFloat = 650
+    static let cardHeight: CGFloat = 310
+}
+
 struct ProductDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel: ProductDetailViewModel
@@ -19,37 +35,11 @@ struct ProductDetailView: View {
     }
     
     var body: some View {
-        HStack(spacing: 20) {
-            RoundedRectangle(cornerRadius: 6)
-                .fill(.secondaryBackground)
-                .overlay {
-                    AsyncImage(url: URL(string: "url")) { image in
-                        image
-                            .resizable()
-                            .scaledToFit()
-                            .padding(5)
-                    } placeholder: {
-                        Image(systemName: "moon.stars.fill")
-                    }
-                }
-                .frame(width: 180, height: 220)
+        HStack(spacing: Constants.spacing) {
+            productImage
             
             VStack(alignment: .leading) {
-                HStack {
-                    Text(product.name)
-                        .font(.title2.bold())
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                        .padding(.top)
-                    
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "square.and.pencil")
-                            .resizable()
-                            .frame(width: 25, height: 25)
-                    }
-                    .buttonStyle(.plain)
-                }
+                headerView
                 
                 HStack {
                     banner(text: product.category.title)
@@ -62,40 +52,7 @@ struct ProductDetailView: View {
                 
                 Spacer()
                 
-                HStack {
-                    Button {
-                        viewModel.deleteProduct(with: product.id)
-                        if viewModel.errorMessage == nil {
-                            dismiss()
-                        }
-                    } label: {
-                        HStack {
-                            Image(systemName: "trash")
-                            Text("Eliminar")
-                        }
-                        .foregroundStyle(.red)
-                    }
-                    .frame(maxWidth: .infinity, minHeight: 35)
-                    .background {
-                        RoundedRectangle(cornerRadius: 10)
-                            .stroke(.red)
-                    }
-                    .buttonStyle(.plain)
-                    
-                    Button("Abastecer") {
-                        viewModel.supplyProduct(id: product.id, stock: 1)
-                        if viewModel.errorMessage == nil {
-                            dismiss()
-                        }
-                    }
-                    .buttonStyle(
-                        GradientButtonStyle(
-                            imageLeft: "repeat",
-                            buttonWidth: .infinity,
-                            buttonHeight: 35
-                        )
-                    )
-                }
+                bottomButtons
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay {
@@ -105,23 +62,119 @@ struct ProductDetailView: View {
                 }
             }
         }
-        .padding(30)
-        .frame(width: 650, height: 310)
+        .padding(Constants.bigPadding)
+        .frame(width: Constants.cardWidth, height: Constants.cardHeight)
         .foregroundStyle(.imsWhite)
         .background {
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.grayBackground)
         }
+        .isOS(.macOS) { view in
+            view.overlay(alignment: .topLeading) {
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .resizable()
+                        .frame(width: Constants.closeSize, height: Constants.closeSize)
+                }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+                .padding()
+            }
+        }
     }
+    
+    // MARK: - Banner View
     
     private func banner(text: String) -> some View {
         Text(text)
             .bold()
             .padding(.horizontal)
-            .padding(.vertical, 8)
+            .padding(.vertical, Constants.middlePadding)
             .background {
-                RoundedRectangle(cornerRadius: 50)
+                RoundedRectangle(cornerRadius: Constants.bannerSize)
                     .fill(.secondaryBackground)
             }
+    }
+    
+    // MARK: Product Image View
+    
+    private var productImage: some View {
+        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+            .fill(.secondaryBackground)
+            .overlay {
+                AsyncImage(url: URL(string: "url")) { image in
+                    image
+                        .resizable()
+                        .scaledToFit()
+                        .padding(Constants.smallPadding)
+                } placeholder: {
+                    Image(systemName: "moon.stars.fill")
+                }
+            }
+            .frame(width: Constants.imageWidth, height: Constants.imageHeight)
+    }
+    
+    // MARK: - Header View
+    
+    private var headerView: some View {
+        HStack {
+            Text(product.name)
+                .font(.title2.bold())
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .padding(.top)
+            
+            Button {
+            
+            } label: {
+                Image(.editIcon)
+                    .resizable()
+                    .frame(width: Constants.editSize, height: Constants.editSize)
+            }
+            .buttonStyle(.plain)
+            .contentShape(Rectangle())
+        }
+    }
+    
+    // MARK: - Bottom Buttons
+    
+    private var bottomButtons: some View {
+        HStack {
+            Button {
+                viewModel.deleteProduct(with: product.id)
+                if viewModel.errorMessage == nil {
+                    dismiss()
+                }
+            } label: {
+                HStack {
+                    Image(systemName: "trash")
+                    Text("Eliminar")
+                }
+                .foregroundStyle(.red)
+            }
+            .frame(maxWidth: .infinity, minHeight: Constants.trashHeight)
+            .background {
+                RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                    .stroke(.red)
+            }
+            .buttonStyle(.plain)
+            .contentShape(Rectangle())
+            
+            Button("Abastecer") {
+                viewModel.supplyProduct(id: product.id, stock: 1)
+                if viewModel.errorMessage == nil {
+                    dismiss()
+                }
+            }
+            .buttonStyle(
+                GradientButtonStyle(
+                    imageLeft: "repeat",
+                    buttonWidth: .infinity,
+                    buttonHeight: Constants.trashHeight
+                )
+            )
+        }
+        .padding(.bottom)
     }
 }

@@ -391,10 +391,11 @@
 		33EEE8462C698209001EC07F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				333A14EF2C770A4C00BBFACB /* ProductDetail */,
-				3331062F2C6BF0010035644F /* ProductCategory.swift */,
 				333106312C6BF01B0035644F /* ProductState.swift */,
+				3331062F2C6BF0010035644F /* ProductCategory.swift */,
+				35441DD92C6C505300B13146 /* AddProduct */,
 				3331062E2C6BEFCF0035644F /* ProductList */,
+				333A14EF2C770A4C00BBFACB /* ProductDetail */,
 			);
 			path = Products;
 			sourceTree = "<group>";
@@ -402,7 +403,6 @@
 		33F848362C5081040065B0D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				35441DD92C6C505300B13146 /* AddingProduct */,
 				33FBF5B12C7020B500ED5032 /* User */,
 				356743EA2C6AFA350073496B /* InvoiceSale */,
 				33EEE8462C698209001EC07F /* Products */,
@@ -433,13 +433,13 @@
 			path = History;
 			sourceTree = "<group>";
 		};
-		35441DD92C6C505300B13146 /* AddingProduct */ = {
+		35441DD92C6C505300B13146 /* AddProduct */ = {
 			isa = PBXGroup;
 			children = (
 				35441DDA2C6C506500B13146 /* AddProductView.swift */,
 				350DA9362C703CBF0043567A /* AddProductViewModel.swift */,
 			);
-			path = AddingProduct;
+			path = AddProduct;
 			sourceTree = "<group>";
 		};
 		356743EA2C6AFA350073496B /* InvoiceSale */ = {

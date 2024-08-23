@@ -46,16 +46,26 @@ struct ProductListView: View {
                         }
                     } label: {
                         productCard(product)
-                            .animation(.easeInOut, value: viewModel.products)
                     }
                     .buttonStyle(.plain)
+                    .animation(.easeInOut, value: viewModel.products)
                 }
             }
             .padding()
         }
-        .sheet(isPresented: $isPresented) {
-            if let selectedProduct = viewModel.selectedProduct {
-                ProductDetailView(product: selectedProduct, reloadProducts: $viewModel.reloadProducts)
+        .isOS(.iOS) { view in
+            view.popover(isPresented: $isPresented) {
+                if let selectedProduct = viewModel.selectedProduct {
+                    ProductDetailView(product: selectedProduct, reloadProducts: $viewModel.reloadProducts)
+                        .presentationCompactAdaptation(.popover)
+                }
+            }
+        }
+        .isOS(.macOS) { view in
+            view.sheet(isPresented: $isPresented) {
+                if let selectedProduct = viewModel.selectedProduct {
+                    ProductDetailView(product: selectedProduct, reloadProducts: $viewModel.reloadProducts)
+                }
             }
         }
         .background(.grayBackground)
@@ -115,8 +125,13 @@ struct ProductListView: View {
                 .foregroundStyle(.graySecundary)
                 .lineLimit(Constants.lineLimit)
             
-            Text("$ \(product.salePrice)")
-                .bold()
+            HStack {
+                Text("$ \(product.salePrice.description)")
+                    .bold()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                
+                Text("cod: \(product.id)")
+            }
             
             Spacer()
         }

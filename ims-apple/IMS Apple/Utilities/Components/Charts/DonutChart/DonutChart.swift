@@ -82,6 +82,11 @@ struct DonutChart: View {
             Text(Int(total).description)
                 .font(.largeTitle)
         }
+        .overlay {
+            if total == .zero {
+                CustomProgressView()
+            }
+        }
     }
 }
 

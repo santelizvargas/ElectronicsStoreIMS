@@ -32,7 +32,6 @@ struct ProductCount: Decodable {
 }
 
 struct ProductModel: Identifiable, Equatable, Decodable {
-    let uuid: UUID = UUID()
     let id: Int
     let name: String
     var category: ProductCategory = .all

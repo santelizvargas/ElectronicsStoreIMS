@@ -72,8 +72,8 @@ struct UserModel: Decodable, Identifiable {
     let address: String
     let roles: [RoleModel]
     let imageId: String?
-    let createdAt: String?
-    let updatedAt: String?
+    let createdAt: String
+    let updatedAt: String
     let deletedAt: String?
 }
 

@@ -29,7 +29,8 @@ final class UserListViewModel: ObservableObject {
         isRequestInProgress = true
         Task { @MainActor in
             do {
-                users = try await authenticationManager.getUsers()
+                let userList = try await authenticationManager.getUsers()
+                users = userList.sorted { $0.createdAt > $1.createdAt }
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false
