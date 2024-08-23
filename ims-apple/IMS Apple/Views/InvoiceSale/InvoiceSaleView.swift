@@ -11,7 +11,6 @@ private enum Constants {
     static let spacingSize: CGFloat = 30
     static let buttonHeight: CGFloat = 40
     static let textFieldWidth: CGFloat = 300
-    static let cornerRadiusSize: CGFloat = 12
     static let hasBorder: Bool = true
     static let addRowImage: String = "plus"
     static let previewImage: String = "eye"
@@ -21,16 +20,14 @@ private enum Constants {
 struct InvoiceSaleView: View {
     @State private var nameValue: String = ""
     @State private var phoneNumberValue: String = ""
-    @State private var quantityValue: String = ""
-    @State private var descriptionValue: String = ""
-    @State private var priceValue: String = ""
+    @State private var invoiceSaleRows: [InvoiceSaleRow] = []
     
     var body: some View {
         VStack {
             headerView
             
             VStack {
-                clientInformatioView
+                clientInformationView
                 
                 invoiceDetailsView
             }
@@ -41,6 +38,9 @@ struct InvoiceSaleView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
+        .onAppear {
+            invoiceSaleRows.append(InvoiceSaleRow())
+        }
     }
     
     // MARK: - Header View
@@ -56,7 +56,9 @@ struct InvoiceSaleView: View {
                                                  buttonHeight: Constants.buttonHeight,
                                                  gradientColors: [.redGradient, .orangeGradient]))
             
-            Button("Generar Factura") { }
+            Button("Generar Factura") { 
+                
+            }
                 .buttonStyle(GradientButtonStyle(imageLeft: Constants.generateInvoiceImage,
                                                  buttonHeight: Constants.buttonHeight))
         }
@@ -65,7 +67,7 @@ struct InvoiceSaleView: View {
     
     // MARK: - Client Information
     
-    private var clientInformatioView: some View {
+    private var clientInformationView: some View {
         HStack(spacing: Constants.spacingSize) {
             IMSTextField(
                 type: .custom("Nombre de cliente"),
@@ -93,48 +95,22 @@ struct InvoiceSaleView: View {
                 
                 Spacer()
                 
-                Button("Agregar fila") { }
+                Button("Agregar fila") {
+                    invoiceSaleRows.append(InvoiceSaleRow())
+                }
                     .buttonStyle(GradientButtonStyle(imageLeft: Constants.addRowImage,
                                                      buttonHeight: Constants.buttonHeight))
             }
             .padding(.vertical)
             
-            HStack {
-                IMSTextField(type: .custom("Cantidad"),
-                             text: $quantityValue.allowOnlyNumbers,
-                             hasBorder: Constants.hasBorder)
-                
-                IMSTextField(type: .custom("Descripcion"),
-                             text: $descriptionValue,
-                             hasBorder: Constants.hasBorder, maxWidth: .infinity)
-                
-                IMSTextField(type: .custom("P. Unitartio"),
-                             text: $priceValue.allowOnlyDecimalNumbers,
-                             hasBorder: Constants.hasBorder)
-                
-                IMSTextField(type: .custom("P. Total"),
-                             text: .constant(totalPrice),
-                             hasBorder: Constants.hasBorder)
-                .disabled(true)
-            }
-            .padding()
-            .background {
-                RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
-                    .fill(.secondaryBackground)
+            ScrollView {
+                ForEach(invoiceSaleRows.indices, id: \.self) { index in
+                    invoiceSaleRows[index]
+                }
             }
         }
     }
     
-    private var totalPrice: String {
-        if let quantity = Double(quantityValue), let price = Double(priceValue) {
-            let result = quantity * price
-            return result.truncatingRemainder(dividingBy: 1) == .zero
-            ? "\(Int(result))"
-            : String(format: "%.2f", result)
-        } else {
-            return "0"
-        }
-    }
 }
 
 #Preview {
