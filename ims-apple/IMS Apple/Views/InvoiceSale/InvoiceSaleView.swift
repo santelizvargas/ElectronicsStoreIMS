@@ -19,8 +19,8 @@ private enum Constants {
 }
 
 struct InvoiceSaleView: View {
-    
     @ObservedObject private var viewModel: InvoiceSaleViewModel = InvoiceSaleViewModel()
+    @State private var showProductList: Bool = false
     
     var body: some View {
         VStack {
@@ -48,16 +48,26 @@ struct InvoiceSaleView: View {
             
             Spacer()
             
-            Button("Previsualizar") { }
-                .buttonStyle(GradientButtonStyle(imageLeft: Constants.previewImage,
-                                                 buttonHeight: Constants.buttonHeight,
-                                                 gradientColors: [.redGradient, .orangeGradient]))
+            Button("Previsualizar") {
+                
+            }
+            .buttonStyle(
+                GradientButtonStyle(
+                    imageLeft: Constants.previewImage,
+                    buttonHeight: Constants.buttonHeight,
+                    gradientColors: [.redGradient, .orangeGradient]
+                )
+            )
             
             Button("Generar Factura") {
                 
             }
-            .buttonStyle(GradientButtonStyle(imageLeft: Constants.generateInvoiceImage,
-                                             buttonHeight: Constants.buttonHeight))
+            .buttonStyle(
+                GradientButtonStyle(
+                    imageLeft: Constants.generateInvoiceImage,
+                    buttonHeight: Constants.buttonHeight
+                )
+            )
         }
         .padding(.vertical)
     }
@@ -92,11 +102,32 @@ struct InvoiceSaleView: View {
                 
                 Spacer()
                 
+                Button("Ver codigos") {
+                    withAnimation {
+                        showProductList = true
+                    }
+                }
+                .buttonStyle(GradientButtonStyle(imageLeft: Constants.previewImage))
+                .isOS(.iOS) { view in
+                    view.sheet(isPresented: $showProductList) {
+                        ProductCodeView(products: viewModel.currentProducts)
+                    }
+                }
+                .isOS(.macOS) { view in
+                    view.popover(isPresented: $showProductList) {
+                        ProductCodeView(products: viewModel.currentProducts)
+                    }
+                }
+                
                 Button("Agregar fila") {
                     viewModel.addInvoiceRow()
                 }
-                .buttonStyle(GradientButtonStyle(imageLeft: Constants.addRowImage,
-                                                 buttonHeight: Constants.buttonHeight))
+                .buttonStyle(
+                    GradientButtonStyle(
+                        imageLeft: Constants.addRowImage,
+                        buttonHeight: Constants.buttonHeight
+                    )
+                )
             }
             .padding(.vertical)
             
@@ -116,15 +147,16 @@ struct InvoiceSaleView: View {
         Grid {
             GridRow {
                 Group {
+                    Text("Codigo")
                     Text("Cantidad")
                     Text("Description")
-                    Text("P. Producto")
+                    Text("P. Unitario")
                     Text("P. Total")
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
                 .foregroundStyle(.imsWhite)
                 
-                Text(" ")
+                Text("").frame(width: Constants.imageSize)
             }
         }
     }
@@ -134,22 +166,38 @@ struct InvoiceSaleView: View {
             Grid {
                 ForEach($viewModel.invoiceSaleModel.products) { $product in
                     GridRow {
-                        IMSTextField(text: $product.amount,
-                                     hasBorder: true)
+                        IMSTextField(
+                            text: $product.code.allowOnlyNumbers,
+                            hasBorder: true
+                        )
                         
-                        IMSTextField(text: $product.description,
-                                     hasBorder: true, maxWidth: .infinity)
+                        IMSTextField(
+                            text: $product.amount.allowOnlyNumbers,
+                            hasBorder: true
+                        )
                         
-                        IMSTextField(text: $product.unitPrice,
-                                     hasBorder: true)
+                        IMSTextField(
+                            text: $product.description,
+                            hasBorder: true,
+                            maxWidth: .infinity
+                        )
+                        .disabled(true)
+                        
+                        IMSTextField(
+                            text: .constant(
+                                viewModel.getDoubleFormat(for: product.unitPrice)
+                            ),
+                            hasBorder: true
+                        )
+                        .disabled(true)
                         
                         IMSTextField(text: .constant(
-                            totalPrice(
-                                amount: $product.amount,
-                                price: $product.unitPrice
+                            viewModel.totalPrice(
+                                amount: product.amount,
+                                price: product.unitPrice
                             )
                         ),
-                        hasBorder: true)
+                                     hasBorder: true)
                         .disabled(true)
                         
                         Button {
@@ -164,17 +212,6 @@ struct InvoiceSaleView: View {
                     }
                 }
             }
-        }
-    }
-    
-    private func totalPrice(amount: Binding<String>, price: Binding<String>) -> String {
-        if let quantity = Double(amount.wrappedValue), let price = Double(price.wrappedValue) {
-            let result = quantity * price
-            return result.truncatingRemainder(dividingBy: 1) == .zero
-            ? "\(Double(result))"
-            : String(format: "%.2f", result)
-        } else {
-            return "0"
         }
     }
 }

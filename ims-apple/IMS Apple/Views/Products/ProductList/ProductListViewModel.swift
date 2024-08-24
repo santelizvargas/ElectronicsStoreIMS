@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 final class ProductListViewModel: ObservableObject {
     @Published var selectedProduct: ProductModel?
     @Published var products: [ProductModel] = []
@@ -55,7 +54,7 @@ final class ProductListViewModel: ObservableObject {
     
     func getProducts() {
         isRequestInProgress = true
-        Task {
+        Task { @MainActor in
             do {
                 allProducts = try await productManager.getProducts()
                 isRequestInProgress = false

@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 final class LoginViewModel: ObservableObject {
     @Published var requestInProgress: Bool = false
     @Published var loginSuccess: Bool = false
@@ -18,7 +17,7 @@ final class LoginViewModel: ObservableObject {
     
     func login(email: String, password: String) {
         requestInProgress = true
-        Task {
+        Task { @MainActor in
             do {
                 try await authenticationManager.login(email: email, password: password)
                 requestInProgress = false
@@ -35,7 +34,7 @@ final class LoginViewModel: ObservableObject {
     func checkIsUserLogged() {
         loginSuccess = false
         isShowLaunchScreen = true
-        Task {
+        Task { @MainActor in
             try await Task.sleep(for: .seconds(2))
             loginSuccess = authenticationManager.isAnUserLogged
             try await Task.sleep(for: .seconds(1))

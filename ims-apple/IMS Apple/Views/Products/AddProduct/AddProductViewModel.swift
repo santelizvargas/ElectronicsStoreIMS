@@ -8,7 +8,6 @@
 import SwiftUI
 import _PhotosUI_SwiftUI
 
-@MainActor
 final class AddProductViewModel: ObservableObject {
     @Published var avatarItem: PhotosPickerItem?
     @Published var productImage: Image?
@@ -52,7 +51,7 @@ final class AddProductViewModel: ObservableObject {
     
     func createProduct(completion: (() -> Void)?) {
         isRequestInProgress = true
-        Task {
+        Task { @MainActor in
             do {
                 try await productManager.createProduct(name: name,
                                                        description: description,
