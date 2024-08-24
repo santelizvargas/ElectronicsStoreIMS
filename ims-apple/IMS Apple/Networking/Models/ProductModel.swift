@@ -35,7 +35,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
     let id: Int
     let name: String
     var category: ProductCategory = .all
-    let description: String?
+    let description: String
     let stock: Int
     let salePrice: Double
     let purchasePrice: Double
@@ -60,7 +60,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         id = try container.decode(Int.self, forKey: .id)
         name = try container.decode(String.self, forKey: .name)
-        description = try container.decodeIfPresent(String.self, forKey: .description)
+        description = try container.decode(String.self, forKey: .description)
         stock = try container.decode(Int.self, forKey: .stock)
         salePrice = try container.decode(Double.self, forKey: .salePrice)
         purchasePrice = try container.decode(Double.self, forKey: .purchasePrice)

@@ -21,7 +21,13 @@ extension Binding where Value == String {
     }
     
     var allowOnlyNumbers: Self {
-        filterInput(allowedCharacters: .decimalDigits)
+        DispatchQueue.main.async {
+            let filtered = wrappedValue.filter { $0.isNumber }
+            if filtered != wrappedValue {
+                wrappedValue = filtered
+            }
+        }
+        return self
     }
     
     var allowOnlyDecimalNumbers: Self {

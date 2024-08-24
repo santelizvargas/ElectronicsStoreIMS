@@ -121,7 +121,7 @@ struct ProductListView: View {
             Text(product.name)
                 .bold()
             
-            Text(product.description ?? "None")
+            Text(product.description)
                 .foregroundStyle(.graySecundary)
                 .lineLimit(Constants.lineLimit)
             

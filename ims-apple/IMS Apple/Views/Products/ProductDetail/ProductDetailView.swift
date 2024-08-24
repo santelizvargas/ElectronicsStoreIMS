@@ -47,7 +47,7 @@ struct ProductDetailView: View {
                     Spacer()
                 }
                 
-                Text(product.description ?? "")
+                Text(product.description)
                     .padding(.vertical)
                 
                 Spacer()

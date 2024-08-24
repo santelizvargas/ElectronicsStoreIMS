@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-@MainActor
 final class ProductDetailViewModel: ObservableObject {
     @Published var isRequestInProgress: Bool = false
     @Published var errorMessage: String?
@@ -22,7 +21,7 @@ final class ProductDetailViewModel: ObservableObject {
     
     func deleteProduct(with id: Int) {
         isRequestInProgress = true
-        Task {
+        Task { @MainActor in
             do {
                 try await productManager.deleteProduct(with: id)
                 reloadProducts = true
@@ -37,7 +36,7 @@ final class ProductDetailViewModel: ObservableObject {
     
     func supplyProduct(id: Int, stock: Double) {
         isRequestInProgress = true
-        Task {
+        Task { @MainActor in
             do {
                 try await productManager.supplyProduct(id: id, with: stock)
                 reloadProducts = true

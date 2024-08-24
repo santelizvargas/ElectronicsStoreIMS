@@ -16,15 +16,18 @@ struct InvoiceSaleModel {
 
 struct InvoiceSaleRowModel: Identifiable {
     let id: UUID = UUID()
+    var code: String
     var amount: String
     var description: String
-    var unitPrice: String
-    var totalPrice: String
+    var unitPrice: Double
+    var totalPrice: Double
     
-    init(amount: String = "",
+    init(code: String = "",
+         amount: String = "",
          description: String = "",
-         unitPrice: String = "",
-         totalPrice: String = "") {
+         unitPrice: Double = 0,
+         totalPrice: Double = 0) {
+        self.code = code
         self.amount = amount
         self.description = description
         self.unitPrice = unitPrice

@@ -7,7 +7,6 @@
 
 import Foundation
 
-@MainActor
 final class ProfileViewModel: ObservableObject {
     @Published var isPasswordEdit: Bool = false
     @Published var userPassword: UserPasswordReset
@@ -49,7 +48,7 @@ final class ProfileViewModel: ObservableObject {
         guard userPassword.newPassword == userPassword.confirmPassword else { return }
         isRequestInProgress = true
         
-        Task {
+        Task { @MainActor in
             do {
                 try await authenticationManager.updatePassword(email: userInfo.email,
                                                                currentPassword: userPassword.currentPassword,
