@@ -38,32 +38,10 @@ struct SalesHistoryView: View {
             }
             
             historyList
-            
-            pageButtons
-                .padding()
         }
         .padding()
         .background(.grayBackground)
-    }
-    
-    // MARK: - Page buttons
-    
-    private var pageButtons: some View {
-        HStack {
-            Button("Anterior") { }
-                .buttonStyle(GradientButtonStyle(imageLeft: "chevron.left",
-                                                 buttonHeight: Constants.Button.height,
-                                                 cornerRadius: Constants.Button.cornerRadius))
-            
-            ForEach(1...5, id: \.self) { number in
-                pageButton(page: number)
-            }
-            
-            Button("Siguiente") { }
-                .buttonStyle(GradientButtonStyle(imageRight: "chevron.right",
-                                                 buttonHeight: Constants.Button.height,
-                                                 cornerRadius: Constants.Button.cornerRadius))
-        }
+        .foregroundStyle(.white)
     }
     
     // MARK: - Header List View
@@ -92,11 +70,13 @@ struct SalesHistoryView: View {
             
             itemRows
         }
-        .padding()
+        .padding(.horizontal, 30)
+        .padding(.vertical)
         .background {
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.secondaryBackground)
         }
+        .padding(.bottom)
     }
     
     // MARK: - Item View
