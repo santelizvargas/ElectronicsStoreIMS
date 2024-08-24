@@ -37,6 +37,7 @@ import CredentialsClientRegister from '../../ims/api/infrastructure/authenticati
 import FetchAuthenticationService from '../../ims/api/application/authentication/FetchAuthenticationService';
 import AuthenticationFetchController from '../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
 import ClientFetcher from '../../ims/api/infrastructure/authentication/credentials/ClientFetcher';
+import { AWSFileUploader } from '../utils/AWSUploaderFile';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -100,6 +101,9 @@ export default class Container {
         assignRoleService: asClass(AssignRoleService).singleton(),
         roleAssigner: asClass(RoleAssigner).singleton(),
         rbacRepository: asClass(PrismaRbacRepository).singleton(),
+      })
+      .register({
+        imageUploader: asClass(AWSFileUploader).singleton(),
       });
   }
 
