@@ -35,4 +35,8 @@ enum ProductCategory: CaseIterable {
             case .electronicParts: "Repuestos"
         }
     }
+    
+    static var categories: [ProductCategory] {
+        ProductCategory.allCases.filter { $0 != .all }
+    }
 }
