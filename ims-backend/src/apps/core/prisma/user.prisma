@@ -7,8 +7,6 @@ model User {
     phone          String     @unique
     password       String
     address        String
-    image          Image?     @relation(fields: [imageId], references: [id])
-    imageId        Int?       @unique
     Seller         Seller?
     createdAt      DateTime?
     updatedAt      DateTime?

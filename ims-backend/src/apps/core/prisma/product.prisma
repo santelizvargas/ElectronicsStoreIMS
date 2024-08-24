@@ -8,5 +8,5 @@ model Product {
   createdAt     DateTime
   updatedAt     DateTime
   deletedAt     DateTime?
-  images        Image[]
+  images        String[]
 }

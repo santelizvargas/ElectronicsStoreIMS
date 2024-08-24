@@ -5,6 +5,7 @@ import FetchProductController from '../../../ims/api/infrastructure/express/cont
 import RemoveProductController from '../../../ims/api/infrastructure/express/controllers/products/RemoveProductController';
 import SupplyProductController from '../../../ims/api/infrastructure/express/controllers/products/SupplyProductController';
 import CountProductController from '../../../ims/api/infrastructure/express/controllers/products/CountProductController';
+import multer, { fileHandler } from '../../middlewares/multer';
 
 export const register = function (app: Express): void {
   const container = new Container().invoke();
@@ -19,7 +20,7 @@ export const register = function (app: Express): void {
 
   app.get('/products', fetchController.invoke.bind(fetchController));
   app.get('/products/count', countController.invoke.bind(countController));
-  app.post('/products', createController.rules, createController.invoke.bind(createController));
+  app.post('/products', multer.array('images'), fileHandler, createController.invoke.bind(createController));
   app.put('/products', supplyController.rules, supplyController.invoke.bind(supplyController));
   app.delete('/products', removeController.rules, removeController.invoke.bind(removeController));
 };
