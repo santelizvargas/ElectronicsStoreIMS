@@ -13,7 +13,6 @@ struct IMSBackground: View {
             Color.imsPrimary
             
             GeometryReader { reader in
-                
                 let size: CGSize = reader.size
                 
                 BlurCircle(color: .imsSecondary, position: .topTrailing(size))
@@ -23,7 +22,6 @@ struct IMSBackground: View {
         }
     }
 }
-
 
 #Preview {
     IMSBackground()
