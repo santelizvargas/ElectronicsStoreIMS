@@ -14,14 +14,16 @@ private enum Constants {
     static let textFieldMinHeight: CGFloat = 30
 }
 
-enum IMSTextFieldType {
+enum IMSTextFieldType: Equatable {
     case custom(String)
     case email
+    case none
     
     var title: String {
         switch self {
             case .custom(let title): title
             case .email: "Email"
+            case .none: ""
         }
     }
 }
@@ -34,7 +36,7 @@ struct IMSTextField: View {
     
     private let type: IMSTextFieldType
     
-    init(type: IMSTextFieldType,
+    init(type: IMSTextFieldType = .none,
          text: Binding<String>,
          hasBorder: Bool = false,
          maxWidth: CGFloat = Constants.textFieldMaxWidth,
@@ -49,8 +51,10 @@ struct IMSTextField: View {
     var body: some View {
         VStack {
             HStack {
-                Text(type.title)
-                    .font(.title3)
+                if type != .none { 
+                    Text(type.title)
+                        .font(.title3)
+                }
                 
                 Spacer()
             }
