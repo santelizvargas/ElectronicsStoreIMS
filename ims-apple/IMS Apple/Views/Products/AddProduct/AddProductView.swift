@@ -25,7 +25,7 @@ private enum Constants {
 }
 
 struct AddProductView: View {
-    @State private var selectedState: ProductState = .available
+    @State private var selectedCategory: ProductCategory = .phones
     @State private var showingImagePicker: Bool = false
     @State private var showAlert: Bool = false
     
@@ -95,6 +95,8 @@ struct AddProductView: View {
                 title: "Unidades disponibles",
                 textValue: $viewModel.stock.allowOnlyNumbers
             )
+            
+            categoryButton
         }
     }
     
@@ -155,6 +157,42 @@ struct AddProductView: View {
         }
         .onChange(of: viewModel.avatarItem) {
             viewModel.getProductImage()
+        }
+    }
+    
+    // MARK: - Category Button
+    
+    private var categoryButton: some View {
+        VStack(alignment: .leading) {
+            Text("Categoria")
+                .font(.title3)
+            +
+            Text(" *")
+                .foregroundStyle(.redGradient)
+            
+            Menu {
+                ForEach(ProductCategory.categories, id: \.self) { category in
+                    Button(category.title) {
+                        selectedCategory = category
+                    }
+                }
+            } label: {
+                Text(selectedCategory.title)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .foregroundStyle(.white)
+                    .isOS(.iOS) { view in
+                        view.padding(Constants.spaceSize)
+                    }
+            }
+            .menuStyle(.borderlessButton)
+            .isOS(.macOS) { view in
+                view.padding(Constants.spaceSize)
+            }
+            .overlay {
+                RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
+                    .stroke(.graySecundary)
+            }
+            .contentShape(Rectangle())
         }
     }
     
