@@ -16,6 +16,22 @@ final class InvoiceSaleViewModel: ObservableObject {
     
     @Published var currentProducts: [ProductModel] = []
     
+    var disableRemoveRow: Bool {
+        invoiceSaleModel.products.count == 1
+    }
+    
+    var disableAddNewRow: Bool {
+        invoiceSaleModel.products.contains { producto in
+            producto.description.isEmpty || producto.amount.isEmpty
+        }
+    }
+    
+    var disableGenerateInvoice: Bool {
+        invoiceSaleModel.clientName.isEmpty ||
+        invoiceSaleModel.clientPhoneNumber.isEmpty ||
+        disableAddNewRow
+    }
+    
     private lazy var productManager: ProductManager = ProductManager()
     
     init() {
@@ -28,6 +44,18 @@ final class InvoiceSaleViewModel: ObservableObject {
     
     func removeInvoiceRow(at id: UUID) {
         invoiceSaleModel.products.removeAll(where: { $0.id == id })
+    }
+    
+    func setProductValues(for id: String, with product: inout InvoiceSaleRowModel) {
+        guard let productId = Int(id),
+              let currentProduct = currentProducts.first(where: { $0.id == productId })
+        else {
+            product.description = ""
+            product.unitPrice = .zero
+            return
+        }
+        product.description = currentProduct.name
+        product.unitPrice = currentProduct.salePrice
     }
     
     func getProducts() {
