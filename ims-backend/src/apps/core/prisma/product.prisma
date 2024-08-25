@@ -9,4 +9,5 @@ model Product {
   updatedAt     DateTime
   deletedAt     DateTime?
   images        String[]
+  invoices      Invoice[]
 }

@@ -2,6 +2,5 @@ model Report {
     id          Int      @id @default(autoincrement())
     description String
     createdAt   DateTime
-    seller      Seller   @relation(fields: [sellerId], references: [id])
     sellerId    Int
 }

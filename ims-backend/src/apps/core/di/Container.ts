@@ -44,6 +44,11 @@ import ClientEnabler from '../../ims/api/infrastructure/authentication/credentia
 import EnableController from '../../ims/api/infrastructure/express/controllers/authentication/EnableController';
 import DisableController from '../../ims/api/infrastructure/express/controllers/authentication/DisableController';
 import ClientRemover from '../../ims/api/infrastructure/authentication/credentials/ClientRemover';
+import CreateInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/CreateInvoiceController';
+import CreateInvoiceService from '../../ims/api/application/invoices/CreateInvoiceService';
+import InvoiceCreator from '../../ims/api/infrastructure/invoices/InvoiceCreator';
+import PrismaInvoiceRepository from '../../ims/api/infrastructure/invoices/repositories/PrismaInvoiceRepository';
+import FetchInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/FetchInvoiceController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -116,6 +121,13 @@ export default class Container {
       })
       .register({
         imageUploader: asClass(AWSFileUploader).singleton(),
+      })
+      .register({
+        createInvoiceController: asClass(CreateInvoiceController).singleton(),
+        fetchInvoiceController: asClass(FetchInvoiceController).singleton(),
+        createInvoiceService: asClass(CreateInvoiceService).singleton(),
+        invoiceCreator: asClass(InvoiceCreator).singleton(),
+        invoiceRepository: asClass(PrismaInvoiceRepository).singleton(),
       });
   }
 
