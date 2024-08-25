@@ -58,4 +58,8 @@ export default class PrismaInvoiceRepository implements CrudRepository<CreateInv
       },
     });
   }
+
+  async count(): Promise<number> {
+    return await this.database.invoice.count();
+  }
 }

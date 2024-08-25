@@ -49,6 +49,7 @@ import CreateInvoiceService from '../../ims/api/application/invoices/CreateInvoi
 import InvoiceCreator from '../../ims/api/infrastructure/invoices/InvoiceCreator';
 import PrismaInvoiceRepository from '../../ims/api/infrastructure/invoices/repositories/PrismaInvoiceRepository';
 import FetchInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/FetchInvoiceController';
+import CountInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/CountInvoiceController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -125,6 +126,7 @@ export default class Container {
       .register({
         createInvoiceController: asClass(CreateInvoiceController).singleton(),
         fetchInvoiceController: asClass(FetchInvoiceController).singleton(),
+        countInvoiceController: asClass(CountInvoiceController).singleton(),
         createInvoiceService: asClass(CreateInvoiceService).singleton(),
         invoiceCreator: asClass(InvoiceCreator).singleton(),
         invoiceRepository: asClass(PrismaInvoiceRepository).singleton(),
