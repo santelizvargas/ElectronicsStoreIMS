@@ -12,6 +12,8 @@ private enum Constants {
     static let imageSize: CGFloat = 20
     static let buttonHeight: CGFloat = 40
     static let textFieldWidth: CGFloat = 300
+    static let minOpacity: CGFloat = 0.6
+    static let maxOpacity: CGFloat = 1
     static let hasBorder: Bool = true
     static let addRowImage: String = "plus"
     static let previewImage: String = "eye"
@@ -68,6 +70,8 @@ struct InvoiceSaleView: View {
                     buttonHeight: Constants.buttonHeight
                 )
             )
+            .disabled(viewModel.disableGenerateInvoice)
+            .opacity(viewModel.disableGenerateInvoice ? Constants.minOpacity : Constants.maxOpacity)
         }
         .padding(.vertical)
     }
@@ -128,6 +132,8 @@ struct InvoiceSaleView: View {
                         buttonHeight: Constants.buttonHeight
                     )
                 )
+                .disabled(viewModel.disableAddNewRow)
+                .opacity(viewModel.disableAddNewRow ? Constants.minOpacity : Constants.maxOpacity)
             }
             .padding(.vertical)
             
@@ -167,9 +173,12 @@ struct InvoiceSaleView: View {
                 ForEach($viewModel.invoiceSaleModel.products) { $product in
                     GridRow {
                         IMSTextField(
-                            text: $product.code.allowOnlyNumbers,
+                            text: $product.code,
                             hasBorder: true
                         )
+                        .onChange(of: product.code) { _, id in
+                            viewModel.setProductValues(for: id, with: &product)
+                        }
                         
                         IMSTextField(
                             text: $product.amount.allowOnlyNumbers,
@@ -209,6 +218,8 @@ struct InvoiceSaleView: View {
                                 .foregroundStyle(.red)
                         }
                         .buttonStyle(.plain)
+                        .disabled(viewModel.disableRemoveRow)
+                        .opacity(viewModel.disableRemoveRow ? Constants.minOpacity : Constants.maxOpacity)
                     }
                 }
             }

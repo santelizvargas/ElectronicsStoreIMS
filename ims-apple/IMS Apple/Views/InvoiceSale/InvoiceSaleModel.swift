@@ -23,7 +23,7 @@ struct InvoiceSaleRowModel: Identifiable {
     var totalPrice: Double
     
     init(code: String = "",
-         amount: String = "",
+         amount: String = "1",
          description: String = "",
          unitPrice: Double = 0,
          totalPrice: Double = 0) {
