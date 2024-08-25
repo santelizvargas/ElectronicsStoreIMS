@@ -4,6 +4,8 @@ import Container from '../../di/Container';
 import UpdatePasswordController from '../../../ims/api/infrastructure/express/controllers/authentication/UpdatePasswordController';
 import RegisterController from '../../../ims/api/infrastructure/express/controllers/authentication/RegisterController';
 import AuthenticationFetchController from '../../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
+import EnableController from '../../../ims/api/infrastructure/express/controllers/authentication/EnableController';
+import DisableController from '../../../ims/api/infrastructure/express/controllers/authentication/DisableController';
 
 export const register = function (app: Express): void {
   const container = new Container().invoke();
@@ -15,6 +17,8 @@ export const register = function (app: Express): void {
   const fetchController: AuthenticationFetchController = container.resolve<AuthenticationFetchController>(
     'authenticationFetchController',
   );
+  const enableController: EnableController = container.resolve<EnableController>('enableController');
+  const disableController: DisableController = container.resolve<DisableController>('disableController');
 
   app.post(
     '/auth/login',
@@ -31,4 +35,7 @@ export const register = function (app: Express): void {
   app.post('/auth/register', registerController.rules, registerController.invoke.bind(registerController));
 
   app.get('/auth', fetchController.invoke.bind(fetchController));
+
+  app.put('/auth/enable', enableController.rules, enableController.invoke.bind(enableController));
+  app.delete('/auth/disable', disableController.rules, disableController.invoke.bind(disableController));
 };

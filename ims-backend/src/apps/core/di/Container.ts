@@ -38,6 +38,12 @@ import FetchAuthenticationService from '../../ims/api/application/authentication
 import AuthenticationFetchController from '../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
 import ClientFetcher from '../../ims/api/infrastructure/authentication/credentials/ClientFetcher';
 import { AWSFileUploader } from '../utils/AWSUploaderFile';
+import DisableUserService from '../../ims/api/application/authentication/DisableUserService';
+import EnableUserService from '../../ims/api/application/authentication/EnableUserService';
+import ClientEnabler from '../../ims/api/infrastructure/authentication/credentials/ClientEnabler';
+import EnableController from '../../ims/api/infrastructure/express/controllers/authentication/EnableController';
+import DisableController from '../../ims/api/infrastructure/express/controllers/authentication/DisableController';
+import ClientRemover from '../../ims/api/infrastructure/authentication/credentials/ClientRemover';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -69,7 +75,11 @@ export default class Container {
         authenticationService: asClass(AuthenticationService).singleton(),
         registrationService: asClass(RegistrationService).singleton(),
         fetchAuthenticationService: asClass(FetchAuthenticationService).singleton(),
+        disableService: asClass(DisableUserService).singleton(),
+        enableService: asClass(EnableUserService).singleton(),
         authenticationController: asClass(AuthenticationController).singleton(),
+        enableController: asClass(EnableController).singleton(),
+        disableController: asClass(DisableController).singleton(),
         register: asClass(CredentialsClientRegister).singleton(),
         passwordUpdater: asClass(CredentialsPasswordUpdater).singleton(),
         updatePasswordService: asClass(UpdatePasswordService).singleton(),
@@ -77,6 +87,8 @@ export default class Container {
         registerController: asClass(RegisterController).singleton(),
         authenticationFetchController: asClass(AuthenticationFetchController).singleton(),
         authenticationFetcher: asClass(ClientFetcher).singleton(),
+        enableUser: asClass(ClientEnabler).singleton(),
+        removerUser: asClass(ClientRemover).singleton(),
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),

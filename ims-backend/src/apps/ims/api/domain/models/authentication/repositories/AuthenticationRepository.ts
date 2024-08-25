@@ -6,4 +6,6 @@ export interface AuthenticationRepository {
   findAll(): Promise<Omit<User, 'password'>[]>;
   findByCredentials(email: string, password: string): Promise<User | null>;
   updatePassword(email: string, password: string): Promise<User>;
+  enable(id: number): Promise<void>;
+  disable(id: number): Promise<void>;
 }

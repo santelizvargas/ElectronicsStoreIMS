@@ -42,6 +42,9 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       omit: {
         password: true,
       },
+      where: {
+        deletedAt: null,
+      },
     });
 
     return users.map((user) => ({
@@ -63,6 +66,7 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       where: {
         email,
         password,
+        deletedAt: null,
       },
     });
   }
@@ -82,6 +86,28 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       },
       data: {
         password,
+      },
+    });
+  }
+
+  public async enable(id: number): Promise<void> {
+    await this.database.user.update({
+      where: {
+        id,
+      },
+      data: {
+        deletedAt: null,
+      },
+    });
+  }
+
+  public async disable(id: number): Promise<void> {
+    await this.database.user.update({
+      where: {
+        id,
+      },
+      data: {
+        deletedAt: new Date(),
       },
     });
   }
