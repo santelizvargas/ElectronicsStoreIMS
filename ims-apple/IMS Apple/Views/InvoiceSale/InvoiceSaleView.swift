@@ -23,6 +23,7 @@ private enum Constants {
 struct InvoiceSaleView: View {
     @ObservedObject private var viewModel: InvoiceSaleViewModel = InvoiceSaleViewModel()
     @State private var showProductList: Bool = false
+    @State private var showInvoicePreview: Bool = false
     
     var body: some View {
         VStack {
@@ -40,6 +41,9 @@ struct InvoiceSaleView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
+        .sheet(isPresented: $showInvoicePreview) {
+            InvoicePreviewView(invoiceSale: viewModel.invoiceSaleModel)
+        }
     }
     
     // MARK: - Header View
@@ -51,7 +55,9 @@ struct InvoiceSaleView: View {
             Spacer()
             
             Button("Previsualizar") {
-                
+                withAnimation {
+                    showInvoicePreview.toggle()
+                }
             }
             .buttonStyle(
                 GradientButtonStyle(
@@ -60,6 +66,8 @@ struct InvoiceSaleView: View {
                     gradientColors: [.redGradient, .orangeGradient]
                 )
             )
+            .disabled(viewModel.disableGenerateInvoice)
+            .opacity(viewModel.disableGenerateInvoice ? Constants.minOpacity : Constants.maxOpacity)
             
             Button("Generar Factura") {
                 
@@ -178,6 +186,7 @@ struct InvoiceSaleView: View {
                         )
                         .onChange(of: product.code) { _, id in
                             viewModel.setProductValues(for: id, with: &product)
+                            viewModel.setTotalPrice(for: &product)
                         }
                         
                         IMSTextField(
@@ -200,14 +209,12 @@ struct InvoiceSaleView: View {
                         )
                         .disabled(true)
                         
-                        IMSTextField(text: .constant(
-                            viewModel.totalPrice(
-                                amount: product.amount,
-                                price: product.unitPrice
-                            )
-                        ),
+                        IMSTextField(text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
                                      hasBorder: true)
                         .disabled(true)
+                        .onChange(of: product.amount) { _, _ in
+                            viewModel.setTotalPrice(for: &product)
+                        }
                         
                         Button {
                             viewModel.removeInvoiceRow(at: product.id)

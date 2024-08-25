@@ -58,6 +58,14 @@ final class InvoiceSaleViewModel: ObservableObject {
         product.unitPrice = currentProduct.salePrice
     }
     
+    func setTotalPrice(for product: inout InvoiceSaleRowModel) {
+        guard let amount = Double(product.amount) else {
+            product.totalPrice = .zero
+            return
+        }
+        product.totalPrice = amount * product.unitPrice
+    }
+    
     func getProducts() {
         Task { @MainActor in
             do {

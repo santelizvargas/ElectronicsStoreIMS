@@ -10,7 +10,7 @@ import Foundation
 struct InvoiceSaleModel {
     var clientName: String
     var clientPhoneNumber: String
-    var date: Date = .now
+    let createAt: String = "Agosto 02, 2024"
     var products: [InvoiceSaleRowModel]
 }
 
