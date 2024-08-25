@@ -7,6 +7,11 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
   constructor(private database: PrismaClient) {}
 
   public async create(data: OmittedUser): Promise<User & { roles: Role[] }> {
+    const defaultRole = await this.database.role.findFirst({
+      where: {
+        name: 'Vendedor',
+      },
+    });
     const user = await this.database.user.create({
       relationLoadStrategy: 'join',
       include: {
@@ -20,6 +25,11 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
         ...data,
         createdAt: new Date(),
         updatedAt: new Date(),
+        roles: {
+          create: {
+            roleId: defaultRole?.id || 0,
+          },
+        },
       },
     });
 
