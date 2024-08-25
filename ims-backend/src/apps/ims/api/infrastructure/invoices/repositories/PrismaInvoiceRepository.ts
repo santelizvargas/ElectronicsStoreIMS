@@ -27,11 +27,22 @@ export default class PrismaInvoiceRepository implements CrudRepository<CreateInv
         ...model,
         createdAt: new Date(),
         products: {
-          connect: model.products,
+          connect: model.products.map((product) => ({
+            id: product.id,
+          })),
+        },
+        details: {
+          create: model.products.map((product) => ({
+            productName: product.name,
+            productQuantity: product.quantity,
+            productPrice: product.price,
+            createdAt: new Date(),
+          })),
         },
       },
       include: {
         products: true,
+        details: true,
       },
     });
   }
