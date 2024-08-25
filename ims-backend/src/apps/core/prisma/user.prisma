@@ -7,7 +7,6 @@ model User {
     phone          String     @unique
     password       String
     address        String
-    Seller         Seller?
     createdAt      DateTime?
     updatedAt      DateTime?
     deletedAt      DateTime?

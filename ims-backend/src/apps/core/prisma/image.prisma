@@ -1,8 +1,0 @@
-model Image {
-    id        Int       @id @default(autoincrement())
-    name      String
-    url       String
-    createdAt DateTime
-    udpatedAt DateTime
-    deletedAt DateTime?
-}

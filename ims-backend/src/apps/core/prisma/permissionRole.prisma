@@ -1,8 +1,0 @@
-model PermissionRoles {
-    permission   Permission @relation(fields: [permissionId], references: [id])
-    permissionId Int
-    role         Role       @relation(fields: [roleId], references: [id])
-    roleId       Int
-
-    @@id([permissionId, roleId])
-}

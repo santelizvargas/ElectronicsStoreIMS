@@ -1,8 +1,0 @@
-model Seller {
-    id      Int      @id @default(autoincrement())
-    code    String   @unique
-    reports Report[]
-    user    User     @relation(fields: [userId], references: [id])
-    userId  Int      @unique
-    invoice Invoice?
-}
