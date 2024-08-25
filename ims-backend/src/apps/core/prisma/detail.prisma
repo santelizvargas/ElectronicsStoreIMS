@@ -1,0 +1,9 @@
+model Detail {
+  id              Int      @id @default(autoincrement())
+  productName     String
+  productQuantity Int
+  productPrice    Float
+  invoice         Invoice  @relation(fields: [invoiceId], references: [id])
+  invoiceId       Int
+  createdAt       DateTime
+}

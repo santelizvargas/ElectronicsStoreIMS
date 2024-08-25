@@ -5,4 +5,5 @@ model Invoice {
     totalAmount            Float
     products               Product[]
     createdAt              DateTime
+    details                Detail[]
 }
