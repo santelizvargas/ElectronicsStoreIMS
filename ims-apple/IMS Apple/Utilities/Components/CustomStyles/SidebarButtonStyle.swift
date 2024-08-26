@@ -18,22 +18,24 @@ private enum Constants {
 // MARK: - Sidebar Button Style
 
 struct SidebarButtonStyle: ButtonStyle {
-    private let iconName: String
+    private let iconName: String?
     private let isSelected: Bool
     
-    init(iconName: String, isSelected: Bool) {
+    init(iconName: String? = nil, isSelected: Bool) {
         self.iconName = iconName
         self.isSelected = isSelected
     }
     
     func makeBody(configuration: Configuration) -> some View {
         HStack {
-            Image(systemName: iconName)
-                .resizable()
-                .frame(
-                    width: Constants.imageSize,
-                    height: Constants.imageSize
-                )
+            if let iconName {
+                Image(systemName: iconName)
+                    .resizable()
+                    .frame(
+                        width: Constants.imageSize,
+                        height: Constants.imageSize
+                    )
+            }
             
             configuration.label
         }
@@ -57,6 +59,7 @@ struct SidebarButtonStyle: ButtonStyle {
             }
         }
         .clipShape(RoundedRectangle(cornerRadius: Constants.cornerRadius))
+        .contentShape(Rectangle())
     }
 }
 

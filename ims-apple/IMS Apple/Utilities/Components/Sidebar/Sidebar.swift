@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import SwiftData
 
 // MARK: - View Constants
 
 private enum Constants {
     static let sectionTitlePadding: CGFloat = 5
     static let dividerPadding: CGFloat = -15
-    static let imageSize: CGFloat = 20
+    static let imageSize: CGFloat = 25
     
     enum AppIcon {
         static let width: CGFloat = 200
@@ -24,9 +25,12 @@ private enum Constants {
 
 struct Sidebar: View {
     @Binding private var itemSelected: SidebarItem
+    private let userLogged: UserModelPersistence?
     
-    init(itemSelected: Binding<SidebarItem>) {
+    init(itemSelected: Binding<SidebarItem>,
+         userLogged: UserModelPersistence?) {
         _itemSelected = itemSelected
+        self.userLogged = userLogged
     }
     
     var body: some View {
@@ -64,9 +68,9 @@ struct Sidebar: View {
     // MARK: - Section List View
     
     private var sectionListView: some View {
-        ForEach(Array(SidebarSection.sidebarCases.enumerated()), id: \.offset) { index, section in
+        ForEach(SidebarSection.allCases, id: \.self) { section in
             VStack(alignment: .leading, spacing: .zero) {
-                if index != .zero {
+                if section != .user {
                     CustomDivider()
                         .padding(.bottom)
                 }
@@ -76,10 +80,35 @@ struct Sidebar: View {
                     .foregroundStyle(.imsGraySecundary)
                     .padding(.bottom, Constants.sectionTitlePadding)
                 
-                itemListView(items: section.itemList)
+                if section == .user {
+                    profileButton
+                } else {
+                    itemListView(items: section.itemList)
+                }
             }
         }
         .isOS(.iOS) { $0.onKeyboardAppear() }
+    }
+    
+    private var profileButton: some View {
+        Button {
+            withAnimation(.snappy) {
+                itemSelected = .profile
+            }
+        } label: {
+            HStack {
+                ProfileImage(fullName: userShortName, size: Constants.imageSize)
+                
+                Text(userShortName)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
+        }
+        .buttonStyle(
+            SidebarButtonStyle(
+                isSelected: itemSelected == .profile
+            )
+        )
+        .contentShape(Rectangle())
     }
     
     // MARK: - Item List View
@@ -99,6 +128,13 @@ struct Sidebar: View {
             )
             .contentShape(Rectangle())
         }
+    }
+    
+    private var userShortName: String {
+        guard let userLogged else { return "" }
+        let firstName = userLogged.firstName.components(separatedBy: " ").first ?? ""
+        let lastName = userLogged.lastName.components(separatedBy: " ").first ?? ""
+        return "\(firstName) \(lastName)"
     }
 }
 

@@ -15,7 +15,7 @@ private enum Constants {
 }
 
 struct MainView: View {
-    @State private var itemSelected: SidebarItem = .graphs
+    @State private var itemSelected: SidebarItem = .profile
     @Binding private var navigationPath: NavigationPath
     @ObservedObject private var viewModel: MainViewViewModel = MainViewViewModel()
     
@@ -31,7 +31,7 @@ struct MainView: View {
     
     var body: some View {
         NavigationSplitView {
-            Sidebar(itemSelected: $itemSelected)
+            Sidebar(itemSelected: $itemSelected, userLogged: viewModel.userLogged)
         } detail: {
             VStack(spacing: .zero) {
                 Breadcrumb(routeList: [sectionSelected.name, itemSelected.name])
@@ -48,17 +48,14 @@ struct MainView: View {
             .navigationTitle(sectionSelected.name)
             .toolbarBackground(.imsPrimary)
             .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    if itemSelected != .productList {
-                        profileButton
-                    }
-                }
-                
                 if itemSelected == .profile {
                     ToolbarItem(placement: .destructiveAction) {
                         logoutButton
                     }
                 }
+            }
+            .onAppear {
+                viewModel.getUserLogged()
             }
         }
         .navigationBarBackButtonHidden()
@@ -74,17 +71,6 @@ struct MainView: View {
             case .productList: ProductListView()
             case .profile: ProfileView()
         }
-    }
-    
-    private var profileButton: some View {
-        Button {
-            withAnimation {
-                itemSelected = .profile
-            }
-        } label: {
-            ProfileImage(fullName: "Juan Perez")
-        }
-        .buttonStyle(.plain)
     }
     
     private var logoutButton: some View {

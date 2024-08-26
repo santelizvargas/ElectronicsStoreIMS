@@ -8,10 +8,10 @@
 import Foundation
 
 enum SidebarSection: CaseIterable {
+    case user
     case dashboard
     case inventory
     case invoicing
-    case user
     
     var name: String {
         switch self {

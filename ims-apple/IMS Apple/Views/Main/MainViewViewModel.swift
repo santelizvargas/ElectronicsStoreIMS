@@ -9,6 +9,7 @@ import Foundation
 
 final class MainViewViewModel: ObservableObject {
     @Published var logoutSuccess: Bool = false
+    @Published var userLogged: UserModelPersistence?
     
     private var authenticationManager: AuthenticationManager = AuthenticationManager()
     
@@ -16,6 +17,15 @@ final class MainViewViewModel: ObservableObject {
         do {
             try authenticationManager.logout()
             logoutSuccess = true
+        } catch {
+            guard let error = error as? DataManagerError else { return }
+            debugPrint(error.description)
+        }
+    }
+    
+    func getUserLogged() {
+        do {
+            userLogged = try authenticationManager.userLogged()
         } catch {
             guard let error = error as? DataManagerError else { return }
             debugPrint(error.description)
