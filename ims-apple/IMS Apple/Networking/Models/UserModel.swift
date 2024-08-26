@@ -78,7 +78,7 @@ struct UserModel: Decodable, Identifiable {
 }
 
 struct RoleModel: Decodable, Identifiable {
-    let id: String
+    let id: Int
     let name: String
     let description: String
     let createdAt: String?
