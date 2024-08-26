@@ -47,7 +47,7 @@ final class InvoiceSaleViewModel: ObservableObject {
     }
     
     func setProductValues(for id: String, with product: inout InvoiceSaleRowModel) {
-        guard let productId = Int(id),
+        guard let productId = Int(id.trimmingCharacters(in: .whitespaces)),
               let currentProduct = currentProducts.first(where: { $0.id == productId })
         else {
             product.description = ""

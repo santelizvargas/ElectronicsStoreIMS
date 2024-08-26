@@ -41,9 +41,6 @@ struct InvoiceSaleView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
-        .sheet(isPresented: $showInvoicePreview) {
-            InvoicePreviewView(invoiceSale: viewModel.invoiceSaleModel)
-        }
     }
     
     // MARK: - Header View
@@ -68,6 +65,16 @@ struct InvoiceSaleView: View {
             )
             .disabled(viewModel.disableGenerateInvoice)
             .opacity(viewModel.disableGenerateInvoice ? Constants.minOpacity : Constants.maxOpacity)
+            .isOS(.iOS) { view in
+                view.sheet(isPresented: $showInvoicePreview) {
+                    InvoicePreviewView(invoiceSale: viewModel.invoiceSaleModel)
+                }
+            }
+            .isOS(.macOS) { view in
+                view.popover(isPresented: $showInvoicePreview) {
+                    InvoicePreviewView(invoiceSale: viewModel.invoiceSaleModel)
+                }
+            }
             
             Button("Generar Factura") {
                 
