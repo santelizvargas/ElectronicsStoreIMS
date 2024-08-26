@@ -15,7 +15,7 @@ private enum Constants {
     static let productGridSpacing: CGFloat = 30
     static let cornerRadius: CGFloat = 10
     static let maxWidth: CGFloat = 700
-    static let minHeight: CGFloat = 500
+    static let minHeight: CGFloat = 600
     static let logoSize: CGFloat = 150
     static let ivaValue: CGFloat = 0.15
 }
@@ -106,10 +106,10 @@ struct InvoicePreviewView: View {
         .padding(.vertical)
         .padding(.horizontal, Constants.productGridSpacing)
         .frame(
-            maxWidth: Constants.maxWidth,
-            minHeight: Constants.maxWidth,
+            minHeight: Constants.minHeight,
             maxHeight: .infinity
         )
+        .frame(width: Constants.maxWidth)
         .foregroundStyle(.black)
         .background {
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
