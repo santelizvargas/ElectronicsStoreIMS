@@ -52,9 +52,6 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       omit: {
         password: true,
       },
-      where: {
-        deletedAt: null,
-      },
     });
 
     return users.map((user) => ({
