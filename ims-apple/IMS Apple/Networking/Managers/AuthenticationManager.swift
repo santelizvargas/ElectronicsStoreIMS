@@ -22,7 +22,7 @@ final class AuthenticationManager {
     
     @discardableResult
     func userLogged() throws -> UserModelPersistence {
-        guard let user = try fetchTest().first
+        guard let user = try fetchUsers().first
         else { throw DataManagerError.fetchModels }
         return user
     }
@@ -33,9 +33,11 @@ final class AuthenticationManager {
         dataManager.save(model: user)
     }
     
-    private func fetchTest() throws -> [UserModelPersistence] {
+    private func fetchUsers() throws -> [UserModelPersistence] {
         try dataManager.fetch()
     }
+    
+    // MARK: - Login
     
     @discardableResult
     func login(email: String, password: String) async throws -> UserModel {
@@ -57,11 +59,15 @@ final class AuthenticationManager {
         }
     }
     
+    // MARK: - Logout
+    
     func logout() throws {
         let user = try userLogged()
         try dataManager.removeAll()
         debugPrint("--- Logout: \(user.firstName) ---")
     }
+    
+    // MARK: - Update Password
     
     func updatePassword(email: String,
                         currentPassword: String,
@@ -115,6 +121,8 @@ final class AuthenticationManager {
         }
     }
     
+    // MARK: - Convert To Dictionaty
+    
     private func convertToDictionaty<T: Codable>(data: T) async throws -> [String: Any] {
         do {
             let jsonData = try JSONEncoder().encode(data)
@@ -122,6 +130,36 @@ final class AuthenticationManager {
                                                               options: .mutableContainers) as? [String: Any]
             guard let parameters else { throw IMSError.somethingWrong }
             return parameters
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
+    
+    // MARK: - Enable User
+    
+    func enableUser(id: Int) async throws {
+        let parameters: [String: Any] = ["id": id]
+        
+        do {
+            let data = try await networkManager.makeRequest(path: .enableUser,
+                                                            with: parameters,
+                                                            httpMethod: .put)
+            let _ = try JSONDecoder().decode(UserAuthResponse.self, from: data)
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
+    
+    // MARK: - Disable User
+    
+    func disableUser(id: Int) async throws {
+        let parameters: [String: Any] = ["id": id]
+        
+        do {
+            let data = try await networkManager.makeRequest(path: .disableUser,
+                                                            with: parameters,
+                                                            httpMethod: .delete)
+            let _ = try JSONDecoder().decode(UserAuthResponse.self, from: data)
         } catch {
             throw IMSError.somethingWrong
         }

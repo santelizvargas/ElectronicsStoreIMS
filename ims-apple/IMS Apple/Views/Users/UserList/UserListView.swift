@@ -94,12 +94,13 @@ struct UserListView: View {
                     let shortName = getShortName(names: user.firstName, lastName: user.lastName)
                     
                     HStack {
-                        ProfileImage(fullName: shortName)
+                        ProfileImage(fullName: shortName, isActive: user.deletedAt == nil)
                         
                         Text(shortName)
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding()
+                            .foregroundStyle(user.deletedAt == nil ? .imsWhite : .imsGraySecundary)
                     }
                     
                     userPropertyTextView(text: user.email)
@@ -114,7 +115,11 @@ struct UserListView: View {
                         }
                     }
                     
-                    userPropertyTextView(text: user.updatedAt.dayMonthYear)
+                    HStack {
+                        userPropertyTextView(text: user.updatedAt.dayMonthYear)
+                        
+                        enableAndDisableButton(for: user.id, isEnable: user.deletedAt == nil)
+                    }
                 }
             }
         }
@@ -126,6 +131,29 @@ struct UserListView: View {
                 CustomProgressView()
             }
         }
+    }
+    
+    // MARK: - Enable Disable Button
+    
+    private func enableAndDisableButton(for userId: Int, isEnable: Bool) -> some View {
+        Menu {
+            if isEnable {
+                Button("Desactivar usuario") {
+                    viewModel.disableUser(for: userId)
+                }
+            } else {
+                Button("Activar usuario") {
+                    viewModel.enableUser(for: userId)
+                }
+            }
+        } label: {
+            Image(systemName: "line.3.horizontal")
+                .foregroundStyle(.imsWhite)
+                .contentShape(Rectangle())
+        }
+        .menuStyle(.borderlessButton)
+        .menuIndicator(.hidden)
+        .frame(width: Constants.mainSpacing)
     }
     
     private func userPropertyTextView(text: String) -> some View {
