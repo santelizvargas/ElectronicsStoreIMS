@@ -18,6 +18,11 @@ struct UserResponse: Decodable {
     let data: [UserModel]
 }
 
+struct UserAuthResponse: Decodable {
+    let message: String
+    let code: Int
+}
+
 struct UpdatePasswordResponse: Decodable {
     let message: String
     let code: Int
@@ -71,7 +76,6 @@ struct UserModel: Decodable, Identifiable {
     let phone: String
     let address: String
     let roles: [RoleModel]
-    let imageId: String?
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?

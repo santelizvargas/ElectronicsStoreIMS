@@ -19,16 +19,25 @@ private enum Constants {
 struct ProfileImage: View {
     private let fullName: String
     private let size: CGFloat
+    private let isActive: Bool
     
     init(fullName: String, 
-         size: CGFloat = Constants.defaultSize) {
+         size: CGFloat = Constants.defaultSize,
+         isActive: Bool = true) {
         self.fullName = fullName
         self.size = size
+        self.isActive = isActive
     }
     
     var body: some View {
         Circle()
-            .fill(LeftGradient(colors: [.purpleGradient, .blueGradient]))
+            .fill(
+                LeftGradient(
+                    colors: isActive 
+                    ? [.purpleGradient, .blueGradient]
+                    : [.imsGraySecundary]
+                )
+            )
             .frame(width: size)
             .overlay {
                 Text(abbreviations)

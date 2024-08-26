@@ -39,4 +39,34 @@ final class UserListViewModel: ObservableObject {
             }
         }
     }
+    
+    func enableUser(for userId: Int) {
+        isRequestInProgress = true
+        Task { @MainActor in
+            do {
+                try await authenticationManager.enableUser(id: userId)
+                isRequestInProgress = false
+                isReloadUsers = true
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func disableUser(for userId: Int) {
+        isRequestInProgress = true
+        Task { @MainActor in
+            do {
+                try await authenticationManager.disableUser(id: userId)
+                isRequestInProgress = false
+                isReloadUsers = true
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
 }
