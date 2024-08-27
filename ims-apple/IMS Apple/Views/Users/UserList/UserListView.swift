@@ -108,10 +108,10 @@ struct UserListView: View {
                         
                         userPropertyTextView(text: user.email)
                         
-                        if user.roles.isEmpty {
+                        if user.roles?.isEmpty ?? true {
                             userPropertyTextView(text: "-")
                         } else {
-                            if let rol = user.roles.first {
+                            if let rol = user.roles?.first {
                                 userPropertyTextView(text: rol.name)
                             }
                         }
@@ -119,7 +119,7 @@ struct UserListView: View {
                         HStack {
                             userPropertyTextView(text: user.updatedAt.dayMonthYear)
                             
-                            if let id = user.roles.first?.id,
+                            if let id = user.roles?.first?.id,
                                id != UserRole.owner.id {
                                 enableAndDisableButton(for: user, isEnable: user.deletedAt == nil)
                             }
@@ -142,7 +142,7 @@ struct UserListView: View {
     
     private func enableAndDisableButton(for user: UserModel, isEnable: Bool) -> some View {
         Menu {
-            if let firstRole = user.roles.first,
+            if let firstRole = user.roles?.first,
                let currentRole = UserRole(rawValue: firstRole.id) {
                 changeRoleMenu(
                     email: user.email,

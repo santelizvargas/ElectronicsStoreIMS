@@ -194,4 +194,16 @@ final class AuthenticationManager {
             throw IMSError.somethingWrong
         }
     }
+    
+    // MARK: - Get User Counts
+    
+    func getUserCounts() async throws -> UsersChartResponse {
+        do {
+            let data = try await networkManager.makeRequest(path: .usersChart)
+            let response = try JSONDecoder().decode(UsersChartResponse.self, from: data)
+            return response
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
 }

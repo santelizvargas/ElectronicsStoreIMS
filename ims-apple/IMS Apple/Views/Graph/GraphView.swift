@@ -79,13 +79,19 @@ struct GraphView: View {
     
     // MARK: - User Card View
     
+    @ViewBuilder
     private var usersCard: some View {
+        let users = Donut.getUserCount(
+            enabled: viewModel.enabledUserCount,
+            disabled: viewModel.disabledUserCount
+        )
+        
         ChartContainer(title: "Usuarios") {
             HStack(spacing: Constants.spacing) {
-                DonutChart(data: Donut.users)
+                DonutChart(data: users)
                 
                 VStack(alignment: .leading) {
-                    ForEach(Donut.users) { item in
+                    ForEach(users) { item in
                         HStack {
                             RoundedRectangle(cornerRadius: Constants.cornerRadius)
                                 .fill(LeftGradient(colors: item.gradientColors))
