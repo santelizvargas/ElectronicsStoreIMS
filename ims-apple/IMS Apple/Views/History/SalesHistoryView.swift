@@ -21,7 +21,7 @@ private enum Constants {
 }
 
 struct SalesHistoryView: View {
-    @State var pageSelected: Int = 0
+    @ObservedObject private var viewModel: SalesHistoryViewModel = .init()
     
     var body: some View {
         VStack {
@@ -51,7 +51,7 @@ struct SalesHistoryView: View {
             GridRow {
                 Group {
                     Text("Cliente")
-                    Text("Telefono")
+                    Text("Identificacion")
                     Text("Fecha")
                         .gridCellColumns(Constants.gridCellColumns)
                 }
@@ -85,12 +85,12 @@ struct SalesHistoryView: View {
         GridRow {
             ScrollView(showsIndicators: false) {
                 Grid(horizontalSpacing: .zero) {
-                    ForEach(HistoryModel.mockData) { item in
+                    ForEach(viewModel.invoices) { item in
                         GridRow {
                             Group {
-                                Text(item.name)
-                                Text(item.phoneNumber)
-                                Text(item.date)
+                                Text(item.customerName)
+                                Text(item.customerIdentification)
+                                Text(item.createdAt.dayMonthYear)
                                 Button("Ver factura") {
                                     
                                 }
@@ -102,24 +102,14 @@ struct SalesHistoryView: View {
                         .padding(.vertical)
                     }
                 }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
             .gridCellColumns(Constants.columnsNumber)
         }
-    }
-    
-    // MARK: - Page Number Button
-    
-    private func pageButton(page: Int) -> some View {
-        Button(page.description) {
-            withAnimation {
-                pageSelected = page
+        .overlay {
+            if viewModel.isRequestInProgress {
+                CustomProgressView()
             }
-        }
-        .frame(width: Constants.Button.width, height: Constants.Button.height)
-        .buttonStyle(.plain)
-        .background {
-            RoundedRectangle(cornerRadius: Constants.Button.cornerRadius)
-                .fill(pageSelected == page ? .blueGradient : .graySecundary)
         }
     }
 }

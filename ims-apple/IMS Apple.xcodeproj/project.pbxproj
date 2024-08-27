@@ -28,6 +28,7 @@
 		3376FDA82C7D8EEE00AFB99C /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDA72C7D8EEE00AFB99C /* UserRole.swift */; };
 		3376FDAA2C7E57BB00AFB99C /* InvoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */; };
 		3376FDAC2C7E592A00AFB99C /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */; };
+		3376FDAE2C7E5F2E00AFB99C /* SalesHistoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDAD2C7E5F2E00AFB99C /* SalesHistoryViewModel.swift */; };
 		338DF8292C645DE200F72772 /* Donut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8282C645DE200F72772 /* Donut.swift */; };
 		338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82A2C645E4D00F72772 /* DonutChart.swift */; };
 		338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82D2C64668B00F72772 /* ChartContainer.swift */; };
@@ -109,6 +110,7 @@
 		3376FDA72C7D8EEE00AFB99C /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceManager.swift; sourceTree = "<group>"; };
 		3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
+		3376FDAD2C7E5F2E00AFB99C /* SalesHistoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesHistoryViewModel.swift; sourceTree = "<group>"; };
 		338DF8282C645DE200F72772 /* Donut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donut.swift; sourceTree = "<group>"; };
 		338DF82A2C645E4D00F72772 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		338DF82D2C64668B00F72772 /* ChartContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContainer.swift; sourceTree = "<group>"; };
@@ -452,6 +454,7 @@
 			isa = PBXGroup;
 			children = (
 				35069C812C61C2E0001E854F /* SalesHistoryView.swift */,
+				3376FDAD2C7E5F2E00AFB99C /* SalesHistoryViewModel.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -756,6 +759,7 @@
 				BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */,
 				3364271A2C7A796E005AC207 /* ProductCodeView.swift in Sources */,
 				331664CB2C71E2EB00968A73 /* ProfileModels.swift in Sources */,
+				3376FDAE2C7E5F2E00AFB99C /* SalesHistoryViewModel.swift in Sources */,
 				33EEE8482C69822F001EC07F /* ProductListView.swift in Sources */,
 				338DF8342C64846000F72772 /* BarChart.swift in Sources */,
 				33A580392C759EA500C58AA2 /* RegisterUserViewModel.swift in Sources */,
