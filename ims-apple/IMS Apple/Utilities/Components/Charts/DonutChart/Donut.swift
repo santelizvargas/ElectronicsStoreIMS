@@ -20,8 +20,18 @@ extension Donut {
     static let products: [Donut] = [Donut(name: "Productos", value: 1220, gradientColors: [.purpleGradient, .blueGradient])]
     static let invoices: [Donut] = [Donut(name: "Facturas", value: 124 , gradientColors: [.purpleGradient, .blueGradient])]
     
-    static let users: [Donut] = [
-        Donut(name: "Deshabilitados", value: 2 , gradientColors: [.graySecundary, .graySecundary]),
-        Donut(name: "Habilitados", value: 6 , gradientColors: [.purpleGradient, .blueGradient])
-    ]
+    static func getUserCount(enabled: Int, disabled: Int) -> [Donut] {
+        [
+            Donut(
+                name: "Deshabilitados",
+                value: Double(disabled),
+                gradientColors: [.graySecundary, .graySecundary]
+            ),
+            Donut(
+                name: "Habilitados",
+                value: Double(enabled),
+                gradientColors: [.purpleGradient, .blueGradient]
+            )
+        ]
+    }
 }

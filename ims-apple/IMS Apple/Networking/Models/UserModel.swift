@@ -14,6 +14,13 @@ struct AuthenticationResponse: Decodable {
     let data: UserModel
 }
 
+struct UsersChartResponse: Decodable {
+    let users: [UserModel]
+    let suspended: [UserModel]
+    let usersCount: Int
+    let suspendedCount: Int
+}
+
 struct UserResponse: Decodable {
     let data: [UserModel]
 }
@@ -68,7 +75,7 @@ final class UserModelPersistence {
         self.phone = user.phone
         self.address = user.address
         
-        if let first = user.roles.first,
+        if let first = user.roles?.first,
            let role = UserRole(rawValue: first.id) {
             self.roleId = role.id
         }
@@ -83,7 +90,7 @@ struct UserModel: Decodable, Identifiable {
     let identification: String
     let phone: String
     let address: String
-    let roles: [RoleModel]
+    var roles: [RoleModel]?
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?
