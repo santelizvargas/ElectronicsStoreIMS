@@ -50,6 +50,7 @@ import InvoiceCreator from '../../ims/api/infrastructure/invoices/InvoiceCreator
 import PrismaInvoiceRepository from '../../ims/api/infrastructure/invoices/repositories/PrismaInvoiceRepository';
 import FetchInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/FetchInvoiceController';
 import CountInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/CountInvoiceController';
+import RevokeRoleController from '../../ims/api/infrastructure/express/controllers/rbac/RevokeRoleController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -116,6 +117,7 @@ export default class Container {
       })
       .register({
         assignRoleController: asClass(AssignRoleController).singleton(),
+        revokeRoleController: asClass(RevokeRoleController).singleton(),
         assignRoleService: asClass(AssignRoleService).singleton(),
         roleAssigner: asClass(RoleAssigner).singleton(),
         rbacRepository: asClass(PrismaRbacRepository).singleton(),

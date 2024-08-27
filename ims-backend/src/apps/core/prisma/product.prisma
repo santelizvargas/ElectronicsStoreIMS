@@ -5,6 +5,7 @@ model Product {
   stock         Int
   salePrice     Float
   purchasePrice Float
+  category      String
   createdAt     DateTime
   updatedAt     DateTime
   deletedAt     DateTime?

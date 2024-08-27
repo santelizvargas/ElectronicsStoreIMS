@@ -8,5 +8,6 @@ export type Product = {
   createdAt: Date | string;
   updatedAt: Date | string;
   deletedAt?: Date | string | null;
-  images?: string[]; // TODO: Update to Image[] when Image model is created
+  category: string;
+  images?: string[];
 };
