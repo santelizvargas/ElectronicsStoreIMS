@@ -51,6 +51,7 @@ import PrismaInvoiceRepository from '../../ims/api/infrastructure/invoices/repos
 import FetchInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/FetchInvoiceController';
 import CountInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/CountInvoiceController';
 import RevokeRoleController from '../../ims/api/infrastructure/express/controllers/rbac/RevokeRoleController';
+import UsersChartController from '../../ims/api/infrastructure/express/controllers/authentication/UsersChartController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -96,6 +97,7 @@ export default class Container {
         authenticationFetcher: asClass(ClientFetcher).singleton(),
         enableUser: asClass(ClientEnabler).singleton(),
         removerUser: asClass(ClientRemover).singleton(),
+        usersChartController: asClass(UsersChartController).singleton(),
       })
       .register({
         createProductService: asClass(CreateProductService).singleton(),

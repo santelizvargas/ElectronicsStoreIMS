@@ -6,6 +6,7 @@ import RegisterController from '../../../ims/api/infrastructure/express/controll
 import AuthenticationFetchController from '../../../ims/api/infrastructure/express/controllers/authentication/AuthenticationFetchController';
 import EnableController from '../../../ims/api/infrastructure/express/controllers/authentication/EnableController';
 import DisableController from '../../../ims/api/infrastructure/express/controllers/authentication/DisableController';
+import UsersChartController from '../../../ims/api/infrastructure/express/controllers/authentication/UsersChartController';
 
 export const register = function (app: Express): void {
   const container = new Container().invoke();
@@ -19,6 +20,7 @@ export const register = function (app: Express): void {
   );
   const enableController: EnableController = container.resolve<EnableController>('enableController');
   const disableController: DisableController = container.resolve<DisableController>('disableController');
+  const chartController: UsersChartController = container.resolve<UsersChartController>('usersChartController');
 
   app.post(
     '/auth/login',
@@ -38,4 +40,6 @@ export const register = function (app: Express): void {
 
   app.put('/auth/enable', enableController.rules, enableController.invoke.bind(enableController));
   app.delete('/auth/disable', disableController.rules, disableController.invoke.bind(disableController));
+
+  app.get('/auth/chart', chartController.invoke.bind(chartController));
 };

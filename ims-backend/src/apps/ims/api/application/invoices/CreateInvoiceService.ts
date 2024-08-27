@@ -3,7 +3,7 @@ import { Logger } from 'winston';
 import { Creator } from '../../../shared/domain/Creator';
 
 export type CreateInvoiceRequest = Omit<Invoice, 'id' | 'createdAt' | 'updatedAt' | 'deletedAt'> & {
-  products: { id: number; name: string; quantity: number; price: number }[];
+  products: { id: number; name: string; quantity: number; price: number; category: string }[];
 };
 
 export type CreateInvoiceResponse = {
