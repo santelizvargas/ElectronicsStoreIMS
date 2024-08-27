@@ -10,15 +10,6 @@ import SwiftUI
 // MARK: - Binding + OnlyNumbers
 
 extension Binding where Value == String {
-    private func filterInput(allowedCharacters: CharacterSet) -> Self {
-        DispatchQueue.main.async {
-            wrappedValue = wrappedValue.filter { character in
-                character.unicodeScalars.allSatisfy(allowedCharacters.contains)
-            }
-        }
-        return self
-    }
-    
     var allowOnlyNumbers: Self {
         DispatchQueue.main.async {
             let filtered = wrappedValue.filter { $0.isNumber }
@@ -30,8 +21,12 @@ extension Binding where Value == String {
     }
     
     var allowOnlyDecimalNumbers: Self {
-        var decimalCharacters: CharacterSet = .decimalDigits
-        decimalCharacters.insert(charactersIn: ".")
-        return filterInput(allowedCharacters: decimalCharacters)
+        DispatchQueue.main.async {
+            let filtered = wrappedValue.filter { $0.isNumber || $0 == "." }
+            if filtered != wrappedValue {
+                wrappedValue = filtered
+            }
+        }
+        return self
     }
 }
