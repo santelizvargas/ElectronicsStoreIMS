@@ -74,14 +74,16 @@ struct UserListView: View {
     // MARK: - Header List View
     
     private var headerListView: some View {
-        LazyVGrid(columns: columns) {
-            Group {
-                Text("Usuario")
-                Text("Email")
-                Text("Rol")
-                Text("Fecha")
+        Grid {
+            GridRow {
+                Group {
+                    Text("Usuario")
+                    Text("Email")
+                    Text("Rol")
+                    Text("Fecha")
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading)
         }
     }
     
@@ -89,36 +91,36 @@ struct UserListView: View {
     
     private var userListView: some View {
         ScrollView(showsIndicators: false) {
-            LazyVGrid(columns: columns) {
+            Grid {
                 ForEach(viewModel.users) { user in
                     let shortName = getShortName(names: user.firstName, lastName: user.lastName)
                     
-                    HStack {
-                        ProfileImage(fullName: shortName, isActive: user.deletedAt == nil)
+                    GridRow {
+                        HStack {
+                            ProfileImage(fullName: shortName, isActive: user.deletedAt == nil)
+                            
+                            Text(shortName)
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .padding()
+                                .foregroundStyle(user.deletedAt == nil ? .imsWhite : .imsGraySecundary)
+                        }
                         
-                        Text(shortName)
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .padding()
-                            .foregroundStyle(user.deletedAt == nil ? .imsWhite : .imsGraySecundary)
-                    }
-                    
-                    userPropertyTextView(text: user.email)
-                    
-                    if user.roles.isEmpty {
-                        Text("-")
-                    } else {
-                        ForEach(user.roles) { rol in
-                            VStack {
+                        userPropertyTextView(text: user.email)
+                        
+                        if user.roles.isEmpty {
+                            userPropertyTextView(text: "-")
+                        } else {
+                            if let rol = user.roles.first {
                                 userPropertyTextView(text: rol.name)
                             }
                         }
-                    }
-                    
-                    HStack {
-                        userPropertyTextView(text: user.updatedAt.dayMonthYear)
                         
-                        enableAndDisableButton(for: user.id, isEnable: user.deletedAt == nil)
+                        HStack {
+                            userPropertyTextView(text: user.updatedAt.dayMonthYear)
+                            
+                            enableAndDisableButton(for: user.id, isEnable: user.deletedAt == nil)
+                        }
                     }
                 }
             }
