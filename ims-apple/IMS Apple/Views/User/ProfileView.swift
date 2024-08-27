@@ -89,7 +89,7 @@ struct ProfileView: View {
                 Text(viewModel.shortName)
                     .font(.title.bold())
                 
-                Text(["Admin", "User"].joined(separator: " - "))
+                Text(viewModel.userInfo.role.name)
                     .font(.title2)
                 
                 Text(viewModel.userInfo.email)

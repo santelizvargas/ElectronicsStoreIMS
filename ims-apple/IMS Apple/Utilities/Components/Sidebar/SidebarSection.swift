@@ -31,7 +31,11 @@ enum SidebarSection: CaseIterable {
         }
     }
     
-    static var sidebarCases: [SidebarSection] {
-        SidebarSection.allCases.filter { $0 != .user }
+    static func getSidebarCases(role: UserRole) -> [SidebarSection] {
+        switch role {
+            case .seller: [.user, .invoicing]
+            case .supplier: [.user, .inventory]
+            default: SidebarSection.allCases
+        }
     }
 }

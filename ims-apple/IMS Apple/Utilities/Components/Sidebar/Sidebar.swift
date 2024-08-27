@@ -13,7 +13,7 @@ import SwiftData
 private enum Constants {
     static let sectionTitlePadding: CGFloat = 5
     static let dividerPadding: CGFloat = -15
-    static let imageSize: CGFloat = 25
+    static let imageSize: CGFloat = 20
     
     enum AppIcon {
         static let width: CGFloat = 200
@@ -68,7 +68,7 @@ struct Sidebar: View {
     // MARK: - Section List View
     
     private var sectionListView: some View {
-        ForEach(SidebarSection.allCases, id: \.self) { section in
+        ForEach(SidebarSection.getSidebarCases(role: userRole), id: \.self) { section in
             VStack(alignment: .leading, spacing: .zero) {
                 if section != .user {
                     CustomDivider()
@@ -135,6 +135,13 @@ struct Sidebar: View {
         let firstName = userLogged.firstName.components(separatedBy: " ").first ?? ""
         let lastName = userLogged.lastName.components(separatedBy: " ").first ?? ""
         return "\(firstName) \(lastName)"
+    }
+    
+    private var userRole: UserRole {
+        guard let roleId = userLogged?.roleId,
+              let role = UserRole(rawValue: roleId)
+        else { return .seller }
+        return role
     }
 }
 

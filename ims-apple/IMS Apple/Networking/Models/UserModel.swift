@@ -38,6 +38,7 @@ final class UserModelPersistence {
     let identification: String
     let phone: String
     let address: String
+    let roleId: Int?
     
     init(id: Int,
          firstName: String,
@@ -45,7 +46,8 @@ final class UserModelPersistence {
          email: String,
          identification: String, 
          phone: String,
-         address: String) {
+         address: String,
+         roleId: Int?) {
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -53,6 +55,7 @@ final class UserModelPersistence {
         self.identification = identification
         self.phone = phone
         self.address = address
+        self.roleId = roleId
     }
     
     /// Factory from user model entity
@@ -64,6 +67,11 @@ final class UserModelPersistence {
         self.identification = user.identification
         self.phone = user.phone
         self.address = user.address
+        
+        if let first = user.roles.first,
+           let role = UserRole(rawValue: first.id) {
+            self.roleId = role.id
+        }
     }
 }
 
