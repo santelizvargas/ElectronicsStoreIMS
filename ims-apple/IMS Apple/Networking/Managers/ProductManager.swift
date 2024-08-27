@@ -34,7 +34,8 @@ final class ProductManager {
                        description: String,
                        salePrice: Double,
                        purchasePrice: Double,
-                       stock: Int = 1) async throws {
+                       stock: Int = 1, 
+                       imageData: Data) async throws {
         let parameters: [String: Any] = [
             "name": name,
             "description": description,
@@ -44,7 +45,9 @@ final class ProductManager {
         ]
         
         do {
-            let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .post)
+            let data = try await networkManager.uploadImage(path: .products, 
+                                                            with: parameters,
+                                                            imageData: imageData)
             let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
             if response.data == nil, response.code == 500 { throw IMSError.uniqueNameKey }
             debugPrint("---\(response.message)---")

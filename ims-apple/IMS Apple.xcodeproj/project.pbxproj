@@ -75,6 +75,7 @@
 		BD56AE312C6FEBD20056FD18 /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD56AE302C6FEBD20056FD18 /* LoginViewModel.swift */; };
 		BD56AE342C6FF39A0056FD18 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD56AE332C6FF39A0056FD18 /* Security.framework */; };
 		BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */; };
+		BD62BDD22C7C26750093DBE7 /* NSMutableData+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD62BDD12C7C26750093DBE7 /* NSMutableData+String.swift */; };
 		BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */; };
 		BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */; };
 		BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */; };
@@ -160,6 +161,7 @@
 		BD56AE332C6FF39A0056FD18 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS17.5.sdk/System/Library/Frameworks/Security.framework; sourceTree = DEVELOPER_DIR; };
 		BD575F622C61D0F0001FF6F3 /* IMS-Apple-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "IMS-Apple-Info.plist"; sourceTree = SOURCE_ROOT; };
 		BD5D706E2C6BFC1D00AFD054 /* ExportPDFButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExportPDFButton.swift; sourceTree = "<group>"; };
+		BD62BDD12C7C26750093DBE7 /* NSMutableData+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSMutableData+String.swift"; sourceTree = "<group>"; };
 		BD6B27FF2C6F2E6B00BC73D2 /* HttpMethod.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpMethod.swift; sourceTree = "<group>"; };
 		BD6B28002C6F2E6B00BC73D2 /* IMSError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IMSError.swift; sourceTree = "<group>"; };
 		BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
@@ -314,6 +316,7 @@
 				350DA9382C704C5D0043567A /* Binding+OnlyNumber.swift */,
 				336AF5C02C744397009810A1 /* View+KeyboardReadable.swift */,
 				33708CDA2C748B9600BD811F /* String+DateFormatter.swift */,
+				BD62BDD12C7C26750093DBE7 /* NSMutableData+String.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -784,6 +787,7 @@
 				BD164AAF2C785DD70088B958 /* InvoiceSaleViewModel.swift in Sources */,
 				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,
 				3331062D2C6B171C0035644F /* ProductListViewModel.swift in Sources */,
+				BD62BDD22C7C26750093DBE7 /* NSMutableData+String.swift in Sources */,
 				33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */,
 				336AF5C72C747A91009810A1 /* CustomProgressView.swift in Sources */,
 				BD6B28092C6F2E6B00BC73D2 /* UserModel.swift in Sources */,

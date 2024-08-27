@@ -2,7 +2,7 @@
 //  AddProductViewModel.swift
 //  IMS Apple
 //
-//  Created by Diana Zeledon on 16/8/24.
+//  Created by Brandon Santeliz on 16/8/24.
 //
 
 import SwiftUI
@@ -12,12 +12,10 @@ final class AddProductViewModel: ObservableObject {
     @Published var avatarItem: PhotosPickerItem?
     @Published var productImage: Image?
     @Published var isRequestInProgress: Bool = false
-    @Published var name: String = ""
-    @Published var price: String = ""
-    @Published var stock: String = ""
-    @Published var description: String = ""
-    
-    private let productManager: ProductManager = ProductManager()
+    @Published var name: String = "Color carton"
+    @Published var price: String = "69"
+    @Published var stock: String = "69"
+    @Published var description: String = "Description"
     
     var isCreateDisabled: Bool {
         name.isEmpty ||
@@ -35,11 +33,16 @@ final class AddProductViewModel: ObservableObject {
         avatarItem = nil
     }
     
+    private let productManager: ProductManager = ProductManager()
+    private var imageData: Data?
+    
     func getProductImage() {
-        Task { @MainActor in
+        Task {
             do {
-                if let imageLoaded = try await avatarItem?.loadTransferable(type: Image.self) {
-                    productImage = imageLoaded
+                if let image = try await avatarItem?.loadTransferable(type: Image.self) {
+                    productImage = image
+                    imageData = UIImage(cgImage: ImageRenderer(content: image).cgImage!).jpegData(compressionQuality: 1.0)
+                    debugPrint("Image loaded")
                 } else {
                     debugPrint("Avatar item is currently nil")
                 }
@@ -50,6 +53,12 @@ final class AddProductViewModel: ObservableObject {
     }
     
     func createProduct(completion: (() -> Void)?) {
+        guard let imageData
+        else {
+            debugPrint("Please select a product image.")
+            return
+        }
+        
         isRequestInProgress = true
         Task { @MainActor in
             do {
@@ -57,7 +66,8 @@ final class AddProductViewModel: ObservableObject {
                                                        description: description,
                                                        salePrice: Double(price) ?? .zero,
                                                        purchasePrice: Double(price) ?? .zero,
-                                                       stock: Int(stock) ?? .zero)
+                                                       stock: Int(stock) ?? .zero,
+                                                       imageData: imageData)
                 isRequestInProgress = false
                 resetProductProperties()
                 completion?()
