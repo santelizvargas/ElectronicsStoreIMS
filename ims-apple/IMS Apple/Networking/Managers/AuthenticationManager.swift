@@ -85,11 +85,9 @@ final class AuthenticationManager {
         ]
         
         do {
-            let data = try await networkManager.makeRequest(path: .updatePassword,
-                                                            with: parameters,
-                                                            httpMethod: .put)
-            let response = try JSONDecoder().decode(UpdatePasswordResponse.self, from: data)
-            debugPrint("---\(response.message) by \(response.data.firstName)---")
+            try await networkManager.makeRequest(path: .updatePassword,
+                                                 with: parameters,
+                                                 httpMethod: .put)
         } catch {
             throw IMSError.somethingWrong
         }
@@ -100,10 +98,9 @@ final class AuthenticationManager {
     func registerUser(user: UserRegisterModel) async throws {
         do {
             let parameters = try await convertToDictionaty(data: user)
-            let data = try await networkManager.makeRequest(path: .register,
-                                                            with: parameters,
-                                                            httpMethod: .post)
-            let _ = try JSONDecoder().decode(AuthenticationResponse.self, from: data)
+            try await networkManager.makeRequest(path: .register,
+                                                 with: parameters,
+                                                 httpMethod: .post)
         } catch {
             throw IMSError.somethingWrong
         }
@@ -141,10 +138,9 @@ final class AuthenticationManager {
         let parameters: [String: Any] = ["id": id]
         
         do {
-            let data = try await networkManager.makeRequest(path: .enableUser,
-                                                            with: parameters,
-                                                            httpMethod: .put)
-            let _ = try JSONDecoder().decode(UserAuthResponse.self, from: data)
+            try await networkManager.makeRequest(path: .enableUser,
+                                                 with: parameters,
+                                                 httpMethod: .put)
         } catch {
             throw IMSError.somethingWrong
         }
@@ -156,10 +152,44 @@ final class AuthenticationManager {
         let parameters: [String: Any] = ["id": id]
         
         do {
-            let data = try await networkManager.makeRequest(path: .disableUser,
-                                                            with: parameters,
-                                                            httpMethod: .delete)
-            let _ = try JSONDecoder().decode(UserAuthResponse.self, from: data)
+            try await networkManager.makeRequest(path: .disableUser,
+                                                 with: parameters,
+                                                 httpMethod: .delete)
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
+    
+    // MARK: - Assign Roles
+    
+    func assignRole(role: String, email: String, revoke: Int) async throws {
+        let parameters: [String: Any] = [
+            "email": email,
+            "role": role
+        ]
+        
+        do {
+            try await networkManager.makeRequest(path: .roles,
+                                                 with: parameters,
+                                                 httpMethod: .post)
+            try await revokeRole(id: revoke, email: email)
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
+    
+    // MARK: - Revoke Roles
+    
+    private func revokeRole(id: Int, email: String) async throws {
+        let parameters: [String: Any] = [
+            "email": email,
+            "roleId": id
+        ]
+        
+        do {
+            try await networkManager.makeRequest(path: .roles,
+                                                 with: parameters,
+                                                 httpMethod: .delete)
         } catch {
             throw IMSError.somethingWrong
         }

@@ -119,7 +119,10 @@ struct UserListView: View {
                         HStack {
                             userPropertyTextView(text: user.updatedAt.dayMonthYear)
                             
-                            enableAndDisableButton(for: user.id, isEnable: user.deletedAt == nil)
+                            if let id = user.roles.first?.id,
+                               id != UserRole.owner.id {
+                                enableAndDisableButton(for: user, isEnable: user.deletedAt == nil)
+                            }
                         }
                     }
                 }
@@ -137,15 +140,23 @@ struct UserListView: View {
     
     // MARK: - Enable Disable Button
     
-    private func enableAndDisableButton(for userId: Int, isEnable: Bool) -> some View {
+    private func enableAndDisableButton(for user: UserModel, isEnable: Bool) -> some View {
         Menu {
+            if let firstRole = user.roles.first,
+               let currentRole = UserRole(rawValue: firstRole.id) {
+                changeRoleMenu(
+                    email: user.email,
+                    currentRole: currentRole
+                )
+            }
+            
             if isEnable {
                 Button("Desactivar usuario") {
-                    viewModel.disableUser(for: userId)
+                    viewModel.disableUser(for: user.id)
                 }
             } else {
                 Button("Activar usuario") {
-                    viewModel.enableUser(for: userId)
+                    viewModel.enableUser(for: user.id)
                 }
             }
         } label: {
@@ -156,6 +167,22 @@ struct UserListView: View {
         .menuStyle(.borderlessButton)
         .menuIndicator(.hidden)
         .frame(width: Constants.mainSpacing)
+    }
+    
+    private func changeRoleMenu(email: String, currentRole: UserRole) -> some View {
+        Menu("Cambiar rol") {
+            ForEach(UserRole.getRoles(omit: currentRole)) { role in
+                Button(role.name) {
+                    withAnimation {
+                        viewModel.assignRoles(
+                            role: role,
+                            email: email,
+                            revokeId: currentRole.id
+                        )
+                    }
+                }
+            }
+        }
     }
     
     private func userPropertyTextView(text: String) -> some View {

@@ -69,4 +69,21 @@ final class UserListViewModel: ObservableObject {
             }
         }
     }
+    
+    func assignRoles(role: UserRole, email: String, revokeId: Int) {
+        isRequestInProgress = true
+        Task { @MainActor in
+            do {
+                try await authenticationManager.assignRole(role: role.name,
+                                                           email: email,
+                                                           revoke: revokeId)
+                isRequestInProgress = false
+                isReloadUsers = true
+            } catch {
+                isRequestInProgress = false
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
 }

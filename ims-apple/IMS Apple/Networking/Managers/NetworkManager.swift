@@ -19,6 +19,7 @@ final class NetworkManager {
         }
     }
     
+    @discardableResult
     func makeRequest(path: IMSPath,
                      with parameters: [String: Any] = [:],
                      httpMethod: HttpMethod = .get) async throws -> Data {
