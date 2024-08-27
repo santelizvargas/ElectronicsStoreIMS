@@ -11,11 +11,16 @@ struct UserInformation {
     let names: String
     let lastName: String
     let email: String
+    let role: UserRole
     
-    init(names: String, lastName: String, email: String) {
+    init(names: String,
+         lastName: String,
+         email: String,
+         role: UserRole) {
         self.names = names
         self.lastName = lastName
         self.email = email
+        self.role = role
     }
     
     /// Factory from user model
@@ -23,6 +28,7 @@ struct UserInformation {
         self.names = user?.firstName ?? ""
         self.lastName = user?.lastName ?? ""
         self.email = user?.email ?? ""
+        self.role = UserRole(rawValue: user?.roleId ?? 1) ?? .seller
     }
 }
 
