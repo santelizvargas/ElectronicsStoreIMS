@@ -24,4 +24,17 @@ export default class PrismaRbacRepository implements RbacRepository {
       },
     });
   }
+
+  public async revokeRole(email: string, roleId: number): Promise<void> {
+    await this.database.user.update({
+      where: {
+        email,
+      },
+      data: {
+        roles: {
+          deleteMany: [{ roleId }],
+        },
+      },
+    });
+  }
 }

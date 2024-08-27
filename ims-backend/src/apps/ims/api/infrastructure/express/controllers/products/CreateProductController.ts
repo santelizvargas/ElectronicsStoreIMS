@@ -18,6 +18,7 @@ export default class CreateProductController implements Controller {
     body('salePrice').isString().withMessage('Please give a valid sale price'),
     body('purchasePrice').isString().withMessage('Please give a valid purchase price'),
     body('stock').isString().withMessage('Please give a valid stock'),
+    body('category').isString().withMessage('Please give a valid category'),
     body('images').isArray().withMessage('Please give a valid images'),
     RequestValidator,
   ];
@@ -37,6 +38,7 @@ export default class CreateProductController implements Controller {
         salePrice: parseFloat(request.body.salePrice),
         purchasePrice: parseFloat(request.body.purchasePrice),
         stock: parseInt(request.body.stock),
+        category: request.body.category,
         images: imagePaths.map((image) => image.path),
       } as ProductRequest;
       const productResponse: ProductResponse = await this.createProductService.create(productData);
