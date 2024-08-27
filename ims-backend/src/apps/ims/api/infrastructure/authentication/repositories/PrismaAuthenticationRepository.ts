@@ -60,8 +60,8 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
     }));
   }
 
-  public async findByCredentials(email: string, password: string): Promise<User | null> {
-    return await this.database.user.findFirst({
+  public async findByCredentials(email: string, password: string): Promise<(User & { roles: Role[] }) | null> {
+    const user = await this.database.user.findFirst({
       relationLoadStrategy: 'join',
       include: {
         roles: {
@@ -76,6 +76,15 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
         deletedAt: null,
       },
     });
+
+    if (!user) {
+      return null;
+    }
+
+    return {
+      ...user,
+      roles: user.roles.map(({ role }) => role) || [],
+    };
   }
 
   public async updatePassword(email: string, password: string): Promise<User> {
