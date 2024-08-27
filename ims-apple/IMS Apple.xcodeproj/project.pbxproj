@@ -26,6 +26,8 @@
 		33708CD92C74897800BD811F /* DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33708CD82C74897800BD811F /* DateFormatter.swift */; };
 		33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33708CDA2C748B9600BD811F /* String+DateFormatter.swift */; };
 		3376FDA82C7D8EEE00AFB99C /* UserRole.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDA72C7D8EEE00AFB99C /* UserRole.swift */; };
+		3376FDAA2C7E57BB00AFB99C /* InvoiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */; };
+		3376FDAC2C7E592A00AFB99C /* InvoiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */; };
 		338DF8292C645DE200F72772 /* Donut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF8282C645DE200F72772 /* Donut.swift */; };
 		338DF82B2C645E4D00F72772 /* DonutChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82A2C645E4D00F72772 /* DonutChart.swift */; };
 		338DF82E2C64668B00F72772 /* ChartContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 338DF82D2C64668B00F72772 /* ChartContainer.swift */; };
@@ -105,6 +107,8 @@
 		33708CD82C74897800BD811F /* DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFormatter.swift; sourceTree = "<group>"; };
 		33708CDA2C748B9600BD811F /* String+DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+DateFormatter.swift"; sourceTree = "<group>"; };
 		3376FDA72C7D8EEE00AFB99C /* UserRole.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
+		3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceManager.swift; sourceTree = "<group>"; };
+		3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceModel.swift; sourceTree = "<group>"; };
 		338DF8282C645DE200F72772 /* Donut.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Donut.swift; sourceTree = "<group>"; };
 		338DF82A2C645E4D00F72772 /* DonutChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonutChart.swift; sourceTree = "<group>"; };
 		338DF82D2C64668B00F72772 /* ChartContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartContainer.swift; sourceTree = "<group>"; };
@@ -251,6 +255,7 @@
 				BD6B28012C6F2E6B00BC73D2 /* NetworkManager.swift */,
 				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
 				BD85DB492C7444680076F612 /* ProductManager.swift */,
+				3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -618,6 +623,7 @@
 				BD6B28032C6F2E6B00BC73D2 /* UserModel.swift */,
 				3331062A2C6B03750035644F /* ProductModel.swift */,
 				33A5803A2C759EFB00C58AA2 /* UserRegisterModel.swift */,
+				3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -745,6 +751,7 @@
 				BDFA27B02C771B66007F4EB0 /* ProductDetailViewModel.swift in Sources */,
 				3376FDA82C7D8EEE00AFB99C /* UserRole.swift in Sources */,
 				BD6B28072C6F2E6B00BC73D2 /* NetworkManager.swift in Sources */,
+				3376FDAA2C7E57BB00AFB99C /* InvoiceManager.swift in Sources */,
 				35069C822C61C2E0001E854F /* SalesHistoryView.swift in Sources */,
 				BD6B28062C6F2E6B00BC73D2 /* IMSError.swift in Sources */,
 				3364271A2C7A796E005AC207 /* ProductCodeView.swift in Sources */,
@@ -757,6 +764,7 @@
 				338DF83C2C65E5EA00F72772 /* BarItem.swift in Sources */,
 				33708CD92C74897800BD811F /* DateFormatter.swift in Sources */,
 				33A580372C759E5D00C58AA2 /* RegisterUserView.swift in Sources */,
+				3376FDAC2C7E592A00AFB99C /* InvoiceModel.swift in Sources */,
 				338DF8312C64733300F72772 /* GraphView.swift in Sources */,
 				332509B92C51E39800E10F94 /* SwiftDataProvider.swift in Sources */,
 				333106322C6BF01B0035644F /* ProductState.swift in Sources */,

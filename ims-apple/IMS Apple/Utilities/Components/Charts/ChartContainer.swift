@@ -43,7 +43,7 @@ struct ChartContainer<Content: View>: View {
 
 #Preview {
     ChartContainer(title: "Productos") {
-        DonutChart(data: Donut.products)
+        DonutChart(data: [])
     }
     .padding()
 }

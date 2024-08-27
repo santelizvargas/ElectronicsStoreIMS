@@ -49,7 +49,7 @@ struct GraphView: View {
     private var firstGridRow: some View {
         GridRow {
             ChartContainer(title: "Facturas") {
-                DonutChart(data: Donut.invoices)
+                DonutChart(total: viewModel.invoiceCount)
             }
             
             ChartContainer(title: "Venta de productos") {

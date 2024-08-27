@@ -23,6 +23,7 @@ enum IMSPath {
     case disableUser
     case roles
     case usersChart
+    case invoices
     
     private var apiVersion: String { "/api/v1/" }
     
@@ -39,6 +40,7 @@ enum IMSPath {
                 case .enableUser: "auth/enable"
                 case .disableUser: "auth/disable"
                 case .roles: "rbac/roles"
+                case .invoices: "invoices"
             }
         }
         return "\(apiVersion)\(path)/"

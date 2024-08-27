@@ -91,5 +91,5 @@ struct DonutChart: View {
 }
 
 #Preview {
-    DonutChart(data: Donut.products)
+    DonutChart(data: [])
 }
