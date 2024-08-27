@@ -127,4 +127,32 @@ export default class PrismaAuthenticationRepository implements AuthenticationRep
       },
     });
   }
+
+  public async usersChart(): Promise<{
+    suspended: User[];
+    users: User[];
+    suspendedCount: number;
+    usersCount: number;
+  }> {
+    const users = await this.database.user.findMany({
+      where: {
+        deletedAt: null,
+      },
+    });
+
+    const suspended = await this.database.user.findMany({
+      where: {
+        deletedAt: {
+          not: null,
+        },
+      },
+    });
+
+    return {
+      users,
+      suspended,
+      usersCount: users.length,
+      suspendedCount: suspended.length,
+    };
+  }
 }

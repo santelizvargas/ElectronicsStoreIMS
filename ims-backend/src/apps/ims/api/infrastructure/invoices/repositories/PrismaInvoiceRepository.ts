@@ -36,6 +36,7 @@ export default class PrismaInvoiceRepository implements CrudRepository<CreateInv
             productName: product.name,
             productQuantity: product.quantity,
             productPrice: product.price,
+            productCategory: product.category,
             createdAt: new Date(),
           })),
         },

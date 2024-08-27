@@ -3,6 +3,7 @@ model Detail {
   productName     String
   productQuantity Int
   productPrice    Float
+  productCategory String?
   invoice         Invoice  @relation(fields: [invoiceId], references: [id])
   invoiceId       Int
   createdAt       DateTime
