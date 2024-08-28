@@ -42,7 +42,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?
-    var images: [String] = [""]
+    var images: [String] = []
 
     enum CodingKeys: String, CodingKey {
         case id
