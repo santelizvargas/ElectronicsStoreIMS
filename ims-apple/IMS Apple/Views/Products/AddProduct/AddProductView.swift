@@ -25,7 +25,6 @@ private enum Constants {
 }
 
 struct AddProductView: View {
-    @State private var selectedCategory: ProductCategory = .phones
     @State private var showingImagePicker: Bool = false
     @State private var showAlert: Bool = false
     
@@ -69,11 +68,14 @@ struct AddProductView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(.grayBackground)
         .alert(
-            viewModel.name.isEmpty
-            ? "Producto Agregado Correctamente"
-            : "¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde.",
+            viewModel.addProductRequestMessage,
             isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
+            }
+            .overlay {
+                if viewModel.isRequestInProgress {
+                    CustomProgressView()
+                }
             }
     }
     
@@ -81,17 +83,17 @@ struct AddProductView: View {
     
     private var productInformationView: some View {
         VStack {
-            productTextFild(
+            productTextField(
                 title: "Nombre del producto",
                 textValue: $viewModel.name
             )
             
-            productTextFild(
+            productTextField(
                 title: "Precio",
                 textValue: $viewModel.price.allowOnlyDecimalNumbers
             )
 
-            productTextFild(
+            productTextField(
                 title: "Unidades disponibles",
                 textValue: $viewModel.stock.allowOnlyNumbers
             )
@@ -132,8 +134,9 @@ struct AddProductView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(maxWidth: .infinity)
-                    .frame(height: Constants.photoMaxHeight)
+                    .frame(maxHeight: Constants.photoMaxHeight)
                     .clipped()
+                    .allowsHitTesting(false)
             } else {
                 RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
                     .stroke(style: StrokeStyle(dash: [Constants.strokLengths]))
@@ -173,11 +176,11 @@ struct AddProductView: View {
             Menu {
                 ForEach(ProductCategory.categories, id: \.self) { category in
                     Button(category.title) {
-                        selectedCategory = category
+                        viewModel.category = category
                     }
                 }
             } label: {
-                Text(selectedCategory.title)
+                Text(viewModel.category.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(.white)
                     .isOS(.iOS) { view in
@@ -196,7 +199,7 @@ struct AddProductView: View {
         }
     }
     
-    private func productTextFild(title: String, textValue: Binding<String>, maxHeight: CGFloat = 35) -> some View {
+    private func productTextField(title: String, textValue: Binding<String>, maxHeight: CGFloat = 35) -> some View {
         VStack {
             HStack {
                 Text(title)

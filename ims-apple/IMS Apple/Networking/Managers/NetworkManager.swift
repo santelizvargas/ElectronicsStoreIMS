@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 private enum Constants {
     static let scheme: String = "https"
@@ -13,6 +14,13 @@ private enum Constants {
 }
 
 final class NetworkManager {
+    private var components: URLComponents = {
+        var components: URLComponents = URLComponents()
+        components.scheme = Constants.scheme
+        components.host = Constants.baseURLString
+        return components
+    }()
+    
     private func makeQueryItems(parameters: [String: Any]) -> [URLQueryItem] {
         parameters.map { key, value in
             URLQueryItem(name: key, value: value as? String)
@@ -53,4 +61,47 @@ final class NetworkManager {
         }
     }
     
+    func makeMultipartRequest(path: IMSPath,
+                              with parameters: [String: Any],
+                              dataCollection: [Data]) async throws -> Data {
+        let boundary: String = UUID().uuidString
+        components.path = path.endPoint
+        components.queryItems = makeQueryItems(parameters: parameters)
+        guard let url = components.url else { throw IMSError.badUrl }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = HttpMethod.post.rawValue
+        request.setValue("multipart/form-data; boundary=\(boundary)",
+                         forHTTPHeaderField: "Content-Type")
+        
+        var data = Data()
+        
+        for (key, value) in parameters {
+            data.appendString("--\(boundary)\r\n")
+            data.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            data.appendString("\(value)\r\n")
+        }
+        
+        for (_, value) in dataCollection.enumerated() {
+            data.appendString("--\(boundary)\r\n")
+            data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n")
+            data.appendString("Content-Type: image/jpeg\r\n\r\n")
+            data.append(value)
+            data.appendString("\r\n")
+        }
+        
+        data.appendString("--\(boundary)--\r\n")
+        
+        request.httpBody = data
+        
+        do {
+            let (data, response) = try await URLSession.shared.data(for: request)
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode,
+                  200...299 ~= statusCode
+            else { throw IMSError.somethingWrong }
+            return data
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
 }

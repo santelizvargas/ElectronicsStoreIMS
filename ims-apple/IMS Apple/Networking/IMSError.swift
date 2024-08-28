@@ -22,6 +22,8 @@ enum IMSError: Error {
     case uniqueNameKey
     case productNotFound
     
+    // TODO: - Translate the error messages to Spanish language
+    
     var localizedDescription: String {
         switch self {
             case .somethingWrong: "Ops, please try again later"

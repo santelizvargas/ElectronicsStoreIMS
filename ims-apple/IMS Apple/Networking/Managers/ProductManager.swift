@@ -34,17 +34,22 @@ final class ProductManager {
                        description: String,
                        salePrice: Double,
                        purchasePrice: Double,
-                       stock: Int = 1) async throws {
+                       stock: Int = 1,
+                       category: String,
+                       imageData: [Data]) async throws {
         let parameters: [String: Any] = [
             "name": name,
             "description": description,
             "salePrice": salePrice,
             "purchasePrice": purchasePrice,
+            "category": category,
             "stock": stock
         ]
         
         do {
-            let data = try await networkManager.makeRequest(path: .products, with: parameters, httpMethod: .post)
+            let data = try await networkManager.makeMultipartRequest(path: .products,
+                                                                     with: parameters,
+                                                                     dataCollection: imageData)
             let response = try JSONDecoder().decode(CreateProductResponse.self, from: data)
             if response.data == nil, response.code == 500 { throw IMSError.uniqueNameKey }
             debugPrint("---\(response.message)---")

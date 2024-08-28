@@ -116,7 +116,7 @@ struct ProductListView: View {
     
     private func productCard(_ product: ProductModel) -> some View {
         VStack(alignment: .leading, spacing: Constants.cornerRadius) {
-            productImage(url: "product.image")
+            productImage(url: product.images.first ?? "")
             
             Text(product.name)
                 .bold()
