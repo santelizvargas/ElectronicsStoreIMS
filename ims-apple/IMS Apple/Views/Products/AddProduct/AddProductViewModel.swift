@@ -14,17 +14,18 @@ final class AddProductViewModel: ObservableObject {
     @Published var avatarItem: PhotosPickerItem?
     @Published var productImage: Image?
     @Published var isRequestInProgress: Bool = false
-    @Published var name: String = "Color carton"
-    @Published var price: String = "69"
-    @Published var stock: String = "69"
-    @Published var description: String = "Description"
+    @Published var name: String = ""
+    @Published var price: String = ""
+    @Published var stock: String = ""
+    @Published var description: String = ""
     
     var isCreateDisabled: Bool {
         name.isEmpty ||
         price.isEmpty ||
         description.isEmpty ||
         stock.isEmpty ||
-        imageData == nil
+        imageData == nil ||
+        avatarItem == nil
     }
     
     private func resetProductProperties() {
