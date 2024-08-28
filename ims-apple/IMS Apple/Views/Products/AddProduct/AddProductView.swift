@@ -159,7 +159,11 @@ struct AddProductView: View {
             }
         }
         .onChange(of: viewModel.avatarItem) {
-            viewModel.getProductImage()
+            viewModel.getProductImage {
+                withAnimation {
+                    showAlert.toggle()
+                }
+            }
         }
     }
     
@@ -175,12 +179,12 @@ struct AddProductView: View {
             
             Menu {
                 ForEach(ProductCategory.categories, id: \.self) { category in
-                    Button(category.title) {
+                    Button(category.rawValue) {
                         viewModel.category = category
                     }
                 }
             } label: {
-                Text(viewModel.category.title)
+                Text(viewModel.category.rawValue)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(.white)
                     .isOS(.iOS) { view in

@@ -11,6 +11,7 @@ import SwiftUI
 final class ProductDetailViewModel: ObservableObject {
     @Published var isRequestInProgress: Bool = false
     @Published var errorMessage: String?
+    @Published var supplyCount: String = ""
     @Binding var reloadProducts: Bool
     
     init(reloadProducts: Binding<Bool>) {
@@ -34,11 +35,11 @@ final class ProductDetailViewModel: ObservableObject {
         }
     }
     
-    func supplyProduct(id: Int, stock: Double) {
+    func supplyProduct(id: Int) {
         isRequestInProgress = true
         Task { @MainActor in
             do {
-                try await productManager.supplyProduct(id: id, with: stock)
+                try await productManager.supplyProduct(id: id, with: Double(supplyCount) ?? 0)
                 reloadProducts = true
             } catch {
                 isRequestInProgress = false

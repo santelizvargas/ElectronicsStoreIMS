@@ -34,7 +34,7 @@ struct ProductCount: Decodable {
 struct ProductModel: Identifiable, Equatable, Decodable {
     let id: Int
     let name: String
-    var category: ProductCategory = .all
+    var category: ProductCategory
     let description: String
     let stock: Int
     let salePrice: Double
@@ -47,6 +47,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
     enum CodingKeys: String, CodingKey {
         case id
         case name
+        case category
         case description
         case stock
         case salePrice
@@ -69,5 +70,8 @@ struct ProductModel: Identifiable, Equatable, Decodable {
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
         deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
         images = try container.decode([String].self, forKey: .images)
+        
+        let categoryValue = try container.decode(String.self, forKey: .category)
+        category = ProductCategory(rawValue: categoryValue) ?? .all
     }
 }

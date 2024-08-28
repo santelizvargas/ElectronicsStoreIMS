@@ -26,6 +26,7 @@ private enum Constants {
 struct ProductDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @ObservedObject private var viewModel: ProductDetailViewModel
+    @State private var isSupplyActive: Bool = false
     private let product: ProductModel
     
     init(product: ProductModel, 
@@ -42,7 +43,7 @@ struct ProductDetailView: View {
                 headerView
                 
                 HStack {
-                    banner(text: product.category.title)
+                    banner(text: product.category.rawValue)
                     banner(text: "\(product.stock) pcs")
                     Spacer()
                 }
@@ -52,7 +53,11 @@ struct ProductDetailView: View {
                 
                 Spacer()
                 
-                bottomButtons
+                if isSupplyActive {
+                    supplyView
+                } else {
+                    bottomButtons
+                }
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .overlay {
@@ -68,20 +73,6 @@ struct ProductDetailView: View {
         .background {
             RoundedRectangle(cornerRadius: Constants.cornerRadius)
                 .fill(.grayBackground)
-        }
-        .isOS(.macOS) { view in
-            view.overlay(alignment: .topLeading) {
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark")
-                        .resizable()
-                        .frame(width: Constants.closeSize, height: Constants.closeSize)
-                }
-                .buttonStyle(.plain)
-                .contentShape(Rectangle())
-                .padding()
-            }
         }
     }
     
@@ -102,9 +93,9 @@ struct ProductDetailView: View {
     
     private var productImage: some View {
         RoundedRectangle(cornerRadius: Constants.cornerRadius)
-            .fill(.secondaryBackground)
+            .fill(.imsWhite)
             .overlay {
-                AsyncImage(url: URL(string: "url")) { image in
+                AsyncImage(url: URL(string: product.images.first ?? "")) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -126,11 +117,11 @@ struct ProductDetailView: View {
                 .padding(.top)
             
             Button {
-            
+                dismiss()
             } label: {
-                Image(.editIcon)
+                Image(systemName: "xmark")
                     .resizable()
-                    .frame(width: Constants.editSize, height: Constants.editSize)
+                    .frame(width: Constants.closeSize, height: Constants.closeSize)
             }
             .buttonStyle(.plain)
             .contentShape(Rectangle())
@@ -162,10 +153,7 @@ struct ProductDetailView: View {
             .contentShape(Rectangle())
             
             Button("Abastecer") {
-                viewModel.supplyProduct(id: product.id, stock: 1)
-                if viewModel.errorMessage == nil {
-                    dismiss()
-                }
+                isSupplyActive.toggle()
             }
             .buttonStyle(
                 GradientButtonStyle(
@@ -176,5 +164,50 @@ struct ProductDetailView: View {
             )
         }
         .padding(.bottom)
+    }
+    
+    // MARK: - Supply TextField view
+    
+    private var supplyView: some View {
+        HStack {
+            IMSTextField(
+                text: $viewModel.supplyCount.allowOnlyNumbers,
+                placeholder: "Cantidad extra",
+                hasBorder: true,
+                minHeight: Constants.trashHeight
+            )
+            
+            Button {
+                viewModel.supplyProduct(id: product.id)
+                
+                if viewModel.errorMessage == nil {
+                    dismiss()
+                }
+            } label: {
+                Image(systemName: "repeat")
+            }
+            .buttonStyle(
+                GradientButtonStyle(
+                    buttonWidth: 40,
+                    buttonHeight: Constants.trashHeight
+                )
+            )
+            .disabled(viewModel.supplyCount.isEmpty)
+            .opacity(viewModel.supplyCount.isEmpty ? 0.6 : 1)
+            
+            Button {
+                isSupplyActive.toggle()
+            } label: {
+                Image(systemName: "xmark")
+                    .contentShape(Rectangle())
+            }
+            .buttonStyle(
+                GradientButtonStyle(
+                    buttonWidth: 40,
+                    buttonHeight: Constants.trashHeight,
+                    gradientColors: [.redGradient, .orangeGradient]
+                )
+            )
+        }
     }
 }

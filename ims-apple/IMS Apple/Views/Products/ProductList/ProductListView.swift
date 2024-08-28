@@ -101,9 +101,9 @@ struct ProductListView: View {
     // MARK: - Category Menu View
     
     private var categoryMenu: some View {
-        Menu(viewModel.selectedCategory.title) {
+        Menu(viewModel.selectedCategory.rawValue) {
             ForEach(ProductCategory.allCases, id: \.self) { category in
-                Button(category.title) {
+                Button(category.rawValue) {
                     withAnimation {
                         viewModel.selectedCategory = category
                     }
