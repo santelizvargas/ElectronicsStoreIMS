@@ -39,7 +39,7 @@ final class InvoiceSaleViewModel: ObservableObject {
     }
     
     func addInvoiceRow() {
-        invoiceSaleModel.products.append(InvoiceSaleRowModel())
+        invoiceSaleModel.products.insert(InvoiceSaleRowModel(), at: .zero)
     }
     
     func removeInvoiceRow(at id: UUID) {

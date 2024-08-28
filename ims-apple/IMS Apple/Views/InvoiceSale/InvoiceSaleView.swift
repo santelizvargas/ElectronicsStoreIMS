@@ -185,43 +185,46 @@ struct InvoiceSaleView: View {
     private var invoiceGridRows: some View {
         ScrollView(showsIndicators: false) {
             Grid {
-                ForEach($viewModel.invoiceSaleModel.products) { $product in
+                ForEach(Array($viewModel.invoiceSaleModel.products.enumerated()), id: \.offset) { index, $product in
                     GridRow {
-                        IMSTextField(
-                            text: $product.code,
-                            hasBorder: true
-                        )
-                        .onChange(of: product.code) { _, id in
-                            viewModel.setProductValues(for: id, with: &product)
-                            viewModel.setTotalPrice(for: &product)
+                        Group {
+                            IMSTextField(
+                                text: $product.code,
+                                hasBorder: true
+                            )
+                            .onChange(of: product.code) { _, id in
+                                viewModel.setProductValues(for: id, with: &product)
+                                viewModel.setTotalPrice(for: &product)
+                            }
+                            
+                            IMSTextField(
+                                text: $product.amount.allowOnlyNumbers,
+                                hasBorder: true
+                            )
                         }
+                        .disabled(index != .zero)
                         
-                        IMSTextField(
-                            text: $product.amount.allowOnlyNumbers,
-                            hasBorder: true
-                        )
-                        
-                        IMSTextField(
-                            text: $product.description,
-                            hasBorder: true,
-                            maxWidth: .infinity
-                        )
-                        .disabled(true)
-                        
-                        IMSTextField(
-                            text: .constant(
-                                viewModel.getDoubleFormat(for: product.unitPrice)
-                            ),
-                            hasBorder: true
-                        )
-                        .disabled(true)
-                        
-                        IMSTextField(text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
-                                     hasBorder: true)
-                        .disabled(true)
-                        .onChange(of: product.amount) { _, _ in
-                            viewModel.setTotalPrice(for: &product)
+                        Group {
+                            IMSTextField(
+                                text: $product.description,
+                                hasBorder: true,
+                                maxWidth: .infinity
+                            )
+                            
+                            IMSTextField(
+                                text: .constant(
+                                    viewModel.getDoubleFormat(for: product.unitPrice)
+                                ),
+                                hasBorder: true
+                            )
+                            
+                            IMSTextField(text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
+                                         hasBorder: true)
+                            .onChange(of: product.amount) { _, _ in
+                                viewModel.setTotalPrice(for: &product)
+                            }
                         }
+                        .disabled(true)
                         
                         Button {
                             viewModel.removeInvoiceRow(at: product.id)
