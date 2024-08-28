@@ -14,9 +14,11 @@ private enum Constants {
 
 struct IMSTextFieldStyle: TextFieldStyle {
     private let textFieldMinHeight: CGFloat
+    private let isActive: Bool
     
-    init(textFieldMinHeight: CGFloat = Constants.textFieldMinHeight) {
+    init(textFieldMinHeight: CGFloat = Constants.textFieldMinHeight, isActive: Bool = true) {
         self.textFieldMinHeight = textFieldMinHeight
+        self.isActive = isActive
     }
     
     func _body(configuration: TextField<Self._Label>) -> some View {
@@ -26,7 +28,7 @@ struct IMSTextFieldStyle: TextFieldStyle {
             .padding(.horizontal)
             .background {
                 RoundedRectangle(cornerRadius: Constants.backgroundRadius)
-                    .fill(.imsGray)
+                    .fill(isActive ? .imsGray : .imsDesactive)
             }
     }
 }

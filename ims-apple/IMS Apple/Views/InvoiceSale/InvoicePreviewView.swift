@@ -54,8 +54,8 @@ struct InvoicePreviewView: View {
                         }
                         
                         GridRow {
-                            Text("Teléfono:")
-                            Text("+505 \(invoiceSale.clientPhoneNumber)")
+                            Text("Identificacion:")
+                            Text(invoiceSale.clientIdentification)
                                 .foregroundStyle(.imsGraySecundary)
                         }
                     }
@@ -78,9 +78,9 @@ struct InvoicePreviewView: View {
                         
                         ForEach(invoiceSale.products) { product in
                             GridRow {
-                                Text(product.amount.description)
-                                Text(product.description)
-                                Text("$\(getDoubleFormat(for: product.unitPrice))")
+                                Text(product.quantity.description)
+                                Text(product.name)
+                                Text("$\(getDoubleFormat(for: product.price))")
                                 Text("$\(getDoubleFormat(for: product.totalPrice))")
                             }
                             .foregroundStyle(.imsGray)
@@ -95,9 +95,9 @@ struct InvoicePreviewView: View {
                 .frame(maxWidth: .infinity, alignment: .leading)
                 
                 Grid(alignment: .leading, horizontalSpacing: Constants.totalSpacing) {
-                    totalGridRow(name: "Subtotal:", value: subtotalPrice)
-                    totalGridRow(name: "IVA:", value: totalIva)
-                    totalGridRow(name: "Total:", value: totalPrice)
+                    totalGridRow(name: "Subtotal:", value: invoiceSale.subtotalPrice)
+                    totalGridRow(name: "IVA:", value: invoiceSale.totalIva)
+                    totalGridRow(name: "Total:", value: invoiceSale.totalPrice)
                 }
                 .padding([.horizontal, .bottom])
                 .frame(maxWidth: .infinity, alignment: .trailing)
@@ -147,27 +147,6 @@ struct InvoicePreviewView: View {
                 .frame(maxWidth: .infinity, alignment: .trailing)
             Text("$\(getDoubleFormat(for: value))")
         }
-    }
-    
-    // MARK: - Subtotal Price
-    
-    private var subtotalPrice: Double {
-        invoiceSale.products.reduce(.zero) { result, product in
-            let price = product.totalPrice
-            return result + price
-        }
-    }
-    
-    // MARK: - Total IVA
-    
-    private var totalIva: Double {
-        subtotalPrice * Constants.ivaValue
-    }
-    
-    // MARK: - Total price
-    
-    private var totalPrice: Double {
-        subtotalPrice + totalIva
     }
     
     // MARK: - Get Double Format

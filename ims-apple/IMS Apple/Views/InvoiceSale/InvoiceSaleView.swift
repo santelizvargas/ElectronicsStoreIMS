@@ -24,6 +24,7 @@ struct InvoiceSaleView: View {
     @ObservedObject private var viewModel: InvoiceSaleViewModel = InvoiceSaleViewModel()
     @State private var showProductList: Bool = false
     @State private var showInvoicePreview: Bool = false
+    @State private var showAlert: Bool = false
     
     var body: some View {
         VStack {
@@ -41,6 +42,19 @@ struct InvoiceSaleView: View {
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
+        .overlay {
+            if viewModel.isRequestInProgress {
+                CustomProgressView()
+            }
+        }
+        .alert(
+            viewModel.disableGenerateInvoice
+            ? "Factura Creada Correctamente"
+            : "¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde.",
+            isPresented: $showAlert
+        ) {
+            Button("OK", role: .cancel) { }
+        }
     }
     
     // MARK: - Header View
@@ -77,7 +91,11 @@ struct InvoiceSaleView: View {
             }
             
             Button("Generar Factura") {
-                
+                withAnimation {
+                    viewModel.createInvoice {
+                        showAlert.toggle()
+                    }
+                }
             }
             .buttonStyle(
                 GradientButtonStyle(
@@ -103,8 +121,8 @@ struct InvoiceSaleView: View {
             )
             
             IMSTextField(
-                type: .custom("Teléfono"),
-                text: $viewModel.invoiceSaleModel.clientPhoneNumber.allowOnlyNumbers,
+                type: .custom("Identificacion del cliente"),
+                text: $viewModel.invoiceSaleModel.clientIdentification,
                 hasBorder: true,
                 maxWidth: .infinity
             )
@@ -187,44 +205,45 @@ struct InvoiceSaleView: View {
             Grid {
                 ForEach(Array($viewModel.invoiceSaleModel.products.enumerated()), id: \.offset) { index, $product in
                     GridRow {
-                        Group {
-                            IMSTextField(
-                                text: $product.code,
-                                hasBorder: true
-                            )
-                            .onChange(of: product.code) { _, id in
-                                viewModel.setProductValues(for: id, with: &product)
-                                viewModel.setTotalPrice(for: &product)
-                            }
-                            
-                            IMSTextField(
-                                text: $product.amount.allowOnlyNumbers,
-                                hasBorder: true
-                            )
+                        IMSTextField(
+                            text: $product.id.allowOnlyNumbers,
+                            hasBorder: true,
+                            isActive: index == .zero
+                        )
+                        .onChange(of: product.id) { _, id in
+                            viewModel.setProductValues(for: id, with: &product)
+                            viewModel.setTotalPrice(for: &product)
                         }
-                        .disabled(index != .zero)
                         
-                        Group {
-                            IMSTextField(
-                                text: $product.description,
-                                hasBorder: true,
-                                maxWidth: .infinity
-                            )
-                            
-                            IMSTextField(
-                                text: .constant(
-                                    viewModel.getDoubleFormat(for: product.unitPrice)
-                                ),
-                                hasBorder: true
-                            )
-                            
-                            IMSTextField(text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
-                                         hasBorder: true)
-                            .onChange(of: product.amount) { _, _ in
-                                viewModel.setTotalPrice(for: &product)
-                            }
+                        IMSTextField(
+                            text: $product.quantity.allowOnlyNumbers,
+                            hasBorder: true,
+                            isActive: index == .zero
+                        )
+                        
+                        IMSTextField(
+                            text: $product.name,
+                            hasBorder: true,
+                            isActive:  false,
+                            maxWidth: .infinity
+                        )
+                        
+                        IMSTextField(
+                            text: .constant(
+                                viewModel.getDoubleFormat(for: product.price)
+                            ),
+                            hasBorder: true,
+                            isActive: false
+                        )
+                        
+                        IMSTextField(
+                            text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
+                            hasBorder: true,
+                            isActive: false
+                        )
+                        .onChange(of: product.quantity) { _, _ in
+                            viewModel.setTotalPrice(for: &product)
                         }
-                        .disabled(true)
                         
                         Button {
                             viewModel.removeInvoiceRow(at: product.id)

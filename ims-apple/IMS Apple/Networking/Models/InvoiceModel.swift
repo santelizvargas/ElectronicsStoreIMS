@@ -15,7 +15,7 @@ struct InvoiceModel: Decodable, Identifiable {
     let id: Int
     let customerName: String
     let customerIdentification: String
-    let totalAmount: Int
+    let totalAmount: Double
     let createdAt: String
     let products: [ProductModel]
 }

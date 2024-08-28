@@ -18,7 +18,7 @@ final class AddProductViewModel: ObservableObject {
     @Published var price: String = ""
     @Published var stock: String = ""
     @Published var description: String = ""
-    @Published var category: ProductCategory = .all
+    @Published var category: ProductCategory = .phones
     
     var isCreateDisabled: Bool {
         name.isEmpty ||

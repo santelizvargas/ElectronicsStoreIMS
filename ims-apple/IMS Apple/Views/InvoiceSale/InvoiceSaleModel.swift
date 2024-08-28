@@ -9,28 +9,58 @@ import Foundation
 
 struct InvoiceSaleModel {
     var clientName: String
-    var clientPhoneNumber: String
-    let createAt: String = "Agosto 02, 2024"
+    var clientIdentification: String
+    let createAt: String
     var products: [InvoiceSaleRowModel]
+    
+    init(clientName: String = "",
+         clientIdentification: String = "",
+         createAt: String = Date().dayMonthYear,
+         products: [InvoiceSaleRowModel] = [.init()]) {
+        self.clientName = clientName
+        self.clientIdentification = clientIdentification
+        self.createAt = createAt
+        self.products = products
+    }
+}
+
+extension InvoiceSaleModel {
+    var subtotalPrice: Double {
+        products.reduce(.zero) { result, product in
+            let price = product.totalPrice
+            return result + price
+        }
+    }
+    
+    var totalIva: Double { subtotalPrice * 0.15 }
+    var totalPrice: Double { subtotalPrice + totalIva }
 }
 
 struct InvoiceSaleRowModel: Identifiable {
-    let id: UUID = UUID()
-    var code: String
-    var amount: String
-    var description: String
-    var unitPrice: Double
+    var id: String
+    var name: String
+    var quantity: String
+    var price: Double
     var totalPrice: Double
     
-    init(code: String = "",
-         amount: String = "1",
-         description: String = "",
-         unitPrice: Double = 0,
+    init(id: String = "",
+         name: String = "",
+         quantity: String = "1",
+         price: Double = 0,
          totalPrice: Double = 0) {
-        self.code = code
-        self.amount = amount
-        self.description = description
-        self.unitPrice = unitPrice
+        self.id = id
+        self.name = name
+        self.quantity = quantity
+        self.price = price
         self.totalPrice = totalPrice
+    }
+    
+    func getParameters() -> [String: Any] {
+        [
+            "id": Int(id) ?? 0,
+            "name": name,
+            "quantity": Int(quantity) ?? 0,
+            "price": price
+        ]
     }
 }

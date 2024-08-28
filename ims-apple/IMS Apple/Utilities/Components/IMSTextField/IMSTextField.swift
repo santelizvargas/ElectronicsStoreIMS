@@ -33,12 +33,13 @@ struct IMSTextField: View {
     private let hasBorder: Bool
     private let maxWidth: CGFloat
     private let minHeight: CGFloat
-    
     private let type: IMSTextFieldType
+    private let isActive: Bool
     
     init(type: IMSTextFieldType = .none,
          text: Binding<String>,
          hasBorder: Bool = false,
+         isActive: Bool = true,
          maxWidth: CGFloat = Constants.textFieldMaxWidth,
          minHeight: CGFloat = Constants.textFieldMinHeight) {
         self.type = type
@@ -46,6 +47,7 @@ struct IMSTextField: View {
         self.hasBorder = hasBorder
         self.maxWidth = maxWidth
         self.minHeight = minHeight
+        self.isActive = isActive
     }
     
     var body: some View {
@@ -60,7 +62,7 @@ struct IMSTextField: View {
             }
             
             TextField("", text: $text)
-                .textFieldStyle(IMSTextFieldStyle(textFieldMinHeight: minHeight))
+                .textFieldStyle(IMSTextFieldStyle(textFieldMinHeight: minHeight, isActive: isActive))
                 .overlay {
                     if hasBorder {
                         RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
@@ -69,6 +71,7 @@ struct IMSTextField: View {
                 }
         }
         .frame(maxWidth: maxWidth, maxHeight: Constants.textFieldMaxHeight)
+        .allowsHitTesting(isActive)
     }
 }
 

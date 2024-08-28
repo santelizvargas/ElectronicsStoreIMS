@@ -97,7 +97,7 @@ final class AuthenticationManager {
     
     func registerUser(user: UserRegisterModel) async throws {
         do {
-            let parameters = try await convertToDictionaty(data: user)
+            let parameters = try await networkManager.convertToDictionaty(data: user)
             try await networkManager.makeRequest(path: .register,
                                                  with: parameters,
                                                  httpMethod: .post)
@@ -113,20 +113,6 @@ final class AuthenticationManager {
             let data = try await networkManager.makeRequest(path: .users)
             let response = try JSONDecoder().decode(UserResponse.self, from: data)
             return response.data
-        } catch {
-            throw IMSError.somethingWrong
-        }
-    }
-    
-    // MARK: - Convert To Dictionaty
-    
-    private func convertToDictionaty<T: Codable>(data: T) async throws -> [String: Any] {
-        do {
-            let jsonData = try JSONEncoder().encode(data)
-            let parameters = try JSONSerialization.jsonObject(with: jsonData,
-                                                              options: .mutableContainers) as? [String: Any]
-            guard let parameters else { throw IMSError.somethingWrong }
-            return parameters
         } catch {
             throw IMSError.somethingWrong
         }
