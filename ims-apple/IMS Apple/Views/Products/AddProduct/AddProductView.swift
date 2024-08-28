@@ -25,7 +25,6 @@ private enum Constants {
 }
 
 struct AddProductView: View {
-    @State private var selectedCategory: ProductCategory = .phones
     @State private var showingImagePicker: Bool = false
     @State private var showAlert: Bool = false
     
@@ -177,11 +176,11 @@ struct AddProductView: View {
             Menu {
                 ForEach(ProductCategory.categories, id: \.self) { category in
                     Button(category.title) {
-                        selectedCategory = category
+                        viewModel.category = category
                     }
                 }
             } label: {
-                Text(selectedCategory.title)
+                Text(viewModel.category.title)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .foregroundStyle(.white)
                     .isOS(.iOS) { view in

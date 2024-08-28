@@ -18,6 +18,7 @@ final class AddProductViewModel: ObservableObject {
     @Published var price: String = ""
     @Published var stock: String = ""
     @Published var description: String = ""
+    @Published var category: ProductCategory = .all
     
     var isCreateDisabled: Bool {
         name.isEmpty ||
@@ -84,7 +85,7 @@ final class AddProductViewModel: ObservableObject {
                                                        salePrice: Double(price) ?? .zero,
                                                        purchasePrice: Double(price) ?? .zero,
                                                        stock: Int(stock) ?? .zero,
-                                                       category: ProductCategory.all.title,
+                                                       category: category.title,
                                                        imageData: [imageData])
                 isRequestInProgress = false
                 resetProductProperties()
