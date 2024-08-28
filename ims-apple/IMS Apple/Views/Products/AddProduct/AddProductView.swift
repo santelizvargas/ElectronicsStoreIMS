@@ -132,8 +132,9 @@ struct AddProductView: View {
                     .resizable()
                     .scaledToFill()
                     .frame(maxWidth: .infinity)
-                    .frame(height: Constants.photoMaxHeight)
+                    .frame(maxHeight: Constants.photoMaxHeight)
                     .clipped()
+                    .allowsHitTesting(false)
             } else {
                 RoundedRectangle(cornerRadius: Constants.cornerRadiusSize)
                     .stroke(style: StrokeStyle(dash: [Constants.strokLengths]))

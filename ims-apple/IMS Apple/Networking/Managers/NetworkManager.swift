@@ -17,9 +17,6 @@ private enum Constants {
 }
 
 final class NetworkManager {
-    
-    private var boundary: String { "\(UUID().uuidString)" }
-    
     private var components: URLComponents = {
         var components: URLComponents = URLComponents()
         components.scheme = Constants.scheme
@@ -71,30 +68,35 @@ final class NetworkManager {
                      with parameters: [String: Any],
                      imageData: Data) async throws -> Data {
         
+        
+        let boundary: String = UUID().uuidString
         components.path = path.endPoint
+        components.queryItems = makeQueryItems(parameters: parameters)
         guard let url = components.url else { throw IMSError.badUrl }
         
         var request = URLRequest(url: url)
         request.httpMethod = HttpMethod.post.rawValue
-        request.setValue("multipart/form-data; boundary=\(boundary)", forHTTPHeaderField: "Content-Type")
+        request.setValue("multipart/form-data; boundary=\(boundary)",
+                         forHTTPHeaderField: "Content-Type")
         
-        var body: Data = Data()
+        var data = Data()
         
         for (key, value) in parameters {
-            body.appendString("--\(boundary)\(Constants.lineBreak)")
-            body.appendString("Content-Disposition: form-data; name=\"\(key)\"\(Constants.lineBreak)")
-            body.appendString("\(value)\(Constants.lineBreak)")
+            data.appendString("--\(boundary)\r\n")
+            data.appendString("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n")
+            data.appendString("\(value)\r\n")
         }
         
-        let uuid: String = UUID().uuidString
-        body.appendString("--\(boundary)\(Constants.lineBreak)")
-        body.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"\(uuid).jpg\"\(Constants.lineBreak)")
-        body.appendString("Content-Type: image/jpeg\(Constants.lineBreak)\(Constants.lineBreak)")
-        body.append(imageData)
-        body.appendString("\(Constants.lineBreak)")
-        body.appendString("--\(boundary)\(Constants.lineBreak)--")
+        /// Apending image
+        data.appendString("--\(boundary)\r\n")
+        data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n\r\n")
+        data.appendString("Content-Type: image/jpeg\r\n\r\n")
+        data.append(imageData)
+        data.appendString("\r\n")
         
-        request.httpBody = body
+        data.appendString("--\(boundary)--\r\n")
+        
+        request.httpBody = data
         
         do {
             let (data, response) = try await URLSession.shared.data(for: request)

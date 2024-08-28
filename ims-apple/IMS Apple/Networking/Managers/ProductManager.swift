@@ -34,14 +34,17 @@ final class ProductManager {
                        description: String,
                        salePrice: Double,
                        purchasePrice: Double,
-                       stock: Int = 1, 
+                       stock: Int = 1,
+                       category: String,
                        imageData: Data) async throws {
         let parameters: [String: Any] = [
             "name": name,
             "description": description,
             "salePrice": salePrice,
             "purchasePrice": purchasePrice,
-            "stock": stock
+            "category": category,
+            "stock": stock,
+//            "images": [imageData]
         ]
         
         do {

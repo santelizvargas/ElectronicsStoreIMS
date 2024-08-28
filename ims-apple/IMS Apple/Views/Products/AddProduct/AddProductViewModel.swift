@@ -8,6 +8,7 @@
 import SwiftUI
 import _PhotosUI_SwiftUI
 
+@MainActor
 final class AddProductViewModel: ObservableObject {
     @Published var avatarItem: PhotosPickerItem?
     @Published var productImage: Image?
@@ -41,7 +42,7 @@ final class AddProductViewModel: ObservableObject {
             do {
                 if let image = try await avatarItem?.loadTransferable(type: Image.self) {
                     productImage = image
-                    imageData = UIImage(cgImage: ImageRenderer(content: image).cgImage!).jpegData(compressionQuality: 1.0)
+                    imageData = ImageRenderer(content: image).cgImage?.dataProvider?.data as? Data
                     debugPrint("Image loaded")
                 } else {
                     debugPrint("Avatar item is currently nil")
@@ -66,7 +67,8 @@ final class AddProductViewModel: ObservableObject {
                                                        description: description,
                                                        salePrice: Double(price) ?? .zero,
                                                        purchasePrice: Double(price) ?? .zero,
-                                                       stock: Int(stock) ?? .zero,
+                                                       stock: Int(stock) ?? .zero, 
+                                                       category: ProductCategory.all.title,
                                                        imageData: imageData)
                 isRequestInProgress = false
                 resetProductProperties()
