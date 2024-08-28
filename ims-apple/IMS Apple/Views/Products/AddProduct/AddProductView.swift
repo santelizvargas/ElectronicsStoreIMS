@@ -69,11 +69,14 @@ struct AddProductView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
         .background(.grayBackground)
         .alert(
-            viewModel.name.isEmpty
-            ? "Producto Agregado Correctamente"
-            : "¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde.",
+            viewModel.addProductRequestMessage,
             isPresented: $showAlert) {
                 Button("OK", role: .cancel) { }
+            }
+            .overlay {
+                if viewModel.isRequestInProgress {
+                    CustomProgressView()
+                }
             }
     }
     
@@ -81,17 +84,17 @@ struct AddProductView: View {
     
     private var productInformationView: some View {
         VStack {
-            productTextFild(
+            productTextField(
                 title: "Nombre del producto",
                 textValue: $viewModel.name
             )
             
-            productTextFild(
+            productTextField(
                 title: "Precio",
                 textValue: $viewModel.price.allowOnlyDecimalNumbers
             )
 
-            productTextFild(
+            productTextField(
                 title: "Unidades disponibles",
                 textValue: $viewModel.stock.allowOnlyNumbers
             )
@@ -197,7 +200,7 @@ struct AddProductView: View {
         }
     }
     
-    private func productTextFild(title: String, textValue: Binding<String>, maxHeight: CGFloat = 35) -> some View {
+    private func productTextField(title: String, textValue: Binding<String>, maxHeight: CGFloat = 35) -> some View {
         VStack {
             HStack {
                 Text(title)

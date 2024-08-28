@@ -23,7 +23,8 @@ final class AddProductViewModel: ObservableObject {
         name.isEmpty ||
         price.isEmpty ||
         description.isEmpty ||
-        stock.isEmpty
+        stock.isEmpty ||
+        imageData == nil
     }
     
     private func resetProductProperties() {
@@ -34,6 +35,8 @@ final class AddProductViewModel: ObservableObject {
         productImage = nil
         avatarItem = nil
     }
+    
+    var addProductRequestMessage: String = ""
     
     private let productManager: ProductManager = ProductManager()
     private var imageData: Data?
@@ -85,10 +88,14 @@ final class AddProductViewModel: ObservableObject {
                 isRequestInProgress = false
                 resetProductProperties()
                 completion?()
+                addProductRequestMessage = "Producto agregado correctamente!"
             } catch {
                 isRequestInProgress = false
                 completion?()
                 guard let error = error as? IMSError else { return }
+                addProductRequestMessage = error == .uniqueNameKey
+                ? "El nombre del producto ya existe, por favor ingrese uno diferente!"
+                : "¡Ups! Algo salió mal. Por favor, intenta de nuevo más tarde."
                 debugPrint(error.localizedDescription)
             }
         }

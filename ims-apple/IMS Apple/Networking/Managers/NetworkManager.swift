@@ -11,9 +11,6 @@ import SwiftUI
 private enum Constants {
     static let scheme: String = "https"
     static let baseURLString: String = "ims-electronics.up.railway.app"
-    static let jsonContentType: String = "application/json"
-    static let multipartContentType: String = "multipart/form-data; boundary="
-    static let lineBreak: String = "\r\n"
 }
 
 final class NetworkManager {
