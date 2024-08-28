@@ -8,13 +8,9 @@
 import Foundation
 
 final class InvoiceSaleViewModel: ObservableObject {
-    @Published var invoiceSaleModel: InvoiceSaleModel = InvoiceSaleModel(
-        clientName: "",
-        clientPhoneNumber: "",
-        products: [.init()]
-    )
-    
+    @Published var invoiceSaleModel: InvoiceSaleModel = .init()
     @Published var currentProducts: [ProductModel] = []
+    @Published var isRequestInProgress: Bool = false
     
     var disableRemoveRow: Bool {
         invoiceSaleModel.products.count == 1
@@ -22,17 +18,18 @@ final class InvoiceSaleViewModel: ObservableObject {
     
     var disableAddNewRow: Bool {
         invoiceSaleModel.products.contains { producto in
-            producto.description.isEmpty || producto.amount.isEmpty
+            producto.name.isEmpty || producto.quantity.isEmpty
         }
     }
     
     var disableGenerateInvoice: Bool {
         invoiceSaleModel.clientName.isEmpty ||
-        invoiceSaleModel.clientPhoneNumber.isEmpty ||
+        invoiceSaleModel.clientIdentification.isEmpty ||
         disableAddNewRow
     }
     
     private lazy var productManager: ProductManager = ProductManager()
+    private lazy var invoiceManager: InvoiceManager = InvoiceManager()
     
     init() {
         getProducts()
@@ -42,28 +39,29 @@ final class InvoiceSaleViewModel: ObservableObject {
         invoiceSaleModel.products.insert(InvoiceSaleRowModel(), at: .zero)
     }
     
-    func removeInvoiceRow(at id: UUID) {
+    func removeInvoiceRow(at id: String) {
         invoiceSaleModel.products.removeAll(where: { $0.id == id })
     }
     
     func setProductValues(for id: String, with product: inout InvoiceSaleRowModel) {
-        guard let productId = Int(id.trimmingCharacters(in: .whitespaces)),
-              let currentProduct = currentProducts.first(where: { $0.id == productId })
+        guard
+            let productId = Int(id.trimmingCharacters(in: .whitespaces)),
+            let currentProduct = currentProducts.first(where: { $0.id == productId })
         else {
-            product.description = ""
-            product.unitPrice = .zero
+            product.name = ""
+            product.price = .zero
             return
         }
-        product.description = currentProduct.name
-        product.unitPrice = currentProduct.salePrice
+        product.name = currentProduct.name
+        product.price = currentProduct.salePrice
     }
     
     func setTotalPrice(for product: inout InvoiceSaleRowModel) {
-        guard let amount = Double(product.amount) else {
+        guard let amount = Double(product.quantity) else {
             product.totalPrice = .zero
             return
         }
-        product.totalPrice = amount * product.unitPrice
+        product.totalPrice = amount * product.price
     }
     
     func getProducts() {
@@ -71,6 +69,23 @@ final class InvoiceSaleViewModel: ObservableObject {
             do {
                 currentProducts = try await productManager.getProducts()
             } catch {
+                guard let error = error as? IMSError else { return }
+                debugPrint(error.localizedDescription)
+            }
+        }
+    }
+    
+    func createInvoice(completion: (() -> Void)?) {
+        isRequestInProgress = true
+        Task { @MainActor in
+            do {
+                try await invoiceManager.createInvoice(invoice: invoiceSaleModel)
+                invoiceSaleModel = .init()
+                isRequestInProgress = false
+                completion?()
+            } catch {
+                isRequestInProgress = false
+                completion?()
                 guard let error = error as? IMSError else { return }
                 debugPrint(error.localizedDescription)
             }

@@ -104,4 +104,18 @@ final class NetworkManager {
             throw IMSError.somethingWrong
         }
     }
+    
+    // MARK: - Convert To Dictionaty
+    
+    func convertToDictionaty<T: Codable>(data: T) async throws -> [String: Any] {
+        do {
+            let jsonData = try JSONEncoder().encode(data)
+            let parameters = try JSONSerialization.jsonObject(with: jsonData,
+                                                              options: .mutableContainers) as? [String: Any]
+            guard let parameters else { throw IMSError.somethingWrong }
+            return parameters
+        } catch {
+            throw IMSError.somethingWrong
+        }
+    }
 }

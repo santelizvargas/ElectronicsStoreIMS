@@ -22,4 +22,11 @@ final class CustomDateFormatter {
         dateFormatter.locale = Locale(identifier: "es_ES")
         return dateFormatter.string(from: date)
     }
+    
+    static func formatDateToDayMonthYear(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormat.dayMonthYear.rawValue
+        dateFormatter.locale = Locale(identifier: "es_ES")
+        return dateFormatter.string(from: date)
+    }
 }
