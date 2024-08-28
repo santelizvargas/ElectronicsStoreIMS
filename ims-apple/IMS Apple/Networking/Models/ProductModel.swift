@@ -42,7 +42,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
     let createdAt: String
     let updatedAt: String
     let deletedAt: String?
-    var images: [String]? = nil
+    var images: [String] = [""]
 
     enum CodingKeys: String, CodingKey {
         case id
@@ -54,6 +54,7 @@ struct ProductModel: Identifiable, Equatable, Decodable {
         case createdAt
         case updatedAt
         case deletedAt
+        case images
     }
 
     init(from decoder: Decoder) throws {
@@ -67,5 +68,6 @@ struct ProductModel: Identifiable, Equatable, Decodable {
         createdAt = try container.decode(String.self, forKey: .createdAt)
         updatedAt = try container.decode(String.self, forKey: .updatedAt)
         deletedAt = try container.decodeIfPresent(String.self, forKey: .deletedAt)
+        images = try container.decode([String].self, forKey: .images)
     }
 }

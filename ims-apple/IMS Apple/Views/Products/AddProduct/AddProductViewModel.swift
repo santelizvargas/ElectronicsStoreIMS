@@ -42,8 +42,8 @@ final class AddProductViewModel: ObservableObject {
             do {
                 if let image = try await avatarItem?.loadTransferable(type: Image.self) {
                     productImage = image
-                    imageData = ImageRenderer(content: image).cgImage?.dataProvider?.data as? Data
-                    debugPrint("Image loaded")
+                    imageData = ImageRenderer(content: productImage).cgImage?.dataProvider?.data as? Data
+                    debugPrint("---Image loaded---")
                 } else {
                     debugPrint("Avatar item is currently nil")
                 }
@@ -67,9 +67,9 @@ final class AddProductViewModel: ObservableObject {
                                                        description: description,
                                                        salePrice: Double(price) ?? .zero,
                                                        purchasePrice: Double(price) ?? .zero,
-                                                       stock: Int(stock) ?? .zero, 
+                                                       stock: Int(stock) ?? .zero,
                                                        category: ProductCategory.all.title,
-                                                       imageData: imageData)
+                                                       imageData: [imageData])
                 isRequestInProgress = false
                 resetProductProperties()
                 completion?()

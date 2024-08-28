@@ -64,11 +64,9 @@ final class NetworkManager {
         }
     }
     
-    func uploadImage(path: IMSPath,
-                     with parameters: [String: Any],
-                     imageData: Data) async throws -> Data {
-        
-        
+    func makeMultipartRequest(path: IMSPath,
+                              with parameters: [String: Any],
+                              dataCollection: [Data]) async throws -> Data {
         let boundary: String = UUID().uuidString
         components.path = path.endPoint
         components.queryItems = makeQueryItems(parameters: parameters)
@@ -87,12 +85,13 @@ final class NetworkManager {
             data.appendString("\(value)\r\n")
         }
         
-        /// Apending image
-        data.appendString("--\(boundary)\r\n")
-        data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n\r\n")
-        data.appendString("Content-Type: image/jpeg\r\n\r\n")
-        data.append(imageData)
-        data.appendString("\r\n")
+        for (_, value) in dataCollection.enumerated() {
+            data.appendString("--\(boundary)\r\n")
+            data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n\r\n")
+            data.appendString("Content-Type: image/jpeg\r\n\r\n")
+            data.append(value)
+            data.appendString("\r\n")
+        }
         
         data.appendString("--\(boundary)--\r\n")
         
