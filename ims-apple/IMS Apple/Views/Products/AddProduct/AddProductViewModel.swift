@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreGraphics
 import _PhotosUI_SwiftUI
 
 @MainActor
@@ -38,14 +39,25 @@ final class AddProductViewModel: ObservableObject {
     private var imageData: Data?
     
     func getProductImage() {
-        Task {
+        Task { @MainActor in
             do {
                 if let image = try await avatarItem?.loadTransferable(type: Image.self) {
                     productImage = image
-                    imageData = ImageRenderer(content: productImage).cgImage?.dataProvider?.data as? Data
-                    debugPrint("---Image loaded---")
-                } else {
-                    debugPrint("Avatar item is currently nil")
+                    let renderer = ImageRenderer(content: image)
+                    
+                    if let cgImage = renderer.cgImage {
+                        let data = NSMutableData()
+                        guard let imageDestination = CGImageDestinationCreateWithData(data as CFMutableData,
+                                                                                      UTType.jpeg.identifier as CFString,
+                                                                                      1, nil)
+                        else { return }
+                        
+                        CGImageDestinationAddImage(imageDestination, cgImage, nil)
+                        
+                        if CGImageDestinationFinalize(imageDestination) {
+                            imageData = data as Data
+                        }
+                    }
                 }
             } catch {
                 debugPrint("Failed loading the image with error: \(error.localizedDescription)")

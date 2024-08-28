@@ -87,7 +87,7 @@ final class NetworkManager {
         
         for (_, value) in dataCollection.enumerated() {
             data.appendString("--\(boundary)\r\n")
-            data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n\r\n")
+            data.appendString("Content-Disposition: form-data; name=\"images\"; filename=\"image-\(boundary).jpg\"\r\n")
             data.appendString("Content-Type: image/jpeg\r\n\r\n")
             data.append(value)
             data.appendString("\r\n")
