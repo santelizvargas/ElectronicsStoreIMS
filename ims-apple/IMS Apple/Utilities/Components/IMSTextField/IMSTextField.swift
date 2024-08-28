@@ -35,9 +35,11 @@ struct IMSTextField: View {
     private let minHeight: CGFloat
     private let type: IMSTextFieldType
     private let isActive: Bool
+    private let placeholder: String
     
     init(type: IMSTextFieldType = .none,
          text: Binding<String>,
+         placeholder: String = "",
          hasBorder: Bool = false,
          isActive: Bool = true,
          maxWidth: CGFloat = Constants.textFieldMaxWidth,
@@ -48,20 +50,21 @@ struct IMSTextField: View {
         self.maxWidth = maxWidth
         self.minHeight = minHeight
         self.isActive = isActive
+        self.placeholder = placeholder
     }
     
     var body: some View {
         VStack {
-            HStack {
-                if type != .none { 
+            if type != .none {
+                HStack {
                     Text(type.title)
                         .font(.title3)
+                    
+                    Spacer()
                 }
-                
-                Spacer()
             }
             
-            TextField("", text: $text)
+            TextField(placeholder, text: $text)
                 .textFieldStyle(IMSTextFieldStyle(textFieldMinHeight: minHeight, isActive: isActive))
                 .overlay {
                     if hasBorder {

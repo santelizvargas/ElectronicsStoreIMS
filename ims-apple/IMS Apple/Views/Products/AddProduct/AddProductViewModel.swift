@@ -43,7 +43,7 @@ final class AddProductViewModel: ObservableObject {
     private let productManager: ProductManager = ProductManager()
     private var imageData: Data?
     
-    func getProductImage() {
+    func getProductImage(completion: (() -> Void)?) {
         Task { @MainActor in
             do {
                 if let image = try await avatarItem?.loadTransferable(type: Image.self) {
@@ -65,6 +65,8 @@ final class AddProductViewModel: ObservableObject {
                     }
                 }
             } catch {
+                addProductRequestMessage = "Formato de imagen no soportado!"
+                completion?()
                 debugPrint("Failed loading the image with error: \(error.localizedDescription)")
             }
         }
@@ -85,7 +87,7 @@ final class AddProductViewModel: ObservableObject {
                                                        salePrice: Double(price) ?? .zero,
                                                        purchasePrice: Double(price) ?? .zero,
                                                        stock: Int(stock) ?? .zero,
-                                                       category: category.title,
+                                                       category: category.rawValue,
                                                        imageData: [imageData])
                 isRequestInProgress = false
                 resetProductProperties()
