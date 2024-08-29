@@ -33,9 +33,33 @@ struct InvoicePreviewView: View {
         ScrollView(showsIndicators: false) {
             contentView
         }
+        .padding(.vertical)
+        .padding(.horizontal, Constants.productGridSpacing)
+        .frame(
+            minHeight: Constants.minHeight,
+            maxHeight: .infinity
+        )
+        .frame(width: Constants.maxWidth)
+        .foregroundStyle(.black)
+        .background {
+            RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                .fill(.imsWhite)
+        }
         .overlay(alignment: .bottomLeading) {
             ExportPDFButton(fileName: "Factura \(Date().dayMonthYear)", color: .black) {
                 contentView
+                    .padding(.vertical)
+                    .padding(.horizontal, Constants.productGridSpacing)
+                    .frame(
+                        minHeight: Constants.minHeight,
+                        maxHeight: .infinity
+                    )
+                    .frame(width: Constants.maxWidth)
+                    .foregroundStyle(.black)
+                    .background {
+                        RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                            .fill(.imsWhite)
+                    }
             }
             .padding()
             .background(.imsWhite)
@@ -116,18 +140,6 @@ struct InvoicePreviewView: View {
             
             Spacer()
         }
-        .padding(.vertical)
-        .padding(.horizontal, Constants.productGridSpacing)
-        .frame(
-            minHeight: Constants.minHeight,
-            maxHeight: .infinity
-        )
-        .frame(width: Constants.maxWidth)
-        .foregroundStyle(.black)
-        .background {
-            RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                .fill(.imsWhite)
-        }
     }
     
     // MARK: - Header View
@@ -144,7 +156,7 @@ struct InvoicePreviewView: View {
             VStack(alignment: .trailing, spacing: Constants.userSpacing) {
                 Text("Factura: ")
                     .bold()
-                + Text("123912")
+                + Text(invoiceSale.id > .zero ? invoiceSale.id.description : "-")
                 
                 Text(invoiceSale.createAt)
                     .foregroundStyle(.imsGraySecundary)

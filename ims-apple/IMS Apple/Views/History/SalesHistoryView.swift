@@ -22,6 +22,7 @@ private enum Constants {
 
 struct SalesHistoryView: View {
     @ObservedObject private var viewModel: SalesHistoryViewModel = .init()
+    @State private var showInvoicePreview: Bool = false
     
     var body: some View {
         VStack {
@@ -85,14 +86,16 @@ struct SalesHistoryView: View {
         GridRow {
             ScrollView(showsIndicators: false) {
                 Grid(horizontalSpacing: .zero) {
-                    ForEach(viewModel.invoices) { item in
+                    ForEach(Array(viewModel.invoices.enumerated()), id: \.offset) { index, item in
                         GridRow {
                             Group {
                                 Text(item.customerName)
                                 Text(item.customerIdentification)
                                 Text(item.createdAt.dayMonthYear)
                                 Button("Ver factura") {
-                                    
+                                    withAnimation {
+                                        viewModel.selectedSale = viewModel.invoicesPreview[index]
+                                    }
                                 }
                                 .buttonStyle(.plain)
                                 .underline()
@@ -100,6 +103,25 @@ struct SalesHistoryView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         }
                         .padding(.vertical)
+                    }
+                }
+                .onReceive(viewModel.$selectedSale) { sale in
+                    if sale != nil {
+                        showInvoicePreview.toggle()
+                    }
+                }
+                .isOS(.iOS) { view in
+                    view.sheet(isPresented: $showInvoicePreview) {
+                        if let selectedSale = viewModel.selectedSale {
+                            InvoicePreviewView(invoiceSale: selectedSale)
+                        }
+                    }
+                }
+                .isOS(.macOS) { view in
+                    view.popover(isPresented: $showInvoicePreview) {
+                        if let selectedSale = viewModel.selectedSale {
+                            InvoicePreviewView(invoiceSale: selectedSale)
+                        }
                     }
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

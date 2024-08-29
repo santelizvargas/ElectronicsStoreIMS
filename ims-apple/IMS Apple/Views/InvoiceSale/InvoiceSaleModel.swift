@@ -8,20 +8,11 @@
 import Foundation
 
 struct InvoiceSaleModel {
-    var clientName: String
-    var clientIdentification: String
-    let createAt: String
-    var products: [InvoiceSaleRowModel]
-    
-    init(clientName: String = "",
-         clientIdentification: String = "",
-         createAt: String = Date().dayMonthYear,
-         products: [InvoiceSaleRowModel] = [.init()]) {
-        self.clientName = clientName
-        self.clientIdentification = clientIdentification
-        self.createAt = createAt
-        self.products = products
-    }
+    var id: Int = 0
+    var clientName: String = ""
+    var clientIdentification: String = ""
+    var createAt: String = Date().dayMonthYear
+    var products: [InvoiceSaleRowModel] = [.init()]
 }
 
 extension InvoiceSaleModel {
@@ -38,23 +29,11 @@ extension InvoiceSaleModel {
 
 struct InvoiceSaleRowModel: Hashable {
     var idString: String = UUID().uuidString
-    var id: String
-    var name: String
-    var quantity: String
-    var price: Double
-    var totalPrice: Double
-    
-    init(id: String = "",
-         name: String = "",
-         quantity: String = "1",
-         price: Double = 0,
-         totalPrice: Double = 0) {
-        self.id = id
-        self.name = name
-        self.quantity = quantity
-        self.price = price
-        self.totalPrice = totalPrice
-    }
+    var id: String = ""
+    var name: String = ""
+    var quantity: String = "1"
+    var price: Double = 0
+    var totalPrice: Double = 0
     
     func getParameters() -> [String: Any] {
         [

@@ -18,4 +18,15 @@ struct InvoiceModel: Decodable, Identifiable {
     let totalAmount: Double
     let createdAt: String
     let products: [ProductModel]
+    let details: [DetailsInvoiceModel]
+}
+
+struct DetailsInvoiceModel: Decodable {
+    let id: Int
+    let productName: String
+    let productQuantity: Int
+    let productPrice: Double
+    let productCategory: String?
+    let invoiceId: Int
+    let createdAt: String
 }
