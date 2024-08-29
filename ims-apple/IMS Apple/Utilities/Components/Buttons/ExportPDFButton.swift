@@ -11,10 +11,14 @@ import SwiftUI
 
 struct ExportPDFButton<Content: View>: View {
     private let fileName: String
+    private let color: Color
     private let content: Content
     
-    init(fileName: String, content: () -> Content) {
+    init(fileName: String, 
+         color: Color = .imsWhite,
+         content: () -> Content) {
         self.fileName = fileName
+        self.color = color
         self.content = content()
     }
     
@@ -32,6 +36,7 @@ struct ExportPDFButton<Content: View>: View {
                 } label: {
                     labelView
                 }
+                .buttonStyle(.plain)
         }
     }
     
@@ -42,7 +47,7 @@ struct ExportPDFButton<Content: View>: View {
             Image(systemName: "square.and.arrow.up.fill")
             Text("Exportar")
         }
-        .foregroundStyle(.white)
+        .foregroundStyle(color)
     }
     
     // MARK: - Current Directory

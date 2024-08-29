@@ -36,7 +36,8 @@ extension InvoiceSaleModel {
     var totalPrice: Double { subtotalPrice + totalIva }
 }
 
-struct InvoiceSaleRowModel: Identifiable {
+struct InvoiceSaleRowModel: Hashable {
+    var idString: String = UUID().uuidString
     var id: String
     var name: String
     var quantity: String
