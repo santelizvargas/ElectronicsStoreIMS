@@ -53,7 +53,7 @@ struct GraphView: View {
             }
             
             ChartContainer(title: "Venta de productos") {
-                BarChart(data: BarItem.lastWeek)
+                BarChart(data: viewModel.productBars)
             }
             .gridCellColumns(Constants.maxCellColumns)
             
@@ -68,7 +68,7 @@ struct GraphView: View {
     private var secondGridRow: some View {
         GridRow {
             ChartContainer(title: "Categorías más vendidas") {
-                BarChart(data: BarItem.categories)
+                BarChart(data: viewModel.categoriesBars)
             }
             .gridCellColumns(Constants.maxCellColumns)
             
