@@ -26,11 +26,25 @@ final class FileFactory {
     static func makeHistoryStringFormatted(histories: [InvoiceModel]) -> String {
         let header: String = "Nombre, Identificacion, Fecha, Pago Total"
         
-        let mappedUsers: String = histories.map { history in
+        let mappedHistory: String = histories.map { history in
             "\(history.customerName), \(history.customerIdentification), \(history.createdAt.dayMonthYear), $\(history.totalAmount)"
         }.joined(separator: "\n")
         
-        let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")
+        let stringFormatted: String = [header, mappedHistory].joined(separator: "\n")
+        return stringFormatted
+    }
+    
+    static func makeProductStringFormatted(products: [ProductModel]) -> String {
+        let header: String = "Nombre, Cantidad, Category, Precio, Descripcion"
+        
+        let mappedProducts: String = products.map { product in
+            let description = product.description.replacingOccurrences(of: ",", with: "")
+            let name = product.name.replacingOccurrences(of: ",", with: "")
+            
+            return "\(name), \(product.stock), \(product.category.rawValue), $\(product.salePrice), \(description)"
+        }.joined(separator: "\n")
+        
+        let stringFormatted: String = [header, mappedProducts].joined(separator: "\n")
         return stringFormatted
     }
 }

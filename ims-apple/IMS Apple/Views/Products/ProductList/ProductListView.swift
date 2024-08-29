@@ -71,6 +71,9 @@ struct ProductListView: View {
         .background(.grayBackground)
         .searchable(text: $viewModel.searchText)
         .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                ExporterNav(fileName: "Lista de productos", collection: viewModel.products)
+            }
             ToolbarItem(placement: .destructiveAction) { stateMenu }
             ToolbarItem(placement: .destructiveAction) { categoryMenu }
         }
@@ -96,6 +99,7 @@ struct ProductListView: View {
                 }
             }
         }
+        .foregroundStyle(.imsWhite)
     }
     
     // MARK: - Category Menu View
@@ -110,6 +114,7 @@ struct ProductListView: View {
                 }
             }
         }
+        .foregroundStyle(.imsWhite)
     }
     
     // MARK: - Product Card View
