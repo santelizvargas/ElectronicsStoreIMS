@@ -33,7 +33,7 @@ struct SalesHistoryView: View {
                 ExporterButton(
                     title: "Exportar",
                     fileName: "Historial de ventas",
-                    collection: HistoryModel.mockData
+                    collection: viewModel.invoices
                 )
             }
             

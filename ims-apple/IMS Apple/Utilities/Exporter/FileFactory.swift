@@ -23,11 +23,11 @@ final class FileFactory {
         return stringFormatted
     }
     
-    static func makeHistoryStringFormatted(histories: [HistoryModel]) -> String {
-        let header: String = "Nombre, Telefono, Fecha"
+    static func makeHistoryStringFormatted(histories: [InvoiceModel]) -> String {
+        let header: String = "Nombre, Identificacion, Fecha, Pago Total"
         
         let mappedUsers: String = histories.map { history in
-            "\(history.name), \(history.phoneNumber), \(history.date)"
+            "\(history.customerName), \(history.customerIdentification), \(history.createdAt.dayMonthYear), $\(history.totalAmount)"
         }.joined(separator: "\n")
         
         let stringFormatted: String = [header, mappedUsers].joined(separator: "\n")

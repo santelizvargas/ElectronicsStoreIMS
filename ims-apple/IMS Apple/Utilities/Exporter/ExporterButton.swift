@@ -48,7 +48,7 @@ struct ExporterButton<IMSCollection: Collection>: View {
     private var formattedDocument: IMSDocument {
         if let users = collection as? [UserModel] {
             IMSDocument(text: FileFactory.makeUserStringFormatted(users: users))
-        } else if let histories = collection as? [HistoryModel] {
+        } else if let histories = collection as? [InvoiceModel] {
             IMSDocument(text: FileFactory.makeHistoryStringFormatted(histories: histories))
         } else {
             IMSDocument(text: "Nothing")
