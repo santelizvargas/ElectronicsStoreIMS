@@ -40,7 +40,7 @@ final class InvoiceSaleViewModel: ObservableObject {
     }
     
     func removeInvoiceRow(at id: String) {
-        invoiceSaleModel.products.removeAll(where: { $0.id == id })
+        invoiceSaleModel.products.removeAll(where: { $0.idString == id })
     }
     
     func setProductValues(for id: String, with product: inout InvoiceSaleRowModel) {

@@ -246,7 +246,7 @@ struct InvoiceSaleView: View {
                         }
                         
                         Button {
-                            viewModel.removeInvoiceRow(at: product.id)
+                            viewModel.removeInvoiceRow(at: product.idString)
                         } label: {
                             Image(systemName: "trash")
                                 .resizable()

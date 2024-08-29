@@ -31,77 +31,90 @@ struct InvoicePreviewView: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(spacing: Constants.spacing) {
-                headerView
-                
-                VStack(alignment: .leading, spacing: Constants.userSpacing) {
-                    Text("+505 8942 6818")
-                    Text(verbatim: "info@electronic.store")
-                    Text("Catedral de León 2C al Norte, León - Nicaragua")
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                .foregroundStyle(.imsGraySecundary)
-                
-                VStack(alignment: .leading, spacing: Constants.userSpacing) {
-                    Text("Datos del cliente")
-                        .font(.title3.bold())
-                    
-                    Grid(alignment: .leading, verticalSpacing: Constants.gridSpacing) {
-                        GridRow {
-                            Text("Nombre:")
-                            Text(invoiceSale.clientName)
-                                .foregroundStyle(.imsGraySecundary)
-                        }
-                        
-                        GridRow {
-                            Text("Identificacion:")
-                            Text(invoiceSale.clientIdentification)
-                                .foregroundStyle(.imsGraySecundary)
-                        }
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                VStack(alignment: .leading, spacing: Constants.userSpacing) {
-                    Text("Detalles de factura")
-                        .font(.title3.bold())
-                    
-                    Grid(alignment: .leading, horizontalSpacing: Constants.productGridSpacing, verticalSpacing: Constants.totalSpacing) {
-                        GridRow {
-                            Text("Cantidad")
-                            Text("Descripción")
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                            Text("P. Unitario")
-                            Text("P. Total")
-                        }
-                        .bold()
-                        
-                        ForEach(invoiceSale.products) { product in
-                            GridRow {
-                                Text(product.quantity.description)
-                                Text(product.name)
-                                Text("$\(getDoubleFormat(for: product.price))")
-                                Text("$\(getDoubleFormat(for: product.totalPrice))")
-                            }
-                            .foregroundStyle(.imsGray)
-                        }
-                    }
-                    .padding()
-                    .background {
-                        RoundedRectangle(cornerRadius: Constants.cornerRadius)
-                            .strokeBorder(.black)
-                    }
-                }
-                .frame(maxWidth: .infinity, alignment: .leading)
-                
-                Grid(alignment: .leading, horizontalSpacing: Constants.totalSpacing) {
-                    totalGridRow(name: "Subtotal:", value: invoiceSale.subtotalPrice)
-                    totalGridRow(name: "IVA:", value: invoiceSale.totalIva)
-                    totalGridRow(name: "Total:", value: invoiceSale.totalPrice)
-                }
-                .padding([.horizontal, .bottom])
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            contentView
+        }
+        .overlay(alignment: .bottomLeading) {
+            ExportPDFButton(fileName: "Factura \(Date().dayMonthYear)", color: .black) {
+                contentView
             }
+            .padding()
+            .background(.imsWhite)
+        }
+    }
+    
+    private var contentView: some View {
+        VStack(spacing: Constants.spacing) {
+            headerView
+            
+            VStack(alignment: .leading, spacing: Constants.userSpacing) {
+                Text("+505 8942 6818")
+                Text(verbatim: "info@electronic.store")
+                Text("Catedral de León 2C al Norte, León - Nicaragua")
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .foregroundStyle(.imsGraySecundary)
+            
+            VStack(alignment: .leading, spacing: Constants.userSpacing) {
+                Text("Datos del cliente")
+                    .font(.title3.bold())
+                
+                Grid(alignment: .leading, verticalSpacing: Constants.gridSpacing) {
+                    GridRow {
+                        Text("Nombre:")
+                        Text(invoiceSale.clientName)
+                            .foregroundStyle(.imsGraySecundary)
+                    }
+                    
+                    GridRow {
+                        Text("Identificacion:")
+                        Text(invoiceSale.clientIdentification)
+                            .foregroundStyle(.imsGraySecundary)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            VStack(alignment: .leading, spacing: Constants.userSpacing) {
+                Text("Detalles de factura")
+                    .font(.title3.bold())
+                
+                Grid(alignment: .leading, horizontalSpacing: Constants.productGridSpacing, verticalSpacing: Constants.totalSpacing) {
+                    GridRow {
+                        Text("Cantidad")
+                        Text("Descripción")
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        Text("P. Unitario")
+                        Text("P. Total")
+                    }
+                    .bold()
+                    
+                    ForEach(invoiceSale.products, id: \.idString) { product in
+                        GridRow {
+                            Text(product.quantity.description)
+                            Text(product.name)
+                            Text("$\(getDoubleFormat(for: product.price))")
+                            Text("$\(getDoubleFormat(for: product.totalPrice))")
+                        }
+                        .foregroundStyle(.imsGray)
+                    }
+                }
+                .padding()
+                .background {
+                    RoundedRectangle(cornerRadius: Constants.cornerRadius)
+                        .strokeBorder(.black)
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            
+            Grid(alignment: .leading, horizontalSpacing: Constants.totalSpacing) {
+                totalGridRow(name: "Subtotal:", value: invoiceSale.subtotalPrice)
+                totalGridRow(name: "IVA:", value: invoiceSale.totalIva)
+                totalGridRow(name: "Total:", value: invoiceSale.totalPrice)
+            }
+            .padding([.horizontal, .bottom])
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            
+            Spacer()
         }
         .padding(.vertical)
         .padding(.horizontal, Constants.productGridSpacing)
