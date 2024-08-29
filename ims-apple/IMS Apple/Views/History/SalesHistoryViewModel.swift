@@ -9,7 +9,9 @@ import Foundation
 
 final class SalesHistoryViewModel: ObservableObject {
     @Published var invoices: [InvoiceModel] = []
+    @Published var invoicesPreview: [InvoiceSaleModel] = []
     @Published var isRequestInProgress: Bool = false
+    @Published var selectedSale: InvoiceSaleModel?
     
     private lazy var invoiceManager: InvoiceManager = InvoiceManager()
     
@@ -21,13 +23,37 @@ final class SalesHistoryViewModel: ObservableObject {
         isRequestInProgress = true
         Task { @MainActor in
             do {
-                invoices = try await invoiceManager.getInvoices()
+                let sales = try await invoiceManager.getInvoices()
+                invoices = sales.sorted { $0.createdAt > $1.createdAt }
+                mapInvoicePreview()
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false
                 guard let error = error as? IMSError else { return }
                 debugPrint(error.localizedDescription)
             }
+        }
+    }
+    
+    func mapInvoicePreview() {
+        invoicesPreview = invoices.map { invoice in
+            let products = invoice.details.map { detail in
+                InvoiceSaleRowModel(
+                    id: detail.id.description,
+                    name: detail.productName,
+                    quantity: detail.productQuantity.description,
+                    price: detail.productPrice,
+                    totalPrice: invoice.totalAmount
+                )
+            }
+            
+            return InvoiceSaleModel(
+                id: invoice.id,
+                clientName: invoice.customerName,
+                clientIdentification: invoice.customerIdentification,
+                createAt: invoice.createdAt.dayMonthYear,
+                products: products
+            )
         }
     }
 }
