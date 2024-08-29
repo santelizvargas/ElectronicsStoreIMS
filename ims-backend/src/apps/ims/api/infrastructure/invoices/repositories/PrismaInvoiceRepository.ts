@@ -9,6 +9,7 @@ export default class PrismaInvoiceRepository implements CrudRepository<CreateInv
     return await this.database.invoice.findMany({
       include: {
         products: true,
+        details: true,
       },
     });
   }
