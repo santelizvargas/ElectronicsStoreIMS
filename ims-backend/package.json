@@ -30,6 +30,7 @@
     "typescript": "^5.4.5"
   },
   "dependencies": {
+    "@getvim/execute": "^1.0.0",
     "@prisma/client": "^5.17.0",
     "awilix": "^10.0.2",
     "aws-sdk": "^2.1682.0",

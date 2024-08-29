@@ -52,6 +52,10 @@ import FetchInvoiceController from '../../ims/api/infrastructure/express/control
 import CountInvoiceController from '../../ims/api/infrastructure/express/controllers/invoices/CountInvoiceController';
 import RevokeRoleController from '../../ims/api/infrastructure/express/controllers/rbac/RevokeRoleController';
 import UsersChartController from '../../ims/api/infrastructure/express/controllers/authentication/UsersChartController';
+import DatabaseConfig from '../config/DatabaseConfig';
+import BackupController from '../../ims/api/infrastructure/express/controllers/database/BackupController';
+import RestoreController from '../../ims/api/infrastructure/express/controllers/database/RestoreController';
+import ListController from '../../ims/api/infrastructure/express/controllers/database/ListController';
 
 export default class Container {
   private readonly container: AwilixContainer;
@@ -69,6 +73,7 @@ export default class Container {
       .register({
         logger: asClass(WinstonLogger).singleton(),
         database: asFunction(createPrismaClient).singleton(),
+        databaseConfig: asClass(DatabaseConfig).singleton(),
       })
       .register({
         authenticator: asClass(CredentialsAuthenticator).singleton(),
@@ -134,6 +139,11 @@ export default class Container {
         createInvoiceService: asClass(CreateInvoiceService).singleton(),
         invoiceCreator: asClass(InvoiceCreator).singleton(),
         invoiceRepository: asClass(PrismaInvoiceRepository).singleton(),
+      })
+      .register({
+        backupController: asClass(BackupController).singleton(),
+        restoreController: asClass(RestoreController).singleton(),
+        listController: asClass(ListController).singleton(),
       });
   }
 
