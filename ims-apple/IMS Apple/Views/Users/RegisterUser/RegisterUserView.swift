@@ -2,7 +2,7 @@
 //  RegisterUserView.swift
 //  IMS Apple
 //
-//  Created by Steven Santeliz on 20/8/24.
+//  Created by Brandon Santeliz on 20/8/24.
 //
 
 import SwiftUI

@@ -2,7 +2,7 @@
 //  ProfileViewModel.swift
 //  IMS Apple
 //
-//  Created by Steven Santeliz on 17/8/24.
+//  Created by Brandon Santeliz on 17/8/24.
 //
 
 import Foundation

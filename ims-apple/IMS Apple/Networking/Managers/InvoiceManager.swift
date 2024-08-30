@@ -2,7 +2,7 @@
 //  InvoiceManager.swift
 //  IMS Apple
 //
-//  Created by Steven Santeliz on 27/8/24.
+//  Created by Brandon Santeliz on 27/8/24.
 //
 
 import Foundation

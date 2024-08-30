@@ -2,7 +2,7 @@
 //  ProfileImage.swift
 //  IMS Apple
 //
-//  Created by Steven Santeliz on 4/8/24.
+//  Created by Brandon Santeliz on 4/8/24.
 //
 
 import SwiftUI
