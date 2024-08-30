@@ -27,7 +27,7 @@ struct InvoiceSaleView: View {
     @State private var showAlert: Bool = false
     
     var body: some View {
-        VStack {
+        ScrollView(showsIndicators: false) {
             headerView
             
             VStack {
@@ -35,10 +35,10 @@ struct InvoiceSaleView: View {
                 
                 invoiceDetailsView
             }
-            .isOS(.iOS) { $0.onKeyboardAppear() }
             
             Spacer()
         }
+        .scrollDismissesKeyboard(.interactively)
         .padding(.horizontal)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(.grayBackground)
@@ -201,62 +201,60 @@ struct InvoiceSaleView: View {
     }
     
     private var invoiceGridRows: some View {
-        ScrollView(showsIndicators: false) {
-            Grid {
-                ForEach(Array($viewModel.invoiceSaleModel.products.enumerated()), id: \.offset) { index, $product in
-                    GridRow {
-                        IMSTextField(
-                            text: $product.id.allowOnlyNumbers,
-                            hasBorder: true,
-                            isActive: index == .zero
-                        )
-                        .onChange(of: product.id) { _, id in
-                            viewModel.setProductValues(for: id, with: &product)
-                            viewModel.setTotalPrice(for: &product)
-                        }
-                        
-                        IMSTextField(
-                            text: $product.quantity.allowOnlyNumbers,
-                            hasBorder: true,
-                            isActive: index == .zero
-                        )
-                        
-                        IMSTextField(
-                            text: $product.name,
-                            hasBorder: true,
-                            isActive:  false,
-                            maxWidth: .infinity
-                        )
-                        
-                        IMSTextField(
-                            text: .constant(
-                                viewModel.getDoubleFormat(for: product.price)
-                            ),
-                            hasBorder: true,
-                            isActive: false
-                        )
-                        
-                        IMSTextField(
-                            text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
-                            hasBorder: true,
-                            isActive: false
-                        )
-                        .onChange(of: product.quantity) { _, _ in
-                            viewModel.setTotalPrice(for: &product)
-                        }
-                        
-                        Button {
-                            viewModel.removeInvoiceRow(at: product.idString)
-                        } label: {
-                            Image(systemName: "trash")
-                                .resizable()
-                                .frame(width: Constants.imageSize, height: Constants.imageSize)
-                                .foregroundStyle(.red)
-                        }
-                        .buttonStyle(.plain)
-                        .disabled(viewModel.disableRemoveRow)
-                        .opacity(viewModel.disableRemoveRow ? Constants.minOpacity : Constants.maxOpacity)
+        Grid {
+            ForEach(Array($viewModel.invoiceSaleModel.products.enumerated()), id: \.offset) { index, $product in
+                GridRow {
+                    IMSTextField(
+                        text: $product.id.allowOnlyNumbers,
+                        hasBorder: true,
+                        isActive: index == .zero
+                    )
+                    .onChange(of: product.id) { _, id in
+                        viewModel.setProductValues(for: id, with: &product)
+                        viewModel.setTotalPrice(for: &product)
                     }
+                    
+                    IMSTextField(
+                        text: $product.quantity.allowOnlyNumbers,
+                        hasBorder: true,
+                        isActive: index == .zero
+                    )
+                    
+                    IMSTextField(
+                        text: $product.name,
+                        hasBorder: true,
+                        isActive:  false,
+                        maxWidth: .infinity
+                    )
+                    
+                    IMSTextField(
+                        text: .constant(
+                            viewModel.getDoubleFormat(for: product.price)
+                        ),
+                        hasBorder: true,
+                        isActive: false
+                    )
+                    
+                    IMSTextField(
+                        text: .constant(viewModel.getDoubleFormat(for: product.totalPrice)),
+                        hasBorder: true,
+                        isActive: false
+                    )
+                    .onChange(of: product.quantity) { _, _ in
+                        viewModel.setTotalPrice(for: &product)
+                    }
+                    
+                    Button {
+                        viewModel.removeInvoiceRow(at: product.idString)
+                    } label: {
+                        Image(systemName: "trash")
+                            .resizable()
+                            .frame(width: Constants.imageSize, height: Constants.imageSize)
+                            .foregroundStyle(.red)
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(viewModel.disableRemoveRow)
+                    .opacity(viewModel.disableRemoveRow ? Constants.minOpacity : Constants.maxOpacity)
                 }
             }
         }
