@@ -2,7 +2,7 @@
 //  ProductManager.swift
 //  IMS Apple
 //
-//  Created by Jose Luna on 8/19/24.
+//  Created by Brandon Santeliz on 8/19/24.
 //
 
 import Foundation

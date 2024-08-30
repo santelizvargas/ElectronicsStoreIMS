@@ -2,7 +2,7 @@
 //  SidebarItem.swift
 //  IMS Apple
 //
-//  Created by Macbook Air M1 on 31/7/24.
+//  Created by Brandon Santeliz on 31/7/24.
 //
 
 import Foundation

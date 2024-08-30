@@ -2,7 +2,7 @@
 //  ChartContainer.swift
 //  IMS Apple
 //
-//  Created by Steven Santeliz on 7/8/24.
+//  Created by Brandon Santeliz on 7/8/24.
 //
 
 import SwiftUI
