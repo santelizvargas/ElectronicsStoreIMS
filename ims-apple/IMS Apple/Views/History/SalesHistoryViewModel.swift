@@ -43,7 +43,7 @@ final class SalesHistoryViewModel: ObservableObject {
                     name: detail.productName,
                     quantity: detail.productQuantity.description,
                     price: detail.productPrice,
-                    totalPrice: invoice.totalAmount
+                    totalPrice: Double(detail.productQuantity) * detail.productPrice
                 )
             }
             
