@@ -79,7 +79,7 @@ struct BarChart: View {
             
             CustomDivider(color: .white)
             
-            customRow(label: "Valor:", value: selectedValue.description)
+            customRow(label: "Unidades:", value: selectedValue.description)
         }
         .padding(.vertical)
         .padding(.horizontal, Constants.horizontalPadding)
