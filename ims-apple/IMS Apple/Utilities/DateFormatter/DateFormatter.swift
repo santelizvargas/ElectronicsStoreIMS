@@ -11,6 +11,7 @@ final class CustomDateFormatter {
     enum DateFormat: String {
         case iso8601 = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         case dayMonthYear = "dd MMM yyyy"
+        case yearMonthDay = "yyyy-MM-dd"
     }
     
     static func formatDateToDayMonthYear(_ dateString: String, format: DateFormat) -> String {
@@ -27,6 +28,15 @@ final class CustomDateFormatter {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = DateFormat.dayMonthYear.rawValue
         dateFormatter.locale = Locale(identifier: "es_ES")
+        return dateFormatter.string(from: date)
+    }
+    
+    static func formatDateToYearMonthDay(from date: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = DateFormat.iso8601.rawValue
+        
+        guard let date = dateFormatter.date(from: date) else { return "" }
+        dateFormatter.dateFormat = DateFormat.yearMonthDay.rawValue
         return dateFormatter.string(from: date)
     }
 }

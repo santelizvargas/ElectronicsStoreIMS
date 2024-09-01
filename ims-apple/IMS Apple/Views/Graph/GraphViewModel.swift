@@ -102,7 +102,7 @@ final class GraphViewModel: ObservableObject {
         
         sales.forEach { sale in
             sale.details.forEach { detail in
-                if let date = dateFormatter.date(from: String(sale.createdAt.prefix(10))) {
+                if let date = dateFormatter.date(from: String(sale.createdAt.yearMonthDay)) {
                     if date >= sevenDaysAgo && date <= currentDate {
                         let dayFormatter = DateFormatter()
                         dayFormatter.locale = Locale(identifier: "es_ES")

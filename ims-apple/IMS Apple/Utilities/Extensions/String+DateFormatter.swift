@@ -11,4 +11,8 @@ extension String {
     var dayMonthYear: String {
         CustomDateFormatter.formatDateToDayMonthYear(self, format: .iso8601)
     }
+    
+    var yearMonthDay: String {
+        CustomDateFormatter.formatDateToYearMonthDay(from: self)
+    }
 }
