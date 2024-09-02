@@ -71,15 +71,19 @@ struct ProductListView: View {
         .background(.grayBackground)
         .searchable(text: $viewModel.searchText)
         .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: viewModel.getProducts) {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(.imsWhite)
+            if OSType.current == .macOS {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button(action: viewModel.getProducts) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundStyle(.imsWhite)
+                    }
                 }
             }
+            
             ToolbarItem(placement: .destructiveAction) {
                 ExporterNav(fileName: "Lista de productos", collection: viewModel.products)
             }
+            
             ToolbarItem(placement: .destructiveAction) { stateMenu }
             ToolbarItem(placement: .destructiveAction) { categoryMenu }
         }
