@@ -37,7 +37,19 @@ struct GraphView: View {
             minHeight: Constants.minHeight,
             maxHeight: .infinity
         )
+        .overlay {
+            if viewModel.isRequestInProgress {
+                CustomProgressView()
+            }
+        }
         .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                Button(action: viewModel.loadData) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.imsWhite)
+                }
+            }
+            
             ToolbarItem(placement: .destructiveAction) {
                 ExportPDFButton(fileName: "Graficos") { self }
             }

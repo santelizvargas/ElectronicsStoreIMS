@@ -14,6 +14,7 @@ final class GraphViewModel: ObservableObject {
     @Published var invoiceCount: Int = .zero
     @Published var categoriesBars: [BarItem] = []
     @Published var productBars: [BarItem] = []
+    @Published var isRequestInProgress: Bool = false
     
     private lazy var productManager: ProductManager = ProductManager()
     private lazy var invoiceManager: InvoiceManager = InvoiceManager()
@@ -24,6 +25,7 @@ final class GraphViewModel: ObservableObject {
     }
     
     func loadData() {
+        isRequestInProgress = true
         getProductCount()
         getUserCount()
         getInvoices()
@@ -60,7 +62,10 @@ final class GraphViewModel: ObservableObject {
                 createBarItems(from: response)
                 productBars = createBarItemsForLast7Days(from: response)
                 invoiceCount = response.count
+                try await Task.sleep(nanoseconds: 1_000_000_000)
+                isRequestInProgress = false
             } catch {
+                isRequestInProgress = false
                 guard let error = error as? IMSError else { return }
                 debugPrint(error.localizedDescription)
             }

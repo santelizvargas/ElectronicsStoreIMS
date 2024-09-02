@@ -131,6 +131,14 @@ struct UserListView: View {
         .refreshable {
             viewModel.getUsers()
         }
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                Button(action: viewModel.getUsers) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.imsWhite)
+                }
+            }
+        }
         .overlay {
             if viewModel.isRequestInProgress {
                 CustomProgressView()
