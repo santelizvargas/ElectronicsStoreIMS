@@ -31,6 +31,7 @@ final class UserListViewModel: ObservableObject {
             do {
                 let userList = try await authenticationManager.getUsers()
                 users = userList.sorted { $0.createdAt > $1.createdAt }
+                try await Task.sleep(nanoseconds: 1_000_000_000)
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false
