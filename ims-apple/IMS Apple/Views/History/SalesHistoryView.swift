@@ -128,11 +128,16 @@ struct SalesHistoryView: View {
             }
             .gridCellColumns(Constants.columnsNumber)
         }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: viewModel.getInvoices) {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(.imsWhite)
+        .refreshable {
+            viewModel.getInvoices()
+        }
+        .isOS(.macOS) { view in
+            view.toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button(action: viewModel.getInvoices) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundStyle(.imsWhite)
+                    }
                 }
             }
         }

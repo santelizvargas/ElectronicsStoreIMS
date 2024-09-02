@@ -131,11 +131,13 @@ struct UserListView: View {
         .refreshable {
             viewModel.getUsers()
         }
-        .toolbar {
-            ToolbarItem(placement: .destructiveAction) {
-                Button(action: viewModel.getUsers) {
-                    Image(systemName: "arrow.clockwise")
-                        .foregroundStyle(.imsWhite)
+        .isOS(.macOS) { view in
+            view.toolbar {
+                ToolbarItem(placement: .destructiveAction) {
+                    Button(action: viewModel.getUsers) {
+                        Image(systemName: "arrow.clockwise")
+                            .foregroundStyle(.imsWhite)
+                    }
                 }
             }
         }
