@@ -128,6 +128,14 @@ struct SalesHistoryView: View {
             }
             .gridCellColumns(Constants.columnsNumber)
         }
+        .toolbar {
+            ToolbarItem(placement: .destructiveAction) {
+                Button(action: viewModel.getInvoices) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.imsWhite)
+                }
+            }
+        }
         .overlay {
             if viewModel.isRequestInProgress {
                 CustomProgressView()

@@ -26,6 +26,7 @@ final class SalesHistoryViewModel: ObservableObject {
                 let sales = try await invoiceManager.getInvoices()
                 invoices = sales.sorted { $0.createdAt > $1.createdAt }
                 mapInvoicePreview()
+                try await Task.sleep(nanoseconds: 1_000_000_000)
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false
