@@ -10,6 +10,7 @@ import Foundation
 final class ProductListViewModel: ObservableObject {
     @Published var selectedProduct: ProductModel?
     @Published var products: [ProductModel] = []
+    @Published var isRequestInProgress: Bool = false
     
     @Published var selectedState: ProductState = .all {
         didSet { filterProducts() }
@@ -32,7 +33,6 @@ final class ProductListViewModel: ObservableObject {
     }
 
     private let productManager: ProductManager = ProductManager()
-    private var isRequestInProgress: Bool = false
     
     private var allProducts: [ProductModel] = [] {
         didSet { filterProducts() }
@@ -57,6 +57,7 @@ final class ProductListViewModel: ObservableObject {
         Task { @MainActor in
             do {
                 allProducts = try await productManager.getProducts()
+                try await Task.sleep(nanoseconds: 1_000_000_000)
                 isRequestInProgress = false
             } catch {
                 isRequestInProgress = false

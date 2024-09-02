@@ -72,6 +72,12 @@ struct ProductListView: View {
         .searchable(text: $viewModel.searchText)
         .toolbar {
             ToolbarItem(placement: .destructiveAction) {
+                Button(action: viewModel.getProducts) {
+                    Image(systemName: "arrow.clockwise")
+                        .foregroundStyle(.imsWhite)
+                }
+            }
+            ToolbarItem(placement: .destructiveAction) {
                 ExporterNav(fileName: "Lista de productos", collection: viewModel.products)
             }
             ToolbarItem(placement: .destructiveAction) { stateMenu }
@@ -81,7 +87,7 @@ struct ProductListView: View {
             viewModel.getProducts()
         }
         .overlay {
-            if viewModel.products.isEmpty {
+            if viewModel.isRequestInProgress {
                 CustomProgressView()
             }
         }
