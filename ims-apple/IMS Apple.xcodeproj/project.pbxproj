@@ -87,6 +87,8 @@
 		BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */; };
 		BDFA27B02C771B66007F4EB0 /* ProductDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFA27AF2C771B66007F4EB0 /* ProductDetailViewModel.swift */; };
 		BDFBD8FE2C71D97800EF549C /* MainViewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */; };
+		E0EAC30E2C8A96AE009C14D4 /* BackupManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EAC30D2C8A96AE009C14D4 /* BackupManager.swift */; };
+		E0EAC3102C8A97B4009C14D4 /* DatabaseResponseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0EAC30F2C8A97B4009C14D4 /* DatabaseResponseModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -173,6 +175,8 @@
 		BDF62E6A2C6C6E9D00867DA4 /* IMSDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMSDocument.swift; sourceTree = "<group>"; };
 		BDFA27AF2C771B66007F4EB0 /* ProductDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewModel.swift; sourceTree = "<group>"; };
 		BDFBD8FD2C71D97800EF549C /* MainViewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewViewModel.swift; sourceTree = "<group>"; };
+		E0EAC30D2C8A96AE009C14D4 /* BackupManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupManager.swift; sourceTree = "<group>"; };
+		E0EAC30F2C8A97B4009C14D4 /* DatabaseResponseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseResponseModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -260,6 +264,7 @@
 				BD6B28022C6F2E6B00BC73D2 /* AuthenticationManager.swift */,
 				BD85DB492C7444680076F612 /* ProductManager.swift */,
 				3376FDA92C7E57BB00AFB99C /* InvoiceManager.swift */,
+				E0EAC30D2C8A96AE009C14D4 /* BackupManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -614,6 +619,7 @@
 				3331062A2C6B03750035644F /* ProductModel.swift */,
 				33A5803A2C759EFB00C58AA2 /* UserRegisterModel.swift */,
 				3376FDAB2C7E592A00AFB99C /* InvoiceModel.swift */,
+				E0EAC30F2C8A97B4009C14D4 /* DatabaseResponseModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -716,7 +722,9 @@
 				338DF8292C645DE200F72772 /* Donut.swift in Sources */,
 				336AF5C12C744397009810A1 /* View+KeyboardReadable.swift in Sources */,
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
+				E0EAC3102C8A97B4009C14D4 /* DatabaseResponseModel.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
+				E0EAC30E2C8A96AE009C14D4 /* BackupManager.swift in Sources */,
 				33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */,
 				6DB536B62C5B3DDF008676D7 /* CustomDivider.swift in Sources */,
 				33FBF5B32C70225200ED5032 /* ProfileView.swift in Sources */,
