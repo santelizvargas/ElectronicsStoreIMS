@@ -10,7 +10,7 @@ import SwiftUI
 struct LeftGradient: ShapeStyle {
     private let colors: [Color]
     
-    init(colors: [Color]) {
+    init(colors: [Color] = [.purpleGradient, .blueGradient]) {
         self.colors = colors
     }
     

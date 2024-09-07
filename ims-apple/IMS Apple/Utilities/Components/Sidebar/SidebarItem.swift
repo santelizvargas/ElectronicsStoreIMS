@@ -9,6 +9,7 @@ import Foundation
 
 enum SidebarItem {
     case graphs
+    case reports
     case users
     
     case productList
@@ -22,6 +23,7 @@ enum SidebarItem {
     var name: String {
         switch self {
             case .graphs: "Gráficos"
+            case .reports: "Reportes"
             case .users: "Usuarios"
                 
             case .productList: "Lista de productos"
@@ -37,6 +39,7 @@ enum SidebarItem {
     var iconName: String {
         switch self {
             case .graphs: "chart.pie"
+            case .reports: "doc.text"
             case .users: "person"
             case .productList: "list.bullet.rectangle.portrait"
             case .addProduct: "plus.circle"

@@ -42,6 +42,13 @@
 		33A580372C759E5D00C58AA2 /* RegisterUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A580362C759E5D00C58AA2 /* RegisterUserView.swift */; };
 		33A580392C759EA500C58AA2 /* RegisterUserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A580382C759EA500C58AA2 /* RegisterUserViewModel.swift */; };
 		33A5803B2C759EFB00C58AA2 /* UserRegisterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A5803A2C759EFB00C58AA2 /* UserRegisterModel.swift */; };
+		33A6C81A2C8A6EFD002B4968 /* ReportSections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C8192C8A6EFD002B4968 /* ReportSections.swift */; };
+		33A6C81C2C8A7375002B4968 /* ReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C81B2C8A7375002B4968 /* ReportView.swift */; };
+		33A6C81E2C8A81E8002B4968 /* ReportViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C81D2C8A81E8002B4968 /* ReportViewModel.swift */; };
+		33A6C8212C8ADD03002B4968 /* ProductReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C8202C8ADD03002B4968 /* ProductReportView.swift */; };
+		33A6C8242C8BDDBA002B4968 /* DetailViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C8232C8BDDBA002B4968 /* DetailViewContainer.swift */; };
+		33A6C8262C8BF9F6002B4968 /* SalesReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C8252C8BF9F6002B4968 /* SalesReportView.swift */; };
+		33A6C8282C8C144B002B4968 /* UsersReportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A6C8272C8C144B002B4968 /* UsersReportView.swift */; };
 		33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941332C4F3A3E00F65E28 /* DataManager.swift */; };
 		33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941392C4F42ED00F65E28 /* DataManagerError.swift */; };
 		33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9413C2C4F4DDC00F65E28 /* Product.swift */; };
@@ -127,6 +134,13 @@
 		33A580362C759E5D00C58AA2 /* RegisterUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserView.swift; sourceTree = "<group>"; };
 		33A580382C759EA500C58AA2 /* RegisterUserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterUserViewModel.swift; sourceTree = "<group>"; };
 		33A5803A2C759EFB00C58AA2 /* UserRegisterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRegisterModel.swift; sourceTree = "<group>"; };
+		33A6C8192C8A6EFD002B4968 /* ReportSections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportSections.swift; sourceTree = "<group>"; };
+		33A6C81B2C8A7375002B4968 /* ReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportView.swift; sourceTree = "<group>"; };
+		33A6C81D2C8A81E8002B4968 /* ReportViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportViewModel.swift; sourceTree = "<group>"; };
+		33A6C8202C8ADD03002B4968 /* ProductReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductReportView.swift; sourceTree = "<group>"; };
+		33A6C8232C8BDDBA002B4968 /* DetailViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewContainer.swift; sourceTree = "<group>"; };
+		33A6C8252C8BF9F6002B4968 /* SalesReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SalesReportView.swift; sourceTree = "<group>"; };
+		33A6C8272C8C144B002B4968 /* UsersReportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersReportView.swift; sourceTree = "<group>"; };
 		33C941332C4F3A3E00F65E28 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		33C941392C4F42ED00F65E28 /* DataManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerError.swift; sourceTree = "<group>"; };
 		33C9413C2C4F4DDC00F65E28 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -191,6 +205,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33006FAA2C8810C800C94CDA /* Backup */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Backup;
+			sourceTree = "<group>";
+		};
 		332509B72C51E37100E10F94 /* Providers */ = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +374,36 @@
 			path = RegisterUser;
 			sourceTree = "<group>";
 		};
+		33A6C8182C8A6EE5002B4968 /* Rerports */ = {
+			isa = PBXGroup;
+			children = (
+				33A6C8222C8BDDAC002B4968 /* Components */,
+				33A6C81F2C8ADCF5002B4968 /* Subviews */,
+				33A6C8192C8A6EFD002B4968 /* ReportSections.swift */,
+				33A6C81B2C8A7375002B4968 /* ReportView.swift */,
+				33A6C81D2C8A81E8002B4968 /* ReportViewModel.swift */,
+			);
+			path = Rerports;
+			sourceTree = "<group>";
+		};
+		33A6C81F2C8ADCF5002B4968 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				33A6C8202C8ADD03002B4968 /* ProductReportView.swift */,
+				33A6C8252C8BF9F6002B4968 /* SalesReportView.swift */,
+				33A6C8272C8C144B002B4968 /* UsersReportView.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		33A6C8222C8BDDAC002B4968 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				33A6C8232C8BDDBA002B4968 /* DetailViewContainer.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
 		33C941322C4F394E00F65E28 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
@@ -436,6 +487,8 @@
 		33F848362C5081040065B0D4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				33A6C8182C8A6EE5002B4968 /* Rerports */,
+				33006FAA2C8810C800C94CDA /* Backup */,
 				33FBF5B12C7020B500ED5032 /* User */,
 				356743EA2C6AFA350073496B /* InvoiceSale */,
 				33EEE8462C698209001EC07F /* Products */,
@@ -721,8 +774,10 @@
 				350DA9392C704C5D0043567A /* Binding+OnlyNumber.swift in Sources */,
 				338DF8292C645DE200F72772 /* Donut.swift in Sources */,
 				336AF5C12C744397009810A1 /* View+KeyboardReadable.swift in Sources */,
+				33A6C8282C8C144B002B4968 /* UsersReportView.swift in Sources */,
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
 				E0EAC3102C8A97B4009C14D4 /* DatabaseResponseModel.swift in Sources */,
+				33A6C8262C8BF9F6002B4968 /* SalesReportView.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				E0EAC30E2C8A96AE009C14D4 /* BackupManager.swift in Sources */,
 				33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */,
@@ -730,13 +785,16 @@
 				33FBF5B32C70225200ED5032 /* ProfileView.swift in Sources */,
 				6DB536BF2C5B3FFC008676D7 /* SidebarItem.swift in Sources */,
 				35441DDB2C6C506500B13146 /* AddProductView.swift in Sources */,
+				33A6C81E2C8A81E8002B4968 /* ReportViewModel.swift in Sources */,
 				3331062B2C6B03750035644F /* ProductModel.swift in Sources */,
 				33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */,
 				BD1DE8FA2C5D9A2400F3D38D /* IMSTextField.swift in Sources */,
 				BDD7125E2C642DD2000FAD7B /* FileFactory.swift in Sources */,
 				356743EE2C6AFA880073496B /* InvoiceSaleView.swift in Sources */,
+				33A6C81A2C8A6EFD002B4968 /* ReportSections.swift in Sources */,
 				331664C72C71900C00968A73 /* ProfileViewModel.swift in Sources */,
 				BD1DE8FB2C5D9A2400F3D38D /* IMSBackground.swift in Sources */,
+				33A6C8242C8BDDBA002B4968 /* DetailViewContainer.swift in Sources */,
 				BD1DE8FC2C5D9A2400F3D38D /* BlurCircle.swift in Sources */,
 				BD6B28082C6F2E6B00BC73D2 /* AuthenticationManager.swift in Sources */,
 				BD6B28052C6F2E6B00BC73D2 /* HttpMethod.swift in Sources */,
@@ -770,11 +828,13 @@
 				333106302C6BF0010035644F /* ProductCategory.swift in Sources */,
 				33708CD62C7486A700BD811F /* UserListViewModel.swift in Sources */,
 				33A5803B2C759EFB00C58AA2 /* UserRegisterModel.swift in Sources */,
+				33A6C81C2C8A7375002B4968 /* ReportView.swift in Sources */,
 				6DB536B82C5B3EC8008676D7 /* Breadcrumb.swift in Sources */,
 				3353B6BD2C60852500202526 /* ProfileImage.swift in Sources */,
 				BDF62E6B2C6C6E9D00867DA4 /* IMSDocument.swift in Sources */,
 				6DB536BB2C5B3F9B008676D7 /* Sidebar.swift in Sources */,
 				BD164AAB2C78509A0088B958 /* InvoiceSaleModel.swift in Sources */,
+				33A6C8212C8ADD03002B4968 /* ProductReportView.swift in Sources */,
 				BD85DB4A2C7444680076F612 /* ProductManager.swift in Sources */,
 				BD164AAF2C785DD70088B958 /* InvoiceSaleViewModel.swift in Sources */,
 				BD5D706F2C6BFC1D00AFD054 /* ExportPDFButton.swift in Sources */,

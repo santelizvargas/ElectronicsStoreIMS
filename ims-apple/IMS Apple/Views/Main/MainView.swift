@@ -16,6 +16,7 @@ private enum Constants {
 
 struct MainView: View {
     @State private var itemSelected: SidebarItem = .profile
+    @State private var subNavigation: String?
     @Binding private var navigationPath: NavigationPath
     @ObservedObject private var viewModel: MainViewViewModel = MainViewViewModel()
     
@@ -34,7 +35,7 @@ struct MainView: View {
             Sidebar(itemSelected: $itemSelected, userLogged: viewModel.userLogged)
         } detail: {
             VStack(spacing: .zero) {
-                Breadcrumb(routeList: [sectionSelected.name, itemSelected.name])
+                Breadcrumb(routeList: [sectionSelected.name, itemSelected.name, subNavigation])
                 
                 detailView
                     .isOS(.macOS) { view in
@@ -64,6 +65,7 @@ struct MainView: View {
     @ViewBuilder private var detailView: some View {
         switch itemSelected {
             case .users: UserListView()
+            case .reports: ReportView(subNavigation: $subNavigation)
             case .salesHistory: SalesHistoryView()
             case .graphs: GraphView()
             case .invoiceSale: InvoiceSaleView()
