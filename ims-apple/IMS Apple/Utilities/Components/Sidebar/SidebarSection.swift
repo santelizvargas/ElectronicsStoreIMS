@@ -24,7 +24,7 @@ enum SidebarSection: CaseIterable {
     
     var itemList: [SidebarItem] {
         switch self {
-            case .dashboard: [.graphs, .users]
+            case .dashboard: [.graphs, .reports, .users]
             case .inventory: [.productList, .addProduct]
             case .invoicing: [.invoiceSale, .salesHistory]
             case .user: [.profile]

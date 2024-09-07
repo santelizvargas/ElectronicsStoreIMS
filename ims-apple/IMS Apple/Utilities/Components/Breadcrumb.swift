@@ -11,8 +11,8 @@ struct Breadcrumb: View {
     private let maxHeight: CGFloat = 50
     private let routeList: [String]
     
-    init(routeList: [String]) {
-        self.routeList = routeList
+    init(routeList: [String?]) {
+        self.routeList = routeList.compactMap { $0 }
     }
     
     var body: some View {

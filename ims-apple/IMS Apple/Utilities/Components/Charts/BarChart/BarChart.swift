@@ -34,7 +34,7 @@ struct BarChart: View {
                 x: .value("id", item.id.uuidString),
                 y: .value("value", item.value)
             )
-            .foregroundStyle(LeftGradient(colors: [.purpleGradient, .blueGradient]))
+            .foregroundStyle(LeftGradient())
             .cornerRadius(Constants.cornerRadius)
         }
         .chartXAxis {

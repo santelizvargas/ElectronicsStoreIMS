@@ -40,8 +40,9 @@ final class FileFactory {
         let mappedProducts: String = products.map { product in
             let description = product.description.replacingOccurrences(of: ",", with: "")
             let name = product.name.replacingOccurrences(of: ",", with: "")
+            let stock = product.stock > .zero ? product.stock.description : "Agotado"
             
-            return "\(name), \(product.stock), \(product.category.rawValue), $\(product.salePrice), \(description)"
+            return "\(name), \(stock), \(product.category.rawValue), $\(product.salePrice), \(description)"
         }.joined(separator: "\n")
         
         let stringFormatted: String = [header, mappedProducts].joined(separator: "\n")
