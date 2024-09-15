@@ -1,4 +1,10 @@
-## IMS Backend
+Install dependencies and run server:
+
+```bash
+cd ./ims-backend
+npm install
+npm run dev
+```
 
 ### Fundamentals
 
@@ -12,6 +18,3 @@ npx prisma db push --schema <SCHEMA_FILE>
 # Example
 
 npx prisma db push --schema ./src/apps/core/prisma
-```
-
-> © 2024 PPLAM S.A. All Rights Reserved
