@@ -31,6 +31,7 @@ private enum Constants {
 
 struct ProfileView: View {
     @ObservedObject private var viewModel: ProfileViewModel = .init()
+    @State private var showModal: Bool = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -38,7 +39,19 @@ struct ProfileView: View {
                 .padding(.vertical)
             
             HStack(alignment: .top) {
-                cardInformation
+                VStack {
+                    cardInformation
+                    
+                    Button("Respaldo DB") {
+                        withAnimation {
+                            showModal.toggle()
+                        }
+                    }
+                    .buttonStyle(GradientButtonStyle())
+                    .popover(isPresented: $showModal) {
+                        BackupListView()
+                    }
+                }
                 
                 VStack {
                     userInformationForm

@@ -52,6 +52,7 @@
 		33C941342C4F3A3E00F65E28 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941332C4F3A3E00F65E28 /* DataManager.swift */; };
 		33C9413A2C4F42ED00F65E28 /* DataManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C941392C4F42ED00F65E28 /* DataManagerError.swift */; };
 		33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33C9413C2C4F4DDC00F65E28 /* Product.swift */; };
+		33E2499E2C8C1A5400EA4B92 /* BackupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E2499D2C8C1A5300EA4B92 /* BackupListView.swift */; };
 		33EA67462C48BDA2007A9DBE /* IMS_AppleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA67452C48BDA2007A9DBE /* IMS_AppleApp.swift */; };
 		33EA67482C48BDA2007A9DBE /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EA67472C48BDA2007A9DBE /* MainView.swift */; };
 		33EA674A2C48BDA4007A9DBE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33EA67492C48BDA4007A9DBE /* Assets.xcassets */; };
@@ -144,6 +145,7 @@
 		33C941332C4F3A3E00F65E28 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		33C941392C4F42ED00F65E28 /* DataManagerError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagerError.swift; sourceTree = "<group>"; };
 		33C9413C2C4F4DDC00F65E28 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		33E2499D2C8C1A5300EA4B92 /* BackupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupListView.swift; sourceTree = "<group>"; };
 		33EA67422C48BDA2007A9DBE /* IMS Apple.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IMS Apple.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		33EA67452C48BDA2007A9DBE /* IMS_AppleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMS_AppleApp.swift; sourceTree = "<group>"; };
 		33EA67472C48BDA2007A9DBE /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 		33006FAA2C8810C800C94CDA /* Backup */ = {
 			isa = PBXGroup;
 			children = (
+				33E2499D2C8C1A5300EA4B92 /* BackupListView.swift */,
 			);
 			path = Backup;
 			sourceTree = "<group>";
@@ -778,6 +781,7 @@
 				6DB536B32C5B394C008676D7 /* SidebarButtonStyle.swift in Sources */,
 				E0EAC3102C8A97B4009C14D4 /* DatabaseResponseModel.swift in Sources */,
 				33A6C8262C8BF9F6002B4968 /* SalesReportView.swift in Sources */,
+				33E2499E2C8C1A5400EA4B92 /* BackupListView.swift in Sources */,
 				33C9413D2C4F4DDC00F65E28 /* Product.swift in Sources */,
 				E0EAC30E2C8A96AE009C14D4 /* BackupManager.swift in Sources */,
 				33708CDB2C748B9600BD811F /* String+DateFormatter.swift in Sources */,
@@ -972,7 +976,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IMS Apple/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24GHL894R3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1014,7 +1018,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"IMS Apple/Preview Content\"";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 24GHL894R3;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

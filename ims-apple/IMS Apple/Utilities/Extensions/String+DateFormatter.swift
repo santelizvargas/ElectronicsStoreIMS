@@ -15,4 +15,8 @@ extension String {
     var yearMonthDay: String {
         CustomDateFormatter.formatDateToYearMonthDay(from: self)
     }
+    
+    var yearMonthDayHoursMinutes: String {
+        CustomDateFormatter.formatDateToYearMonthDayHoursMinutes(self, format: .simpleFormat)
+    }
 }
